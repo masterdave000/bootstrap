@@ -78,12 +78,13 @@ require __DIR__ . "/../../login-check.php";
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Navigation</h6> 
+                        <h6 class="collapse-header">Navigation</h6>
                         <!-- <a class="collapse-item" href="register.html">Register</a> -->
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Admin</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Location</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Owner</a>
+                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/category/">Category</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Equipment List</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Business List</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Inspector</a>
