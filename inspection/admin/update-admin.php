@@ -12,32 +12,32 @@ $fullname = $_SESSION['fullname'];
 
         <?php
             if (filter_has_var(INPUT_GET, 'user_id')) {
-                    $clean_id = filter_var($_GET['user_id'], FILTER_SANITIZE_NUMBER_INT);
-                    $user_id = filter_var($clean_id, FILTER_VALIDATE_INT);
-                    $userQuery = "SELECT * from users where user_id = :user_id";
-                    $userStatement = $pdo->prepare($userQuery);
-                    $userStatement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                $clean_id = filter_var($_GET['user_id'], FILTER_SANITIZE_NUMBER_INT);
+                $user_id = filter_var($clean_id, FILTER_VALIDATE_INT);
+                $userQuery = "SELECT * from users where user_id = :user_id";
+                $userStatement = $pdo->prepare($userQuery);
+                $userStatement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 
-                    //Check whether the query is executed or not.
-                    $userStatement->execute();
-                    $userCount = $userStatement->rowCount();
+                //Check whether the query is executed or not.
+                $userStatement->execute();
+                $userCount = $userStatement->rowCount();
                     
-                    if ($userCount === 1) {
-                        $user = $userStatement->fetch(PDO::FETCH_ASSOC);
-                        
-                        $full_name = $user['fullname'];
-                        $username = $user['username'];
-                                
-                    } else {
-                        $_SESSION['no_admin_data_found'] = "
-                            <div class='msgalert alert--danger' id='alert'>
-                                <div class='alert__message'>	
-                                    Admin Profile Data Not Found
-                                </div>
+                if ($userCount === 1) {
+                    $user = $userStatement->fetch(PDO::FETCH_ASSOC);
+                    
+                    $full_name = $user['fullname'];
+                    $username = $user['username'];
+                            
+                } else {
+                    $_SESSION['no_admin_data_found'] = "
+                        <div class='msgalert alert--danger' id='alert'>
+                            <div class='alert__message'>	
+                                Admin Profile Data Not Found
                             </div>
-                        ";
-                        header('location:' . SITEURL . 'admin/admin_manage/admin_manage.php');
-                    }
+                        </div>
+                    ";
+                    header('location:' . SITEURL . 'admin/admin_manage/admin_manage.php');
+                }
             }
                 
 
