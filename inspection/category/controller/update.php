@@ -17,7 +17,7 @@ if ($categoryStatement->execute()) {
     $_SESSION['update'] = "
     <div class='msgalert alert--success' id='alert'>
         <div class='alert__message'>
-            Category Added Successfully
+            Category Updated Successfully
         </div>
     </div>
     ";
@@ -28,7 +28,7 @@ if ($categoryStatement->execute()) {
     $_SESSION['update'] = "
     <div class='msgalert alert--danger' id='alert'>
         <div class='alert__message'>
-            Failed to Add Category
+            Failed to Update Category
         </div>
     </div>
     ";
