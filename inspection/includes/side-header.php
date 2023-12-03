@@ -85,8 +85,8 @@ require __DIR__ . "/../../login-check.php";
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Location</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Owner</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/category/">Category</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/equipment/">Equipment List</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Business List</a>
+                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/equipment/">Equipment</a>
+                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/business/">Business</a>
                         <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Inspector</a>
                         <div class="collapse-divider"></div>
                         <!-- <h6 class="collapse-header">Other Pages:</h6>
