@@ -38,9 +38,9 @@ $fullname = $_SESSION['fullname'];
                 unset($_SESSION['change_pass_success']);
             }
         
-            if (isset($_SESSION['no_admin_data_found'])) {
-                echo $_SESSION['no_admin_data_found'];
-                unset($_SESSION['no_admin_data_found']);
+            if (isset($_SESSION['no_user_data_found'])) {
+                echo $_SESSION['no_user_data_found'];
+                unset($_SESSION['no_user_data_found']);
             }
         ?>
 
@@ -56,7 +56,7 @@ $fullname = $_SESSION['fullname'];
                 <div class="d-flex align-items-center justify-content-end card-header py-3">
                     <a href="./add-user.php" class="btn btn-success d-flex align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span>Add Admin</span>
+                        <span>Add User</span>
                     </a>
                 </div>
                 <div class="card-body">
@@ -83,7 +83,7 @@ $fullname = $_SESSION['fullname'];
                                     <td class="align-middle"><?php echo htmlspecialchars($user['fullname'])?></td>
                                     <td class="align-middle"><?php echo htmlspecialchars($user['username'])?></td>
                                     <td class="d-flex justify-content-end">
-                                        <a href="./update-admin.php?user_id=<?php echo $user['user_id']?>"
+                                        <a href="./update-user.php?user_id=<?php echo $user['user_id']?>"
                                             class="btn btn-primary mr-2">Edit</a>
                                         <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
                                             class="btn btn-warning mr-2">Change Password</a>
