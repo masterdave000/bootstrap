@@ -37,14 +37,14 @@ $fullname = $_SESSION['fullname'];
                             <div class="form-group">
                                 <input type="text" name="inspector_name"
                                     class="form-control form-control-user squared-border" id="exampleInputOwnerName"
-                                    aria-describedby="inspectorNameHelp" placeholder="Enter Inspector Name...">
+                                    aria-describedby="inspectorNameHelp" placeholder="Enter Inspector Name..." required>
                             </div>
 
                             <div class="form-group">
                                 <input type="text" name="contact_no"
                                     class="form-control form-control-user squared-border" id="exampleInputcontactno"
                                     aria-describedby="contactnoHelp" placeholder="Enter Contact Number..."
-                                    maxlength="11">
+                                    maxlength="11" required>
                             </div>
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"

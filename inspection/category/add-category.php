@@ -36,7 +36,7 @@ $fullname = $_SESSION['fullname'];
                             <div class="form-group">
                                 <input type="text" name="category_name"
                                     class="form-control form-control-user squared-border" id="exampleInputcategoryname"
-                                    aria-describedby="categorynameHelp" placeholder="Enter Category Name...">
+                                    aria-describedby="categorynameHelp" placeholder="Enter Category Name..." required>
                             </div>
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Add">

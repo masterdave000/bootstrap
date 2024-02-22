@@ -71,12 +71,12 @@ $fullname = $_SESSION['fullname'];
                                 <input type="text" name="category_name"
                                     class="form-control form-control-user squared-border" id="exampleInputcategoryname"
                                     aria-describedby="categorynameHelp" placeholder="Enter Category Name..."
-                                    value="<?php echo $category['category_name']; ?>">
+                                    value="<?php echo $category['category_name']; ?>" required>
                             </div>
 
+                            <input type="hidden" name="category_id" value="<?php echo $category_id; ?>" required>
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
                                 value="Update">
-                            <input type="hidden" name="category_id" value="<?php echo $category_id; ?>">
                         </form>
                     </div>
                 </div>

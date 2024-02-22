@@ -43,23 +43,23 @@ $fullname = $_SESSION['fullname'];
                             <div class="form-group">
                                 <input type="text" name="fullname" class="form-control form-control-user squared-border"
                                     id="exampleInputfullname" aria-describedby="fullnameHelp"
-                                    placeholder="Enter Fullname...">
+                                    placeholder="Enter Fullname..." required>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-user squared-border"
                                     id="exampleInputusername" aria-describedby="usernameHelp"
-                                    placeholder="Enter Username...">
+                                    placeholder="Enter Username..." required>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="password1"
                                     class="form-control form-control-user squared-border" id="exampleInputPassword1"
-                                    placeholder="Password">
+                                    placeholder="Password" required>
                             </div>
 
                             <div class="form-group">
                                 <input type="password" name="password2"
                                     class="form-control form-control-user squared-border" id="exampleInputPassword2 "
-                                    placeholder="Confirm Password">
+                                    placeholder="Confirm Password" required>
                             </div>
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block squared-border"

@@ -49,18 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <input type="text" name="inspector_name"
                                     class="form-control form-control-user squared-border" id="exampleInputOwnerName"
                                     aria-describedby="inspectorNameHelp" placeholder="Enter Inpsector Name..."
-                                    value="<?php echo $inspector['inspector_name']?>">
+                                    value="<?php echo $inspector['inspector_name']?>" required>
                             </div>
 
                             <div class="form-group">
                                 <input type="text" name="contact_no"
                                     class="form-control form-control-user squared-border" id="exampleInputcontactno"
                                     aria-describedby="contactnoHelp" placeholder="Enter Contact Number..."
-                                    maxlength="11" value="<?php echo $inspector['contact_no']?>">
+                                    maxlength="11" value="<?php echo $inspector['contact_no']?>" required>
 
                             </div>
 
-                            <input type="hidden" name="inspector_id" value="<?php echo $inspector['inspector_id']?>">
+                            <input type="hidden" name="inspector_id" value="<?php echo $inspector['inspector_id']?>"
+                                required>
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
                                 value="Update">
                         </form>

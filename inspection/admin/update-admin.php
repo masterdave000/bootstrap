@@ -72,12 +72,12 @@ $fullname = $_SESSION['fullname'];
                             <div class="form-group">
                                 <input type="text" name="fullname" class="form-control form-control-user squared-border"
                                     id="exampleInputfullname" aria-describedby="fullnameHelp"
-                                    placeholder="Enter Fullname..." value="<?php echo $user['fullname']; ?>">
+                                    placeholder="Enter Fullname..." value="<?php echo $fullname; ?>" required>
                             </div>
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-user squared-border"
                                     id="exampleInputusername" aria-describedby="usernameHelp"
-                                    placeholder="Enter Username..." value="<?php echo $full_name?>">
+                                    placeholder="Enter Username..." value="<?php echo $username; ?>">
                             </div>
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
