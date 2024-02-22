@@ -84,11 +84,11 @@ $fullname = $_SESSION['fullname'];
                                     <td class="align-middle"><?php echo htmlspecialchars($user['username'])?></td>
                                     <td class="d-flex justify-content-end">
                                         <a href="./update-admin.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-primary mr-2">Edit Admin</a>
+                                            class="btn btn-primary mr-2">Edit</a>
                                         <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
                                             class="btn btn-warning mr-2">Change Password</a>
                                         <a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-danger">Delete Admin</a>
+                                            class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
 
