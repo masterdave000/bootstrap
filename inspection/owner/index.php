@@ -74,7 +74,7 @@ $fullname = $_SESSION['fullname'];
                                             class="btn btn-primary mr-2">Edit</a>
 
                                         <a href="./controller/delete.php?owner_id=<?php echo $owner['owner_id']?>"
-                                            class="btn btn-danger ml-2">Delete</a>
+                                            class="btn btn-danger">Delete</a>
                                     </td>
 
 

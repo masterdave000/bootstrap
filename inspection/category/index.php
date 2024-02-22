@@ -76,9 +76,9 @@ $fullname = $_SESSION['fullname'];
                                     </td>
                                     <td class="d-flex justify-content-end">
                                         <a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-primary mr-3">Edit Category</a>
+                                            class="btn btn-primary mr-3">Edit</a>
                                         <a href="./controller/delete.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-danger">Delete Category</a>
+                                            class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
 
