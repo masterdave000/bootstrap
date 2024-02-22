@@ -54,7 +54,10 @@ $fullname = $_SESSION['fullname'];
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-end card-header py-3">
-                    <a href="./add-admin.php" class="btn btn-success">Add Admin</a>
+                    <a href="./add-user.php" class="btn btn-success d-flex align-items-center">
+                        <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+                        <span>Add Admin</span>
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
