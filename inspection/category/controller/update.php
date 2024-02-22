@@ -8,7 +8,7 @@ if (filter_has_var(INPUT_POST, 'category_id')) {
     $category_name = htmlspecialchars(ucwords(trim($_POST['category_name'])));
 }
 
-$categoryQuery = "UPDATE category SET category_name = :category_name WHERE category_id = :category_id";
+$categoryQuery = "UPDATE category_list SET category_name = :category_name WHERE category_id = :category_id";
 $categoryStatement = $pdo->prepare($categoryQuery);
 $categoryStatement->bindParam(':category_id', $category_id);
 $categoryStatement->bindParam(':category_name', $category_name);

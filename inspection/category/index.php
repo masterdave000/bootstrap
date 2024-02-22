@@ -10,6 +10,7 @@ $fullname = $_SESSION['fullname'];
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
+
         <?php 
         
             if (isset($_SESSION['add'])) //Checking whether the session is set or not
@@ -54,26 +55,28 @@ $fullname = $_SESSION['fullname'];
                             <thead>
                                 <tr>
                                     <th>Category Name</th>
-                                    <th colspan="2">Actions</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <?php 
-                                    $categoryQuery = "SELECT * FROM category ORDER BY category_id";
+                                    $categoryQuery = "SELECT * FROM category_list ORDER BY category_id";
                                     $categoryStatement = $pdo->query($categoryQuery);
                                     $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($categories as $category) {
                                 ?>
 
                                 <tr>
-                                    <td><?php echo htmlspecialchars($category['category_name'])?></td>
-                                    <td><a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-primary">Edit Category</a></td>
-                                    <td><a href="./controller/delete.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-danger">Delete Category</a></td>
-
+                                    <td class="align-middle"><?php echo htmlspecialchars($category['category_name'])?>
+                                    </td>
+                                    <td class="d-flex justify-content-end">
+                                        <a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
+                                            class="btn btn-primary mr-3">Edit Category</a>
+                                        <a href="./controller/delete.php?category_id=<?php echo $category['category_id']?>"
+                                            class="btn btn-danger">Delete Category</a>
+                                    </td>
                                 </tr>
 
                                 <?php
