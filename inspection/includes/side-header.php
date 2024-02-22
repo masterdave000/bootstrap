@@ -39,7 +39,6 @@ require __DIR__ . "/../../login-check.php";
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-
         <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -69,38 +68,40 @@ require __DIR__ . "/../../login-check.php";
                 Navigation
             </div>
 
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Navigation</h6>
-                        <!-- <a class="collapse-item" href="register.html">Register</a> -->
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Admin</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Location</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Owner</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/category/">Category</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/equipment/">Equipment</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/business/">Business</a>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/admin/">Inspector</a>
-                        <div class="collapse-divider"></div>
-                        <!-- <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="<?php echo SITEURL?>inspection/404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a> -->
-                    </div>
-                </div>
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/admin/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Admin</span></a>
             </li>
 
-            <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="tables.html">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/owner/">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Owner</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/category/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Category</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/equipment/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Equipment</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/business/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Business</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/inspector/">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Inspector</span></a>
             </li>
 
             <!-- Divider -->
