@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Change Password";
+$title = "Update Password";
 include './../includes/side-header.php';
 $fullname = $_SESSION['fullname'];
 ?>
@@ -42,56 +42,39 @@ $fullname = $_SESSION['fullname'];
             require './../includes/top-header.php';
         ?>
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4 text-gray-800"><?php echo $title?></h1>
-
-        </div>
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-
-            <div class="col-xl-4 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
-                                    </div>
-                                    <form action="./controller/update-password.php" method="POST" class="user">
-                                        <div class="form-group">
-                                            <input type="password" name="currentpassword"
-                                                class="form-control form-control-user" id="exampleInputcurrentpassword"
-                                                aria-describedby="currentpasswordHelp"
-                                                placeholder="Enter Current Password..." required>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="password" name="newpassword"
-                                                class="form-control form-control-user" id="exampleInputnewpassword"
-                                                aria-describedby="newpasswordHelp" placeholder="Enter New Password..."
-                                                required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <input type="password" name="confirmpassword"
-                                                class="form-control form-control-user" id="exampleInputconfirmpassword"
-                                                aria-describedby="confirmpasswordHelp" placeholder="Confirm Password..."
-                                                required>
-                                        </div>
-
-                                        <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
-                                            value="Update Password">
-                                        <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
-                                    </form>
-                                </div>
-                            </div>
+        <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 88vh">
+            <div class="col-xl-4 col-lg-8 col-md-11 col-sm-11 p-3">
+                <div class="card card-body o-hidden shadow-lg p-3 pt-4">
+                    <!-- Nested Row within Card Body -->
+                    <div class="d-flex flex-column justify-content-center col-lg-12 p-3">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
+
+                        <form action="./controller/update-password.php" method="POST" class="user">
+                            <div class="form-group">
+                                <input type="password" name="currentpassword"
+                                    class="form-control form-control-user squared-border"
+                                    id="exampleInputcurrentpassword" aria-describedby="currentpasswordHelp"
+                                    placeholder="Enter Current Password..." required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="newpassword"
+                                    class="form-control form-control-user squared-border" id="exampleInputnewpassword"
+                                    aria-describedby="newpasswordHelp" placeholder="Enter New Password..." required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="confirmpassword"
+                                    class="form-control form-control-user squared-border"
+                                    id="exampleInputconfirmpassword" aria-describedby="confirmpasswordHelp"
+                                    placeholder="Confirm Password..." required>
+                            </div>
+
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
+                                value="Update Password">
+                            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
+                        </form>
                     </div>
                 </div>
             </div>

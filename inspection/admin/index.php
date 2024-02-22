@@ -63,7 +63,7 @@ $fullname = $_SESSION['fullname'];
                                 <tr>
                                     <th>Fullname</th>
                                     <th>Username</th>
-                                    <th colspan="3">Actions</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
@@ -77,16 +77,16 @@ $fullname = $_SESSION['fullname'];
                                 ?>
 
                                 <tr>
-                                    <td><?php echo htmlspecialchars($user['fullname'])?></td>
-                                    <td><?php echo htmlspecialchars($user['username'])?></td>
-                                    <td><a href="./update-admin.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-primary">Edit Admin</a></td>
-                                    <td><a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-warning">Change Password</a></td>
-                                    <td><a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-danger">Delete Admin</a></td>
-
-
+                                    <td class="align-middle"><?php echo htmlspecialchars($user['fullname'])?></td>
+                                    <td class="align-middle"><?php echo htmlspecialchars($user['username'])?></td>
+                                    <td class="d-flex justify-content-end">
+                                        <a href="./update-admin.php?user_id=<?php echo $user['user_id']?>"
+                                            class="btn btn-primary mr-2">Edit Admin</a>
+                                        <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
+                                            class="btn btn-warning mr-2">Change Password</a>
+                                        <a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
+                                            class="btn btn-danger">Delete Admin</a>
+                                    </td>
                                 </tr>
 
                                 <?php
