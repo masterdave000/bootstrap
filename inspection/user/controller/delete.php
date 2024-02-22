@@ -17,24 +17,24 @@ if ($deleteuserStatement->execute()) {
 $_SESSION['delete'] = "
 <div class='msgalert alert--success' id='alert'>
     <div class='alert__message'>
-        Admin Profile Deleted Successfully
+        User Account Deleted Successfully
     </div>
 </div>
 ";
-//Redirecting to the manage admin page.
-header('location:' . SITEURL . 'inspection/admin/');
+//Redirecting to the manage user page.
+header('location:' . SITEURL . 'inspection/user/');
 } else {
 //Creating SESSION variable to display message.
 $_SESSION['delete'] = "
 <div class='msgalert alert--danger' id='alert'>
     <div class='alert__message'>
-        Failed to Delete Admin Profile, Please try again
+        Failed to Delete User Account, Please try again
     </div>
 </div>
 
 ";
-//Redirecting to the manage admin page.
-header('location:' . SITEURL . 'inspection/admin/');
+//Redirecting to the manage user page.
+header('location:' . SITEURL . 'inspection/user/');
 }
 } else {
 echo "Id invalid";

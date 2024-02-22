@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Manage Admin";
+$title = "Manage User";
 require "./../includes/side-header.php";
 $user_id = $_SESSION['user_id'];
 $fullname = $_SESSION['fullname'];

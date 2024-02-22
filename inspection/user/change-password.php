@@ -37,7 +37,6 @@ $fullname = $_SESSION['fullname'];
             }
         ?>
 
-
         <?php 
             require './../includes/top-header.php';
         ?>
@@ -58,6 +57,7 @@ $fullname = $_SESSION['fullname'];
                                     id="exampleInputcurrentpassword" aria-describedby="currentpasswordHelp"
                                     placeholder="Enter Current Password..." required>
                             </div>
+
                             <div class="form-group">
                                 <input type="password" name="newpassword"
                                     class="form-control form-control-user squared-border" id="exampleInputnewpassword"
@@ -73,6 +73,7 @@ $fullname = $_SESSION['fullname'];
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
                                 value="Update Password">
+
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                         </form>
                     </div>

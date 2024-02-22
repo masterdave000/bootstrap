@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Update Admin";
+$title = "Update User";
 include './../includes/side-header.php';
 $fullname = $_SESSION['fullname'];
 ?>
@@ -29,14 +29,14 @@ $fullname = $_SESSION['fullname'];
                     $username = $user['username'];
                             
                 } else {
-                    $_SESSION['no_admin_data_found'] = "
+                    $_SESSION['no_user_data_found'] = "
                         <div class='msgalert alert--danger' id='alert'>
                             <div class='alert__message'>	
                                 Admin Profile Data Not Found
                             </div>
                         </div>
                     ";
-                    header('location:' . SITEURL . 'admin/admin_manage/admin_manage.php');
+                    header('location:' . SITEURL . 'user/user_manage/user_manage.php');
                 }
             }
                 
@@ -74,6 +74,7 @@ $fullname = $_SESSION['fullname'];
                                     id="exampleInputfullname" aria-describedby="fullnameHelp"
                                     placeholder="Enter Fullname..." value="<?php echo $fullname; ?>" required>
                             </div>
+
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-user squared-border"
                                     id="exampleInputusername" aria-describedby="usernameHelp"
@@ -82,6 +83,7 @@ $fullname = $_SESSION['fullname'];
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
                                 value="Update">
+
                             <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                         </form>
                     </div>

@@ -69,9 +69,9 @@ require __DIR__ . "/../../login-check.php";
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL?>inspection/admin/">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Admin</span></a>
+                    <span>User</span></a>
             </li>
 
             <li class="nav-item">

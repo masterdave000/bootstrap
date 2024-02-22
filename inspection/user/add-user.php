@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Add Admin";
+$title = "Add User";
 include './../includes/side-header.php';
 $fullname = $_SESSION['fullname'];
 
@@ -39,17 +39,20 @@ $fullname = $_SESSION['fullname'];
                         <div class="text-center mb-4">
                             <h1 class="h4 text-gray-900"><?php echo $title?></h1>
                         </div>
+
                         <form action="./controller/create.php" method="POST" class="user">
                             <div class="form-group">
                                 <input type="text" name="fullname" class="form-control form-control-user squared-border"
                                     id="exampleInputfullname" aria-describedby="fullnameHelp"
                                     placeholder="Enter Fullname..." required>
                             </div>
+
                             <div class="form-group">
                                 <input type="text" name="username" class="form-control form-control-user squared-border"
                                     id="exampleInputusername" aria-describedby="usernameHelp"
                                     placeholder="Enter Username..." required>
                             </div>
+
                             <div class="form-group">
                                 <input type="password" name="password1"
                                     class="form-control form-control-user squared-border" id="exampleInputPassword1"
