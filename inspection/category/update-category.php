@@ -15,7 +15,7 @@ $fullname = $_SESSION['fullname'];
                 $clean_id = filter_var($_GET['category_id'], FILTER_SANITIZE_NUMBER_INT);
                 $category_id = filter_var($clean_id, FILTER_VALIDATE_INT);
                 
-                $categoryQuery = "SELECT * from category where category_id = :category_id";
+                $categoryQuery = "SELECT * from category_list where category_id = :category_id";
                 $categoryStatement = $pdo->prepare($categoryQuery);
                 $categoryStatement->bindParam(':category_id', $category_id, PDO::PARAM_INT);
 
@@ -58,47 +58,33 @@ $fullname = $_SESSION['fullname'];
             require './../includes/top-header.php';
         ?>
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4 text-gray-800"><?php echo $title?></h1>
-
-        </div>
-
-        <!-- Outer Row -->
-        <div class="row justify-content-center">
-            <div class="col-xl-4 col-lg-12 col-md-9">
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
-                                    </div>
-                                    <form action="./controller/update.php" method="POST" class="user">
-                                        <div class="form-group">
-                                            <input type="text" name="category_name"
-                                                class="form-control form-control-user" id="exampleInputcategoryname"
-                                                aria-describedby="categorynameHelp" placeholder="Enter Category Name..."
-                                                value="<?php echo $category['category_name']; ?>">
-                                        </div>
-
-                                        <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
-                                            value="Edit">
-                                        <input type="hidden" name="category_id" value="<?php echo $category_id; ?>">
-                                    </form>
-                                </div>
-                            </div>
+        <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 88vh">
+            <div class="col-xl-4 col-lg-8 col-md-11 col-sm-11 p-3">
+                <div class="card card-body o-hidden shadow-lg p-3 pt-5">
+                    <!-- Nested Row within Card Body -->
+                    <div class="d-flex flex-column col-lg-12 p-3">
+                        <div class="text-center mb-4">
+                            <h1 class="h4 text-gray-900"><?php echo $title?></h1>
                         </div>
+                        <form action="./controller/update.php" method="POST" class="user">
+                            <div class="form-group">
+                                <input type="text" name="category_name"
+                                    class="form-control form-control-user squared-border" id="exampleInputcategoryname"
+                                    aria-describedby="categorynameHelp" placeholder="Enter Category Name..."
+                                    value="<?php echo $category['category_name']; ?>" required>
+                            </div>
+
+                            <input type="hidden" name="category_id" value="<?php echo $category_id; ?>" required>
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
+                                value="Update">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <!-- End of Main Content -->
 
 <!-- Scroll to Top Button-->

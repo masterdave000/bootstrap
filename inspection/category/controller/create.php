@@ -5,7 +5,7 @@ if (filter_has_var(INPUT_POST, 'submit')) {
     $category_name = htmlspecialchars(ucwords(trim($_POST['category_name'])));
 }
 
-$categoryQuery = "INSERT INTO category(category_name) VALUES (:category_name)";
+$categoryQuery = "INSERT INTO category_list(category_name) VALUES (:category_name)";
 $categoryStatement = $pdo->prepare($categoryQuery);
 $categoryStatement->bindParam(':category_name', $category_name);    
 

@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Manage Admin";
+$title = "Inspector List";
 require "./../includes/side-header.php";
 $user_id = $_SESSION['user_id'];
 $fullname = $_SESSION['fullname'];
@@ -11,10 +11,6 @@ $fullname = $_SESSION['fullname'];
     <!-- Main Content -->
     <div id="content">
         <?php 
-            if (isset($_SESSION['login-success'])) {
-                echo $_SESSION['login-success'];
-                unset($_SESSION['login-success']);
-            }
         
             if (isset($_SESSION['add'])) //Checking whether the session is set or not
             {	//DIsplaying session message
@@ -32,16 +28,7 @@ $fullname = $_SESSION['fullname'];
                 echo $_SESSION['update'];
                 unset($_SESSION['update']);
             }
-        
-            if (isset($_SESSION['change_pass_success'])) {
-                 echo $_SESSION['change_pass_success'];
-                unset($_SESSION['change_pass_success']);
-            }
-        
-            if (isset($_SESSION['no_admin_data_found'])) {
-                echo $_SESSION['no_admin_data_found'];
-                unset($_SESSION['no_admin_data_found']);
-            }
+
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -54,39 +41,41 @@ $fullname = $_SESSION['fullname'];
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-end card-header py-3">
-                    <a href="./add-admin.php" class="btn btn-success">Add Admin</a>
+                    <a href="./add-inspector.php" class="btn btn-success d-flex align-items-center">
+                        <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+                        <span>Add Inspector</span>
+                    </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Fullname</th>
-                                    <th>Username</th>
-                                    <th colspan="3">Actions</th>
+                                    <th>Owner Name</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
                             <tbody>
 
                                 <?php 
-                                    $userQuery = "SELECT * FROM users ORDER BY user_id";
-                                    $userStatement = $pdo->query($userQuery);
-                                    $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($users as $user) {
+                                    $inspectorQuery = "SELECT inspector_id, inspector_name FROM inspector";
+                                    $inspectorStatement = $pdo->query($inspectorQuery);
+                                    $inspectors = $inspectorStatement->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($inspectors as $inspector) {
                                 ?>
 
                                 <tr>
-                                    <td><?php echo htmlspecialchars($user['fullname'])?></td>
-                                    <td><?php echo htmlspecialchars($user['username'])?></td>
-                                    <td><a href="./update-admin.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-primary">Edit Admin</a></td>
-                                    <td><a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-warning">Change Password</a></td>
-                                    <td><a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-danger">Delete Admin</a></td>
+                                    <td class="align-middle">
+                                        <?php echo htmlspecialchars($inspector['inspector_name'])?></td>
 
+                                    <td class="d-flex justify-content-end">
+                                        <a href="./update-inspector.php?inspector_id=<?php echo $inspector['inspector_id']?>"
+                                            class="btn btn-primary mr-2">Edit</a>
 
+                                        <a href="./controller/delete.php?inspector_id=<?php echo $inspector['inspector_id']?>"
+                                            class="btn btn-danger ml-2">Delete</a>
+                                    </td>
                                 </tr>
 
                                 <?php
@@ -101,10 +90,8 @@ $fullname = $_SESSION['fullname'];
 
         </div>
         <!-- /.container-fluid -->
-
     </div>
     <!-- End of Main Content -->
-
 </div>
 <!-- End of Content Wrapper -->
 

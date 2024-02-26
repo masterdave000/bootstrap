@@ -1,8 +1,8 @@
 <?php 
 
-$title = "Manage Category";
+$title = "Manage User";
 require "./../includes/side-header.php";
-$user = $_SESSION['user_id'];
+$user_id = $_SESSION['user_id'];
 $fullname = $_SESSION['fullname'];
 
 ?>
@@ -10,8 +10,11 @@ $fullname = $_SESSION['fullname'];
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-
         <?php 
+            if (isset($_SESSION['login-success'])) {
+                echo $_SESSION['login-success'];
+                unset($_SESSION['login-success']);
+            }
         
             if (isset($_SESSION['add'])) //Checking whether the session is set or not
             {	//DIsplaying session message
@@ -29,12 +32,16 @@ $fullname = $_SESSION['fullname'];
                 echo $_SESSION['update'];
                 unset($_SESSION['update']);
             }
-
-            if (isset($_SESSION['no_category_data_found'])) {
-                echo $_SESSION['no_category_data_found'];
-                unset($_SESSION['no_category_data_found']);
+        
+            if (isset($_SESSION['change_pass_success'])) {
+                 echo $_SESSION['change_pass_success'];
+                unset($_SESSION['change_pass_success']);
             }
         
+            if (isset($_SESSION['no_user_data_found'])) {
+                echo $_SESSION['no_user_data_found'];
+                unset($_SESSION['no_user_data_found']);
+            }
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -47,9 +54,9 @@ $fullname = $_SESSION['fullname'];
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-end card-header py-3">
-                    <a href="./add-category.php" class="btn btn-success d-flex align-items-center">
+                    <a href="./add-user.php" class="btn btn-success d-flex align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span>Add Category</span>
+                        <span>Add User</span>
                     </a>
                 </div>
                 <div class="card-body">
@@ -57,7 +64,8 @@ $fullname = $_SESSION['fullname'];
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Category Name</th>
+                                    <th>Fullname</th>
+                                    <th>Username</th>
                                     <th>Actions</th>
 
                                 </tr>
@@ -65,19 +73,21 @@ $fullname = $_SESSION['fullname'];
                             <tbody>
 
                                 <?php 
-                                    $categoryQuery = "SELECT * FROM category_list ORDER BY category_id";
-                                    $categoryStatement = $pdo->query($categoryQuery);
-                                    $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($categories as $category) {
+                                    $userQuery = "SELECT * FROM users ORDER BY user_id";
+                                    $userStatement = $pdo->query($userQuery);
+                                    $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($users as $user) {
                                 ?>
 
                                 <tr>
-                                    <td class="align-middle"><?php echo htmlspecialchars($category['category_name'])?>
-                                    </td>
+                                    <td class="align-middle"><?php echo htmlspecialchars($user['fullname'])?></td>
+                                    <td class="align-middle"><?php echo htmlspecialchars($user['username'])?></td>
                                     <td class="d-flex justify-content-end">
-                                        <a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-primary mr-3">Edit</a>
-                                        <a href="./controller/delete.php?category_id=<?php echo $category['category_id']?>"
+                                        <a href="./update-user.php?user_id=<?php echo $user['user_id']?>"
+                                            class="btn btn-primary mr-2">Edit</a>
+                                        <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
+                                            class="btn btn-warning mr-2">Change Password</a>
+                                        <a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
                                             class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
@@ -94,8 +104,10 @@ $fullname = $_SESSION['fullname'];
 
         </div>
         <!-- /.container-fluid -->
+
     </div>
     <!-- End of Main Content -->
+
 </div>
 <!-- End of Content Wrapper -->
 

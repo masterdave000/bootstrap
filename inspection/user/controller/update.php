@@ -23,23 +23,21 @@ if (filter_has_var(INPUT_POST, 'user_id')) {
 		$_SESSION['update'] = "
 			<div class='msgalert alert--success' id='alert'>
 				<div class='alert__message'>
-					Admin Profile Updated Successfully
+					User Account Updated Successfully
 				</div>
 			</div>
 		";
 
-		header('location:' . SITEURL . 'inspection/admin/');
+		header('location:' . SITEURL . 'inspection/user/');
 	} else {
 		$_SESSION['update'] = "
 			<div class='msgalert alert--danger' id='alert'>
                 <div class='alert__message'>	
-                    Failed to Update Admin Profile
+                    Failed to Update User Account
                 </div>
 			</div>
 		";
 
-		header('location:' . SITEURL . "inspection/admin/update-admin.php?user_id='$user_id'");
+		header('location:' . SITEURL . "inspection/user/update-user.php?user_id='$user_id'");
 	}
 }
-
-?>

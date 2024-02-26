@@ -37,7 +37,7 @@ if (filter_has_var(INPUT_POST, 'user_id')) {
 						</div>
 					";
 
-					header('location:' . SITEURL . 'inspection/admin/');
+					header('location:' . SITEURL . 'inspection/user/');
 				} else {
 					$_SESSION['change_pass_failed'] = "
 						<div class='msgalert alert--danger' id='alert'>
@@ -47,7 +47,7 @@ if (filter_has_var(INPUT_POST, 'user_id')) {
 						</div>
 					";
 
-					header('location:' . SITEURL . "inspection/admin/change-password.php?user_id=$user_id");
+					header('location:' . SITEURL . "inspection/user/change-password.php?user_id=$user_id");
 				}
 			} else {
 				$_SESSION['pass_not_match'] = "
@@ -57,7 +57,7 @@ if (filter_has_var(INPUT_POST, 'user_id')) {
 						</div>
 					</div>
 				";
-				header('location:' . SITEURL . "inspection/admin/change-password.php?user_id=$user_id");
+				header('location:' . SITEURL . "inspection/user/change-password.php?user_id=$user_id");
 			}
 		} else {
 			$_SESSION['user_not_found'] = "
@@ -67,8 +67,7 @@ if (filter_has_var(INPUT_POST, 'user_id')) {
 					</div>
 				</div>
 			";
-			header('location:' . SITEURL . "inspection/admin/change-password.php?user_id=$user_id");
+			header('location:' . SITEURL . "inspection/user/change-password.php?user_id=$user_id");
 		}
 	}
 }
-?>
