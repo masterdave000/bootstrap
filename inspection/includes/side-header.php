@@ -17,6 +17,7 @@ require __DIR__ . "/../../login-check.php";
     <title><?php echo $title ?></title>
 
     <!-- Custom fonts for this template-->
+    <link rel="icon" type="image/x-icon" href="./../../assets/img/lgu_logo.ico">
     <link href="./../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -45,7 +46,7 @@ require __DIR__ . "/../../login-check.php";
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
                 <div class="sidebar-brand-icon rotate-n-15" style="width: 50px; height: 50px">
-                    <img style="width: 100%; height: 100%" src="./../../assets/img/lgu_logozz.png">
+                    <img style="width: 100%; height: 100%" src="./../../assets/img/lgu_logo.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">OBOS</div>
             </a>
