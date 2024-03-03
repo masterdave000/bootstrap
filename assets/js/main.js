@@ -1,3 +1,7 @@
-setTimeout(function() {
-    document.getElementById("alert").style.display = 'none';
-}, 6000);
+const alert = document.getElementById("alert");
+
+if (alert) {
+    setTimeout(function() {
+        alert.style.display = 'none';
+    }, 6000);
+}
