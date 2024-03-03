@@ -143,7 +143,7 @@ require "./config/constants.php";
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['fullname'] = $user['fullname'];
 
-            header('location:'.SITEURL.'inspection/admin/');
+            header('location:'.SITEURL.'inspection/user/');
             
         } else {
             $_SESSION['incorrect-input'] = "
