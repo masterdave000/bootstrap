@@ -71,3 +71,7 @@
 .squared-border {
   border-radius: 0 !important;
 }
+
+.sub-title {
+  font-size: .7rem;
+}
