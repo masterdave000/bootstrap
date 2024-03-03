@@ -17,20 +17,21 @@ require __DIR__ . "/../../login-check.php";
     <title><?php echo $title ?></title>
 
     <!-- Custom fonts for this template-->
-    <link rel="icon" type="image/x-icon" href="./../../assets/img/lgu_logo.ico">
-    <link href="./../../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/x-icon" href="<?php echo SITEURL?>assets/img/lgu_logo.ico">
+    <link href="<?php echo SITEURL?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="./../../assets/css/style.css" rel="stylesheet">
-    <link href="./../../assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo SITEURL ?>assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.css" rel="stylesheet">
+    <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 
     <?php 
     
     if ($title === 'Manage Admin') {
-        echo '<link href="./../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">';
+        echo '<link href="<?php ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">';
     }
     ?>
 
@@ -44,30 +45,25 @@ require __DIR__ . "/../../login-check.php";
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="<?php echo SITEURL; ?>inspection/dashboard/">
                 <div class="sidebar-brand-icon rotate-n-15" style="width: 50px; height: 50px">
-                    <img style="width: 100%; height: 100%" src="./../../assets/img/lgu_logo.png">
+                    <img style="width: 100%; height: 100%" src="<?php echo SITEURL ?>assets/img/lgu_logo.png">
                 </div>
                 <div class="sidebar-brand-text mx-3">OBOS</div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="./">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
                 Navigation
             </div>
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="<?php echo SITEURL; ?>inspection/dashboard/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
