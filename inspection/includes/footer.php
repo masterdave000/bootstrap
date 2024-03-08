@@ -26,14 +26,3 @@ if ($title === 'Dashboard') :?>
 <script src="<?php echo SITEURL ?>asets/js/demo/datatables-demo.js"></script>
 
 <?php endif;?>
-
-
-
-
-
-
-
-
-
-
-?>
