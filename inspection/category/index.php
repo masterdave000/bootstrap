@@ -3,7 +3,7 @@
 $title = "Manage Category";
 require "./../includes/side-header.php";
 $user = $_SESSION['user_id'];
-$fullname = $_SESSION['fullname'];
+$username = $_SESSION['username'];
 
 ?>
 <!-- Content Wrapper -->

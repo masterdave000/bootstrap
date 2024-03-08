@@ -2,7 +2,7 @@
 
 $title = "Dashboard";
 require './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
+$username = $_SESSION['username'];
 
 ?>
 
