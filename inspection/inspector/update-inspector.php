@@ -2,7 +2,6 @@
 
 $title = "Update Owner";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
 
 ?>
 <?php 

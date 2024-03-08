@@ -2,7 +2,6 @@
 
 $title = "Update Equipment";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
 
 ?>
 

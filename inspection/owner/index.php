@@ -2,8 +2,6 @@
 
 $title = "Owner List";
 require "./../includes/side-header.php";
-$user_id = $_SESSION['user_id'];
-$username = $_SESSION['username'];
 
 ?>
 <!-- Content Wrapper -->

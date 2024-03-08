@@ -2,7 +2,6 @@
 
 $title = "Add Category";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
 
 ?>
 

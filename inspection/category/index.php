@@ -2,8 +2,6 @@
 
 $title = "Manage Category";
 require "./../includes/side-header.php";
-$user = $_SESSION['user_id'];
-$username = $_SESSION['username'];
 
 ?>
 <!-- Content Wrapper -->

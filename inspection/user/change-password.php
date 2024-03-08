@@ -2,7 +2,7 @@
 
 $title = "Update Password";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
+
 ?>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">

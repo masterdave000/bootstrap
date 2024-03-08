@@ -2,7 +2,6 @@
 
 $title = "Add Owner";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
 
 ?>
 
