@@ -53,6 +53,8 @@ require __DIR__ . "/../../login-check.php";
                 <div class="sidebar-brand-text mx-3">OBOS</div>
             </a>
 
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
             <!-- Heading -->
             <div class="sidebar-heading">
                 Navigation
