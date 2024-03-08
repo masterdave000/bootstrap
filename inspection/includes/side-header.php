@@ -1,6 +1,9 @@
 <?php 
 require __DIR__ . "/../../config/constants.php";
 require __DIR__ . "/../../login-check.php";
+
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
