@@ -66,44 +66,44 @@ $username = $_SESSION['username'];
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo SITEURL; ?>inspection/dashboard/">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-chart-line"></i>
                     <span>Dashboard</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>User</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL?>inspection/owner/">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Owner</span></a>
-            </li>
-
-            <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/category/">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-list"></i>
                     <span>Category</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/inspection/">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-file-medical"></i>
                     <span>Inspection</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/business/">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-business-time"></i>
                     <span>Business</span></a>
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/owner/">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Owner</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/inspector/">
-                    <i class="fas fa-fw fa-table"></i>
+                    <i class="fas fa-fw fa-users"></i>
                     <span>Inspector</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
+                    <i class="fas fa-fw fa-circle-user"></i>
+                    <span>User</span></a>
             </li>
 
             <!-- Divider -->
