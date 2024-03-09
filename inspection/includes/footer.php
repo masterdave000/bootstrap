@@ -5,7 +5,6 @@
 <!-- Core plugin JavaScript-->
 <script src="<?php echo SITEURL ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Custom scripts for all pages-->
-<script src="<?php echo SITEURL ?>assets/js/sb-admin-2.min.js"></script>
 <script src="<?php echo SITEURL ?>assets/js/sb-admin-2.js"></script>
 
 
