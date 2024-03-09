@@ -191,5 +191,7 @@
 
     </ul>
 
+    <?php require './../modals/logout.php'?>
+
 </nav>
 <!-- End of Topbar -->
