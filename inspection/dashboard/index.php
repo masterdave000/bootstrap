@@ -11,7 +11,16 @@ require './../includes/side-header.php';
     <!-- Main Content -->
     <div id="content">
 
-        <?php require './../includes/top-header.php'?>
+        <?php 
+        
+        if (isset($_SESSION['login-success'])) {
+            echo $_SESSION['login-success'];
+            unset($_SESSION['login-success']);
+        }
+    
+        require './../includes/top-header.php'
+        
+        ?>
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
