@@ -80,12 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
-    
-    require './../modals/logout.php';
-    require './../includes/footer.php';
-    
-    ?>
+<?php require './../includes/footer.php'; ?>
 </body>
 
 </html>

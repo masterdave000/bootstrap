@@ -98,8 +98,6 @@ require "./../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-
-<?php require './../modals/logout.php'?>
 <?php require './../includes/footer.php';?>
 
 </body>

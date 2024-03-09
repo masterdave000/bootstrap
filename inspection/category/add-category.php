@@ -52,12 +52,8 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
-    
-    require './../modals/logout.php';
-    require './../includes/footer.php';
-    
-    ?>
+<?php require './../includes/footer.php'; ?>
+
 </body>
 
 </html>
