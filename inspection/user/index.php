@@ -9,10 +9,6 @@ require "./../includes/side-header.php";
     <!-- Main Content -->
     <div id="content">
         <?php 
-            if (isset($_SESSION['login-success'])) {
-                echo $_SESSION['login-success'];
-                unset($_SESSION['login-success']);
-            }
         
             if (isset($_SESSION['add'])) //Checking whether the session is set or not
             {	//DIsplaying session message
