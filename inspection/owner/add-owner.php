@@ -104,7 +104,7 @@ include './../includes/side-header.php';
                                     <label for="email">Email <span class="text-danger">*</span>
                                     </label>
                                     <input type="email" name="email" class="form-control p-4" id="email"
-                                        aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." required>
+                                        aria-describedby="contactnoHelp" placeholder="Enter Email Address..." required>
                                 </div>
                             </div>
 
