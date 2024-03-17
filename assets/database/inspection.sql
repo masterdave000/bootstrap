@@ -177,7 +177,7 @@ CREATE TABLE users (
 );
 
 CREATE VIEW user_view AS
-SELECT u.user_id, i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, u.username, i.inspector_img_url
+SELECT u.user_id, i.inspector_id, i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, u.username, u.role, u.password, i.inspector_img_url
 FROM users u LEFT JOIN inspector i 
 ON u.inspector_id = i.inspector_id;
     
