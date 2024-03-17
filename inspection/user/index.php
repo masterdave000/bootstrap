@@ -40,12 +40,11 @@ require "./../includes/side-header.php";
 
         <?php require './../includes/top-header.php'?>
 
-        <!-- Begin Page Content -->
         <div class="container-fluid mt-4">
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-user.php?" class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-owner.php" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -74,7 +73,7 @@ require "./../includes/side-header.php";
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
                                     <td class="p-0 m-0">
-                                        <a
+                                        <a href="./view-user.php?user_id=<?php echo $user['user_id']?>"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
                                             <div class="image-container img-fluid">
                                                 <img src="./../inspector/images/<?php echo $user['inspector_img_url'] ?? 'default.png'?>"
@@ -87,7 +86,6 @@ require "./../includes/side-header.php";
                                                 </div>
                                                 <div class="sub-title">Username:
                                                     <?php echo $user['username']?></div>
-
                                             </div>
                                         </a>
                                     </td>
