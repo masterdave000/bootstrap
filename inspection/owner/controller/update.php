@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Redirect to the form file with an error message
         if (isset($_SESSION['error'])) {
-            header("Location: ../add-owner.php");
+            header("Location: ../update-owner.php?owner_id='$owner_id'");
             exit();
         }
 
