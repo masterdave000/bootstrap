@@ -105,7 +105,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <label for="inspector-suffix">Suffix </label>
                                     <input type="text" name="inspector_suffix" id="inspector-suffix"
                                         class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="inspectorNameHelp" placeholder="Enter Suffix Name...">
+                                        aria-describedby="inspectorNameHelp" placeholder="Enter Suffix Name..."
+                                        value="<?php echo $inspector['$inspector_suffix']?>">
                                 </div>
                             </div>
 
