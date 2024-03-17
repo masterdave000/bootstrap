@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $inspectorStatement->execute();
 
     $inspector = $inspectorStatement->fetch(PDO::FETCH_ASSOC);
+    $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
+    $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
+    $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
+    $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
+    $contact_number = htmlspecialchars($inspector['contact_number']);
+    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+
+    $img_url = $inspector['inspector_img_url'];
 }
 ?>
 
@@ -43,14 +51,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $inspector['inspector_img_url'] ?? 'default.png'?>"
+                                    <img src="./images/<?php echo $img_url ?? 'default.png'?>"
                                         alt="default-inspector-image" class="img-fluid rounded-circle" />
                                 </div>
 
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></p>
+
                                 <div class="form-group d-flex flex-column align-items-center w-100">
                                     <input type="hidden" name="current_img_url" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG"
-                                        value="<?php echo $inspector['inspector_img_url'] ?>" />
+                                        accept="image/JPEG, image/JPG, image/PNG" value="<?php echo $img_url ?>" />
 
                                     <input type="file" name="inspector_img_url" id="inspector-img-url"
                                         class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
@@ -70,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         </small>
                                     </div>
                                 </div>
+
                             </div>
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
@@ -79,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <input type="text" name="inspector_firstname" id="inspector-firstname"
                                         class="form-control p-4" id="exampleInputOwnerName"
                                         aria-describedby="inspectorNameHelp" placeholder="Enter First Name..."
-                                        value="<?php echo $inspector['inspector_firstname']?>" required>
+                                        value="<?php echo $firstname?>" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
@@ -98,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <input type="text" name="inspector_lastname" id="inspector-lasttname"
                                         class="form-control p-4" id="exampleInputOwnerName"
                                         aria-describedby="inspectorNameHelp" placeholder="Enter Last Name..."
-                                        value="<?php echo $inspector['inspector_lastname']?>" required>
+                                        value="<?php echo $lastname?>" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
@@ -106,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <input type="text" name="inspector_suffix" id="inspector-suffix"
                                         class="form-control p-4" id="exampleInputOwnerName"
                                         aria-describedby="inspectorNameHelp" placeholder="Enter Suffix Name..."
-                                        value="<?php echo $inspector['$inspector_suffix']?>">
+                                        value="<?php echo $suffix ?>">
                                 </div>
                             </div>
 

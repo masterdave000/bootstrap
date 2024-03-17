@@ -69,6 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <img src="./../inspector/images/<?php echo $inspector_img_url ?? 'default.png'?>"
                                         alt="default-inspector-image" class="img-fluid rounded-circle" />
                                 </div>
+
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></p>
                             </div>
 
                             <div class="col col-12 p-0 form-group">

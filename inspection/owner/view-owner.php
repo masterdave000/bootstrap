@@ -14,6 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $getOwnerStatement->execute();
 
     $owner = $getOwnerStatement->fetch(PDO::FETCH_ASSOC);
+    $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
+    $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+    $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
+    $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
+    $contact_number = htmlspecialchars($owner['contact_number']);
+    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+
+    $img_url = $owner['owner_img_url'];
 ?>
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -32,17 +40,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <form class="user">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $owner['owner_img_url']?>" alt="default-owner-image"
+                                    <img src="./images/<?php echo $img_url?>" alt="default-owner-image"
                                         class="img-fluid rounded-circle" />
                                 </div>
+
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></p>
                             </div>
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-firstname">First Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control p-4"
-                                        value="<?php echo $owner['owner_firstname']?>" disabled>
+                                    <input type="text" class="form-control p-4" value="<?php echo $firstname?>"
+                                        disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
@@ -56,14 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-lasttname">Last Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" class="form-control p-4"
-                                        value="<?php echo $owner['owner_lastname']?>" disabled>
+                                    <input type="text" class="form-control p-4" value="<?php echo $lastname?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-suffix">Suffix </label>
-                                    <input type="text" class="form-control p-4"
-                                        value="<?php echo $owner['owner_suffix']?>" disabled>
+                                    <input type="text" class="form-control p-4" value="<?php echo $suffix?>" disabled>
                                 </div>
                             </div>
 

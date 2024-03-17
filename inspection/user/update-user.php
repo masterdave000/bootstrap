@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></p>
                         </div>
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
@@ -55,6 +55,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     <img src="./../inspector/images/<?php echo $user['inspector_img_url'] ?? 'default.png'?>"
                                         alt="default-inspector-image" class="img-fluid rounded-circle" />
                                 </div>
+
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></h1>
                             </div>
 
                             <div class="col col-12 p-1 form-group d-flex flex-column">
