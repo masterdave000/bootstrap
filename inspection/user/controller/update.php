@@ -1,23 +1,28 @@
 <?php
 include './../../../config/constants.php';
 
-if (filter_has_var(INPUT_POST, 'user_id')) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$clean_id = filter_var($_POST['user_id'], FILTER_SANITIZE_NUMBER_INT);
 	$user_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-	$fullname = htmlspecialchars(ucwords($_POST['fullname']));
+	$clean_inspector_id = filter_var($_POST['inspector_name'], FILTER_SANITIZE_NUMBER_INT);
+    $inspector_id = filter_var($clean_inspector_id, FILTER_VALIDATE_INT);
+	
 	$username = htmlspecialchars($_POST['username']);
+	$role = htmlspecialchars(ucwords($_POST['role']));
 
 	$updateuserQuery = "UPDATE users SET
-		fullname = :fullname,
-		username = :username
+		inspector_id = :clean_inspector_id,
+		username = :username,
+		role = :role
 		WHERE user_id = :user_id
 	";
 
 	$updateuserStatement = $pdo->prepare($updateuserQuery);
 	$updateuserStatement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-	$updateuserStatement->bindParam(':fullname', $fullname);
+	$updateuserStatement->bindParam(':inspector_id', $inspector_id);
 	$updateuserStatement->bindParam(':username', $username);
+	$updateuserStatement->bindParam(':role', $role);
 
 	if ($updateuserStatement->execute()) {
 		$_SESSION['update'] = "

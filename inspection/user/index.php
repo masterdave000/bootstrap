@@ -41,48 +41,76 @@ require "./../includes/side-header.php";
         <?php require './../includes/top-header.php'?>
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
-            <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800"><?php echo $title ?></h1>
-
-            <!-- DataTales Example -->
+        <div class="container-fluid mt-4">
             <div class="card shadow mb-4">
-                <div class="d-flex align-items-center justify-content-end card-header py-3">
-                    <a href="./add-user.php" class="btn btn-success d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-between card-header">
+                    <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
+                    <a href="./add-user.php?" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span>Add User</span>
+                        <span class="d-none d-lg-inline">Add</span>
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr>
-                                    <th>Fullname</th>
-                                    <th>Username</th>
-                                    <th>Actions</th>
 
-                                </tr>
                             </thead>
+
                             <tbody>
 
                                 <?php 
-                                    $userQuery = "SELECT * FROM users ORDER BY user_id";
+                                    $userQuery = "SELECT * FROM user_view ORDER BY user_id";
                                     $userStatement = $pdo->query($userQuery);
                                     $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($users as $user) {
+                                        $firstname = htmlspecialchars(ucwords($user['inspector_firstname']));
+                                        $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                        $lastname = htmlspecialchars(ucwords($user['inspector_lastname']));
+                                        $suffix = htmlspecialchars(ucwords($user['inspector_suffix']));
+                                        
+                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr>
-                                    <td class="align-middle"><?php echo htmlspecialchars($user['fullname'])?></td>
-                                    <td class="align-middle"><?php echo htmlspecialchars($user['username'])?></td>
+                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                    <td class="p-0 m-0">
+                                        <a
+                                            class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
+                                            <div class="image-container img-fluid">
+                                                <img src="./../inspector/images/<?php echo $user['inspector_img_url'] ?? 'default.png'?>"
+                                                    alt="inspector-image" class="img-fluid rounded-circle" />
+                                            </div>
+
+                                            <div>
+                                                <div class="text d-none d-md-flex">
+                                                    Name: <?php echo $fullname?>
+                                                </div>
+                                                <div class="sub-title">Username:
+                                                    <?php echo $user['username']?></div>
+
+                                            </div>
+                                        </a>
+                                    </td>
+
                                     <td class="d-flex justify-content-end">
                                         <a href="./update-user.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-primary mr-2">Edit</a>
+                                            class="btn btn-primary mr-2 text-center d-flex align-items-center">
+                                            <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                            <span class="d-none d-lg-inline">Edit</span>
+                                        </a>
+
                                         <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-warning mr-2">Change Password</a>
-                                        <a href="./controller/delete.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-danger">Delete</a>
+                                            class="btn btn-warning mr-2 text-center d-flex justify-content-center align-items-center">
+                                            <i class="fa fa-key mr-1" aria-hidden="true"></i>
+                                            <span class="d-none d-lg-inline">Change Password</span>
+                                        </a>
+
+                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                            class="btn btn-danger d-flex justify-content-center align-items-center">
+                                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                            <span class="d-none d-lg-inline">Delete</span>
+                                        </a>
+
                                     </td>
                                 </tr>
 
@@ -95,24 +123,21 @@ require "./../includes/side-header.php";
                     </div>
                 </div>
             </div>
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
-    <!-- End of Main Content -->
-
 </div>
-<!-- End of Content Wrapper -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
+<?php 
 
-<?php require './../modals/logout.php'?>
-<?php require './../includes/footer.php';?>
+require './modals/delete.php';
+require './../includes/footer.php';
+
+?>
 
 </body>
 
