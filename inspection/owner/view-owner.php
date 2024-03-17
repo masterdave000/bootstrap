@@ -41,18 +41,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-firstname">First Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_firstname" id="owner-firstname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter First Name..."
+                                    <input type="text" class="form-control p-4"
                                         value="<?php echo $owner['owner_firstname']?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-midname">Middle Name </label>
-                                    <input type="text" name="owner_midname" id="owner-midname" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Middle Name..." value="<?php echo $owner['owner_midname']?>"
-                                        disabled>
+                                    <input type="text" class="form-control p-4"
+                                        value="<?php echo $owner['owner_midname']?>" disabled>
                                 </div>
                             </div>
 
@@ -60,18 +56,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-lasttname">Last Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_lastname" id="owner-lasttname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter Last Name..."
+                                    <input type="text" class="form-control p-4"
                                         value="<?php echo $owner['owner_lastname']?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-suffix">Suffix </label>
-                                    <input type="text" name="owner_suffix" id="owner-suffix" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Suffix Name..." value="<?php echo $owner['owner_suffix']?>"
-                                        disabled>
+                                    <input type="text" class="form-control p-4"
+                                        value="<?php echo $owner['owner_suffix']?>" disabled>
                                 </div>
                             </div>
 
@@ -79,18 +71,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="contact-number">Contact Number <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="contact_number" class="form-control p-4"
-                                        id="contact-number" aria-describedby="contactnoHelp"
-                                        placeholder="Enter Contact Number..." maxlength="11"
+                                    <input type="text" class="form-control p-4"
                                         value="<?php echo $owner['contact_number']?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="email">Email <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control p-4" id="email"
-                                        aria-describedby="contactnoHelp" placeholder="Enter Contact Number..."
-                                        value="<?php echo $owner['email']?>" disabled>
+                                    <input type="email" class="form-control p-4" value="<?php echo $owner['email']?>"
+                                        disabled>
                                 </div>
                             </div>
                         </form>
