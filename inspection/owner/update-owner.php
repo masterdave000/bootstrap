@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             <input type="hidden" name="owner_id" value="<?php echo $owner['owner_id']?>">
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Add">
+                                value="Edit">
                         </form>
                     </div>
                 </div>
