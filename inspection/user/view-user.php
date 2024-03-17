@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Edit User";
+$title = "User Details";
 include './../includes/side-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
