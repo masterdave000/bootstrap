@@ -2,64 +2,83 @@
 
 include './../../../config/constants.php';
 
-if (filter_has_var(INPUT_POST, 'submit')) {
-    $owner_name = htmlspecialchars(ucwords(trim($_POST['owner_name'])));
-    $business_name = htmlspecialchars(ucwords(trim($_POST['business_name'])));
-    $business_desc = trim($_POST['business_desc']);
-    $street = ucwords(trim($_POST['street']));
-    $purok = ucwords(trim($_POST['purok']));
-    $barangay = ucwords(trim($_POST['barangay']));
-    $city = ucwords(trim($_POST['city']));
-    $contact_no = htmlspecialchars($_POST['contact_number']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $owner_id = htmlspecialchars(ucwords(trim($_POST['owner_name'])));
+    $bus_name = htmlspecialchars(ucwords(trim($_POST['bus_name'])));
+    $bus_address = htmlspecialchars(ucwords(trim($_POST['bus_address'])));
+    $bus_type = htmlspecialchars(ucwords($_POST['bus_type']));
+    $contact_number = htmlspecialchars($_POST['contact_number']);
+    $floor_area = htmlspecialchars($_POST['floor_area']);
+    $signage_area = htmlspecialchars($_POST['signage_area']);
+    $clean_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $email = strtolower(trim(filter_var($clean_email, FILTER_VALIDATE_EMAIL)));
+    
+    $img_name = basename($_FILES['bus_img']['name']);
+    $temp_name = $_FILES['bus_img']['tmp_name'];
+    $img_size = $_FILES['bus_img']['size'];
+    $max_size = 1024 * 1024;
+
+    $img_extension = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
+    $allowed_types = ['jpeg', 'png', 'jpg'];
+    $folder_path = "./../images/";
+    $filename = $bus_name . '(' . date('m-d-Y') . ').png';
+
+    $bus_img_url = 'no-image.png';
+    
+    if ($img_name) {
+        if (!in_array($img_extension, $allowed_types)) {
+                $_SESSION['error'] = "Only JPEG, JPG, and PNG files are allowed.";
+        } elseif ($img_size >= $max_size) {
+                $_SESSION['error'] = "File size must be less than 1MB.";
+        } else {
+                $upload = $filename;
+                move_uploaded_file($temp_name, $folder_path . $upload);
+                $bus_img_url = $upload;
+        }
+
+        // Redirect to the form file with an error message
+        if (isset($_SESSION['error'])) {
+                header("Location: ../add-business.php");
+                exit();
+        }
+
+    }
+    
     
 }
 
-$ownerQuery = "INSERT INTO owner (owner_name) VALUES (:owner_name)";
-$ownerStatement = $pdo->prepare($ownerQuery);
-$ownerStatement->bindParam(':owner_name', $owner_name, PDO::PARAM_STR);
-$ownerStatement->execute();
-$owner_id = $pdo->lastInsertId();
-
-$locationQuery = "INSERT INTO location (
-    street,
-    purok,
-    barangay,
-    city
-) VALUES (
-    :street,
-    :purok,
-    :barangay,
-    :city
-)";
-
-$locationStatement = $pdo->prepare($locationQuery);
-$locationStatement->bindParam(':street', $street);
-$locationStatement->bindParam(':purok', $purok);
-$locationStatement->bindParam(':barangay', $barangay);
-$locationStatement->bindParam(':city', $purok);
-$locationStatement->execute();          
-$location_id = $pdo->lastInsertId();
-
 $businessQuery = "INSERT INTO business (
     owner_id, 
-    location_id, 
     bus_name, 
-    bus_desc, 
-    contact_no
+    bus_address,
+    bus_type,
+    bus_contact_number,
+    email,
+    floor_area,
+    signage_area,
+    bus_img_url
 ) VALUES (
     :owner_id, 
-    :location_id, 
     :bus_name, 
-    :bus_desc, 
-    :contact_no
+    :bus_address,
+    :bus_type,
+    :bus_contact_number,
+    :email,
+    :floor_area,
+    :signage_area,
+    :bus_img_url
 )";
 
 $businessStatement = $pdo->prepare($businessQuery);
 $businessStatement->bindParam(':owner_id', $owner_id);
-$businessStatement->bindParam(':location_id', $location_id);
-$businessStatement->bindParam(':bus_name', $business_name);
-$businessStatement->bindParam(':bus_desc', $business_desc);
-$businessStatement->bindParam(':contact_no', $contact_no);
+$businessStatement->bindParam(':bus_name', $bus_name);
+$businessStatement->bindParam(':bus_address', $bus_address);
+$businessStatement->bindParam(':bus_type', $bus_type);
+$businessStatement->bindParam(':bus_contact_number', $contact_number);
+$businessStatement->bindParam(':email', $email);
+$businessStatement->bindParam(':floor_area', $floor_area);
+$businessStatement->bindParam(':signage_area', $signage_area);
+$businessStatement->bindParam(':bus_img_url', $bus_img_url);
 
 if ($businessStatement->execute()) {
     $_SESSION['add'] = "

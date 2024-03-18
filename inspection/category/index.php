@@ -2,8 +2,6 @@
 
 $title = "Manage Category";
 require "./../includes/side-header.php";
-$user = $_SESSION['user_id'];
-$fullname = $_SESSION['fullname'];
 
 ?>
 <!-- Content Wrapper -->
@@ -104,9 +102,7 @@ $fullname = $_SESSION['fullname'];
     <i class="fas fa-angle-up"></i>
 </a>
 
-
-<?php require './../modals/logout.php'?>
-<?php require './../includes/footer.php';?>
+<?php require './../includes/footer.php'; ?>
 
 </body>
 

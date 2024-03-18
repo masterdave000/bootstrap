@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Edit Owner";
+$title = "Owner Details";
 include './../includes/side-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -26,17 +26,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
-
-        <?php
-
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['update'];
-                //Removing session message
-                unset($_SESSION['update']);
-            }
-        ?>
-
         <?php require './../includes/top-header.php'?>
 
         <!-- Outer Row -->
@@ -48,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
-                        <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
+                        <form class="user">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
                                     <img src="./images/<?php echo $img_url?>" alt="default-owner-image"
@@ -56,47 +45,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 </div>
 
                                 <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></p>
-
-                                <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="owner_img_url" id="owner-img-url" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG" />
-
-                                    <input type="hidden" name="current_img_url" value="<?php echo $img_url?>" />
-
-                                    <?php
-                                    
-                                    if (isset($_SESSION['error'])) {
-                                        echo "<small class='text-danger text-center'>" . $_SESSION['error'] . "</small>";
-                                        unset($_SESSION['error']); // clear the error message from the session
-                                    }
-                                    ?>
-
-                                    <div class="text-danger text-center">
-                                        <small>
-                                            <i>Note: The maximum file size allowed is 1MB. <br>
-                                                Only JPEG, JPG, and PNG formats are accepted.
-                                            </i>
-                                        </small>
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-firstname">First Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_firstname" id="owner-firstname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter First Name..."
-                                        value="<?php echo $firstname?>" required>
+                                    <input type="text" class="form-control p-4" value="<?php echo $firstname?>"
+                                        disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-midname">Middle Name </label>
-                                    <input type="text" name="owner_midname" id="owner-midname" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Middle Name..." value="<?php echo $owner['owner_midname']?>">
+                                    <input type="text" class="form-control p-4"
+                                        value="<?php echo $owner['owner_midname']?>" disabled>
                                 </div>
                             </div>
 
@@ -104,17 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-lasttname">Last Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_lastname" id="owner-lasttname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter Last Name..."
-                                        value="<?php echo $lastname?>" required>
+                                    <input type="text" class="form-control p-4" value="<?php echo $lastname?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-suffix">Suffix </label>
-                                    <input type="text" name="owner_suffix" id="owner-suffix" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Suffix Name..." value="<?php echo $suffix?>">
+                                    <input type="text" class="form-control p-4" value="<?php echo $suffix?>" disabled>
                                 </div>
                             </div>
 
@@ -122,24 +79,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="contact-number">Contact Number <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="contact_number" class="form-control p-4"
-                                        id="contact-number" aria-describedby="contactnoHelp"
-                                        placeholder="Enter Contact Number..." maxlength="11"
-                                        value="<?php echo $owner['contact_number']?>" required>
+                                    <input type="text" class="form-control p-4"
+                                        value="<?php echo $owner['contact_number']?>" disabled>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="email">Email <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control p-4" id="email"
-                                        aria-describedby="contactnoHelp" placeholder="Enter Email Address..."
-                                        value="<?php echo $owner['email']?>" required>
+                                    <input type="email" class="form-control p-4" value="<?php echo $owner['email']?>"
+                                        disabled>
                                 </div>
                             </div>
-                            <input type="hidden" name="owner_id" value="<?php echo $owner['owner_id']?>">
-
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
                         </form>
                     </div>
                 </div>

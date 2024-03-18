@@ -2,31 +2,36 @@
 
 include './../../../config/constants.php';
 
-if (filter_has_var(INPUT_POST, 'submit')) {
-	$fullname = htmlspecialchars(ucwords($_POST["fullname"]));
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	$clean_inspector_id = filter_var($_POST['inspector_name'], FILTER_SANITIZE_NUMBER_INT);
+	$inspector_id = filter_var($clean_inspector_id, FILTER_VALIDATE_INT);
 	$username = htmlspecialchars($_POST["username"]);
 	$password1 = htmlspecialchars(md5($_POST["password1"]));
 	$password2 = htmlspecialchars(md5($_POST["password2"]));
+	$role = htmlspecialchars($_POST['role']);
 
 	if ($password1 == $password2) {
 
 		$insertUserQuery = "INSERT INTO users
 			(
-				fullname,
+				inspector_id,
 				username,
-				password
+				password,
+				role
 			)
 			VALUES
 			(
-				:fullname,
+				:inspector_id,
 				:username,
-				:password
+				:password,
+				:role
 			)";
 
 		$insertUserStatement = $pdo->prepare($insertUserQuery);
-		$insertUserStatement->bindParam(':fullname', $fullname);
+		$insertUserStatement->bindParam(':inspector_id', $inspector_id);
 		$insertUserStatement->bindParam(':username', $username);
 		$insertUserStatement->bindParam(':password', $password1);
+		$insertUserStatement->bindParam(':role', $role);
 
 
 

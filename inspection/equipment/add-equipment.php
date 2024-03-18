@@ -2,7 +2,6 @@
 
 $title = "Add Equipment";
 include './../includes/side-header.php';
-$fullname = $_SESSION['fullname'];
 
 ?>
 
@@ -108,12 +107,8 @@ $fullname = $_SESSION['fullname'];
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
-    
-    require './../modals/logout.php';
-    require './../includes/footer.php';
-    
-    ?>
+<?php require './../includes/footer.php'; ?>
+
 </body>
 
 </html>

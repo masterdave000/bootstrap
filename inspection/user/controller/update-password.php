@@ -1,28 +1,27 @@
 <?php
 include './../../../config/constants.php';
 
-if (filter_has_var(INPUT_POST, 'user_id')) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$clean_id = filter_var($_POST['user_id'], FILTER_SANITIZE_NUMBER_INT);
 	$user_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-	$currentpassword = htmlspecialchars(md5($_POST['currentpassword']));
-	$newpassword = htmlspecialchars(md5($_POST['newpassword']));
-	$confirmpassword = htmlspecialchars(md5($_POST['confirmpassword']));
+	$currentpassword = $_POST['current_password'];
+	$newpassword = md5($_POST['new_password']);
+	$confirmpassword = md5($_POST['confirm_password']);
 
-	$userQuery = "SELECT * FROM users WHERE user_id = :user_id AND password = :currentpassword";
+	$userQuery = "SELECT * FROM users WHERE user_id = :user_id";
 	$userStatement = $pdo->prepare($userQuery);
 	$userStatement->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-	$userStatement->bindParam(':currentpassword', $currentpassword);
 
 	if ($userStatement->execute()) {
 		$userCount = $userStatement->rowCount();
 
 		if ($userCount === 1) {
-			if ($newpassword == $confirmpassword) {
+			if ($newpassword === $confirmpassword) {
 
 				$updatepasswordQuery = "UPDATE users SET 
 					password = :newpassword
-					where user_id = :user_id
+					WHERE user_id = :user_id
 				";
 				$updatepaswwordStatement = $pdo->prepare($updatepasswordQuery);
 				$updatepaswwordStatement->bindParam(':user_id', $user_id, PDO::PARAM_INT);

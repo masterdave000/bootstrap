@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
     <!-- Sidebar Toggle (Topbar) -->
 
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -110,7 +110,7 @@
                 </h6>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
+                        <img class="rounded-circle" src="<?php echo SITEURL?>assets/img/undraw_profile_1.svg" alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
                     <div class="font-weight-bold">
@@ -121,7 +121,8 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_2.svg" alt="...">
+                        <img class="rounded-circle" src="<?php echo SITEURL ?>assets/img/undraw_profile_2.svg"
+                            alt="...">
                         <div class="status-indicator"></div>
                     </div>
                     <div>
@@ -132,7 +133,8 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="img/undraw_profile_3.svg" alt="...">
+                        <img class="rounded-circle" src="<?php echo SITEURL ?>assets/img/undraw_profile_3.svg"
+                            alt="...">
                         <div class="status-indicator bg-warning"></div>
                     </div>
                     <div>
@@ -143,7 +145,7 @@
                 </a>
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <div class="dropdown-list-image mr-3">
-                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="...">
+                        <img class="rounded-circle" src="<?php echo SITEURL?>assets/img/undraw_profile.svg" alt="...">
                         <div class="status-indicator bg-success"></div>
                     </div>
                     <div>
@@ -162,8 +164,10 @@
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $fullname?></span>
-                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username?></span>
+                <div class="header-image">
+                    <img class=" img-profile rounded-circle" src="<?php echo SITEURL?>assets/img/undraw_profile.svg">
+                </div>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -188,6 +192,8 @@
         </li>
 
     </ul>
+
+    <?php require './../modals/logout.php'?>
 
 </nav>
 <!-- End of Topbar -->
