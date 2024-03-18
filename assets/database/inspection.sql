@@ -182,7 +182,9 @@ FROM users u LEFT JOIN inspector i
 ON u.inspector_id = i.inspector_id;
     
 CREATE VIEW business_view AS
-SELECT bus_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.email, floor_area, signage_area, bus_img_url, owner.* FROM business bus
+SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.email, floor_area, signage_area, bus_img_url, 
+owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_suffix 
+FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
 
 
