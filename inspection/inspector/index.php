@@ -68,17 +68,19 @@ require "./../includes/side-header.php";
                                     <td class="p-0 m-0">
                                         <a href="./view-inspector.php?inspector_id=<?php echo $inspector['inspector_id']?>"
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
-                                            <div class="image-container d-none d-md-flex img-fluid">
+                                            <div class="image-container img-fluid">
                                                 <img src="./images/<?php echo $inspector['inspector_img_url'] ?? 'default.png'?>"
                                                     alt="inspector-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
                                                 <div class="text">
-                                                    Name: <?php echo $fullname?>
+                                                    <span class="d-none d-md-inline">Name:</span>
+                                                    <?php echo $fullname?>
                                                 </div>
-                                                <div class="sub-title">ID:
-                                                    <?php echo $inspector['inspector_id']?></div>
+                                                <div class=" sub-title d-none d-md-flex">ID:
+                                                    <?php echo $inspector['inspector_id']?>
+                                                </div>
 
                                             </div>
                                         </a>

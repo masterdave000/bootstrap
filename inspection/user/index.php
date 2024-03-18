@@ -84,8 +84,10 @@ require "./../includes/side-header.php";
                                                 <div class="text d-none d-md-flex">
                                                     Name: <?php echo $fullname?>
                                                 </div>
-                                                <div class="sub-title">Username:
-                                                    <?php echo $user['username']?></div>
+                                                <div class="sub-title">
+                                                    <span class="d-none d-md-inline">Username:</span>
+                                                    <?php echo $user['username']?>
+                                                </div>
                                             </div>
                                         </a>
                                     </td>

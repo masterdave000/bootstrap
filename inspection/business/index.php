@@ -75,16 +75,17 @@ require "./../includes/side-header.php";
                                         <a href="view-business.php?bus_id=<?php echo $business['bus_id']?>"
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap"
                                             href="./view-business.php?bus_id=<?php $business['bus_id']?>">
-                                            <div class="image-container d-none d-md-flex img-fluid">
+                                            <div class="image-container img-fluid">
                                                 <img src="./images/<?php echo $business['bus_img_url'] ?? 'no-image.png'?>"
                                                     alt="inspector-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
                                                 <div class="text">
-                                                    Business Name: <?php echo $bus_name?>
+                                                    <span class="d-none d-md-inline">Business Name:</span>
+                                                    <?php echo $bus_name?>
                                                 </div>
-                                                <div class="sub-title">Owner:
+                                                <div class="sub-title d-none d-md-flex">Owner:
                                                     <?php echo $fullname?>
                                                 </div>
 
