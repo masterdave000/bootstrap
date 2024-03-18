@@ -12,30 +12,30 @@ if (filter_has_var(INPUT_GET, 'bus_id')) {
     $deletecategoryStatement = $pdo->prepare($deletecategoryQuery);
     $deletecategoryStatement->bindParam(':bus_id', $bus_id, PDO::PARAM_INT);
 
-if ($deletecategoryStatement->execute()) {
-    //Creating SESSION variable to display message.
-    $_SESSION['delete'] = "
-    <div class='msgalert alert--success' id='alert'>
-        <div class='alert__message'>
-            Business Details Deleted Successfully
+    if ($deletecategoryStatement->execute()) {
+        //Creating SESSION variable to display message.
+        $_SESSION['delete'] = "
+        <div class='msgalert alert--success' id='alert'>
+            <div class='alert__message'>
+                Business Details Deleted Successfully
+            </div>
         </div>
-    </div>
-    ";
-    //Redirecting to the manage business page.
-    header('location:' . SITEURL . 'inspection/business/');
-} else {
-    //Creating SESSION variable to display message.
-    $_SESSION['delete'] = "
-    <div class='msgalert alert--danger' id='alert'>
-        <div class='alert__message'>
-            Failed to Delete Business Details, Please try again
+        ";
+        //Redirecting to the manage business page.
+        header('location:' . SITEURL . 'inspection/business/');
+    } else {
+        //Creating SESSION variable to display message.
+        $_SESSION['delete'] = "
+        <div class='msgalert alert--danger' id='alert'>
+            <div class='alert__message'>
+                Failed to Delete Business Details, Please try again
+            </div>
         </div>
-    </div>
 
-    ";
-    //Redirecting to the manage business page.
-    header('location:' . SITEURL . 'inspection/business/');
-}
+        ";
+        //Redirecting to the manage business page.
+        header('location:' . SITEURL . 'inspection/business/');
+    }
 } else {
 echo "Id invalid";
 }
