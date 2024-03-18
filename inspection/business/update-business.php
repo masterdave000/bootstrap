@@ -60,6 +60,8 @@ include './../includes/side-header.php';
                                         class="img-fluid rounded-circle" />
                                 </div>
 
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $business['bus_name']?></p>
+
                                 <div class="form-group d-flex flex-column align-items-center w-100">
                                     <input type="file" name="bus_img" id="bus-img" class="border w-75"
                                         accept="image/JPEG, image/JPG, image/PNG" />
