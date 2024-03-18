@@ -73,5 +73,56 @@
 }
 
 .sub-title {
-  font-size: .7rem;
+  font-size: 0.9rem;
+}
+
+label, 
+select,
+select > option,
+input::placeholder {
+  font-size: 1rem !important; 
+}
+
+.select-container { 
+  height: 50px;
+  
+}
+
+select {
+  height: 100% !important;
+}
+
+.flex-gap {
+  gap: 10px;
+}
+
+
+td .text {
+  font-size: clamp(0.8rem, 0.68rem + 0.48vw, 1.1rem);
+}
+
+td .image-container {
+  width: 60px;
+  height: 60px;
+}
+
+.header-image{
+  width: 50px;
+  height: 50px;
+}
+
+img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: fill;
+}
+
+form .image-container {
+  width: 110px;
+  height: 110px;
+}
+
+input[disabled] {
+  background: #FFFFFF !important;
+  cursor: not-allowed;
 }
