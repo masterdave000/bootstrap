@@ -72,7 +72,8 @@ require "./../includes/side-header.php";
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
-                                        <a class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap"
+                                        <a href="view-business.php?bus_id=<?php echo $business['bus_id']?>"
+                                            class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap"
                                             href="./view-business.php?bus_id=<?php $business['bus_id']?>">
                                             <div class="image-container d-none d-md-flex img-fluid">
                                                 <img src="./images/<?php echo $business['bus_img_url'] ?? 'no-image.png'?>"
