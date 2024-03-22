@@ -27,6 +27,15 @@ require "./../includes/side-header.php";
                 unset($_SESSION['update']);
             }
 
+            if (isset($_SESSION['invalid_password'])) {
+                echo $_SESSION['invalid_password'];
+                unset($_SESSION['invalid_password']);
+            }
+
+            if (isset($_SESSION['id_not_found'])) {
+                echo $_SESSION['id_not_found'];
+                unset($_SESSION['id_not_found']);
+            }
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -126,7 +135,12 @@ require "./../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php require './../includes/footer.php'; ?>
+<?php 
+
+require './modals/delete.php';
+require './../includes/footer.php'; 
+
+?>
 
 </body>
 
