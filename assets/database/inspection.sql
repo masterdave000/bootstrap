@@ -36,6 +36,7 @@ CREATE TABLE business (
 CREATE TABLE category_list (
         category_id int NOT NULL AUTO_INCREMENT,
         category_name varchar(100) NOT NULL,
+        category_img_url varchar(50) NOT NULL DEFAULT 'default-img.png',
         PRIMARY KEY(category_id)
 );
     

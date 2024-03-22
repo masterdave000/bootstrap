@@ -12,7 +12,7 @@ include './../includes/side-header.php';
     <div id="content">
 
         <?php
-        
+
             if (isset($_SESSION['add'])) //Checking whether the session is set or not
             {	//DIsplaying session message
                 echo $_SESSION['add'];
@@ -23,29 +23,64 @@ include './../includes/side-header.php';
 
         <?php require './../includes/top-header.php'?>
 
-        <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 88vh">
-            <div class="col-xl-4 col-lg-8 col-md-11 col-sm-11 p-3">
-                <div class="card card-body o-hidden shadow-lg p-3 pt-5">
+        <!-- Outer Row -->
+        <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
+            <div class="col-xl-6 col-lg-8 col-md-11 col-sm-11 p-3">
+                <div class="card card-body o-hidden shadow-lg p-4">
                     <!-- Nested Row within Card Body -->
-                    <div class="d-flex flex-column col-lg-12 p-3">
-                        <div class="text-center mb-4">
-                            <h1 class="h4 text-gray-900"><?php echo $title?></h1>
+                    <div class="d-flex flex-column justify-content-center col-lg-12">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
-                        <form action="./controller/create.php" method="POST" class="user">
-                            <div class="form-group">
-                                <input type="text" name="category_name"
-                                    class="form-control form-control-user squared-border" id="exampleInputcategoryname"
-                                    aria-describedby="categorynameHelp" placeholder="Enter Category Name..." required>
+                        <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="image-container mb-3">
+                                    <img src="./images/no-image.png" alt="default-category-image"
+                                        class="img-fluid rounded-circle" />
+                                </div>
+
+                                <div class="form-group d-flex flex-column align-items-center w-100">
+                                    <input type="file" name="category_img" id="category-img" class="border w-75"
+                                        accept="image/JPEG, image/JPG, image/PNG" />
+
+                                    <?php
+                                    if (isset($_SESSION['error'])) {
+                                        echo "<small class='text-danger text-center'>" . $_SESSION['error'] . "</small>";
+                                        unset($_SESSION['error']); // clear the error message from the session
+                                    }
+                                    ?>
+
+                                    <div class="text-danger text-center">
+                                        <small>
+                                            <i>Note: The maximum file size allowed is 1MB. <br>
+                                                Only JPEG, JPG, and PNG formats are accepted.
+                                            </i>
+                                        </small>
+                                    </div>
+                                </div>
                             </div>
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block" value="Add">
+                            <div class="col col-12 p-0 form-group">
+                                <label for="category-name">Category Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="category_name" class="form-control p-4" id="category-name"
+                                    aria-describedby="businessaddressHelp" placeholder="Enter Business Address..."
+                                    required>
+                            </div>
+
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
+                                value="Add">
                         </form>
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
+
 </div>
+<!-- End of Main Content -->
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
@@ -53,7 +88,6 @@ include './../includes/side-header.php';
 </a>
 
 <?php require './../includes/footer.php'; ?>
-
 </body>
 
 </html>
