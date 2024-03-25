@@ -73,7 +73,7 @@ require "./../includes/side-header.php";
                                         
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
                                         <a href="./view-category.php?category_id=<?php echo $category['category_id']?>"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">

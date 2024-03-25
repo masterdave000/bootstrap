@@ -73,7 +73,7 @@ require "./../includes/side-header.php";
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
                                         <a href="./view-owner.php?owner_id=<?php echo $owner['owner_id']?>"
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">

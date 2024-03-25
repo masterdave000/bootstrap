@@ -81,7 +81,7 @@ require "./../includes/side-header.php";
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
                                         <a href="./view-user.php?user_id=<?php echo $user['user_id']?>"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
