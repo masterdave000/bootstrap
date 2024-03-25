@@ -188,4 +188,8 @@ owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_su
 FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
 
+CREATE VIEW item_view AS 
+SELECT i.item_id, i.item_name, i.img_url, c.category_name 
+FROM item_list i
+LEFT JOIN category_list c ON i.category_id = c.category_id;
 
