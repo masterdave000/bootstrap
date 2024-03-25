@@ -77,7 +77,7 @@ $username = $_SESSION['username'];
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL?>inspection/equipment/">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/item/">
                     <i class="fas fa-fw fa-list"></i>
                     <span>Equipment</span></a>
             </li>
