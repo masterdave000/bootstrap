@@ -35,7 +35,7 @@ include './../includes/side-header.php';
                         <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/no-image.png" alt="default-category-image"
+                                    <img src="./images/default-img.png" alt="default-category-image"
                                         class="img-fluid rounded-circle" />
                                 </div>
 

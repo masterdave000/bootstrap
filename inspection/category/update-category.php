@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $category_img_url ?: 'no-image.png'?>"
+                                    <img src="./images/<?php echo $category_img_url ?: 'default-img.png'?>"
                                         alt="default-category-image" class="img-fluid rounded-circle" />
                                 </div>
 
