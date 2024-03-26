@@ -54,7 +54,7 @@ require "./../includes/side-header.php";
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-owner.php" class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-user.php" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -115,7 +115,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Change Password</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#deleteModal-<?php echo $user['user_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>
@@ -125,6 +126,7 @@ require "./../includes/side-header.php";
                                 </tr>
 
                                 <?php
+                                require './modals/delete.php';
                             }
                                 ?>
 
@@ -143,10 +145,7 @@ require "./../includes/side-header.php";
 </a>
 
 <?php 
-
-require './modals/delete.php';
 require './../includes/footer.php';
-
 ?>
 
 </body>

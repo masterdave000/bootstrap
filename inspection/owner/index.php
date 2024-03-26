@@ -101,7 +101,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#deleteModal-<?php echo $owner['owner_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>
@@ -111,6 +112,7 @@ require "./../includes/side-header.php";
                                 </tr>
 
                                 <?php
+                                require './modals/delete.php';
                             }
                                 ?>
 
@@ -129,10 +131,7 @@ require "./../includes/side-header.php";
 </a>
 
 <?php 
-
-require './modals/delete.php';
 require './../includes/footer.php';
-
 ?>
 
 </body>
