@@ -36,6 +36,7 @@ CREATE TABLE business (
 CREATE TABLE category_list (
         category_id int NOT NULL AUTO_INCREMENT,
         category_name varchar(100) NOT NULL,
+        category_img_url varchar(50) NOT NULL DEFAULT 'default-img.png',
         PRIMARY KEY(category_id)
 );
     
@@ -187,4 +188,8 @@ owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_su
 FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
 
+CREATE VIEW item_view AS 
+SELECT i.item_id, i.item_name, i.img_url, c.category_name 
+FROM item_list i
+LEFT JOIN category_list c ON i.category_id = c.category_id;
 

@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Owner List";
+$title = "Manage Item";
 require "./../includes/side-header.php";
 
 ?>
@@ -26,7 +26,12 @@ require "./../includes/side-header.php";
                 echo $_SESSION['update'];
                 unset($_SESSION['update']);
             }
-
+        
+            if (isset($_SESSION['no_item_data_found'])) {
+                echo $_SESSION['no_item_data_found'];
+                unset($_SESSION['no_item_data_found']);
+            }
+            
             if (isset($_SESSION['invalid_password'])) {
                 echo $_SESSION['invalid_password'];
                 unset($_SESSION['invalid_password']);
@@ -41,12 +46,11 @@ require "./../includes/side-header.php";
 
         <?php require './../includes/top-header.php'?>
 
-        <!-- Begin Page Content -->
         <div class="container-fluid mt-4">
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-owner.php" class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-item.php" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -61,48 +65,39 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php 
-                                    $ownerQuery = "SELECT * FROM owner ORDER BY owner_id DESC";
-                                    $ownerStatement = $pdo->query($ownerQuery);
-                                    $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($owners as $owner) {
-                                        $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
-                                        $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                        $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
-                                        $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
-                                        $contact_number = htmlspecialchars($owner['contact_number']);
-                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+                                    $itemQuery = "SELECT * FROM item_list ORDER BY item_id";
+                                    $itemStatement = $pdo->query($itemQuery);
+                                    $items = $itemStatement->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($items as $item) {
+                                        
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
-                                        <a href="./view-owner.php?owner_id=<?php echo $owner['owner_id']?>"
-                                            class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
+                                        <a href="./view-item.php?item_id=<?php echo $item['item_id']?>"
+                                            class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
                                             <div class="image-container img-fluid">
-                                                <img src="./images/<?php echo $owner['owner_img_url'] ?? 'default.png'?>"
-                                                    alt="inspector-image" class="img-fluid rounded-circle" />
+                                                <img src="./images/<?php echo $item['img_url'] ?? 'default-img.png'?>"
+                                                    alt="item-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
-                                                <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
-                                                    <?php echo $fullname?>
+                                                <div class="text d-none d-md-flex">
+                                                    Name: <?php echo $item['item_name']?>
                                                 </div>
-                                                <div class="sub-title d-none d-md-flex">ID:
-                                                    <?php echo $owner['owner_id']?></div>
-
                                             </div>
                                         </a>
                                     </td>
 
                                     <td class="d-flex justify-content-end">
-                                        <a href="./update-owner.php?owner_id=<?php echo $owner['owner_id']?>"
+                                        <a href="./update-item.php?item_id=<?php echo $item['item_id']?>"
                                             class="btn btn-primary mr-2 text-center d-flex align-items-center">
                                             <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
 
                                         <a href="#" data-toggle="modal"
-                                            data-target="#deleteModal-<?php echo $owner['owner_id']?>"
+                                            data-target="#deleteModal-<?php echo $item['item_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>

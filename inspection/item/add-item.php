@@ -1,23 +1,8 @@
 <?php 
 
-$title = "Update Category";
+$title = "Add Item";
 include './../includes/side-header.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $clean_category_id = filter_var($_GET['category_id'], FILTER_SANITIZE_NUMBER_INT);
-    $category_id = filter_var($clean_category_id, FILTER_VALIDATE_INT);
-
-    $categoryQuery = "SELECT * FROM category_list WHERE category_id = :category_id";
-    $categoryStatement = $pdo->prepare($categoryQuery);
-    $categoryStatement->bindParam(':category_id', $category_id);
-    $categoryStatement->execute();
-
-    $category = $categoryStatement->fetch(PDO::FETCH_ASSOC);
-
-    $category_id = $category['category_id'];
-    $category_name = $category['category_name'];
-    $category_img_url = $category['category_img_url'];
-}
 ?>
 
 <!-- Content Wrapper -->
@@ -28,11 +13,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         <?php
 
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
+            if (isset($_SESSION['add'])) //Checking whether the session is set or not
             {	//DIsplaying session message
-                echo $_SESSION['update'];
+                echo $_SESSION['add'];
                 //Removing session message
-                unset($_SESSION['update']);
+                unset($_SESSION['add']);
             }
         ?>
 
@@ -47,23 +32,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
-                        <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
+                        <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $category_img_url ?: 'default-img.png'?>"
-                                        alt="default-category-image" class="img-fluid rounded-circle" />
+                                    <img src="./images/default-img.png" alt="default-item-image"
+                                        class="img-fluid rounded-circle" />
                                 </div>
 
-                                <p class="h3 text-gray-900 mb-4 "><?php echo $category_name?></p>
-
                                 <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="category_img" id="category-img" class="border w-75"
+                                    <input type="file" name="item_img" id="item-img" class="border w-75"
                                         accept="image/JPEG, image/JPG, image/PNG" />
-
-                                    <input type="hidden" name="current_category_img" id="category-img"
-                                        class="border w-75" accept="image/JPEG, image/JPG, image/PNG"
-                                        value="<?php echo $category_img_url?>" />
-
 
                                     <?php
                                     if (isset($_SESSION['error'])) {
@@ -82,18 +60,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 </div>
                             </div>
 
-                            <div class="col col-12 p-0 form-group">
-                                <label for="category-name">Category Name <span class="text-danger">*</span>
+
+                            <div class="form-group d-flex flex-column flex-md-grow-1">
+                                <label for="category-id">Category <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="category_name" class="form-control p-4" id="category-name"
-                                    aria-describedby="businessaddressHelp" placeholder="Enter Business Address..."
-                                    value="<?php echo $category_name?>" required>
+                                <div class="d-flex align-items-center justify-content-center select-container">
+                                    <select name="category_id" id="category-id" class="form-control px-3" required>
+                                        <option selected disabled hidden value="">Select</option>
+                                        <?php 
+                                            $categoryQuery = "SELECT * from category_list";
+                                            $categoryStatement = $pdo->query($categoryQuery);
+                                            $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
+                                            
+                                            foreach ($categories as $category) {
+                                                ?>
+
+                                        <option value="<?php echo $category['category_id']?>">
+                                            <?php echo $category['category_name']?>
+                                        </option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
                             </div>
 
-                            <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
+                            <div class="col col-12 p-0 form-group">
+                                <label for="item-name">Item Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="item_name" class="form-control p-4" id="item-name"
+                                    placeholder="Enter Item Name..." required>
+                            </div>
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
+                                value="Add">
                         </form>
                     </div>
                 </div>

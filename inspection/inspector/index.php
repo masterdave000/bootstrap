@@ -27,6 +27,16 @@ require "./../includes/side-header.php";
                 unset($_SESSION['update']);
             }
 
+            if (isset($_SESSION['invalid_password'])) {
+                echo $_SESSION['invalid_password'];
+                unset($_SESSION['invalid_password']);
+            }
+
+            if (isset($_SESSION['id_not_found'])) {
+                echo $_SESSION['id_not_found'];
+                unset($_SESSION['id_not_found']);
+            }
+
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -64,21 +74,23 @@ require "./../includes/side-header.php";
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
                                         <a href="./view-inspector.php?inspector_id=<?php echo $inspector['inspector_id']?>"
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
-                                            <div class="image-container d-none d-md-flex img-fluid">
+                                            <div class="image-container img-fluid">
                                                 <img src="./images/<?php echo $inspector['inspector_img_url'] ?? 'default.png'?>"
                                                     alt="inspector-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
                                                 <div class="text">
-                                                    Name: <?php echo $fullname?>
+                                                    <span class="d-none d-md-inline">Name:</span>
+                                                    <?php echo $fullname?>
                                                 </div>
-                                                <div class="sub-title">ID:
-                                                    <?php echo $inspector['inspector_id']?></div>
+                                                <div class=" sub-title d-none d-md-flex">ID:
+                                                    <?php echo $inspector['inspector_id']?>
+                                                </div>
 
                                             </div>
                                         </a>
@@ -91,7 +103,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#deleteModal-<?php echo $inspector['inspector_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>
@@ -101,6 +114,7 @@ require "./../includes/side-header.php";
                                 </tr>
 
                                 <?php
+                                require './modals/delete.php';
                             }
                                 ?>
 
@@ -119,9 +133,7 @@ require "./../includes/side-header.php";
 </a>
 
 <?php 
-
 require './../includes/footer.php';
-
 ?>
 
 </body>

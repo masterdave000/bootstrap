@@ -36,6 +36,16 @@ require "./../includes/side-header.php";
                 echo $_SESSION['no_user_data_found'];
                 unset($_SESSION['no_user_data_found']);
             }
+
+            if (isset($_SESSION['invalid_password'])) {
+                echo $_SESSION['invalid_password'];
+                unset($_SESSION['invalid_password']);
+            }
+
+            if (isset($_SESSION['id_not_found'])) {
+                echo $_SESSION['id_not_found'];
+                unset($_SESSION['id_not_found']);
+            }
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -44,7 +54,7 @@ require "./../includes/side-header.php";
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-owner.php" class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-user.php" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -71,7 +81,7 @@ require "./../includes/side-header.php";
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom pb-0">
+                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
                                         <a href="./view-user.php?user_id=<?php echo $user['user_id']?>"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
@@ -84,8 +94,10 @@ require "./../includes/side-header.php";
                                                 <div class="text d-none d-md-flex">
                                                     Name: <?php echo $fullname?>
                                                 </div>
-                                                <div class="sub-title">Username:
-                                                    <?php echo $user['username']?></div>
+                                                <div class="sub-title">
+                                                    <span class="d-none d-md-inline">Username:</span>
+                                                    <?php echo $user['username']?>
+                                                </div>
                                             </div>
                                         </a>
                                     </td>
@@ -103,7 +115,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Change Password</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#deleteModal-<?php echo $user['user_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>
@@ -113,6 +126,7 @@ require "./../includes/side-header.php";
                                 </tr>
 
                                 <?php
+                                require './modals/delete.php';
                             }
                                 ?>
 
@@ -131,10 +145,7 @@ require "./../includes/side-header.php";
 </a>
 
 <?php 
-
-require './modals/delete.php';
 require './../includes/footer.php';
-
 ?>
 
 </body>

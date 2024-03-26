@@ -1,7 +1,6 @@
-<?php 
+<?php
 
 include './../../../config/constants.php';
-
 
 if (filter_has_var(INPUT_POST, 'password')) {
 
@@ -21,53 +20,56 @@ if (filter_has_var(INPUT_POST, 'password')) {
         </div>
 
         ";
-        //Redirecting to the manage owner page.
-        header('location:' . SITEURL . 'inspection/owner/');
+        //Redirecting to the manage user page.
+        header('location:' . SITEURL . 'inspection/item/');
     }
-
+    
 }
 
-if (filter_has_var(INPUT_POST, 'inspector_id')) {
-    $clean_inspector_id = filter_var($_POST['inspector_id'], FILTER_SANITIZE_NUMBER_INT);
-    $inspector_id = filter_var($clean_inspector_id, FILTER_VALIDATE_INT);
+//Post the id to be deleted
+if (filter_has_var(INPUT_POST, 'item_id')) {
+    $clean_id = filter_var($_POST['item_id'], FILTER_SANITIZE_NUMBER_INT);
+    $item_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-    $deleteOwnerQuery = "DELETE FROM inspector WHERE inspector_id = :inspector_id";
-    $deleteOwnerStatement = $pdo->prepare($deleteOwnerQuery);
-    $deleteOwnerStatement->bindParam(':inspector_id', $inspector_id);
+    //SQL query to delete list
+    $deleteItemQuery = "DELETE FROM item_list WHERE item_id = :item_id";
+    $deleteItemStatement = $pdo->prepare($deleteItemQuery);
+    $deleteItemStatement->bindParam(':item_id', $item_id, PDO::PARAM_INT);
 
-    if ($deleteOwnerStatement->execute()) {
+    if ($deleteItemStatement->execute()) {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Owner Deleted Successfully
+                Item Details Deleted Successfully
             </div>
         </div>
         ";
-        //Redirecting to the manage inspector page.
-        header('location:' . SITEURL . 'inspection/inspector/');
+        //Redirecting to the manage Item page.
+        header('location:' . SITEURL . 'inspection/item/');
     } else {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>
-                Failed to Delete Owner, Please try again
+                Failed to Delete Item Details, Please try again
             </div>
         </div>
 
         ";
-        //Redirecting to the manage inspector page.
-        header('location:' . SITEURL . 'inspection/inspector/');
+        //Redirecting to the manage Item page.
+        header('location:' . SITEURL . 'inspection/item/');
     }
 } else {
+
     $_SESSION['id_not_found'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>
-                Inspector ID Not Found
+                User ID Not Found
             </div>
         </div>
 
     ";
-    //Redirecting to the manage user page.
-    header('location:' . SITEURL . 'inspection/inspector/');
+    //Redirecting to the manage item page.
+    header('location:' . SITEURL . 'inspection/item/');
 }

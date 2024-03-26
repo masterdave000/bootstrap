@@ -27,6 +27,15 @@ require "./../includes/side-header.php";
                 unset($_SESSION['update']);
             }
 
+            if (isset($_SESSION['invalid_password'])) {
+                echo $_SESSION['invalid_password'];
+                unset($_SESSION['invalid_password']);
+            }
+
+            if (isset($_SESSION['id_not_found'])) {
+                echo $_SESSION['id_not_found'];
+                unset($_SESSION['id_not_found']);
+            }
         ?>
 
         <?php require './../includes/top-header.php'?>
@@ -75,16 +84,17 @@ require "./../includes/side-header.php";
                                         <a href="view-business.php?bus_id=<?php echo $business['bus_id']?>"
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap"
                                             href="./view-business.php?bus_id=<?php $business['bus_id']?>">
-                                            <div class="image-container d-none d-md-flex img-fluid">
+                                            <div class="image-container img-fluid">
                                                 <img src="./images/<?php echo $business['bus_img_url'] ?? 'no-image.png'?>"
                                                     alt="inspector-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
                                                 <div class="text">
-                                                    Business Name: <?php echo $bus_name?>
+                                                    <span class="d-none d-md-inline">Business Name:</span>
+                                                    <?php echo $bus_name?>
                                                 </div>
-                                                <div class="sub-title">Owner:
+                                                <div class="sub-title d-none d-md-flex">Owner:
                                                     <?php echo $fullname?>
                                                 </div>
 
@@ -99,7 +109,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal" data-target="#deleteModal"
+                                        <a href="#" data-toggle="modal"
+                                            data-target="#deleteModal-<?php echo $business['bus_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>
@@ -109,6 +120,7 @@ require "./../includes/side-header.php";
                                 </tr>
 
                                 <?php
+                                require './modals/delete.php';
                             }
                                 ?>
 
@@ -125,7 +137,9 @@ require "./../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php require './../includes/footer.php'; ?>
+<?php 
+require './../includes/footer.php'; 
+?>
 
 </body>
 
