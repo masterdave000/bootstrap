@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Manage Category";
+$title = "Manage Item";
 require "./../includes/side-header.php";
 
 ?>
@@ -27,9 +27,9 @@ require "./../includes/side-header.php";
                 unset($_SESSION['update']);
             }
         
-            if (isset($_SESSION['no_category_data_found'])) {
-                echo $_SESSION['no_category_data_found'];
-                unset($_SESSION['no_category_data_found']);
+            if (isset($_SESSION['no_item_data_found'])) {
+                echo $_SESSION['no_item_data_found'];
+                unset($_SESSION['no_item_data_found']);
             }
             
             if (isset($_SESSION['invalid_password'])) {
@@ -50,8 +50,7 @@ require "./../includes/side-header.php";
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-category.php"
-                        class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-item.php" class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -66,32 +65,32 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php 
-                                    $categoryQuery = "SELECT * FROM item_view ORDER BY item_id";
-                                    $categoryStatement = $pdo->query($categoryQuery);
-                                    $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($categories as $category) {
+                                    $itemQuery = "SELECT * FROM item_list ORDER BY item_id";
+                                    $itemStatement = $pdo->query($itemQuery);
+                                    $items = $itemStatement->fetchAll(PDO::FETCH_ASSOC);
+                                    foreach ($items as $item) {
                                         
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
-                                        <a href="./view-category.php?category_id=<?php echo $category['category_id']?>"
+                                        <a href="./view-item.php?item_id=<?php echo $item['item_id']?>"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
                                             <div class="image-container img-fluid">
-                                                <img src="./images/<?php echo $category['category_img_url'] ?? 'default-img.png'?>"
-                                                    alt="category-image" class="img-fluid rounded-circle" />
+                                                <img src="./images/<?php echo $item['img_url'] ?? 'default-img.png'?>"
+                                                    alt="item-image" class="img-fluid rounded-circle" />
                                             </div>
 
                                             <div>
                                                 <div class="text d-none d-md-flex">
-                                                    Name: <?php echo $category['category_name']?>
+                                                    Name: <?php echo $item['item_name']?>
                                                 </div>
                                             </div>
                                         </a>
                                     </td>
 
                                     <td class="d-flex justify-content-end">
-                                        <a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
+                                        <a href="./update-item.php?item_id=<?php echo $item['item_id']?>"
                                             class="btn btn-primary mr-2 text-center d-flex align-items-center">
                                             <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Edit</span>

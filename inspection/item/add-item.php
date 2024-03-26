@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Add Equipment";
+$title = "Add Item";
 include './../includes/side-header.php';
 
 ?>
@@ -23,82 +23,87 @@ include './../includes/side-header.php';
 
         <?php require './../includes/top-header.php'?>
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h3 mb-4 text-gray-800"><?php echo $title?></h1>
-
-        </div>
-
-
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
+            <div class="col-xl-6 col-lg-8 col-md-11 col-sm-11 p-3">
+                <div class="card card-body o-hidden shadow-lg p-4">
+                    <!-- Nested Row within Card Body -->
+                    <div class="d-flex flex-column justify-content-center col-lg-12">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                        </div>
+                        <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
+                            <div class="d-flex flex-column align-items-center">
+                                <div class="image-container mb-3">
+                                    <img src="./images/default-img.png" alt="default-item-image"
+                                        class="img-fluid rounded-circle" />
+                                </div>
 
-            <div class="col-xl-4 col-lg-12 col-md-9">
+                                <div class="form-group d-flex flex-column align-items-center w-100">
+                                    <input type="file" name="item_img" id="item-img" class="border w-75"
+                                        accept="image/JPEG, image/JPG, image/PNG" />
 
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                                    <?php
+                                    if (isset($_SESSION['error'])) {
+                                        echo "<small class='text-danger text-center'>" . $_SESSION['error'] . "</small>";
+                                        unset($_SESSION['error']); // clear the error message from the session
+                                    }
+                                    ?>
+
+                                    <div class="text-danger text-center">
+                                        <small>
+                                            <i>Note: The maximum file size allowed is 1MB. <br>
+                                                Only JPEG, JPG, and PNG formats are accepted.
+                                            </i>
+                                        </small>
                                     </div>
-                                    <form action="./controller/create.php" method="POST" class="user">
-                                        <div class="form-group">
-                                            <input type="text" name="equipment_name"
-                                                class="form-control form-control-user" id="exampleInputequipmentname"
-                                                aria-describedby="equipmentnameHelp"
-                                                placeholder="Enter Equipment Name...">
-                                        </div>
-                                        <div class="form-group">
-                                            <select name="category" class="form-control"
-                                                style="border-radius: 10rem; font-size: 0.8rem; height: 50px;"
-                                                id="exampleInputcategory" aria-describedby="categoryHelp" required>
-                                                <option value="" selected>Select</option>
-                                                <?php
-
-                                                    $categoryQuery = "SELECT * FROM category ORDER BY category_name";
-                                                    $categoryStatement = $pdo->query($categoryQuery);
-
-                                                    $categoryCount = $categoryStatement->rowCount();
-
-                                                    if ($categoryCount > 0) {
-                                                        $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
-                                                        foreach ($categories as $category) {
-                                                            $category_id = $category['category_id'];
-                                                            $category_name = $category['category_name'];
-
-                                                    ?>
-
-                                                <option value="<?php echo $category_id; ?>">
-                                                    <?php echo $category_name; ?></option>
-
-                                                <?php
-                                                    }
-                                                } else {
-                                                    ?>
-                                                <option value="">No Category Found</option>
-                                                <?php
-                                                }
-
-                                                ?>
-                                            </select>
-                                        </div>
-
-                                        <input type="submit" name="submit" class="btn btn-primary btn-user btn-block"
-                                            value="Add">
-                                    </form>
                                 </div>
                             </div>
-                        </div>
+
+
+                            <div class="form-group d-flex flex-column flex-md-grow-1">
+                                <label for="category-id">Category <span class="text-danger">*</span>
+                                </label>
+                                <div class="d-flex align-items-center justify-content-center select-container">
+                                    <select name="category_id" id="category-id" class="form-control px-3" required>
+                                        <option selected disabled hidden value="">Select</option>
+                                        <?php 
+                                            $categoryQuery = "SELECT * from category_list";
+                                            $categoryStatement = $pdo->query($categoryQuery);
+                                            $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
+                                            
+                                            foreach ($categories as $category) {
+                                                ?>
+
+                                        <option value="<?php echo $category['category_id']?>">
+                                            <?php echo $category['category_name']?>
+                                        </option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col col-12 p-0 form-group">
+                                <label for="item-name">Item Name <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="item_name" class="form-control p-4" id="item-name"
+                                    placeholder="Enter Item Name..." required>
+                            </div>
+
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
+                                value="Add">
+                        </form>
                     </div>
                 </div>
             </div>
+
         </div>
+
     </div>
+
 </div>
 <!-- End of Main Content -->
 
@@ -108,7 +113,6 @@ include './../includes/side-header.php';
 </a>
 
 <?php require './../includes/footer.php'; ?>
-
 </body>
 
 </html>
