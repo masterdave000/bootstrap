@@ -48,28 +48,6 @@ CREATE TABLE item_list (
         FOREIGN KEY(category_id) REFERENCES category_list(category_id)
 );
     
-CREATE TABLE inspection ( 
-        inspection_id int NOT NULL AUTO_INCREMENT,
-        bus_id int NOT NULL,
-        application_type varchar(50) NOT NULL DEFAULT 'Annual',
-        rating varchar(100) DEFAULT NULL,
-        quantity int NOT NULL,
-        fee decimal(10, 2) NOT NULL,
-        violation text NOT NULL,
-        date_inspected datetime NOT NULL default current_timestamp(),
-        date_signed datetime NOT NULL,
-        time_received time NOT NULL,
-        PRIMARY KEY(inspection_id),
-        FOREIGN KEY(bus_id) REFERENCES business(bus_id)
-);
-    
-CREATE TABLE item_inspection (
-	item_id int NOT NULL,
-    inspection_id int NOT NULL,
-    FOREIGN KEY (item_id) REFERENCES item_list(item_id),
-    FOREIGN KEY (inspection_id) REFERENCES inspection(inspection_id)
-);
-    
 CREATE TABLE inspector ( 
         inspector_id int NOT NULL AUTO_INCREMENT,
         inspector_firstname varchar(100) NOT NULL,
@@ -82,6 +60,25 @@ CREATE TABLE inspector (
         PRIMARY KEY(inspector_id)
 );
 
+CREATE TABLE inspection ( 
+        inspection_id int NOT NULL AUTO_INCREMENT,
+        owner_id int NOT NULL,
+        bus_id int NOT NULL,
+        item_id int NOT NULL,
+        application_type varchar(50) NOT NULL DEFAULT 'Annual',
+        power_rating varchar(100) DEFAULT NULL,
+        quantity int NOT NULL,
+        fee decimal(10, 2) NOT NULL,
+        violation text NOT NULL,
+        date_inspected datetime NOT NULL default current_timestamp(),
+        date_signed datetime NOT NULL,
+        time_received time NOT NULL,
+        PRIMARY KEY(inspection_id),
+        FOREIGN KEY(owner_id) REFERENCES owner(owner_id),
+        FOREIGN KEY(bus_id) REFERENCES business(bus_id),
+        FOREIGN KEY(item_id) REFERENCES item_list(item_id)
+);
+   
 CREATE TABLE inspection_inspector (
 	inspector_id int NOT NULL,
     inspection_id int NOT NULL,
@@ -193,3 +190,10 @@ SELECT i.item_id, i.item_name, i.img_url, c.category_name
 FROM item_list i
 LEFT JOIN category_list c ON i.category_id = c.category_id;
 
+CREATE VIEW inspection_view AS
+SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
+i.application_type, i.power_rating, i.quantity, i.date_inspected
+FROM inspection i 
+LEFT JOIN business b ON i.bus_id = b.bus_id
+LEFT JOIN owner o ON i.owner_id = b.owner_id
+LEFT JOIN item_list il ON i.item_id = il.item_id;
