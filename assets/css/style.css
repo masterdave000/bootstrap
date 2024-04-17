@@ -122,7 +122,23 @@ form .image-container {
   height: 110px;
 }
 
-input[disabled] {
+input[disabled],
+input[readonly] {
   background: #FFFFFF !important;
   cursor: not-allowed;
+}
+
+.no-data-image-container {
+  width: 42%;
+  height: 25%;
+  background: black;
+}
+
+
+.carousel-button {
+  border-radius: 5px;
+}
+
+ol.carousel-indicators li {
+  background-color: #42444E;
 }
