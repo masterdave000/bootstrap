@@ -65,7 +65,7 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php 
-                                    $itemQuery = "SELECT * FROM item_list ORDER BY item_id";
+                                    $itemQuery = "SELECT * FROM item_view ORDER BY item_id";
                                     $itemStatement = $pdo->query($itemQuery);
                                     $items = $itemStatement->fetchAll(PDO::FETCH_ASSOC);
                                     foreach ($items as $item) {
@@ -82,9 +82,12 @@ require "./../includes/side-header.php";
                                             </div>
 
                                             <div>
-                                                <div class="text d-none d-md-flex">
-                                                    Name: <?php echo $item['item_name']?>
+                                                <div class="text d-md-flex">
+                                                    <span class="d-none d-md-inline">Name:
+                                                    </span><?php echo $item['item_name']?>
                                                 </div>
+                                                <div class="sub-title d-none d-md-flex">Category:
+                                                    <?php echo $item['category_name']?></div>
                                             </div>
                                         </a>
                                     </td>
