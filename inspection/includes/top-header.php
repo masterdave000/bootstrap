@@ -193,7 +193,7 @@
 
     </ul>
 
-    <?php require './../modals/logout.php'?>
+    <?php require __DIR__ . './../modals/logout.php'?>
 
 </nav>
 <!-- End of Topbar -->
