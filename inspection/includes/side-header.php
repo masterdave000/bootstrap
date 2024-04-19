@@ -89,6 +89,12 @@ $username = $_SESSION['username'];
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/certificate/">
+                    <i class="fas fa-fw fa-file-medical"></i>
+                    <span>Certificate</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/business/">
                     <i class="fas fa-fw fa-business-time"></i>
                     <span>Business</span></a>
