@@ -52,7 +52,7 @@
                             SAFE, THE ELECTRICAL
                         </div>
 
-                        <div class="d-flex flex-column align-items-center">
+                        <div class="d-flex flex-column align-items-center mb-2">
                             <div class="verified-title mb-1">
                                 VERIFIED AS TO THE FOLLOWING
                             </div>
@@ -170,7 +170,6 @@
                                     <p class="w-100 m-0 text-center verified-by-position">OTHERS (SPECIFY)
                                     </p>
                                 </div>
-
                             </div>
                         </div>
 
@@ -216,11 +215,93 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
+
                     <div class="annual-sheet-right">
+                        <div class="d-flex justify-content-end official-bin">BIN:</div>
+                        <table class="mb-2 table-one">
+                            <thead>
+                                <tr class="font-seven">
+                                    <th colspan="3" class="text-left">CERTIFICATE ANNUAL INSPECTION</th>
+                                    <th>DATE INSPECTED</th>
+                                </tr>
+                                <tr>
+                                    <th class="font-seven p-2">NAME OF LESSEE</th>
+                                    <th colspan="3" class="lessee-name">NAMEEEEEEEEEEEEEEEEEEEEEE</th>
+                                </tr>
+                                <tr>
+                                    <th class="font-seven p-3">LOCATION</th>
+                                    <th colspan="3" class="location">LOCATIONNNNNNNNNNNNNNNNNNNNNNNNNNNNN</th>
+                                </tr>
+                                <tr class="font-seven">
+                                    <th class="p-2" style="width: 15%">DATE SIGNED</th>
+                                    <th style="width: 55%">NAME OF INSPECTOR</th>
+                                    <th style="width: 15%">TIME IN (SIGNED)</th>
+                                    <th style="width: 15%">TIME OUT (SIGNED)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                </tr>
 
+                                <tr>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                </tr>
 
+                                <tr>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                    <td>try</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="d-flex justify-content-between inspector">
+                            <div>
+                                ANNUAL INSPECTION TEAM: <b>ERNESTO, VILLAFUERTE, MALARAN</b>
+                            </div>
+                            <div>
+                                DATE COMPLIED: <span><b>01-09-2024</b></span>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-container w-100 d-flex justify-content-center pl-5">
+                            <div class="w-75 d-flex flex-wrap">
+                                <div class="d-flex w-50 flex-gap">
+                                    <div class="box"></div>
+                                    <div>NEW</div>
+                                </div>
+                                <div class="d-flex w-50 flex-gap mb-2">
+                                    <div class="box"></div>
+                                    <div>ANNUAL</div>
+                                </div>
+                                <div class="d-flex w-50 flex-gap">
+                                    <div class="box"></div>
+                                    <div>ADDITIONAL LINE</div>
+                                </div>
+                                <div class="d-flex w-50 flex-gap">
+                                    <div class="box"></div>
+                                    <div>CHANGE ADDRESS</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table>
+                            <tr>
+                                <td style="width: 15%">sdfsdf</td>
+                                <td style="width: 55%">sdfsdf</td>
+                                <td style="width: 15%">sdfsdf</td>
+                                <td style="width: 15%">sdfsdf</td>
+                            </tr>
+                        </table>
                     </div>
                 </div>
             </div>

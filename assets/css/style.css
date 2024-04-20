@@ -193,11 +193,11 @@ ol.carousel-indicators li {
   flex-grow: 1;
 } 
 
-table.section-table {
+table {
   border: 1px solid black;
 }
 
-table.section-table td, table.section-table th {
+table td, table th {
   padding: 0;
   text-align: center;
   border: 1px solid black !important;
@@ -292,7 +292,11 @@ table.section-table td, table.section-table th {
   z-index: 10;
 }
 
-.annual-container .annual-data {
+.annual-container .annual-data, 
+.annual-sheet-right .lessee-name,
+.annual-sheet-right .location,
+.annual-sheet-right table.table-one td,
+.annual-sheet-right .inspector span {
   color: rgb(63, 84, 255);
 }
 
@@ -330,7 +334,8 @@ table.section-table td, table.section-table th {
   font-size: 13.5pt;
 }
 
-.annual-sheet-left .annual-business-address {
+.annual-sheet-left .annual-business-address,
+.annual-sheet-right .official-bin {
   font-size: 8pt;
 }
 
@@ -421,7 +426,60 @@ table.section-table td, table.section-table th {
   width: 50%;
 }
 
+/* RIGHT */
+.annual-container .annual-sheet-right {
+  width: 571px;
+  left: 502px;
+  top: 152px;
+  padding: 0 19.6px;
+  font-weight: bolder;
+}
 
+.annual-sheet-right .official-bin {
+  font-family: 'Times New Roman', Times, serif;
+  margin-bottom: 10px;
+}
+
+.annual-sheet-right table {
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.annual-sheet-right table th
+.annual-sheet-right table td {
+  font-family: Arial, Helvetica, sans-serif;
+  
+}
+
+.annual-sheet-right .font-seven,
+.annual-sheet-right table td, 
+.annual-sheet-right .inspector {
+  font-size: 7pt;
+}
+
+.annual-sheet-right .lessee-name {
+  font-size: 14.5pt;
+}
+
+.annual-sheet-right .location,
+.annual-sheet-right .checkbox-container {
+  font-size: 8pt;
+}
+
+.annual-sheet-right .checkbox-container{
+  margin-bottom: 40px;
+}
+
+.annual-sheet-right .inspector {
+  margin-bottom: 17px;
+}
+
+.annual-sheet-right .box {
+  border: 2px solid black;
+  width: 26px;
+  height: 20px;
+  
+}
 
 @media print {
   #accordionSidebar, #topHeader {
