@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function () {
                   let itemNameLabel = createLabel(`Item Name`);
                   itemNameContainer.appendChild(itemNameLabel);
   
-                  // Create and append input field with unique identifier
                   let itemNameInputField = createInputField('text', `item-name-${counter}`, `item_name[]`);
                   itemNameContainer.appendChild(itemNameInputField);
                   itemNameInputField.value = itemDetails.item_name;
@@ -135,14 +134,17 @@ document.addEventListener("DOMContentLoaded", function () {
                   let categoryName = createLabel(`Category`);
                   categoryNameContainer.appendChild(categoryName);
   
-                  // Create and append input field with unique identifier
                   let categoryNameInputField = createInputField('text', `category-name-${counter}`, `category_name[]`);
                   categoryNameContainer.appendChild(categoryNameInputField);
                   categoryNameInputField.value = itemDetails.category_name;
 
+                  // Quantity and Power Rating Container
+                  let quantityPowerContainer = createContainerDiv('d-md-flex align-items-center justify-content-center p-0');
+                  itemContent.appendChild(quantityPowerContainer);
+
                   //Quantity Field
-                  let quantityContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(quantityContainer);
+                  let quantityContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                  quantityPowerContainer.appendChild(quantityContainer);
 
                   let quantityLabel = createLabel('Quantity');
                   quantityContainer.appendChild(quantityLabel);
@@ -151,8 +153,8 @@ document.addEventListener("DOMContentLoaded", function () {
                   quantityContainer.append(quantityInputField);
 
                   // Power Rating
-                  let powerRatingContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(powerRatingContainer);
+                  let powerRatingContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                  quantityPowerContainer.appendChild(powerRatingContainer);
 
                   let powerRatingLabel = createLabel('Power Rating');
                   powerRatingContainer.appendChild(powerRatingLabel);
