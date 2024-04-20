@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set('Asia/Manila');
 
-define('SITEURL', 'http://localhost/bootstrap/');
+define('SITEURL', 'http://localhost/obos/');
 $localhost = 'localhost';
 $db_name = 'inspection';
 $username = 'root';

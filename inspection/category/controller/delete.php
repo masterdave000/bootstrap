@@ -46,7 +46,7 @@ if (filter_has_var(INPUT_POST, 'category_id')) {
             </div>
         </div>
         ";
-        //Redirecting to the manage admin page.
+        //Redirecting to the manage category page.
         header('location:' . SITEURL . 'inspection/category/');
     } else {
         //Creating SESSION variable to display message.
@@ -58,7 +58,7 @@ if (filter_has_var(INPUT_POST, 'category_id')) {
         </div>
 
         ";
-        //Redirecting to the manage admin page.
+        //Redirecting to the manage category page.
         header('location:' . SITEURL . 'inspection/category/');
     }
     

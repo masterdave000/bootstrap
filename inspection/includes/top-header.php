@@ -1,5 +1,5 @@
 <!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+<nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow" id="topHeader">
     <!-- Sidebar Toggle (Topbar) -->
 
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -193,7 +193,7 @@
 
     </ul>
 
-    <?php require './../modals/logout.php'?>
+    <?php require __DIR__ . './../modals/logout.php'?>
 
 </nav>
 <!-- End of Topbar -->

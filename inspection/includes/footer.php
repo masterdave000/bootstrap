@@ -16,7 +16,7 @@ if ($title === 'Dashboard') :?>
 <script src="<?php echo SITEURL ?>assets/js/demo/chart-area-demo.js"></script>
 <script src="<?php echo SITEURL ?>assets/js/demo/chart-pie-demo.js"></script>
 
-<?php elseif ($title === 'Manage Admin'): ?>
+<?php elseif ($title === 'Manage User'): ?>
 
 <!-- Page level plugins -->
 <script src="<?php echo SITEURL ?>vendor/datatables/jquery.dataTables.min.js"></script>
