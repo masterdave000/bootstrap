@@ -32,7 +32,8 @@ include './../includes/side-header.php';
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
-                        <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
+                        <form action="./generate/equipment-inspection.php" method="POST" class="user"
+                            enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
                                     <img src="./images/default-img.png" alt="default-item-image"
@@ -68,10 +69,14 @@ include './../includes/side-header.php';
                                         </li>
                                         <li data-target="#inspectionCarousel" data-slide-to="1"></li>
                                         <li data-target="#inspectionCarousel" data-slide-to="2"></li>
+                                        <li data-target="#inspectionCarousel" data-slide-to="4"></li>
                                     </ol>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
+                                    <div class="carousel-item active p-2">
+
+                                        <p class="text font-weight-bolder">Business Information</p>
+
                                         <div class="col col-12 p-0 form-group">
                                             <label for="application-type">Application Type <span
                                                     class="text-danger">*</span>
@@ -137,9 +142,8 @@ include './../includes/side-header.php';
                                                 id="bus-contact-number" placeholder="Enter Business Contact Number..."
                                                 required readonly>
                                         </div>
-                                        <div
-                                            class="col col-12 d-md-flex align-items-center justify-content-center flex-gap">
-                                            <div class="col col-md-6 p-0 mr-2 form-group flex-md-grow-1 d-none">
+                                        <div class="d-md-flex align-items-center justify-content-center">
+                                            <div class="col col-md-6 p-0 form-group flex-md-grow-1 d-none">
                                                 <label for="floor-area">Floor Area <span class="text-danger">*</span>
                                                 </label>
                                                 <input type="text" name="floor_area" class="form-control p-4"
@@ -160,9 +164,13 @@ include './../includes/side-header.php';
                                     <div class="carousel-item p-3">
 
                                         <div class="d-flex flex-column" id="item-container">
-                                            <p class="text font-weight-bolder align-self-end">Total
-                                                Item: <span id="total-item">0</span>
-                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <p class="text font-weight-bolder">Item Information</p>
+                                                <p class="text font-weight-bolder">Total
+                                                    Item: <span id="total-item">0</span>
+                                                </p>
+                                            </div>
+
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
@@ -172,14 +180,42 @@ include './../includes/side-header.php';
                                         </div>
 
                                     </div>
-                                    <div class="carousel-item">
+
+                                    <div class="carousel-item p-2">
+
+                                        <p class="text font-weight-bolder">Other Fees Information</p>
+
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="power-rating">Example <span class="text-danger">*</span>
+                                            <label for="building-fee">Building Fee <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="power_rating" class="form-control p-4"
-                                                id="power-rating" placeholder="Enter Power Rating..." required>
+                                            <input type="number" name="building_fee" class="form-control p-4"
+                                                id="building-fee" placeholder="Enter Building Fee..." step="0.01"
+                                                value="0.00" min="0.00" required>
                                         </div>
 
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="sanitary-fee">Sanitary Fee <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" name="sanitary_fee" class="form-control p-4"
+                                                id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01"
+                                                value="0.00" required>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="signage-fee">Signage Fee <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="number" name="signage_fee" class="form-control p-4"
+                                                id="signage0-fee" placeholder="Enter Signage Fee..." step="0.01"
+                                                value="0.00" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="carousel-item p-2">
+                                        <p class="text font-weight-bolder">Other Fees Information</p>
+
+                                        <div class="form-check">
+                                            <input>
+                                        </div>
                                     </div>
                                 </div>
 
