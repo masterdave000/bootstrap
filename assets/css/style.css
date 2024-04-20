@@ -193,11 +193,11 @@ ol.carousel-indicators li {
   flex-grow: 1;
 } 
 
-table {
+table.section-table {
   border: 1px solid black;
 }
 
-table td, table th {
+table.section-table td, table.section-table th {
   padding: 0;
   text-align: center;
   border: 1px solid black !important;
@@ -280,4 +280,157 @@ table td, table th {
 
 .section-footer .number {
   font-size: 8pt;
+}
+
+/* Annual Certificate */
+
+.annual-container {
+  width: 297mm;
+  height: 209mm;
+  color: rgb(0,0,0);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  z-index: 10;
+}
+
+.annual-container .annual-data {
+  color: rgb(63, 84, 255);
+}
+
+.annual-container .annual-sheet,
+.annual-container .annual-sheet-image{
+  width: 100%;
+  height: 100%;
+}
+
+.annual-container .annual-sheet {
+  position: relative;
+}
+
+/* LEFT */
+.annual-container .annual-sheet-left,
+.annual-container .annual-sheet-right {
+  position: absolute;
+}
+
+.annual-container .annual-sheet-left {
+  width: 442px;
+  left: 30px;
+  top: 105px;
+  padding: 0 13px;
+  font-weight: bold;
+}
+
+.annual-sheet-left .annual-header,
+.annual-sheet-left .verified-by-names {
+  border-bottom: 2px solid black;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.annual-sheet-left .annual-business-name {
+  font-size: 13.5pt;
+}
+
+.annual-sheet-left .annual-business-address {
+  font-size: 8pt;
+}
+
+
+.annual-sheet-left .annual-owner-wrapper {
+   margin-bottom: 14px;
+}
+
+.annual-sheet-left .annual-owner,
+.annual-sheet-left .annual-group,
+.annual-sheet-left .chief-name {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt;
+}
+
+.annual-sheet-left .annual-owner,
+.annual-sheet-left .annual-group {
+  border-bottom: 2px solid black;
+}
+
+.annual-sheet-left .annual-owner-title,
+.annual-sheet-left .annual-group-title,
+.annual-sheet-left .annual-recommended-description,
+.annual-sheet-left .annual-certification-description,
+.annual-sheet-left .verified-by-position,
+.annual-sheet-left .inspection-division-title, 
+.annual-sheet-left .annual-date {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.annual-sheet-left .annual-owner-title,
+.annual-sheet-left .annual-group-title,
+.annual-sheet-left .signature-title {
+  font-size: 7pt;
+}
+
+.annual-sheet-left .annual-certification-description, 
+.annual-sheet-left .annual-recommended-description {
+  text-indent: 24.5px;
+  font-size: 8pt;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.annual-sheet-left .annual-certification-description {
+  margin-bottom: 15px;
+}
+
+.annual-sheet-left .annual-recommended-description {
+  margin-bottom: 10px;
+}
+
+.annual-sheet-left .verified-title {
+  font-size: 10pt;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.annual-sheet-left .verified-by-wrapper {
+  column-gap: 20px;
+}
+
+.annual-sheet-left .verified-by-container {
+  width: 30%;
+}
+
+.annual-sheet-left .verified-by-position,
+.annual-sheet-left .inspection-division-title,
+.annual-sheet-left .annual-date {
+  font-size: 6pt;
+}
+.annual-sheet-left .verified-by-names,
+.annual-sheet-left .chief-title {
+  font-size: 10.5pt;
+}
+
+
+.annual-sheet-left .chief-title,
+.annual-sheet-left .signature-title {
+  font-family: Calibri, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS', sans-serif;
+}
+
+.annual-sheet-left .chief-title {
+  font-size: 10pt;
+}
+
+.annual-date-underline {
+  border-bottom: 2px solid black;
+  width: 50%;
+}
+
+
+
+@media print {
+  #accordionSidebar, #topHeader {
+    display: none !important;
+  }
+
+  #equipmentListFees {
+    display: block !important;
+    width: 100%; 
+  }
+
 }
