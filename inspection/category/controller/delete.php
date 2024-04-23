@@ -23,6 +23,7 @@ if (filter_has_var(INPUT_POST, 'password')) {
         ";
         //Redirecting to the manage category page.
         header('location:' . SITEURL . 'inspection/category/');
+        exit;
     }
 
 }

@@ -22,6 +22,7 @@ if (filter_has_var(INPUT_POST, 'password')) {
         ";
         //Redirecting to the manage user page.
         header('location:' . SITEURL . 'inspection/item/');
+        exit;
     }
     
 }
