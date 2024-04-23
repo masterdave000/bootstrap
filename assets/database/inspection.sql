@@ -16,7 +16,7 @@ CREATE TABLE owner (
         email varchar(100) DEFAULT NULL,
         owner_img_url varchar(45) NOT NULL DEFAULT 'default.png',
         PRIMARY KEY(owner_id)
-    );
+);
 
 CREATE TABLE business (
         bus_id int NOT NULL AUTO_INCREMENT,
@@ -31,7 +31,7 @@ CREATE TABLE business (
         bus_img_url varchar(50) DEFAULT 'no-image.png',
         PRIMARY KEY(bus_id),
         FOREIGN KEY(owner_id) REFERENCES owner(owner_id)
-    ); 
+); 
 
 CREATE TABLE category_list (
         category_id int NOT NULL AUTO_INCREMENT,
@@ -92,6 +92,16 @@ CREATE TABLE fee (
         plumbing_fee decimal(10, 2) NOT NULL,
         signage_fee decimal(10, 2) NOT NULL,
         PRIMARY KEY(fee_id)
+);
+
+CREATE TABLE equipment_billing (
+	billing_id int NOT NULL AUTO_INCREMENT,
+    category_id int NOT NULL,
+	section varchar(100) NOT NULL,
+    capacity varchar(100) NOT NULL,
+	fee decimal(11, 2) NOT NULL,
+    PRIMARY KEY(billing_id),
+    FOREIGN KEY(category_id) REFERENCES category_list(category_id)
 );
 
 CREATE TABLE annual_fees ( 
@@ -197,3 +207,8 @@ FROM inspection i
 LEFT JOIN business b ON i.bus_id = b.bus_id
 LEFT JOIN owner o ON i.owner_id = b.owner_id
 LEFT JOIN item_list il ON i.item_id = il.item_id;
+
+CREATE VIEW equipment_billing_view AS 
+SELECT b.billing_id, c.category_id, c.category_name, b.section, b.capacity, b.fee
+FROM equipment_billing b
+LEFT JOIN category_list c ON b.category_id = c.category_id;

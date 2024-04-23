@@ -113,6 +113,12 @@ $username = $_SESSION['username'];
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/billing/">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Billing</span></a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
                     <i class="fas fa-fw fa-circle-user"></i>
                     <span>User</span></a>

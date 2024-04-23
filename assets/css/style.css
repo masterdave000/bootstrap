@@ -193,11 +193,12 @@ ol.carousel-indicators li {
   flex-grow: 1;
 } 
 
-table {
+.sheet-container table {
   border: 1px solid black;
 }
 
-table td, table th {
+.sheet-container table td, 
+.sheet-container table th {
   padding: 0;
   text-align: center;
   border: 1px solid black !important;

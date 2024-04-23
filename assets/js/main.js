@@ -7,6 +7,7 @@ if (alert) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  if (document.getElementById("business-id")) {
     let busId = document.getElementById("business-id");
 
     function owner () {
@@ -57,7 +58,58 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     busId.addEventListener("change", owner);
-  
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  let equipmentCategory = document.getElementById("category-id");
+  let electricalSection = document.getElementById("electrical-section");
+  let mechanicalSection = document.getElementById("mechanical-section");
+  let electronicSection = document.getElementById("electronic-section");
+
+  equipmentCategory.addEventListener("change", () => {
+    let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
+    let equipmentCategoryText = selectedOption.innerText.trim();
+
+
+    if (equipmentCategoryText === 'Electrical') {
+      electricalSection.classList.replace('d-none', 'd-flex');
+      electricalSection.querySelector('select').removeAttribute("disabled");
+      electricalSection.querySelector('select').setAttribute('required', 'required');
+
+      mechanicalSection.classList.replace('d-flex', 'd-none');
+      mechanicalSection.querySelector('select').removeAttribute("required");
+      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      electronicSection.classList.replace('d-flex', 'd-none');
+      electronicSection.querySelector('select').removeAttribute("required");
+      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+    } else if (equipmentCategoryText === 'Mechanical') {
+      mechanicalSection.classList.replace('d-none', 'd-flex');
+      mechanicalSection.querySelector('select').removeAttribute("disabled");
+      mechanicalSection.querySelector('select').setAttribute('required', 'required');
+
+      electricalSection.classList.replace('d-flex', 'd-none');
+      electricalSection.querySelector('select').removeAttribute("required");
+      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      electronicSection.classList.replace('d-flex', 'd-none');
+      electronicSection.querySelector('select').removeAttribute("required");
+      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+    } else if (equipmentCategoryText === 'Electronic') {
+      electronicSection.classList.replace('d-none', 'd-flex');
+      electronicSection.querySelector('select').removeAttribute("disabled");
+      electronicSection.querySelector('select').setAttribute('required', 'required');
+
+      electricalSection.classList.replace('d-flex', 'd-none');
+      electricalSection.querySelector('select').removeAttribute("required");
+      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      mechanicalSection.classList.replace('d-flex', 'd-none');
+      mechanicalSection.querySelector('select').removeAttribute("required");
+      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+    }
+  });
 });
 
 

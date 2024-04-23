@@ -21,8 +21,9 @@ if (filter_has_var(INPUT_POST, 'password')) {
         </div>
 
         ";
-        //Redirecting to the manage owner page.
-        header('location:' . SITEURL . 'inspection/owner/');
+        //Redirecting to the manage category page.
+        header('location:' . SITEURL . 'inspection/category/');
+        exit;
     }
 
 }
