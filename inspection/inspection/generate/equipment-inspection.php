@@ -1,5 +1,8 @@
 <?php 
 
+// var_dump($_POST);
+// exit;
+
     $title = "Equipment List Certificate";
     include './../../includes/side-header.php';
 
@@ -25,6 +28,10 @@
         $building_fee = $_POST['building_fee'];
         $sanitary_fee = $_POST['sanitary_fee'];
         $signage_fee = $_POST['signage_fee'];
+
+        $totalElectronicsFee = 0.00;
+        $totalElectricalFee = 0.00;
+        $totalMechanicalFee = 0.00;
 
         
     }
@@ -110,6 +117,7 @@
                             <tbody>
 
                                 <?php 
+                                    
                                     $item_id = $_POST['item_id'];
                                     
 
@@ -123,6 +131,21 @@
                                         $power_rating = $_POST['power_rating'][$i];
                                         $fee = $_POST['fee'][$i];
 
+                                        switch ($category_name) {
+                                            case 'Electronics':
+                                                $totalElectronicsFee += $fee;
+                                                break;
+                                            case 'Electrical':
+                                                $totalElectricalFee += $fee;
+                                                break;
+                                            case 'Mechanical':
+                                                $totalMechanicalFee += $fee;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+                        
                                         ?>
                                 <tr>
                                     <td><?php echo $item_name?></td>
@@ -143,9 +166,9 @@
                                     <td class="text-right px-2"><b>TOTAL</b></td>
                                     <td></td>
                                     <td></td>
-                                    <td><b>₱</b></td>
-                                    <td><b>₱</b></td>
-                                    <td><b>₱</b></td>
+                                    <td><b>₱ <?php echo number_format($totalElectronicsFee, 2) ?? 0.00?></b></td>
+                                    <td><b>₱ <?php echo number_format($totalElectricalFee, 2) ?? 0.00?></b></td>
+                                    <td><b>₱ <?php echo number_format($totalMechanicalFee, 2) ?? 0.00?></b></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -155,17 +178,48 @@
                                 <div class="inspector-container mb-2 d-flex justify-content-between flex-gap">
                                     <div class="inspector-names w-50 d-flex flex-column align-items-center px-1">
                                         <div><b>Inspector Name & Signature</b></div>
+
+                                        <?php 
+                                            $inspector_id = $_POST['inspector_id'];
+                                            
+
+                                            for ($i = 0; $i < count($inspector_id); $i++) {
+                                                $inspectorId = $_POST['inspector_id'][$i];
+                                                $inspector_name = $_POST['inspector_name'][$i];
+                                             ?>
+
+                                        <div class="d-flex justify-content-center m-0">
+
+
+                                            <?php echo $inspector_name ?>
+
+
+                                        </div>
+
+
+                                        <?php
+                                        }
+                                        ?>
                                         <div></div>
                                         <div></div>
-                                        <div></div>
-                                        <div></div>
+
+
                                     </div>
                                     <div class="date-inspected w-50 d-flex flex-column align-items-center px-1">
                                         <div><b>Remarks/Date Inspected</b></div>
+
+                                        <div class="d-flex justify-content-center m-0">
+
+
+                                            <span><?php echo date('m-d-Y'); ?></span>
+
+                                        </div>
+
                                         <div></div>
                                         <div></div>
                                         <div></div>
-                                        <div></div>
+
+
                                     </div>
                                 </div>
                                 <div class="inspected-payment-container px-2">
@@ -181,7 +235,8 @@
                                         <div class="w-50">
                                             <div class="text-center city-building-official">ENGR. AUREA M. PASCUAL
                                             </div>
-                                            <div class="text-center city-building-title">CITY BUILDING OFFICIAL</div>
+                                            <div class="text-center city-building-title">CITY BUILDING OFFICIAL
+                                            </div>
                                         </div>
                                         <div class="w-50 d-flex flex-column align-items-center justify-content-end">
                                             <div class="w-75 underline"></div>
@@ -214,15 +269,22 @@
 
                                 </div>
 
-                                <div class="w-50 d-flex flex-column align-items-end other-fee">
+                                <div class="d-flex flex-column align-items-start other-fee">
                                     <div>Building Fee = <?php echo $building_fee ?></div>
                                     <div>Plumbing/Sanitary Fee = <?php echo $sanitary_fee ?></div>
                                     <div>Signage Fee = <?php echo $signage_fee ?></div>
                                 </div>
 
                                 <div>
-                                    <div class="w-50 d-flex justify-content-end assessment-fee-title">
-                                        <div>TOTAL ASSESSMENT FEE =</div>
+                                    <div class="d-flex justify-content-start assessment-fee-title">
+                                        <div>TOTAL ASSESSMENT FEE =
+                                            <?php 
+                                            $totalAssessmentFee = $totalElectronicsFee + $totalElectricalFee + 
+                                            $totalMechanicalFee + $building_fee + $sanitary_fee + $signage_fee;
+
+                                            echo number_format($totalAssessmentFee, 2);
+                                            ?>
+                                        </div>
                                     </div>
                                     <div class="d-flex flex-column align-items-center violation-container">
                                         <div><b>VIOLATION/S:</b> (PLEASE CHECK)</div>
