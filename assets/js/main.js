@@ -445,6 +445,169 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  let equipmentCategory = document.getElementById("category-id");
+  let electricalSection = document.getElementById("electrical-section");
+  let mechanicalSection = document.getElementById("mechanical-section");
+  let electronicSection = document.getElementById("electronic-section");
+
+  equipmentCategory.addEventListener("change", () => {
+    let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
+    let equipmentCategoryText = selectedOption.innerText.trim();
+
+
+    if (equipmentCategoryText === 'Electrical') {
+      electricalSection.classList.replace('d-none', 'd-flex');
+      electricalSection.querySelector('select').removeAttribute("disabled");
+      electricalSection.querySelector('select').setAttribute('required', 'required');
+
+      mechanicalSection.classList.replace('d-flex', 'd-none');
+      mechanicalSection.querySelector('select').removeAttribute("required");
+      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      electronicSection.classList.replace('d-flex', 'd-none');
+      electronicSection.querySelector('select').removeAttribute("required");
+      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+    } else if (equipmentCategoryText === 'Mechanical') {
+      mechanicalSection.classList.replace('d-none', 'd-flex');
+      mechanicalSection.querySelector('select').removeAttribute("disabled");
+      mechanicalSection.querySelector('select').setAttribute('required', 'required');
+
+      electricalSection.classList.replace('d-flex', 'd-none');
+      electricalSection.querySelector('select').removeAttribute("required");
+      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      electronicSection.classList.replace('d-flex', 'd-none');
+      electronicSection.querySelector('select').removeAttribute("required");
+      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+    } else if (equipmentCategoryText === 'Electronic') {
+      electronicSection.classList.replace('d-none', 'd-flex');
+      electronicSection.querySelector('select').removeAttribute("disabled");
+      electronicSection.querySelector('select').setAttribute('required', 'required');
+
+      electricalSection.classList.replace('d-flex', 'd-none');
+      electricalSection.querySelector('select').removeAttribute("required");
+      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+
+      mechanicalSection.classList.replace('d-flex', 'd-none');
+      mechanicalSection.querySelector('select').removeAttribute("required");
+      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+    }
+  });
+});
+
+
+// $('#inspectionCarousel').on('slid', '', checkitem);  // on caroussel move
+// $('#inspectionCarousel').on('slid.bs.carousel', '', checkitem); // on carousel move
+
+
+// function checkitem() {
+//     var $this = $('#inspectionCarousel');
+//     if ($('.carousel-inner .carousel-item:first').hasClass('active')) {
+//         // Hide next arrow
+//         $this.children('.previous').hide();
+//         // But show previous arrow
+//         $this.children('.next').show();
+//     } else if ($('.carousel-inner .carousel-item:last').hasClass('active')) {
+//         // Hide next arrow
+//         $this.children('.next').hide();
+//         // But show previous arrow
+//         $this.children('.previous').show();
+//     } else {
+//         $this.children('.carousel-button').show();
+//     }
+// }
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  let wrapper = document.getElementById("inspector-list");
+  let selectInspectorButtons = document.querySelectorAll(".select-inspector");
+  let deleteInspectorButton = document.getElementById("delete-inspector");
+  let totalInspector = document.getElementById("total-inspector");
+  let counter = parseInt(totalInspector.innerText) || 0; // Initialize counter
+
+  // Inside the loop where you're adding event listeners for select inspector buttons
+  for (let i = 0; i < selectInspectorButtons.length; i++) {
+    selectInspectorButtons[i].addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let inspectorId = this.getAttribute("data-inspector-id");
+
+        // Make an AJAX request to fetch the inspector details
+        let inspector = new XMLHttpRequest();
+        inspector.open("GET", `./json_response/inspector.php?inspector_id=${inspectorId}`, true);
+        inspector.onreadystatechange = function () {
+            if (inspector.readyState === 4 && inspector.status === 200) {
+                let inspectorDetails = JSON.parse(inspector.responseText);
+
+                // Increment counter for each click
+                counter++;
+
+                //Inspector Container
+                let inspectorContainer = document.getElementById('inspector-container');
+
+                //Inspector Content Container
+                let inspectorContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
+                inspectorContainer.appendChild(inspectorContent);
+
+                let inspectorTitle = createTitle(`Inspector ${counter}`, `inspector-title-${counter}`);
+                inspectorContent.appendChild(inspectorTitle);
+
+                // Create and append inspector name container div
+                let inspectorNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                inspectorContent.appendChild(inspectorNameContainer);
+
+                // Create and append inspector name label
+                let inspectorNameLabel = createLabel(`Inspector Name`);
+                inspectorNameContainer.appendChild(inspectorNameLabel);
+
+                let inspectorNameInputField = createInputField('text', `inspector-name-${counter}`, `inspector_name[]`);
+                inspectorNameContainer.appendChild(inspectorNameInputField);
+                inspectorNameInputField.value = inspectorDetails.inspector_name;
+
+                
+                // Update input field values with unique identifiers
+                inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
+                document.getElementById(`inspector-id-${counter}`).value = inspectorDetails.inspector_id;
+
+                // Update the displayed count of added inspectors
+                updateInspectorCount(counter);
+
+                // Close the modal
+                let modal = bootstrap.Modal.getInstance(wrapper);
+                modal.hide();
+            }
+        };
+        inspector.send();
+    });
+  }
+
+  // If delete button is available, add event listener to it
+  if (deleteInspectorButton) {
+    deleteInspectorButton.addEventListener("click", function () {
+        // Remove the last added inspector field
+        let lastInspectorTitle = document.getElementById(`inspector-title-${counter}`);
+        let lastInspector = document.getElementById(`inspector-name-${counter}`);
+        
+        if (lastInspector) {
+          lastInspectorTitle.parentElement.remove();
+            counter--;
+
+          // Update the displayed count of added inspector
+          updateInspectorCount(counter);
+      }
+    });
+  }
+
+    // Function to update the count of added inspector
+  function updateInspectorCount(count) {
+    if (totalInspector) {
+        totalInspector.innerHTML = count;
+    }
+  }
+    
+});
+
 function createContainerDiv(className, id = "") {
   const div = document.createElement('div');
   div.className = className;
