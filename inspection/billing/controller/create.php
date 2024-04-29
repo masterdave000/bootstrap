@@ -10,10 +10,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $capacity = $_POST['capacity'];
     $fee = $_POST['fee'];
 
-    $fetchBilling = "SELECT section, capacity FROM equipment_billing_view WHERE category_id = :category_id AND section = :section";
+    $fetchBilling = "SELECT billing_id FROM equipment_billing_view WHERE capacity = :capacity";
     $fetchBillingStatement = $pdo->prepare($fetchBilling);
-    $fetchBillingStatement->bindParam(':category_id', $category_id);
-    $fetchBillingStatement->bindParam(':section', $section);
+    $fetchBillingStatement->bindParam(':capacity', $capacity);
     $fetchBillingStatement->execute();
 
     $billingRecordCount = $fetchBillingStatement->rowCount();
