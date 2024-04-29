@@ -7,6 +7,7 @@ if (alert) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
+  let busImg = document.getElementById("bus-img");
   if (document.getElementById("business-id")) {
     let busId = document.getElementById("business-id");
 
@@ -28,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let ownerName= document.getElementById("owner-name");
                 ownerName.value = ownerDetails.owner_name;
+
+                let busName = document.getElementById("bus-name");
+                busName.value = ownerDetails.bus_name;
 
                 let busType = document.getElementById("bus-type");
                 busType.value = ownerDetails.bus_type;
@@ -142,143 +146,302 @@ document.addEventListener("DOMContentLoaded", function () {
   let totalItem = document.getElementById("total-item");
   let counter = parseInt(totalItem.innerText) || 0; // Initialize counter
 
+  // Inside the loop where you're adding event listeners for select item buttons
   for (let i = 0; i < selectItemButtons.length; i++) {
-      selectItemButtons[i].addEventListener("click", function (event) {
-          event.preventDefault();
-  
-          let itemId = this.getAttribute("data-item-id");
-  
-          // Make an AJAX request to fetch the item details
-          let item = new XMLHttpRequest();
-          item.open("GET", `./json_response/item.php?item_id=${itemId}`, true);
-          item.onreadystatechange = function () {
-              if (item.readyState === 4 && item.status === 200) {
-                  let itemDetails = JSON.parse(item.responseText);
-  
-                  // Increment counter for each click
-                  counter++;
-  
-                  //Item Container
-                  let itemContainer = document.getElementById('item-container');
-                  
-                  //Item Content Container
-                  let itemContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `item-content-${counter}`);
-                  itemContainer.appendChild(itemContent);
+    selectItemButtons[i].addEventListener("click", function (event) {
+        event.preventDefault();
 
-                  let itemTitle = createTitle(`Item ${counter}`, `item-title-${counter}`);
-                  itemContent.appendChild(itemTitle);
-                  // Create and append item name container div
-                  let itemNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(itemNameContainer);
-  
-                  // Create and append item name label
-                  let itemNameLabel = createLabel(`Item Name`);
-                  itemNameContainer.appendChild(itemNameLabel);
-  
-                  let itemNameInputField = createInputField('text', `item-name-${counter}`, `item_name[]`);
-                  itemNameContainer.appendChild(itemNameInputField);
-                  itemNameInputField.value = itemDetails.item_name;
+        let itemId = this.getAttribute("data-item-id");
 
-                  // Category Field 
-                  let categoryNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(categoryNameContainer); 
+        // Make an AJAX request to fetch the item details
+        let item = new XMLHttpRequest();
+        item.open("GET", `./json_response/item.php?item_id=${itemId}`, true);
+        item.onreadystatechange = function () {
+            if (item.readyState === 4 && item.status === 200) {
+                let itemDetails = JSON.parse(item.responseText);
 
-                  let categoryName = createLabel(`Category`);
-                  categoryNameContainer.appendChild(categoryName);
-  
-                  let categoryNameInputField = createInputField('text', `category-name-${counter}`, `category_name[]`);
-                  categoryNameContainer.appendChild(categoryNameInputField);
-                  categoryNameInputField.value = itemDetails.category_name;
+                // Increment counter for each click
+                counter++;
 
-                  // Quantity and Power Rating Container
-                  let quantityPowerContainer = createContainerDiv('d-md-flex align-items-center justify-content-center p-0');
-                  itemContent.appendChild(quantityPowerContainer);
+                //Item Container
+                let itemContainer = document.getElementById('item-container');
 
-                  //Quantity Field
-                  let quantityContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
-                  quantityPowerContainer.appendChild(quantityContainer);
+                //Item Content Container
+                let itemContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `item-content-${counter}`);
+                itemContainer.appendChild(itemContent);
 
-                  let quantityLabel = createLabel('Quantity');
-                  quantityContainer.appendChild(quantityLabel);
+                let itemTitle = createTitle(`Item ${counter}`, `item-title-${counter}`);
+                itemContent.appendChild(itemTitle);
 
-                  let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, false);
-                  quantityContainer.append(quantityInputField);
+                // Create and append item name container div
+                let itemNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                itemContent.appendChild(itemNameContainer);
 
-                  // Power Rating
-                  let powerRatingContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
-                  quantityPowerContainer.appendChild(powerRatingContainer);
+                // Create and append item name label
+                let itemNameLabel = createLabel(`Item Name`);
+                itemNameContainer.appendChild(itemNameLabel);
 
-                  let powerRatingLabel = createLabel('Power Rating');
-                  powerRatingContainer.appendChild(powerRatingLabel);
+                let itemNameInputField = createInputField('text', `item-name-${counter}`, `item_name[]`);
+                itemNameContainer.appendChild(itemNameInputField);
+                itemNameInputField.value = itemDetails.item_name;
 
-                  let powerRatingInputField = createInputField('number', `power-rating-${counter}`, `power_rating[]`, false);
-                  powerRatingContainer.appendChild(powerRatingInputField);
-  
-                  // Item Fee
-                  let feeContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(feeContainer);
+                // Category Field 
+                let categoryNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                itemContent.appendChild(categoryNameContainer);
 
-                  let feeLabel = createLabel('Fee');
-                  feeContainer.appendChild(feeLabel);
+                let categoryName = createLabel(`Category`);
+                categoryNameContainer.appendChild(categoryName);
 
-                  let feeInputField = createInputField('number', `fee-${counter}`, `fee[]`, false);
-                  feeContainer.appendChild(feeInputField);
-  
+                let categoryNameInputField = createInputField('text', `category-name-${counter}`, `category_name[]`);
+                categoryNameInputField.readOnly = true; // Disabled
+                categoryNameContainer.appendChild(categoryNameInputField);
+                categoryNameInputField.value = itemDetails.category_name;
 
-                  // Create and append hidden input elements with unique identifiers
-                  itemContent.appendChild(createHiddenInput("item_id[]", `item-id-${counter}`, true));
-                  // Update input field values with unique identifiers
-                  document.getElementById(`item-id-${counter}`).value = itemDetails.item_id;
-  
-                  // Update the displayed count of added items
-                  updateItemCount(counter);
+                // Section Field
+                let sectionContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
+                itemContent.appendChild(sectionContainer);
 
-                  // Close the modal
-                  let modal = bootstrap.Modal.getInstance(wrapper);
-                  modal.hide();
+                let sectionLabel = createLabel(`Section`);
+                sectionContainer.appendChild(sectionLabel);
 
-                  // Add event listener to item title for toggling visibility
-                  // itemTitle.addEventListener("click", function () {
-                  //     itemNameInputField.style.display = (itemNameInputField.style.display === "none") ? "block" : "none";
-                  //     categoryNameInputField.style.display = (categoryNameInputField.style.display === "none") ? "block" : "none";
-                  //     quantityInputField.style.display = (quantityInputField.style.display === "none") ? "block" : "none";
-                  // });
-              }
-          };
-          item.send();
-      });
+                let sectionFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
+                sectionContainer.appendChild(sectionFieldContainer);
+
+                let sectionSelect = document.createElement('select');
+                sectionSelect.classList.add('form-control');
+                sectionSelect.id = `section-${counter}`;
+                sectionSelect.name = 'section[]';
+                sectionFieldContainer.appendChild(sectionSelect);
+
+                // Capacity Field
+                let capacityContainer = createContainerDiv('form-group d-none flex-column flex-md-grow-1');
+                itemContent.appendChild(capacityContainer);
+
+                let capacityLabel = createLabel(`Capacity`);
+                capacityContainer.appendChild(capacityLabel);
+
+                let capacityFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
+                capacityContainer.appendChild(capacityFieldContainer);
+
+                let capacitySelect = document.createElement('select');
+                capacitySelect.classList.add('form-control');
+                capacitySelect.id = `capacity-${counter}`;
+                capacitySelect.name = 'capacity[]';
+                capacityFieldContainer.appendChild(capacitySelect);
+                
+
+                function updateSections() {
+                  var selectedCategory = categoryNameInputField.value;
+                  // Make an AJAX request to fetch sections
+                  let xhr = new XMLHttpRequest();
+                  xhr.open("POST", "./json_response/sections.php", true);
+                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xhr.onreadystatechange = function () {
+                      if (xhr.readyState === 4 && xhr.status === 200) {
+                          let response = JSON.parse(xhr.responseText);
+
+                          // Section Default option
+                          let sectionDefaultOption = document.createElement("option");
+                          sectionDefaultOption.value = "";
+                          sectionDefaultOption.text = "Select";
+                          sectionDefaultOption.selected = true;
+                          sectionDefaultOption.disabled = true;
+                          sectionDefaultOption.hidden = true;
+                          sectionSelect.appendChild(sectionDefaultOption);
+
+                   
+                          // Populate section select field with fetched sections
+                          response.sections.forEach(section => {
+                              let option = document.createElement("option");
+                              option.value = section;
+                              option.text = section;
+                              sectionSelect.appendChild(option);
+                          });
+                      }
+                  };
+                  // Send selected category as parameter
+                  xhr.send(`category=${selectedCategory}`);
+                }
+
+                // Call updateSections to populate sections initially
+                updateSections();
+                
+                // Add event listener for section change event
+                sectionSelect.addEventListener("change", function () {
+                    updateCapacities();
+                });
+
+                capacitySelect.addEventListener("change", function () {
+                    updateFee();
+                });
+                
+                
+                // Quantity and Power Rating Container
+                let quantityPowerContainer = createContainerDiv('d-md-flex align-items-center justify-content-center p-0');
+                itemContent.appendChild(quantityPowerContainer);
+
+                //Quantity Field
+                let quantityContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                quantityPowerContainer.appendChild(quantityContainer);
+
+                let quantityLabel = createLabel('Quantity');
+                quantityContainer.appendChild(quantityLabel);
+
+                let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, false);
+                quantityContainer.append(quantityInputField);
+
+                // Power Rating
+                let powerRatingContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                quantityPowerContainer.appendChild(powerRatingContainer);
+
+                let powerRatingLabel = createLabel('Power Rating');
+                powerRatingContainer.appendChild(powerRatingLabel);
+
+                let powerRatingInputField = createInputField('number', `power-rating-${counter}`, `power_rating[]`, false);
+                powerRatingContainer.appendChild(powerRatingInputField);
+
+                // Item Fee
+                let feeContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                itemContent.appendChild(feeContainer);
+
+                let feeLabel = createLabel('Fee');
+                feeContainer.appendChild(feeLabel);
+
+                let feeInputField = createInputField('number', `fee-${counter}`, `fee[]`, false);
+                feeContainer.appendChild(feeInputField);
+
+                // Create and append hidden input elements with unique identifiers
+                itemContent.appendChild(createHiddenInput("item_id[]", `item-id-${counter}`, true));
+
+                // Function to update the capacities based on the selected section
+                function updateCapacities() {
+                  let selectedSection = sectionSelect.value;
+                  // Make an AJAX request to fetch capacities
+                  let xhr = new XMLHttpRequest();
+                  xhr.open("POST", "./json_response/capacities.php", true);
+                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xhr.onreadystatechange = function () {
+                      if (xhr.readyState === 4 && xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+                          
+                        capacitySelect.innerHTML = "";
+
+                        capacityContainer.classList.remove('d-none');
+                        capacityContainer.classList.add('d-flex');
+                        // Capacity Default Option
+                        let capacityDefaultOption = document.createElement("option");
+                        capacityDefaultOption.value = "";
+                        capacityDefaultOption.text = "Select";
+                        capacityDefaultOption.selected = true;
+                        capacityDefaultOption.disabled = true;
+                        capacityDefaultOption.hidden = true;
+                        capacitySelect.appendChild(capacityDefaultOption);
+
+                        response.capacities.forEach(capacity => {
+                          let option = document.createElement("option");
+                          option.value = capacity;
+                          option.text = capacity;
+                          capacitySelect.appendChild(option);
+                        });
+
+                      }
+                  };
+                  // Send selected section as parameter
+                  xhr.send(`section=${selectedSection}`);
+                }
+
+                let originalFeeValue;
+
+                function updateFee() {
+                  let selectedCapacity = capacitySelect.value;
+
+                  let xhr = new XMLHttpRequest();
+                  xhr.open("POST", "./json_response/fee.php", true);
+                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                  xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                      let response = JSON.parse(xhr.responseText);
+
+                        // Store the initial fee value
+                        originalFeeValue = parseFloat(response.fee);
+
+                        // Set the fee input field value
+                        feeInputField.value = parseFloat(response.fee).toFixed(2);
+                      }
+                    };
+                    // Send selected section as parameter
+                  xhr.send(`capacity=${selectedCapacity}`);
+                }
+
+                quantityInputField.addEventListener("input", function() {
+                  calculateTotalFee();
+                });
+
+                // Function to calculate total fee
+                function calculateTotalFee() {
+                    let quantity = parseFloat(quantityInputField.value);
+                    let fee = parseFloat(feeInputField.value);
+                    if (isNaN(quantity) || isNaN(fee)) {
+                        // If either quantity or fee is not a number, reset fee input field
+                        feeInputField.value = originalFeeValue.toFixed(2);
+                    } else {
+                        // Calculate total fee and update fee input field
+                        let totalFee = quantity * fee;
+                        feeInputField.value = totalFee.toFixed(2); // assuming you want to keep it as a float with 2 decimal places
+                    }
+                }
+
+                // Update input field values with unique identifiers
+                document.getElementById(`item-id-${counter}`).value = itemDetails.item_id;
+
+                // Update the displayed count of added items
+                updateItemCount(counter);
+
+                // Close the modal
+                let modal = bootstrap.Modal.getInstance(wrapper);
+                modal.hide();
+            }
+        };
+        item.send();
+    });
   }
 
+  // If delete button is available, add event listener to it
   if (deleteItemButton) {
-      deleteItemButton.addEventListener("click", function () {
-      // Remove the last added item field
-      let lastItemTitle = document.getElementById( `item-title-${counter}`)
-      let lastItem = document.getElementById(`item-name-${counter}`);
-      let lastCategory = document.getElementById(`category-name-${counter}`);
-      let lastQuantity = document.getElementById(`quantity-${counter}`);
-      let lastPowerRating = document.getElementById(`power-rating-${counter}`);
-      let lastFee = document.getElementById(`fee-${counter}`);
-      if (lastItem && lastCategory && lastQuantity && lastPowerRating && lastFee) {
-        lastItemTitle.parentElement.remove();
-        lastItem.parentElement.remove(); // Remove the container div
-        lastCategory.parentElement.remove(); // Remove the container div
-        lastQuantity.parentElement.remove(); // Remove the container div
-        lastPowerRating.parentElement.remove(); // Remove the container div
-        lastFee.parentElement.remove(); // Remove the container div
-        counter--;
+    deleteItemButton.addEventListener("click", function () {
+        // Remove the last added item field
+        let lastItemTitle = document.getElementById(`item-title-${counter}`);
+        let lastItem = document.getElementById(`item-name-${counter}`);
+        let lastCategory = document.getElementById(`category-name-${counter}`);
+        let lastSection = document.getElementById(`section-${counter}`);
+        let lastCapacity = document.getElementById(`capacity-${counter}`);
+        let lastQuantity = document.getElementById(`quantity-${counter}`);
+        let lastPowerRating = document.getElementById(`power-rating-${counter}`);
+        let lastFee = document.getElementById(`fee-${counter}`);
+        if (lastItem && lastCategory && lastSection && lastCapacity && lastQuantity && lastPowerRating && lastFee) {
+          lastItemTitle.parentElement.remove();
+          lastItem.parentElement.remove(); // Remove the container div
+          lastCategory.parentElement.remove(); // Remove the container div
+          lastSection.parentElement.remove(); // Remove the container div
+          lastCapacity.parentElement.remove(); // Remove the container div
+          lastQuantity.parentElement.remove(); // Remove the container div
+          lastPowerRating.parentElement.remove(); // Remove the container div
+          lastFee.parentElement.remove(); // Remove the container div
+          counter--;
 
-        // Update the displayed count of added items
-        updateItemCount(counter);
+          // Update the displayed count of added items
+          updateItemCount(counter);
       }
     });
   }
 
-  // Function to update the count of added items
+    // Function to update the count of added items
   function updateItemCount(count) {
     if (totalItem) {
-      totalItem.innerHTML = count;
+        totalItem.innerHTML = count;
     }
   }
+    
 });
 
 function createContainerDiv(className, id = "") {
