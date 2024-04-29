@@ -226,8 +226,16 @@ include './../includes/side-header.php';
 
                                     </div>
                                     <div class="carousel-item p-2">
-                                        <p class="text font-weight-bolder">Inspector Information</p>
 
+                                        <div class="d-flex flex-column" id="inspector-container">
+                                            <div class="d-flex justify-content-between">
+                                                <p class="text font-weight-bolder">Inspector Information</p>
+                                                <p class="text font-weight-bolder">Total
+                                                    Inspector: <span id="total-inspector">0</span>
+                                                </p>
+                                            </div>
+
+                                        </div>
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
                                                 data-target="#inspector-list" data-toggle="modal">Add Inspector</a>
@@ -238,15 +246,13 @@ include './../includes/side-header.php';
 
                                     <div class="carousel-item p-2">
                                         <p class="text font-weight-bolder">Violation Information</p>
-
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="violation-id">Violation Description <span
                                                     class="text-danger">*</span>
                                             </label>
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="violation_id" id="violation-id" class="form-control px-3"
-                                                    required>
+                                                <select name="violation_id" id="violation-id" class="form-control px-3">
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php 
                                                     
@@ -258,7 +264,7 @@ include './../includes/side-header.php';
                                                         ?>
 
                                                     <option value="<?php echo $violation['violation_id']?>">
-                                                        <?php echo $violation['violation_description']?>
+                                                        <?php echo $violation['description']?>
                                                     </option>
                                                     <?php
                                                     }
@@ -272,8 +278,7 @@ include './../includes/side-header.php';
                                             </label>
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="remarks_id" id="remarks-id" class="form-control px-3"
-                                                    required>
+                                                <select name="remarks_id" id="remarks-id" class="form-control px-3">
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="No Violation">No Violation</option>
                                                     <option value="With Violation">With Violation</option>
