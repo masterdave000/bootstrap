@@ -235,10 +235,9 @@ ol.carousel-indicators li {
 .section-footer .inspector-names > *:not(:first-child), 
 .section-footer .date-inspected > *:not(:first-child) {
   width: 100%;
+  height: 20%;
   border-bottom: 1px solid black;
   flex-grow: 1;
-  margin-bottom: 5px;
-  
 }
 
 .section-footer .inspected-title {
