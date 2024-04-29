@@ -1,10 +1,15 @@
- CREATE TABLE violation (
+CREATE TABLE violation (
         violation_id int NOT NULL AUTO_INCREMENT,
-        findings varchar(100) NOT NULL,
-        major_violation varchar(100) NOT NULL,
-        other varchar(100) NOT NULL,
+        description varchar(100) NOT NULL,
         PRIMARY KEY(violation_id)
-    );
+);
+
+CREATE TABLE inspection_violation (
+	inspection_id int NOT NULL,
+    violation_id int NOT NULL,
+    FOREIGN KEY(inspection_id) REFERENCES inspection(inspection_id),
+	FOREIGN KEY(violation_id) REFERENCES violation(violation_id)
+);
     
 CREATE TABLE owner ( 
         owner_id int NOT NULL AUTO_INCREMENT,
