@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $bus_id = filter_var($clean_bus_id, FILTER_VALIDATE_INT);
     
 
-    $busQuery = "SELECT owner_id, bus_name, owner_firstname, owner_midname, owner_lastname, owner_suffix, bus_type, bus_address, bus_contact_number, floor_area, signage_area FROM business_view WHERE bus_id = :bus_id";
+    $busQuery = "SELECT owner_id, bus_name, owner_firstname, owner_midname, owner_lastname, owner_suffix, bus_type, bus_address, bus_contact_number, floor_area, signage_area, bus_img_url FROM business_view WHERE bus_id = :bus_id";
     $busStatement = $pdo->prepare($busQuery);
     $busStatement->bindParam(':bus_id', $bus_id);
     $busStatement->execute();
@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $bus_contact_number = $business['bus_contact_number'];
     $floor_area = $business['floor_area'];
     $signage_area = $business['signage_area'];
+    $bus_img_url = $business['bus_img_url'];
 }
 
 $response = array(
@@ -35,7 +36,8 @@ $response = array(
     'bus_address' => $bus_address,
     'bus_contact_number' => $bus_contact_number,
     'floor_area' => $floor_area,
-    'signage_area' => $signage_area
+    'signage_area' => $signage_area,
+    'bus_img_url' => $bus_img_url
     
 );
 

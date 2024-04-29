@@ -7,7 +7,6 @@ if (alert) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-  let busImg = document.getElementById("bus-img");
   if (document.getElementById("business-id")) {
     let busId = document.getElementById("business-id");
 
@@ -17,36 +16,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let url = "./json_response/business.php?bus_id=" + busIdValue;
     
-        
         business.open("GET", url, true);
         business.onreadystatechange = function () {
             if (business.readyState === 4 && business.status === 200) {
                 
-                let ownerDetails = JSON.parse(business.responseText);
+                let businessDetails = JSON.parse(business.responseText);
             
                 let ownerId = document.getElementById("owner-id");
-                ownerId.value = ownerDetails.owner_id;
+                ownerId.value = businessDetails.owner_id;
 
                 let ownerName= document.getElementById("owner-name");
-                ownerName.value = ownerDetails.owner_name;
+                ownerName.value = businessDetails.owner_name;
 
                 let busName = document.getElementById("bus-name");
-                busName.value = ownerDetails.bus_name;
+                busName.value = businessDetails.bus_name;
 
                 let busType = document.getElementById("bus-type");
-                busType.value = ownerDetails.bus_type;
+                busType.value = businessDetails.bus_type;
 
                 let busAddress = document.getElementById("bus-address");
-                busAddress.value = ownerDetails.bus_address;
+                busAddress.value = businessDetails.bus_address;
 
                 let busContactNumber = document.getElementById("bus-contact-number");
-                busContactNumber.value = ownerDetails.bus_contact_number;
+                busContactNumber.value = businessDetails.bus_contact_number;
 
                 let floorArea = document.getElementById("floor-area");
-                floorArea.value = ownerDetails.floor_area;
+                floorArea.value = businessDetails.floor_area;
 
                 let signageArea = document.getElementById("signage-area");
-                signageArea.value = ownerDetails.signage_area;
+                signageArea.value = businessDetails.signage_area;
+
+                let busImg = document.getElementById("bus-img");
+                busImg.src = `./../business/images/${businessDetails.bus_img_url??'no-image.png'}`;
 
                 let carouselItemContainer = document.querySelector(".carousel-item");
                 let hiddenElements = carouselItemContainer.querySelectorAll(".d-none");
