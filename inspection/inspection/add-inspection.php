@@ -37,7 +37,7 @@ include './../includes/side-header.php';
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
                                     <img src="./images/default-img.png" alt="default-item-image"
-                                        class="img-fluid rounded-circle" />
+                                        class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
 
                                 <div class="form-group d-flex flex-column align-items-center w-100">
