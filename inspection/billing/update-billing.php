@@ -14,11 +14,11 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
+            if (isset($_SESSION['update'])) //Checking whether the session is set or not
             {	//DIsplaying session message
-                echo $_SESSION['add'];
+                echo $_SESSION['update'];
                 //Removing session message
-                unset($_SESSION['add']);
+                unset($_SESSION['update']);
             }
 
             if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
