@@ -70,6 +70,7 @@ include './../includes/side-header.php';
                                         <li data-target="#inspectionCarousel" data-slide-to="1"></li>
                                         <li data-target="#inspectionCarousel" data-slide-to="2"></li>
                                         <li data-target="#inspectionCarousel" data-slide-to="4"></li>
+                                        <li data-target="#inspectionCarousel" data-slide-to="5"></li>
                                     </ol>
                                 </div>
                                 <div class="carousel-inner">
@@ -77,12 +78,23 @@ include './../includes/side-header.php';
 
                                         <p class="text font-weight-bolder">Business Information</p>
 
-                                        <div class="col col-12 p-0 form-group">
+                                        <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="application-type">Application Type <span
                                                     class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="application_type" class="form-control p-4"
-                                                id="application-type" placeholder="Application Type..." required>
+                                            <div
+                                                class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="application_type" id="application-type"
+                                                    class="form-control px-3" required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <option value="Annual">Annual</option>
+                                                    <option value="New">New</option>
+                                                    <option value="Change Address">Change Address</option>
+                                                    <option value="Change Name">Change Name</option>
+
+
+                                                </select>
+                                            </div>
                                         </div>
 
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
@@ -110,6 +122,9 @@ include './../includes/side-header.php';
                                                 </select>
                                             </div>
                                         </div>
+
+                                        <input type="hidden" name="bus_name" class="form-control p-4" id="bus-name"
+                                            required readonly>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="owner-name">Owner Name <span class="text-danger">*</span>
@@ -175,8 +190,8 @@ include './../includes/side-header.php';
 
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-success btn-md-block mr-3 px-3" data-target="#item-list"
-                                                data-toggle="modal">Add</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-item">Delete</a>
+                                                data-toggle="modal">Add Item</a>
+                                            <a class="btn btn-danger btn-md-block px-3" id="delete-item">Delete Item</a>
                                         </div>
 
                                     </div>
@@ -205,16 +220,65 @@ include './../includes/side-header.php';
                                             <label for="signage-fee">Signage Fee <span class="text-danger">*</span>
                                             </label>
                                             <input type="number" name="signage_fee" class="form-control p-4"
-                                                id="signage0-fee" placeholder="Enter Signage Fee..." step="0.01"
+                                                id="signage-fee" placeholder="Enter Signage Fee..." step="0.01"
                                                 value="0.00" required>
                                         </div>
 
                                     </div>
                                     <div class="carousel-item p-2">
-                                        <p class="text font-weight-bolder">Other Fees Information</p>
+                                        <p class="text font-weight-bolder">Inspector Information</p>
 
-                                        <div class="form-check">
-                                            <input>
+                                        <div class="d-flex justify-content-end my-4">
+                                            <a class="btn btn-success btn-md-block mr-3 px-3"
+                                                data-target="#inspector-list" data-toggle="modal">Add Inspector</a>
+                                            <a class="btn btn-danger btn-md-block px-3" id="delete-inspector">Delete
+                                                Inspector</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="carousel-item p-2">
+                                        <p class="text font-weight-bolder">Violation Information</p>
+
+                                        <div class="form-group d-flex flex-column flex-md-grow-1">
+                                            <label for="violation-id">Violation Description <span
+                                                    class="text-danger">*</span>
+                                            </label>
+                                            <div
+                                                class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="violation_id" id="violation-id" class="form-control px-3"
+                                                    required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <?php 
+                                                    
+                                                    $violationQuery = "SELECT * from violation";
+                                                    $violationStatement = $pdo->query($violationQuery);
+                                                    $violations = $violationStatement->fetchAll(PDO::FETCH_ASSOC);
+                                                    
+                                                    foreach ($violations as $violation) {
+                                                        ?>
+
+                                                    <option value="<?php echo $violation['violation_id']?>">
+                                                        <?php echo $violation['violation_description']?>
+                                                    </option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group d-flex flex-column flex-md-grow-1">
+                                            <label for="remarks-id">Remarks <span class="text-danger">*</span>
+                                            </label>
+                                            <div
+                                                class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="remarks_id" id="remarks-id" class="form-control px-3"
+                                                    required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <option value="No Violation">No Violation</option>
+                                                    <option value="With Violation">With Violation</option>
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -262,6 +326,7 @@ include './../includes/side-header.php';
 
 require './../includes/footer.php'; 
 require './modals/item.php';
+require './modals/inspector.php';
 ?>
 </body>
 
