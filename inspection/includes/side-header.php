@@ -56,13 +56,6 @@ $username = $_SESSION['username'];
                 <div class="sidebar-brand-text mx-3">OBOS</div>
             </a>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Navigation
-            </div>
-
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="<?php echo SITEURL; ?>inspection/dashboard/">
@@ -116,6 +109,12 @@ $username = $_SESSION['username'];
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/billing/">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Billing</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/violation/">
+                    <i class="fas fa-fw fa-users"></i>
+                    <span>Violation</span></a>
             </li>
 
             <li class="nav-item">
