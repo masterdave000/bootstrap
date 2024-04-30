@@ -39,26 +39,6 @@ include './../includes/side-header.php';
                                     <img src="./images/default-img.png" alt="default-item-image"
                                         class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
-
-                                <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="item_img" id="item-img" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG" />
-
-                                    <?php
-                                    if (isset($_SESSION['error'])) {
-                                        echo "<small class='text-danger text-center'>" . $_SESSION['error'] . "</small>";
-                                        unset($_SESSION['error']); // clear the error message from the session
-                                    }
-                                    ?>
-
-                                    <div class="text-danger text-center">
-                                        <small>
-                                            <i>Note: The maximum file size allowed is 1MB. <br>
-                                                Only JPEG, JPG, and PNG formats are accepted.
-                                            </i>
-                                        </small>
-                                    </div>
-                                </div>
                             </div>
 
                             <div id="inspectionCarousel" class="carousel slide" data-ride="carousel"
@@ -306,7 +286,7 @@ include './../includes/side-header.php';
                                         href="#inspectionCarousel" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     </button>
-                                    <button type="submit"
+                                    <button
                                         class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
                                         href="#inspectionCarousel" role="button" data-slide="next">
                                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
