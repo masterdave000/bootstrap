@@ -139,8 +139,8 @@ input[readonly] {
   border-radius: 5px;
 }
 
-ol.carousel-indicators li {
-  background-color: #42444E;
+.carousel-indicators > button {
+  background-color: #42444E !important;
 }
 
 /* List of Equipment */
