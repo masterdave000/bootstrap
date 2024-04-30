@@ -608,6 +608,96 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  let wrapper = document.getElementById("violation-list");
+  let selectViolationButtons = document.querySelectorAll(".select-violation");
+  let deleteViolationButton = document.getElementById("delete-violation");
+  let totalViolation = document.getElementById("total-violation");
+  let counter = parseInt(totalViolation.innerText) || 0; // Initialize counter
+
+  // Inside the loop where you're adding event listeners for select violation buttons
+  for (let i = 0; i < selectViolationButtons.length; i++) {
+    selectViolationButtons[i].addEventListener("click", function (event) {
+        event.preventDefault();
+
+        let violationId = this.getAttribute("data-violation-id");
+
+        // Make an AJAX request to fetch the violation details
+        let violation = new XMLHttpRequest();
+        violation.open("GET", `./json_response/violation.php?violation_id=${violationId}`, true);
+        violation.onreadystatechange = function () {
+            if (violation.readyState === 4 && violation.status === 200) {
+                let violationDetails = JSON.parse(violation.responseText);
+
+                // Increment counter for each click
+                counter++;
+
+                //Violation Container
+                let violationContainer = document.getElementById('violation-container');
+
+                //Violation Content Container
+                let violationContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `violation-content-${counter}`);
+                violationContainer.appendChild(violationContent);
+
+                let violationTitle = createTitle(`Violation ${counter}`, `violation-title-${counter}`);
+                violationContent.appendChild(violationTitle);
+
+                // Create and append violation name container div
+                let descriptionContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                violationContent.appendChild(descriptionContainer);
+
+                // Create and append violation name label
+                let descriptionLabel = createLabel(`Description`);
+                descriptionContainer.appendChild(descriptionLabel);
+
+                let descriptionInputField = createInputField('text', `description-${counter}`, `description[]`);
+                descriptionContainer.appendChild(descriptionInputField);
+                descriptionInputField.value = violationDetails.description;
+
+                
+                // Update input field values with unique identifiers
+                violationContent.appendChild(createHiddenInput("violation_id[]", `violation-id-${counter}`, true));
+                document.getElementById(`violation-id-${counter}`).value = violationDetails.violation_id;
+
+                // Update the displayed count of added violations
+                updateViolationCount(counter);
+
+                // Close the modal
+                let modal = bootstrap.Modal.getInstance(wrapper);
+                modal.hide();
+            }
+        };
+        violation.send();
+    });
+  }
+
+  // If delete button is available, add event listener to it
+  if (deleteViolationButton) {
+    deleteViolationButton.addEventListener("click", function () {
+        // Remove the last added violation field
+        let lastViolationTitle = document.getElementById(`violation-title-${counter}`);
+        let lastViolation = document.getElementById(`description-${counter}`);
+        
+        if (lastViolation) {
+          lastViolationTitle.parentElement.remove();
+            counter--;
+
+          // Update the displayed count of added violation
+          updateViolationCount(counter);
+      }
+    });
+  }
+
+    // Function to update the count of added inspector
+  function updateViolationCount(count) {
+    if (totalViolation) {
+        totalViolation.innerHTML = count;
+    }
+  }
+    
+});
+
+
 function createContainerDiv(className, id = "") {
   const div = document.createElement('div');
   div.className = className;
