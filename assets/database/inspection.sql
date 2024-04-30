@@ -65,13 +65,8 @@ CREATE TABLE inspection (
 	bus_id int NOT NULL,
 	business_billing_id int NOT NULL,
 	application_type varchar(50) NOT NULL DEFAULT 'Annual',
-	power_rating varchar(100) DEFAULT NULL,
-	quantity int NOT NULL,
-	fee decimal(10, 2) NOT NULL,
-	violation text NOT NULL,
 	date_inspected datetime NOT NULL default current_timestamp(),
 	date_signed datetime NOT NULL,
-	time_received time NOT NULL,
 	PRIMARY KEY(inspection_id),
 	FOREIGN KEY(owner_id) REFERENCES owner(owner_id),
 	FOREIGN KEY(bus_id) REFERENCES business(bus_id),
@@ -102,6 +97,9 @@ CREATE TABLE inspection_item (
 	inspection_id int NOT NULL,
     item_id int NOT NULL,
     billing_id int NOT NULL,
+	power_rating varchar(100) DEFAULT NULL,
+    quantity int NOT NULL,
+	fee decimal(11, 2) NOT NULL,
     FOREIGN KEY(inspection_id) REFERENCES inspection(inspection_id),
 	FOREIGN KEY(item_id) REFERENCES item_list(item_id),
     FOREIGN KEY(billing_id) REFERENCES equipment_billing(billing_id)
@@ -160,15 +158,17 @@ LEFT JOIN category_list c ON i.category_id = c.category_id;
 
 CREATE VIEW inspection_view AS
 SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
-i.application_type, i.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, i.quantity, i.date_inspected
+i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, i.date_inspected
 FROM inspection i 
 LEFT JOIN business b ON i.bus_id = b.bus_id
 LEFT JOIN owner o ON i.owner_id = o.owner_id
 LEFT JOIN inspection_item ii ON i.inspection_id = ii.inspection_id
 LEFT JOIN item_list il ON ii.item_id = il.item_id
 LEFT JOIN category_list cl ON il.category_id = cl.category_id
-lEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
-LEFT JOIN business_billing bb ON i.business_billing_id = bb.business_billing_id;
+LEFT JOIN business_billing bb ON i.business_billing_id = bb.business_billing_id
+LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
+LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
+LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 CREATE VIEW equipment_billing_view AS 
 SELECT b.billing_id, c.category_id, c.category_name, b.section, b.capacity, b.fee
