@@ -6,7 +6,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Fetch sections from the database based on the selected category
     // Modify this query according to your database structure
-    $feeQuery = "SELECT fee FROM equipment_billing_view WHERE capacity = :capacity";
+    $feeQuery = "SELECT billing_id, fee FROM equipment_billing_view WHERE capacity = :capacity";
 
     // Prepare and execute the query
     $feeStatement = $pdo->prepare($feeQuery);
@@ -18,7 +18,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Prepare the JSON response
     $response = array(
-        'fee' => $fee['fee']
+        'fee' => $fee['fee'],
+        'billing_id' => $fee['billing_id']
     );
 
     // Set the content type header
@@ -30,7 +31,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle the case when section is not set
     // You can return an error response or an empty array
     $response = array(
-        'fee' => 1.00
+        'fee' => 1.00,
+        'billing_id' => ''
     );
     
     header('Content-Type: application/json');
