@@ -8,16 +8,6 @@ require "./../includes/side-header.php";
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <?php 
-        
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
-
-        ?>
 
         <?php require './../includes/top-header.php'?>
 
@@ -42,7 +32,7 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php 
-                                    $inspectionQuery = "SELECT * FROM inspection_view ORDER BY inspection_id DESC";
+                                    $inspectionQuery = "SELECT DISTINCT inspection_id, bus_name, bus_img_url, date_inspected FROM inspection_view ORDER BY inspection_id DESC";
                                     $inspectionStatement = $pdo->query($inspectionQuery);
                                     $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
                                     ?>
@@ -58,7 +48,7 @@ require "./../includes/side-header.php";
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none
                                 text-gray-700 flex-gap">
                                             <div class="image-container img-fluid">
-                                                <img src="./images/<?php echo $inspection['inspection_img_url'] ?? 'default.png'?>"
+                                                <img src="./../business/images/<?php echo $inspection['bus_img_url'] ?? 'no-image.png'?>"
                                                     alt="inspector-image" class="img-fluid rounded-circle" />
                                             </div>
 
@@ -73,26 +63,10 @@ require "./../includes/side-header.php";
                                             </div>
                                         </a>
                                     </td>
-
-                                    <td class="d-flex justify-content-end">
-                                        <a href="./update-inspection.php?inspection_id=<?php echo $inspection['inspection_id']?>"
-                                            class="btn btn-primary mr-2 text-center d-flex align-items-center">
-                                            <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Edit</span>
-                                        </a>
-
-                                        <a href="#" data-toggle="modal"
-                                            data-target="#deleteModal-<?php echo $inspection['inspection_id']?>"
-                                            class="btn btn-danger d-flex justify-content-center align-items-center">
-                                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Delete</span>
-                                        </a>
-
-                                    </td>
                                 </tr>
 
                                 <?php
-                                    require './modals/delete.php';
+                                   
                                     endforeach;
                                 ?>
                                 <?php else : ?>
@@ -113,6 +87,16 @@ require "./../includes/side-header.php";
     </div>
 </div>
 
+<?php 
+        
+    if (isset($_SESSION['add'])) { //Checking whether the session is set or not
+	//DIsplaying session message
+        echo $_SESSION['add'];
+        //Removing session message
+        unset($_SESSION['add']);
+    }
+
+?>
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
