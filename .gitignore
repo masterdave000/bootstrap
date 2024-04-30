@@ -1,1 +1,16 @@
 node_modules
+inspection/business/images/*
+!inspection/business/images/no-image.png
+
+inspection/category/images/*
+!inspection/category/images/default-img.png
+
+inspection/inspector/images/*
+!inspection/inspector/images/default.png
+
+inspection/item/images/*
+!inspection/item/images/default-img.png
+
+inspection/owner/images/*
+!inspection/owner/images/default.png
+

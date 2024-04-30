@@ -109,8 +109,8 @@ require "./../includes/side-header.php";
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
 
-                                        <a href="#" data-toggle="modal"
-                                            data-target="#deleteModal-<?php echo $business['bus_id']?>"
+                                        <a href="#" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal-<?php echo $business['bus_id']?>"
                                             class="btn btn-danger d-flex justify-content-center align-items-center">
                                             <i class="fa fa-trash mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Delete</span>

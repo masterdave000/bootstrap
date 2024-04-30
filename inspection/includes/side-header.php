@@ -30,14 +30,9 @@ $username = $_SESSION['username'];
     <link href="<?php echo SITEURL ?>assets/css/style.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
-
-    <?php 
-    
-    if ($title === 'Manage Admin') {
-        echo '<link href="<?php ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">';
-    }
-    ?>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="<?php echo SITEURL ?>assets/css/equipment-print.css" rel="stylesheet" media="print">
 </head>
 
 <body id="page-top">
@@ -45,7 +40,7 @@ $username = $_SESSION['username'];
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion d-print-none" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
@@ -55,13 +50,6 @@ $username = $_SESSION['username'];
                 </div>
                 <div class="sidebar-brand-text mx-3">OBOS</div>
             </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Navigation
-            </div>
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
@@ -84,7 +72,7 @@ $username = $_SESSION['username'];
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/inspection/">
-                    <i class="fas fa-fw fa-file-medical"></i>
+                    <i class="fas fa-fw fa-check-square"></i>
                     <span>Inspection</span></a>
             </li>
 
@@ -114,8 +102,14 @@ $username = $_SESSION['username'];
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/billing/">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fa fa-credit-card-alt"></i>
                     <span>Billing</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="<?php echo SITEURL?>inspection/violation/">
+                    <i class="fas fa-fw fa-warning"></i>
+                    <span>Violation</span></a>
             </li>
 
             <li class="nav-item">
