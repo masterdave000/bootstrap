@@ -770,7 +770,7 @@ function createTitle(itemTitle, id) {
   const title = document.createElement("a");
   title.innerHTML = itemTitle;
   title.id = id;
-  title.className = "text"; // class assignment
+  title.className = "text text-decoration-none"; // class assignment
   title.style.cursor = "pointer";
   title.style.textDecorationStyle = "none";
   title.style.fontWeight = 700;
