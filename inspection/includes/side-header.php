@@ -72,7 +72,7 @@ $username = $_SESSION['username'];
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/inspection/">
-                    <i class="fas fa-fw fa-file-medical"></i>
+                    <i class="fas fa-fw fa-check-square"></i>
                     <span>Inspection</span></a>
             </li>
 
@@ -102,13 +102,13 @@ $username = $_SESSION['username'];
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/billing/">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fa fa-credit-card-alt"></i>
                     <span>Billing</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/violation/">
-                    <i class="fas fa-fw fa-users"></i>
+                    <i class="fas fa-fw fa-warning"></i>
                     <span>Violation</span></a>
             </li>
 
