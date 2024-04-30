@@ -245,33 +245,6 @@ include './../includes/side-header.php';
                                     </div>
 
                                     <div class="carousel-item p-2">
-                                        <p class="text font-weight-bolder">Violation Information</p>
-                                        <div class="form-group d-flex flex-column flex-md-grow-1">
-                                            <label for="violation-id">Violation Description <span
-                                                    class="text-danger">*</span>
-                                            </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="violation_id" id="violation-id" class="form-control px-3">
-                                                    <option selected disabled hidden value="">Select</option>
-                                                    <?php 
-                                                    
-                                                    $violationQuery = "SELECT * from violation";
-                                                    $violationStatement = $pdo->query($violationQuery);
-                                                    $violations = $violationStatement->fetchAll(PDO::FETCH_ASSOC);
-                                                    
-                                                    foreach ($violations as $violation) {
-                                                        ?>
-
-                                                    <option value="<?php echo $violation['violation_id']?>">
-                                                        <?php echo $violation['description']?>
-                                                    </option>
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                        </div>
 
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="remarks-id">Remarks <span class="text-danger">*</span>
@@ -285,6 +258,22 @@ include './../includes/side-header.php';
                                                 </select>
                                             </div>
                                         </div>
+                                        <div class="d-flex flex-column" id="violation-container">
+                                            <div class="d-flex justify-content-between">
+                                                <p class="text font-weight-bolder">Violation Information</p>
+                                                <p class="text font-weight-bolder">Total
+                                                    Violation: <span id="total-violation">0</span>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-end my-4">
+                                            <a class="btn btn-success btn-md-block mr-3 px-3"
+                                                data-target="#violation-list" data-toggle="modal">Add violation</a>
+                                            <a class="btn btn-danger btn-md-block px-3" id="delete-violation">Delete
+                                                Violation</a>
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -332,6 +321,7 @@ include './../includes/side-header.php';
 require './../includes/footer.php'; 
 require './modals/item.php';
 require './modals/inspector.php';
+require './modals/violation.php';
 ?>
 </body>
 
