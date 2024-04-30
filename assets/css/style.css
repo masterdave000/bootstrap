@@ -141,6 +141,7 @@ input[readonly] {
 
 .carousel-indicators > button {
   background-color: #42444E !important;
+  height: 5px !important;
 }
 
 /* List of Equipment */
