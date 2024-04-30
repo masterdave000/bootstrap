@@ -33,7 +33,7 @@ include './../includes/side-header.php';
                             <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
                         <form action="./generate/equipment-inspection.php" method="POST" class="user"
-                            enctype="multipart/form-data">
+                            id="inspection-form" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
                                     <img src="./images/default-img.png" alt="default-item-image"
@@ -254,7 +254,7 @@ include './../includes/side-header.php';
                                             </label>
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="remarks" id="remarks" class="form-control px-3">
+                                                <select name="remarks" id="remarks" class="form-control px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="No Violation">No Violation</option>
                                                     <option value="With Violation">With Violation</option>
@@ -277,6 +277,11 @@ include './../includes/side-header.php';
                                                 Violation</a>
                                         </div>
 
+                                        <div class="text-center mt-4">
+                                            <input type="submit" name="submit"
+                                                class="btn btn-primary btn-user btn-block mt-3" value="Add">
+                                        </div>
+
                                     </div>
                                 </div>
 
@@ -295,10 +300,7 @@ include './../includes/side-header.php';
 
                             </div>
 
-                            <div class="text-center mt-4">
-                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                    value="Add">
-                            </div>
+
                         </form>
                     </div>
                 </div>
