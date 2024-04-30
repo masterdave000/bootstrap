@@ -481,15 +481,3 @@ input[readonly] {
   height: 20px;
   
 }
-
-@media print {
-  #accordionSidebar, #topHeader {
-    display: none !important;
-  }
-
-  #equipmentListFees {
-    display: block !important;
-    width: 100%; 
-  }
-
-}
