@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" type="button" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
@@ -44,7 +44,7 @@
 
                             </td>
                             <td>
-                                <a class="btn btn-success py-1">
+                                <a class="btn btn-success py-1 select-item">
                                     Select
                                 </a>
                             </td>
