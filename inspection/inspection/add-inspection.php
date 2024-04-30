@@ -203,25 +203,48 @@ include './../includes/side-header.php';
                                         <div class="col col-12 p-0 form-group">
                                             <label for="building-fee">Building Fee <span class="text-danger">*</span>
                                             </label>
-                                            <input type="number" name="building_fee" class="form-control p-4"
-                                                id="building-fee" placeholder="Enter Building Fee..." step="0.01"
-                                                value="0.00" min="0.00" required>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">₱</span>
+                                                </div>
+
+                                                <input type="number" name="building_fee" class="form-control p-4"
+                                                    id="building-fee" placeholder="Enter Building Fee..." step="0.01"
+                                                    value="0.00" min="0.00" required>
+                                            </div>
+
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
                                             <label for="sanitary-fee">Sanitary Fee <span class="text-danger">*</span>
                                             </label>
-                                            <input type="number" name="sanitary_fee" class="form-control p-4"
-                                                id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01"
-                                                value="0.00" required>
+
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">₱</span>
+                                                </div>
+
+                                                <input type="number" name="sanitary_fee" class="form-control p-4"
+                                                    id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01"
+                                                    value="0.00" required>
+                                            </div>
+
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
                                             <label for="signage-fee">Signage Fee <span class="text-danger">*</span>
                                             </label>
-                                            <input type="number" name="signage_fee" class="form-control p-4"
-                                                id="signage-fee" placeholder="Enter Signage Fee..." step="0.01"
-                                                value="0.00" required>
+
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">₱</span>
+                                                </div>
+
+                                                <input type="number" name="signage_fee" class="form-control p-4"
+                                                    id="signage-fee" placeholder="Enter Signage Fee..." step="0.01"
+                                                    value="0.00" required>
+                                            </div>
+
                                         </div>
 
                                     </div>
