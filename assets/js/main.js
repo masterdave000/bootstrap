@@ -314,6 +314,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Create and append hidden input elements with unique identifiers
                 itemContent.appendChild(createHiddenInput("item_id[]", `item-id-${counter}`, true));
 
+                let billingIdHiddenInput = createHiddenInput("billing_id[]", `billing-id-${counter}`, true)
+                itemContent.appendChild(billingIdHiddenInput);
+
                 // Function to update the capacities based on the selected section
                 function updateCapacities() {
                   let selectedSection = sectionSelect.value;
@@ -368,6 +371,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // Set the fee input field value
                         feeInputField.value = parseFloat(response.fee).toFixed(2);
+                        billingIdHiddenInput.value = response.billing_id;
                       }
                     };
                     // Send selected section as parameter
