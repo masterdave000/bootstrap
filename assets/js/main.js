@@ -729,9 +729,13 @@ function createInputField(type, id, name, readOnly = true, required = true) {
     if (name === "quantity[]") {
       input.value = 1;
       input.step = 1;
-    } else if (name === "power_rating[]" || name === "fee[]") {
+    } else if (name === "fee[]") {
       input.value = parseFloat(1.00).toFixed(2);
       input.step = 0.01;
+    } else if (name === "power_rating[]") {
+      input.value = parseFloat(0.00).toFixed(2);
+      input.step = 0.01;
+
     }
   
   }
