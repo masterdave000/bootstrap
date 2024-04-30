@@ -251,7 +251,7 @@ include './../includes/side-header.php';
                                             </label>
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="remarks_id" id="remarks-id" class="form-control px-3">
+                                                <select name="remarks" id="remarks" class="form-control px-3">
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="No Violation">No Violation</option>
                                                     <option value="With Violation">With Violation</option>
