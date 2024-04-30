@@ -41,20 +41,21 @@ include './../includes/side-header.php';
                                 </div>
                             </div>
 
-                            <div id="inspectionCarousel" class="carousel slide" data-ride="carousel"
-                                data-interval="false">
-                                <div>
-                                    <ol class="carousel-indicators">
-                                        <li data-target="#inspectionCarousel" data-slide-to="0" class="active">
-                                        </li>
-                                        <li data-target="#inspectionCarousel" data-slide-to="1"></li>
-                                        <li data-target="#inspectionCarousel" data-slide-to="2"></li>
-                                        <li data-target="#inspectionCarousel" data-slide-to="4"></li>
-                                        <li data-target="#inspectionCarousel" data-slide-to="5"></li>
-                                    </ol>
+                            <div id="inspectionCarousel" class="carousel slide">
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="0"
+                                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="1"
+                                        aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="2"
+                                        aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="3"
+                                        aria-label="Slide 4"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="4"
+                                        aria-label="Slide 5"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active p-2">
+                                    <div class="carousel-item active p-2" data-bs-interval="false">
 
                                         <p class="text font-weight-bolder">Business Information</p>
 
@@ -156,8 +157,7 @@ include './../includes/side-header.php';
 
                                     </div>
 
-                                    <div class="carousel-item p-3">
-
+                                    <div class="carousel-item p-2" data-bs-interval="false">
                                         <div class="d-flex flex-column" id="item-container">
                                             <div class="d-flex justify-content-between">
                                                 <p class="text font-weight-bolder">Item Information</p>
@@ -169,14 +169,14 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-success btn-md-block mr-3 px-3" data-target="#item-list"
-                                                data-toggle="modal">Add Item</a>
+                                            <a class="btn btn-success btn-md-block mr-3 px-3"
+                                                data-bs-target="#item-list" data-bs-toggle="modal">Add Item</a>
                                             <a class="btn btn-danger btn-md-block px-3" id="delete-item">Delete Item</a>
                                         </div>
 
                                     </div>
 
-                                    <div class="carousel-item p-2">
+                                    <div class="carousel-item p-2" data-bs-interval="false">
 
                                         <p class="text font-weight-bolder">Other Fees Information</p>
 
@@ -226,10 +226,9 @@ include './../includes/side-header.php';
                                             </div>
 
                                         </div>
-
                                     </div>
-                                    <div class="carousel-item p-2">
 
+                                    <div class="carousel-item p-2" data-bs-interval="false">
                                         <div class="d-flex flex-column" id="inspector-container">
                                             <div class="d-flex justify-content-between">
                                                 <p class="text font-weight-bolder">Inspector Information</p>
@@ -241,14 +240,14 @@ include './../includes/side-header.php';
                                         </div>
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
-                                                data-target="#inspector-list" data-toggle="modal">Add Inspector</a>
+                                                data-bs-target="#inspector-list" data-bs-toggle="modal">Add
+                                                Inspector</a>
                                             <a class="btn btn-danger btn-md-block px-3" id="delete-inspector">Delete
                                                 Inspector</a>
                                         </div>
                                     </div>
 
-                                    <div class="carousel-item p-2">
-
+                                    <div class="carousel-item p-2" data-bs-interval="false">
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="remarks-id">Remarks <span class="text-danger">*</span>
                                             </label>
@@ -272,7 +271,8 @@ include './../includes/side-header.php';
 
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
-                                                data-target="#violation-list" data-toggle="modal">Add violation</a>
+                                                data-bs-target="#violation-list" data-bs-toggle="modal">Add
+                                                violation</a>
                                             <a class="btn btn-danger btn-md-block px-3" id="delete-violation">Delete
                                                 Violation</a>
                                         </div>
@@ -281,26 +281,26 @@ include './../includes/side-header.php';
                                             <input type="submit" name="submit"
                                                 class="btn btn-primary btn-user btn-block mt-3" value="Add">
                                         </div>
-
                                     </div>
                                 </div>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button
-                                        class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button"
-                                        href="#inspectionCarousel" role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    </button>
-                                    <button
-                                        class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
-                                        href="#inspectionCarousel" role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    </button>
+                                    <div class="previous-container invisible">
+                                        <button
+                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button"
+                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                    <div class="next-container">
+                                        <button
+                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
+                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
                                 </div>
-
                             </div>
-
-
                         </form>
                     </div>
                 </div>
@@ -320,7 +320,6 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-
 <?php 
 
 require './../includes/footer.php'; 
@@ -328,6 +327,7 @@ require './modals/item.php';
 require './modals/inspector.php';
 require './modals/violation.php';
 ?>
+
 </body>
 
 </html>
