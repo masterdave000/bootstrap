@@ -308,7 +308,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let feeLabel = createLabel('Fee');
                 feeContainer.appendChild(feeLabel);
 
-                let feeInputField = createInputField('number', `fee-${counter}`, `fee[]`, false);
+                let feeInputField = createInputField('number', `fee-${counter}`, `fee[]`);
                 feeContainer.appendChild(feeInputField);
 
                 // Create and append hidden input elements with unique identifiers
@@ -381,8 +381,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Function to calculate total fee
                 function calculateTotalFee() {
                     let quantity = parseFloat(quantityInputField.value);
-                    let fee = parseFloat(feeInputField.value);
-                    if (isNaN(quantity) || isNaN(fee)) {
+                    let fee = originalFeeValue.toFixed(2);
+                    if (isNaN(quantity) || isNaN(fee) || quantity === 0) {
                         // If either quantity or fee is not a number, reset fee input field
                         feeInputField.value = originalFeeValue.toFixed(2);
                     } else {
