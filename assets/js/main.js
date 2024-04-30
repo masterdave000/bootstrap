@@ -1,10 +1,34 @@
 const alert = document.getElementById("alert");
 
 if (alert) {
-    setTimeout(function() {
-        alert.style.display = 'none';
-    }, 6000);
+  setTimeout(function() {
+    alert.style.display = 'none';
+  }, 6000);
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  var carousel = document.getElementById('inspectionCarousel');
+  var prevBtn = document.querySelector('.previous-container');
+  var nextBtn = document.querySelector('.next-container');
+
+  carousel.addEventListener('slid.bs.carousel', function () {
+      var currentIndex = $('.carousel-item.active').index();
+      console.log(currentIndex);
+      var totalItems = $('.carousel-item').length;
+      console.log(totalItems);
+      if (currentIndex == 0) {
+        prevBtn.classList.add('invisible');
+        
+      } else if (totalItems - 1 == currentIndex) {
+        nextBtn.classList.add('invisible');
+      } else {
+        prevBtn.classList.remove('invisible');
+        nextBtn.classList.remove('invisible');
+      }
+    
+  });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
   if (document.getElementById("business-id")) {
@@ -168,7 +192,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let itemContainer = document.getElementById('item-container');
 
                 //Item Content Container
-                let itemContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `item-content-${counter}`);
+                let itemContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `item-content-${counter}`);
                 itemContainer.appendChild(itemContent);
 
                 let itemTitle = createTitle(`Item ${counter}`, `item-title-${counter}`);
@@ -551,7 +575,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let inspectorContainer = document.getElementById('inspector-container');
 
                 //Inspector Content Container
-                let inspectorContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
+                let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
                 inspectorContainer.appendChild(inspectorContent);
 
                 let inspectorTitle = createTitle(`Inspector ${counter}`, `inspector-title-${counter}`);
@@ -640,7 +664,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let violationContainer = document.getElementById('violation-container');
 
                 //Violation Content Container
-                let violationContent = createContainerDiv('shadow-sm bg-white rounded p-3 mb-2', `violation-content-${counter}`);
+                let violationContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `violation-content-${counter}`);
                 violationContainer.appendChild(violationContent);
 
                 let violationTitle = createTitle(`Violation ${counter}`, `violation-title-${counter}`);
