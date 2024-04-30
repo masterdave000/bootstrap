@@ -55,7 +55,7 @@ CREATE TABLE inspector (
 CREATE TABLE business_billing (
 	business_billing_id int NOT NULL AUTO_INCREMENT,
 	building_fee decimal(10, 2) NOT NULL,
-	plumbing_fee decimal(10, 2) NOT NULL,
+	sanitary_fee decimal(10, 2) NOT NULL,
 	signage_fee decimal(10, 2) NOT NULL,
 	PRIMARY KEY(business_billing_id)
 );
@@ -157,8 +157,10 @@ FROM item_list i
 LEFT JOIN category_list c ON i.category_id = c.category_id;
 
 CREATE VIEW inspection_view AS
-SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
-i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, i.date_inspected
+SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
+b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
+bb.building_fee, bb.sanitary_fee, bb.signage_fee,
+i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, b.bus_img_url, i.date_inspected
 FROM inspection i 
 LEFT JOIN business b ON i.bus_id = b.bus_id
 LEFT JOIN owner o ON i.owner_id = o.owner_id
