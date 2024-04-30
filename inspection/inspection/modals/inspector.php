@@ -42,8 +42,8 @@
                                             <span class="d-none d-md-inline">Name:</span>
                                             <?php echo $fullname?>
                                         </div>
-                                        <div class="sub-title d-none d-md-flex">
-                                            <?php echo $inspector['inspector_id']?></div>
+                                        <div class="sub-title">
+                                            Id: <?php echo $inspector['inspector_id']?></div>
 
                                     </div>
                                 </a>
