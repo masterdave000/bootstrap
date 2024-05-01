@@ -16,7 +16,7 @@ if (printButton) {
   });
 }
 
-function carousel (carouselForm, previous = '.previous-container', next = '.next-container') {
+function carousel(carouselForm, previous = '.previous-container', next = '.next-container') {
 
   document.addEventListener('DOMContentLoaded', function () {
     var carousel = document.getElementById(carouselForm);
@@ -42,8 +42,8 @@ function carousel (carouselForm, previous = '.previous-container', next = '.next
 
 }
 
-carousel ('inspectionCarousel');
-carousel ('certificateCarousel');
+carousel('inspectionCarousel');
+carousel('certificateCarousel');
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -579,7 +579,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Make an AJAX request to fetch the inspector details
         let inspector = new XMLHttpRequest();
-        inspector.open("GET", `./json_response/inspector.php?inspector_id=${inspectorId}`, true);
+        inspector.open("GET", `./../json_response/inspector.php?inspector_id=${inspectorId}`, true);
         inspector.onreadystatechange = function () {
             if (inspector.readyState === 4 && inspector.status === 200) {
                 let inspectorDetails = JSON.parse(inspector.responseText);
