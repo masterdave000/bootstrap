@@ -6,6 +6,16 @@ if (alert) {
   }, 6000);
 }
 
+let printButton = document.getElementById("print-button");
+
+if (printButton) {
+  printButton.addEventListener('click', (event) => {
+    // Prevent default form submission behavior
+    // Initiate print dialog
+    window.print();
+  });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   var carousel = document.getElementById('inspectionCarousel');
   var prevBtn = document.querySelector('.previous-container');
