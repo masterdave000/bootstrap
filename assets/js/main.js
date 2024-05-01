@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let busIdValue = busId.value;
         let business = new XMLHttpRequest();
 
-        let url = "./json_response/business.php?bus_id=" + busIdValue;
+        let url = "./../json_response/business.php?bus_id=" + busIdValue;
     
         business.open("GET", url, true);
         business.onreadystatechange = function () {
