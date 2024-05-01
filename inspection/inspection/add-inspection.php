@@ -66,7 +66,7 @@ include './../includes/side-header.php';
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
                                                 <select name="application_type" id="application-type"
-                                                    class="form-control px-3" required>
+                                                    class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="Annual">Annual</option>
                                                     <option value="New">New</option>
@@ -83,8 +83,8 @@ include './../includes/side-header.php';
                                             </label>
                                             <div
                                                 class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="business_id" id="business-id" class="form-control px-3"
-                                                    required>
+                                                <select name="business_id" id="business-id"
+                                                    class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php 
                                             $businessQuery = "SELECT * from business";
