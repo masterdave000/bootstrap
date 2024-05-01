@@ -16,28 +16,34 @@ if (printButton) {
   });
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  var carousel = document.getElementById('inspectionCarousel');
-  var prevBtn = document.querySelector('.previous-container');
-  var nextBtn = document.querySelector('.next-container');
+function carousel (carouselForm, previous = '.previous-container', next = '.next-container') {
 
-  carousel.addEventListener('slid.bs.carousel', function () {
-      var currentIndex = $('.carousel-item.active').index();
-      console.log(currentIndex);
-      var totalItems = $('.carousel-item').length;
-      console.log(totalItems);
-      if (currentIndex == 0) {
-        prevBtn.classList.add('invisible');
-        
-      } else if (totalItems - 1 == currentIndex) {
-        nextBtn.classList.add('invisible');
-      } else {
-        prevBtn.classList.remove('invisible');
-        nextBtn.classList.remove('invisible');
-      }
-    
+  document.addEventListener('DOMContentLoaded', function () {
+    var carousel = document.getElementById(carouselForm);
+    var prevBtn = document.querySelector(previous);
+    var nextBtn = document.querySelector(next);
+
+    carousel.addEventListener('slid.bs.carousel', function () {
+        var currentIndex = $('.carousel-item.active').index();
+   
+        var totalItems = $('.carousel-item').length;
+        if (currentIndex == 0) {
+          prevBtn.classList.add('invisible');
+          
+        } else if (totalItems - 1 == currentIndex) {
+          nextBtn.classList.add('invisible');
+        } else {
+          prevBtn.classList.remove('invisible');
+          nextBtn.classList.remove('invisible');
+        }
+      
+    });
   });
-});
+
+}
+
+carousel ('inspectionCarousel');
+carousel ('certificateCarousel');
 
 
 document.addEventListener("DOMContentLoaded", function () {
