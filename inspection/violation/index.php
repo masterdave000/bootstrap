@@ -76,7 +76,7 @@ require "./../includes/side-header.php";
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
+                                                    <span class="d-none d-md-inline">Description:</span>
                                                     <?php echo $violation_description?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">ID:
