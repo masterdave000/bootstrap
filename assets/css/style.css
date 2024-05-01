@@ -128,6 +128,11 @@ input[readonly] {
   cursor: not-allowed;
 }
 
+.no-data-image {
+  width: 45% !important;
+}
+
+
 .carousel-button {
   border-radius: 5px;
 }
