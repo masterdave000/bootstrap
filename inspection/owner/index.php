@@ -64,13 +64,15 @@ require "./../includes/side-header.php";
                                     $ownerQuery = "SELECT * FROM owner ORDER BY owner_id DESC";
                                     $ownerStatement = $pdo->query($ownerQuery);
                                     $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($owners as $owner) {
-                                        $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
-                                        $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                        $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
-                                        $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
-                                        $contact_number = htmlspecialchars($owner['contact_number']);
-                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+
+                                    if ($owners) :
+                                        foreach ($owners as $owner) :
+                                            $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
+                                            $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                            $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
+                                            $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
+                                            $contact_number = htmlspecialchars($owner['contact_number']);
+                                            $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
@@ -113,9 +115,17 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach
                                 ?>
+                                <?php else : ?>
 
+                                <div class="img-fluid w-100 d-flex flex-column align-items-center bg-white m-0 p-0">
+                                    <img src="<?php echo SITEURL?>assets/img/no_data.png" alt="no-data-image"
+                                        class="img-fluid w-50 m-0 no-data-image" />
+                                    <p class="font-weight-bolder m-0 p-0">No Data</p>
+                                </div>
+
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>

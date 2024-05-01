@@ -65,14 +65,16 @@ require "./../includes/side-header.php";
                                     $inspectorQuery = "SELECT inspector_id, inspector_firstname, inspector_midname, inspector_lastname, inspector_suffix, contact_number, inspector_img_url FROM inspector ORDER BY inspector_id DESC";
                                     $inspectorStatement = $pdo->query($inspectorQuery);
                                     $inspectors = $inspectorStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($inspectors as $inspector) {
-                                        $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
-                                        $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                        $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
-                                        $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
-                                        $contact_number = htmlspecialchars($inspector['contact_number']);
-                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-                                ?>
+                                    
+                                    if ($inspectors) :
+                                        foreach ($inspectors as $inspector) :
+                                            $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
+                                            $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                            $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
+                                            $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
+                                            $contact_number = htmlspecialchars($inspector['contact_number']);
+                                            $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+                                    ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
@@ -115,9 +117,18 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach;
                                 ?>
+                                <?php else : ?>
 
+                                <div
+                                    class="img-fluid no-data-image-container w-100 d-flex flex-column align-items-center m-0 p-0">
+                                    <img src="<?php echo SITEURL?>assets/img/no_data.png" alt="no-data-image"
+                                        class="img-fluid m-0 no-data-image" />
+                                    <p class="font-weight-bolder m-0 p-0">No Data</p>
+                                </div>
+
+                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
