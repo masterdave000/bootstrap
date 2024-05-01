@@ -23,7 +23,8 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
     var prevBtn = document.querySelector(previous);
     var nextBtn = document.querySelector(next);
 
-    carousel.addEventListener('slid.bs.carousel', function () {
+    if (carousel) {
+      carousel.addEventListener('slid.bs.carousel', function () {
         var currentIndex = $('.carousel-item.active').index();
    
         var totalItems = $('.carousel-item').length;
@@ -37,7 +38,9 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
           nextBtn.classList.remove('invisible');
         }
       
-    });
+      });
+    }
+
   });
 
 }
@@ -112,72 +115,53 @@ document.addEventListener("DOMContentLoaded", () => {
   let mechanicalSection = document.getElementById("mechanical-section");
   let electronicSection = document.getElementById("electronic-section");
 
-  equipmentCategory.addEventListener("change", () => {
-    let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-    let equipmentCategoryText = selectedOption.innerText.trim();
+  if (equipmentCategory) {
+    equipmentCategory.addEventListener("change", () => {
+      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
+      let equipmentCategoryText = selectedOption.innerText.trim();
+  
+  
+      if (equipmentCategoryText === 'Electrical') {
+        electricalSection.classList.replace('d-none', 'd-flex');
+        electricalSection.querySelector('select').removeAttribute("disabled");
+        electricalSection.querySelector('select').setAttribute('required', 'required');
+  
+        mechanicalSection.classList.replace('d-flex', 'd-none');
+        mechanicalSection.querySelector('select').removeAttribute("required");
+        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        electronicSection.classList.replace('d-flex', 'd-none');
+        electronicSection.querySelector('select').removeAttribute("required");
+        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (equipmentCategoryText === 'Mechanical') {
+        mechanicalSection.classList.replace('d-none', 'd-flex');
+        mechanicalSection.querySelector('select').removeAttribute("disabled");
+        mechanicalSection.querySelector('select').setAttribute('required', 'required');
+  
+        electricalSection.classList.replace('d-flex', 'd-none');
+        electricalSection.querySelector('select').removeAttribute("required");
+        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        electronicSection.classList.replace('d-flex', 'd-none');
+        electronicSection.querySelector('select').removeAttribute("required");
+        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (equipmentCategoryText === 'Electronic') {
+        electronicSection.classList.replace('d-none', 'd-flex');
+        electronicSection.querySelector('select').removeAttribute("disabled");
+        electronicSection.querySelector('select').setAttribute('required', 'required');
+  
+        electricalSection.classList.replace('d-flex', 'd-none');
+        electricalSection.querySelector('select').removeAttribute("required");
+        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        mechanicalSection.classList.replace('d-flex', 'd-none');
+        mechanicalSection.querySelector('select').removeAttribute("required");
+        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+      }
+    });
+  }
 
-
-    if (equipmentCategoryText === 'Electrical') {
-      electricalSection.classList.replace('d-none', 'd-flex');
-      electricalSection.querySelector('select').removeAttribute("disabled");
-      electricalSection.querySelector('select').setAttribute('required', 'required');
-
-      mechanicalSection.classList.replace('d-flex', 'd-none');
-      mechanicalSection.querySelector('select').removeAttribute("required");
-      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      electronicSection.classList.replace('d-flex', 'd-none');
-      electronicSection.querySelector('select').removeAttribute("required");
-      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-    } else if (equipmentCategoryText === 'Mechanical') {
-      mechanicalSection.classList.replace('d-none', 'd-flex');
-      mechanicalSection.querySelector('select').removeAttribute("disabled");
-      mechanicalSection.querySelector('select').setAttribute('required', 'required');
-
-      electricalSection.classList.replace('d-flex', 'd-none');
-      electricalSection.querySelector('select').removeAttribute("required");
-      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      electronicSection.classList.replace('d-flex', 'd-none');
-      electronicSection.querySelector('select').removeAttribute("required");
-      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-    } else if (equipmentCategoryText === 'Electronic') {
-      electronicSection.classList.replace('d-none', 'd-flex');
-      electronicSection.querySelector('select').removeAttribute("disabled");
-      electronicSection.querySelector('select').setAttribute('required', 'required');
-
-      electricalSection.classList.replace('d-flex', 'd-none');
-      electricalSection.querySelector('select').removeAttribute("required");
-      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      mechanicalSection.classList.replace('d-flex', 'd-none');
-      mechanicalSection.querySelector('select').removeAttribute("required");
-      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-    }
-  });
 });
-
-
-// $('#inspectionCarousel').on('slid', '', checkitem);  // on caroussel move
-// $('#inspectionCarousel').on('slid.bs.carousel', '', checkitem); // on carousel move
-
-
-// function checkitem() {
-//     var $this = $('#inspectionCarousel');
-//     if ($('.carousel-inner .carousel-item:first').hasClass('active')) {
-//         // Hide next arrow
-//         $this.children('.previous').hide();
-//         // But show previous arrow
-//         $this.children('.next').show();
-//     } else if ($('.carousel-inner .carousel-item:last').hasClass('active')) {
-//         // Hide next arrow
-//         $this.children('.next').hide();
-//         // But show previous arrow
-//         $this.children('.previous').show();
-//     } else {
-//         $this.children('.carousel-button').show();
-//     }
-// }
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -186,7 +170,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let deleteItemButton = document.getElementById("delete-item");
   let totalItem = document.getElementById("total-item");
   let counter = parseInt(totalItem.innerText) || 0; // Initialize counter
-
+  
+  
   // Inside the loop where you're adding event listeners for select item buttons
   for (let i = 0; i < selectItemButtons.length; i++) {
     selectItemButtons[i].addEventListener("click", function (event) {
@@ -250,6 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let sectionSelect = document.createElement('select');
                 sectionSelect.classList.add('form-control');
+                sectionSelect.classList.add('form-select');
                 sectionSelect.id = `section-${counter}`;
                 sectionSelect.name = 'section[]';
                 sectionFieldContainer.appendChild(sectionSelect);
@@ -266,6 +252,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let capacitySelect = document.createElement('select');
                 capacitySelect.classList.add('form-control');
+                capacitySelect.classList.add('form-select');
                 capacitySelect.id = `capacity-${counter}`;
                 capacitySelect.name = 'capacity[]';
                 capacityFieldContainer.appendChild(capacitySelect);
@@ -495,162 +482,194 @@ document.addEventListener("DOMContentLoaded", () => {
   let mechanicalSection = document.getElementById("mechanical-section");
   let electronicSection = document.getElementById("electronic-section");
 
-  equipmentCategory.addEventListener("change", () => {
-    let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-    let equipmentCategoryText = selectedOption.innerText.trim();
-
-
-    if (equipmentCategoryText === 'Electrical') {
-      electricalSection.classList.replace('d-none', 'd-flex');
-      electricalSection.querySelector('select').removeAttribute("disabled");
-      electricalSection.querySelector('select').setAttribute('required', 'required');
-
-      mechanicalSection.classList.replace('d-flex', 'd-none');
-      mechanicalSection.querySelector('select').removeAttribute("required");
-      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      electronicSection.classList.replace('d-flex', 'd-none');
-      electronicSection.querySelector('select').removeAttribute("required");
-      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-    } else if (equipmentCategoryText === 'Mechanical') {
-      mechanicalSection.classList.replace('d-none', 'd-flex');
-      mechanicalSection.querySelector('select').removeAttribute("disabled");
-      mechanicalSection.querySelector('select').setAttribute('required', 'required');
-
-      electricalSection.classList.replace('d-flex', 'd-none');
-      electricalSection.querySelector('select').removeAttribute("required");
-      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      electronicSection.classList.replace('d-flex', 'd-none');
-      electronicSection.querySelector('select').removeAttribute("required");
-      electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-    } else if (equipmentCategoryText === 'Electronic') {
-      electronicSection.classList.replace('d-none', 'd-flex');
-      electronicSection.querySelector('select').removeAttribute("disabled");
-      electronicSection.querySelector('select').setAttribute('required', 'required');
-
-      electricalSection.classList.replace('d-flex', 'd-none');
-      electricalSection.querySelector('select').removeAttribute("required");
-      electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-
-      mechanicalSection.classList.replace('d-flex', 'd-none');
-      mechanicalSection.querySelector('select').removeAttribute("required");
-      mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-    }
-  });
-});
-
-
-// $('#inspectionCarousel').on('slid', '', checkitem);  // on caroussel move
-// $('#inspectionCarousel').on('slid.bs.carousel', '', checkitem); // on carousel move
-
-
-// function checkitem() {
-//     var $this = $('#inspectionCarousel');
-//     if ($('.carousel-inner .carousel-item:first').hasClass('active')) {
-//         // Hide next arrow
-//         $this.children('.previous').hide();
-//         // But show previous arrow
-//         $this.children('.next').show();
-//     } else if ($('.carousel-inner .carousel-item:last').hasClass('active')) {
-//         // Hide next arrow
-//         $this.children('.next').hide();
-//         // But show previous arrow
-//         $this.children('.previous').show();
-//     } else {
-//         $this.children('.carousel-button').show();
-//     }
-// }
-
-
-document.addEventListener("DOMContentLoaded", function () {
-  let wrapper = document.getElementById("inspector-list");
-  let selectInspectorButtons = document.querySelectorAll(".select-inspector");
-  let deleteInspectorButton = document.getElementById("delete-inspector");
-  let totalInspector = document.getElementById("total-inspector");
-  let counter = parseInt(totalInspector.innerText) || 0; // Initialize counter
-
-  // Inside the loop where you're adding event listeners for select inspector buttons
-  for (let i = 0; i < selectInspectorButtons.length; i++) {
-    selectInspectorButtons[i].addEventListener("click", function (event) {
-        event.preventDefault();
-
-        let inspectorId = this.getAttribute("data-inspector-id");
-
-        // Make an AJAX request to fetch the inspector details
-        let inspector = new XMLHttpRequest();
-        inspector.open("GET", `./../json_response/inspector.php?inspector_id=${inspectorId}`, true);
-        inspector.onreadystatechange = function () {
-            if (inspector.readyState === 4 && inspector.status === 200) {
-                let inspectorDetails = JSON.parse(inspector.responseText);
-
-                // Increment counter for each click
-                counter++;
-
-                //Inspector Container
-                let inspectorContainer = document.getElementById('inspector-container');
-
-                //Inspector Content Container
-                let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
-                inspectorContainer.appendChild(inspectorContent);
-
-                let inspectorTitle = createTitle(`Inspector ${counter}`, `inspector-title-${counter}`);
-                inspectorContent.appendChild(inspectorTitle);
-
-                // Create and append inspector name container div
-                let inspectorNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                inspectorContent.appendChild(inspectorNameContainer);
-
-                // Create and append inspector name label
-                let inspectorNameLabel = createLabel(`Inspector Name`);
-                inspectorNameContainer.appendChild(inspectorNameLabel);
-
-                let inspectorNameInputField = createInputField('text', `inspector-name-${counter}`, `inspector_name[]`);
-                inspectorNameContainer.appendChild(inspectorNameInputField);
-                inspectorNameInputField.value = inspectorDetails.inspector_name;
-
-                
-                // Update input field values with unique identifiers
-                inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
-                document.getElementById(`inspector-id-${counter}`).value = inspectorDetails.inspector_id;
-
-                // Update the displayed count of added inspectors
-                updateInspectorCount(counter);
-
-                // Close the modal
-                let modal = bootstrap.Modal.getInstance(wrapper);
-                modal.hide();
-            }
-        };
-        inspector.send();
-    });
-  }
-
-  // If delete button is available, add event listener to it
-  if (deleteInspectorButton) {
-    deleteInspectorButton.addEventListener("click", function () {
-        // Remove the last added inspector field
-        let lastInspectorTitle = document.getElementById(`inspector-title-${counter}`);
-        let lastInspector = document.getElementById(`inspector-name-${counter}`);
-        
-        if (lastInspector) {
-          lastInspectorTitle.parentElement.remove();
-            counter--;
-
-          // Update the displayed count of added inspector
-          updateInspectorCount(counter);
+  if (equipmentCategory) {
+    equipmentCategory.addEventListener("change", () => {
+      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
+      let equipmentCategoryText = selectedOption.innerText.trim();
+  
+  
+      if (equipmentCategoryText === 'Electrical') {
+        electricalSection.classList.replace('d-none', 'd-flex');
+        electricalSection.querySelector('select').removeAttribute("disabled");
+        electricalSection.querySelector('select').setAttribute('required', 'required');
+  
+        mechanicalSection.classList.replace('d-flex', 'd-none');
+        mechanicalSection.querySelector('select').removeAttribute("required");
+        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        electronicSection.classList.replace('d-flex', 'd-none');
+        electronicSection.querySelector('select').removeAttribute("required");
+        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (equipmentCategoryText === 'Mechanical') {
+        mechanicalSection.classList.replace('d-none', 'd-flex');
+        mechanicalSection.querySelector('select').removeAttribute("disabled");
+        mechanicalSection.querySelector('select').setAttribute('required', 'required');
+  
+        electricalSection.classList.replace('d-flex', 'd-none');
+        electricalSection.querySelector('select').removeAttribute("required");
+        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        electronicSection.classList.replace('d-flex', 'd-none');
+        electronicSection.querySelector('select').removeAttribute("required");
+        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (equipmentCategoryText === 'Electronic') {
+        electronicSection.classList.replace('d-none', 'd-flex');
+        electronicSection.querySelector('select').removeAttribute("disabled");
+        electronicSection.querySelector('select').setAttribute('required', 'required');
+  
+        electricalSection.classList.replace('d-flex', 'd-none');
+        electricalSection.querySelector('select').removeAttribute("required");
+        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+  
+        mechanicalSection.classList.replace('d-flex', 'd-none');
+        mechanicalSection.querySelector('select').removeAttribute("required");
+        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
       }
     });
   }
-
-    // Function to update the count of added inspector
-  function updateInspectorCount(count) {
-    if (totalInspector) {
-        totalInspector.innerHTML = count;
-    }
-  }
-    
+  
 });
+
+
+
+function inspector(inspectorContainers, selectInspector) {
+  document.addEventListener("DOMContentLoaded", function () {
+    let wrapper = document.getElementById("inspector-list");
+    let selectInspectorButtons = document.querySelectorAll(selectInspector);
+    let deleteInspectorButton = document.getElementById("delete-inspector");
+    let totalInspector = document.getElementById("total-inspector");
+    let counter = parseInt(totalInspector.innerText) || 0; // Initialize counter
+  
+    // Inside the loop where you're adding event listeners for select inspector buttons
+    for (let i = 0; i < selectInspectorButtons.length; i++) {
+      selectInspectorButtons[i].addEventListener("click", function (event) {
+          event.preventDefault();
+  
+          let inspectorId = this.getAttribute("data-inspector-id");
+  
+          // Make an AJAX request to fetch the inspector details
+          let inspector = new XMLHttpRequest();
+          inspector.open("GET", `./../json_response/inspector.php?inspector_id=${inspectorId}`, true);
+          inspector.onreadystatechange = function () {
+              if (inspector.readyState === 4 && inspector.status === 200) {
+                  let inspectorDetails = JSON.parse(inspector.responseText);
+  
+                  // Increment counter for each click
+                  counter++;
+  
+                  //Inspector Container
+                  let inspectorContainer = document.getElementById(inspectorContainers);
+                  console.log(inspectorContainers);
+
+                  //Inspector Content Container
+                  let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
+                  inspectorContainer.appendChild(inspectorContent);
+  
+                  let inspectorTitle = createTitle(`Inspector ${counter}`, `inspector-title-${counter}`);
+                  inspectorContent.appendChild(inspectorTitle);
+  
+                  // Create and append inspector name container div
+                  let inspectorNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                  inspectorContent.appendChild(inspectorNameContainer);
+  
+                  // Create and append inspector name label
+                  let inspectorNameLabel = createLabel(`Inspector Name`);
+                  inspectorNameContainer.appendChild(inspectorNameLabel);
+  
+                  let inspectorNameInputField = createInputField('text', `inspector-name-${counter}`, `inspector_name[]`);
+                  inspectorNameContainer.appendChild(inspectorNameInputField);
+                  inspectorNameInputField.value = inspectorDetails.inspector_name;
+  
+                  
+                  // Update input field values with unique identifiers
+                  inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
+                  document.getElementById(`inspector-id-${counter}`).value = inspectorDetails.inspector_id;
+  
+                  if (inspectorContainers == 'inspector-certificate-container') {
+                    // Category Field
+                    let categoryContainer = createContainerDiv('form-group flex-column flex-md-grow-1');
+                    inspectorContent.appendChild(categoryContainer);
+
+                    let categoryLabel = createLabel(`Category`);
+                    categoryContainer.appendChild(categoryLabel);
+
+                    let categoryFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
+                    categoryContainer.appendChild(categoryFieldContainer);
+
+                    let categorySelect = document.createElement('select');
+                    categorySelect.classList.add('form-control');
+                    categorySelect.classList.add('form-select');
+                    categorySelect.id = `category-${counter}`;
+                    categorySelect.name = 'category[]';
+                    categoryFieldContainer.appendChild(categorySelect);
+
+                    function createOption(value = "", text = "Select", selected = false, disabled = false, hidden = false) {
+                      let Option = document.createElement("option");
+                      Option.value = value;
+                      Option.text = text;
+                      Option.selected = selected;
+                      Option.disabled = disabled;
+                      Option.hidden = hidden;
+                      categorySelect.appendChild(Option);
+                    }
+
+                    let defaultOption = createOption("", "Select", selected = true, disabled = true, hidden = true);
+                    let Option1 = createOption('Locational/Zoning of land Use', 'Locational/Zoning of land Use');
+                    let option2 = createOption('Line and Grade (Geodetic)', 'Line and Grade (Geodetic)');
+                    let option3 = createOption('Architectural', 'Architectural');
+                    let option4 = createOption('Civil/ Structural', 'Civil/ Structural');
+                    let option5 = createOption('Electrical', 'Electrical');
+                    let option6 = createOption('Mechanical', 'Mechanical');
+                    let option7 = createOption('Sanitary', 'Sanitary');
+                    let option8 = createOption('Plumbing', 'Plumbing');
+                    let option9 = createOption('Electronics', 'Electronics');
+                    let option10 = createOption('Interior', 'Interior');
+                    let option11 = createOption('AccessibilitY', 'AccessibilitY');
+                    let option12 = createOption('Fire', 'Fire');
+                    let option13 = createOption('Others (Specify)', 'Others (Specify)');
+
+                  }
+                  // Update the displayed count of added inspectors
+                  updateInspectorCount(counter);
+  
+                  // Close the modal
+                  let modal = bootstrap.Modal.getInstance(wrapper);
+                  modal.hide();
+              }
+          };
+          inspector.send();
+      });
+    }
+  
+    // If delete button is available, add event listener to it
+    if (deleteInspectorButton) {
+      deleteInspectorButton.addEventListener("click", function () {
+          // Remove the last added inspector field
+          let lastInspectorTitle = document.getElementById(`inspector-title-${counter}`);
+          let lastInspector = document.getElementById(`inspector-name-${counter}`);
+          
+          if (lastInspector) {
+            lastInspectorTitle.parentElement.remove();
+              counter--;
+  
+            // Update the displayed count of added inspector
+            updateInspectorCount(counter);
+        }
+      });
+    }
+  
+      // Function to update the count of added inspector
+    function updateInspectorCount(count) {
+      if (totalInspector) {
+          totalInspector.innerHTML = count;
+      }
+    }
+      
+  });
+  
+}
+inspector('inspector-certificate-container', '.select-certificate-inspector');
+inspector('inspector-container', '.select-inspector');
 
 document.addEventListener("DOMContentLoaded", function () {
   let wrapper = document.getElementById("violation-list");
@@ -804,34 +823,3 @@ function createHiddenInput(name, id, required = false) {
   return input;
 }
 
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     // Get reference to the carousel
-//     var carousel = document.getElementById('inspectionCarousel');
-
-//     // Get references to the previous and next buttons
-//     var prevButton = carousel.querySelector('.carousel-button.previous');
-//     var nextButton = carousel.querySelector('.carousel-button.next');
-
-//     // Add event listener to the carousel
-//     carousel.addEventListener('slid.bs.carousel', function (event) {
-//         var currentIndex = event.to; // Get the index of the current slide
-
-//         // Show/hide previous button based on current slide
-//         if (currentIndex === 0) {
-//             prevButton.style.display = 'none';
-//         } else {
-//             prevButton.style.display = 'block';
-//         }
-
-//         // Show/hide next button based on current slide
-//         if (currentIndex === event.relatedTarget.length - 1) {
-//             nextButton.style.display = 'none';
-//         } else {
-//             nextButton.style.display = 'block';
-//         }
-//     });
-
-//     // Trigger the event to initially hide/show the buttons
-//     carousel.dispatchEvent(new Event('slid.bs.carousel'));
-// });
