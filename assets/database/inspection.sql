@@ -117,18 +117,26 @@ CREATE TABLE equipment_billing (
 );
 
     
-CREATE TABLE certificate (
+CREATE TABLE annual_inspection_certificate (
 	certificate_id int NOT NULL AUTO_INCREMENT,
 	bus_id int NOT NULL,
-	annualfee_id int NOT NULL,
-	inspector_id int NOT NULL,
-	certificate_no int NOT NULL,        
-	date_issued datetime  NOT NULL default current_timestamp(),
+	owner_id int NOT NULL,
+	bus_group varchar(10) NOT NULL,    
+    character_of_occupancy int NOT NULL,
+    date_inspected datetime NOT NULL default current_timestamp(),
+	date_issued datetime NOT NULL default current_timestamp(),
 	PRIMARY KEY(certificate_id),
 	FOREIGN KEY(bus_id) REFERENCES business(bus_id),
-	FOREIGN KEY(annualfee_id) REFERENCES annual_fees(annualfee_id),
-	FOREIGN KEY(inspector_id) REFERENCES inspector(inspector_id)
+	FOREIGN KEY(owner_id) REFERENCES owner(owner_id)
 );
+
+CREATE TABLE annual_inspection_certificate_inspector (
+	certificate_id int NOT NULL,
+    inspector_id int NOT NULL,
+    category varchar(100) NOT NULL,
+    FOREIGN KEY(certificate_id) REFERENCES annual_inspection_certificate(certificate_id),
+	FOREIGN KEY(inspector_id) REFERENCES inspector(inspector_id)
+); 
 
 CREATE TABLE users ( 
 	user_id int NOT NULL AUTO_INCREMENT,
@@ -171,6 +179,17 @@ LEFT JOIN business_billing bb ON i.business_billing_id = bb.business_billing_id
 LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
+
+
+CREATE VIEW annual_inspection_certificate_view AS
+SELECT aic.certificate_id, b.bus_name, b.bus_address, aic.bus_group, aic.character_of_occupancy, 
+o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
+i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aic.date_inspected, aic.date_issued
+FROM annual_inspection_certificate aic 
+LEFT JOIN business b ON aic.bus_id = b.bus_id
+LEFT JOIN owner o ON aic.owner_id = o.owner_id
+LEFT JOIN annual_inspection_certificate_inspector aici ON aic.certificate_id = aici.certificate_id
+LEFT JOIN inspector i ON aici.inspector_id = i.inspector_id;
 
 CREATE VIEW equipment_billing_view AS 
 SELECT b.billing_id, c.category_id, c.category_name, b.section, b.capacity, b.fee
