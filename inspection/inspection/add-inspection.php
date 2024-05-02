@@ -276,11 +276,6 @@ include './../includes/side-header.php';
                                             <a class="btn btn-danger btn-md-block px-3" id="delete-violation">Delete
                                                 Violation</a>
                                         </div>
-
-                                        <div class="text-center mt-4">
-                                            <input type="submit" name="submit"
-                                                class="btn btn-primary btn-user btn-block mt-3" value="Add">
-                                        </div>
                                     </div>
                                 </div>
 
@@ -300,6 +295,11 @@ include './../includes/side-header.php';
                                         </button>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="text-center mt-4 d-none formSubmit">
+                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
+                                    value="Add">
                             </div>
                         </form>
                     </div>
