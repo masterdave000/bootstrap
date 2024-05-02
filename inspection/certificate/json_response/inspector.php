@@ -1,5 +1,5 @@
 <?php 
-include './../../config/constants.php';
+include './../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $clean_inspector_id = filter_var($_GET['inspector_id'], FILTER_SANITIZE_NUMBER_INT);
