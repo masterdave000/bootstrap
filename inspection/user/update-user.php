@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         <option selected hidden value="<?php echo $user['role']?>">
                                             <?php echo $user['role']?>
                                         </option>
-                                        <option value="System Admin">System Admin</option>
+                                        <option value="Administrator">Administrator</option>
                                         <option value="Inspector Admin">Inspector Admin</option>
                                         <option value="Inspector">Inspector</option>
                                     </select>

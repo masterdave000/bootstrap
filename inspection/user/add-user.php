@@ -108,7 +108,7 @@ include './../includes/side-header.php';
                                 <div class="d-flex align-items-center justify-content-center select-container">
                                     <select name="role" id="role" class="form-control form-select px-3" required>
                                         <option selected disabled hidden value="">Select</option>
-                                        <option value="System Admin">System Admin</option>
+                                        <option value="Administrator">Administrator</option>
                                         <option value="Inspector Admin">Inspector Admin</option>
                                         <option value="Inspector">Inspector</option>
                                     </select>
