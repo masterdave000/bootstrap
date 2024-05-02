@@ -36,6 +36,7 @@ CREATE TABLE item_list (
 	item_id int NOT NULL AUTO_INCREMENT,
 	category_id int NOT NULL,        
 	item_name varchar(100) NOT NULL,
+    img_url varchar(100) NOT NULL,
 	PRIMARY KEY(item_id),
 	FOREIGN KEY(category_id) REFERENCES category_list(category_id)
 );
