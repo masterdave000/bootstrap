@@ -19,7 +19,7 @@ require "./../includes/side-header.php";
                     <a href="./add-inspection.php"
                         class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span class="d-none d-lg-inline">Add</span>
+                        <span class="d-none d-lg-inline">Issue</span>
                     </a>
                 </div>
                 <div class="card-body">
