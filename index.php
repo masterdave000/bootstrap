@@ -127,7 +127,7 @@ require "./config/constants.php";
     
         //2.SQL to check whether the user with username and password exists or not
     
-        $userQuery = "SELECT * FROM users WHERE username = :username AND password = :password";
+        $userQuery = "SELECT * FROM user_view WHERE username = :username AND password = :password";
         $userStatement = $pdo->prepare($userQuery);
         $userStatement->bindParam(':username', $username);
         $userStatement->bindParam(':password', $password);
@@ -147,6 +147,7 @@ require "./config/constants.php";
     
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['inspector_img_url'] = $user['inspector_img_url'];
 
             header('location:'.SITEURL.'inspection/dashboard/');
             
