@@ -18,12 +18,13 @@ if (printButton) {
   });
 }
 
-function carousel(carouselForm, previous = '.previous-container', next = '.next-container') {
+function carousel(carouselForm, previous = '.previous-container', next = '.next-container', submit = '.formSubmit') {
 
   document.addEventListener('DOMContentLoaded', function () {
     var carousel = document.getElementById(carouselForm);
     var prevBtn = document.querySelector(previous);
     var nextBtn = document.querySelector(next);
+    var submitBtn = document.querySelector(submit);
 
     if (carousel) {
       carousel.addEventListener('slid.bs.carousel', function () {
@@ -35,9 +36,11 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
           
         } else if (totalItems - 1 == currentIndex) {
           nextBtn.classList.add('invisible');
+          submitBtn.classList.remove('d-none');
         } else {
           prevBtn.classList.remove('invisible');
           nextBtn.classList.remove('invisible');
+          submitBtn.classList.add('d-none');
         }
       
       });
