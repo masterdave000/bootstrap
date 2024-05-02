@@ -183,7 +183,7 @@ LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 
 CREATE VIEW annual_inspection_certificate_view AS
-SELECT aic.certificate_id, b.bus_name, b.bus_address, aic.bus_group, aic.character_of_occupancy, 
+SELECT aic.certificate_id, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, 
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
 i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aic.date_inspected, aic.date_issued
 FROM annual_inspection_certificate aic 
