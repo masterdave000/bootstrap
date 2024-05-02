@@ -16,7 +16,7 @@
                             <label for="password">Password</label>
                             <div class="form-group">
                                 <input type="password" name="password"
-                                    class="form-control form-control-user squared-border" id="password"
+                                    class="form-control form-control-user squared-border"
                                     aria-describedby="passwordHelp" placeholder="Enter Your Password..." required>
 
                                 <input type="hidden" name="category_id" value="<?php echo $category['category_id']?>" />
