@@ -54,9 +54,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Inspector
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -87,9 +94,9 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
                                                     <?php echo $fullname?>
                                                 </div>
+
                                                 <div class=" sub-title d-none d-md-flex">ID:
                                                     <?php echo $inspector['inspector_id']?>
                                                 </div>

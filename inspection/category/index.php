@@ -58,8 +58,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Category
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
 
                             </thead>
 
@@ -73,6 +81,7 @@ require "./../includes/side-header.php";
                                     if ($categories) :
                                         foreach ($categories as $category) :
                                         
+                                
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
@@ -85,8 +94,8 @@ require "./../includes/side-header.php";
                                             </div>
 
                                             <div>
-                                                <div class="text d-none d-md-flex">
-                                                    Name: <?php echo $category['category_name']?>
+                                                <div class="text">
+                                                    <?php echo $category['category_name']?>
                                                 </div>
                                             </div>
                                         </a>

@@ -24,9 +24,14 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Category
+                                    </th>
 
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -54,7 +59,6 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline ">Name:</span>
                                                     <?php echo $inspection['bus_name']?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">Date Inspected:

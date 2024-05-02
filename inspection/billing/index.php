@@ -56,21 +56,23 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-                                <tr class="border-sm-bottom">
-                                    <th class="d-sm-table-column d-none p-0 m-0">
-                                        Category</th>
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Category
+                                    </th>
 
-                                    <th class="d-sm-table-column d-none p-0 m-0 py-1">
-                                        Fee</th>
+                                    <th>
+                                        Actions
+                                    </th>
                                 </tr>
                             </thead>
 
                             <tbody>
 
                                 <?php 
-                                    $billingQuery = "SELECT * FROM equipment_billing_view ORDER BY billing_id DESC";
+                                    $billingQuery = "SELECT billing_id, category_name, section FROM equipment_billing_view ORDER BY billing_id DESC";
                                     $billingStatement = $pdo->query($billingQuery);
                                     $billings = $billingStatement->fetchAll(PDO::FETCH_ASSOC);
                                     
@@ -80,13 +82,11 @@ require "./../includes/side-header.php";
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
-                                    <td class="p-0 m-0 w-lg-50">
+                                    <td class="p-0 m-0 w-md-50">
                                         <a href="view-billing.php?billing_id=<?php echo $billing['billing_id']?>"
                                             class="d-flex flex-row align-items-center text-decoration-none text-gray-700 flex-gap">
-
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Category:</span>
                                                     <?php echo $billing['category_name']?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">Section:
@@ -95,13 +95,6 @@ require "./../includes/side-header.php";
 
                                             </div>
                                         </a>
-                                    </td>
-
-                                    <td class="p-0 m-0 d-none d-lg-block w-lg-25">
-                                        <div class="text">
-                                            <span>Fee:</span>
-                                            <?php echo $billing['fee']?>
-                                        </div>
                                     </td>
 
                                     <td class="d-flex justify-content-end">

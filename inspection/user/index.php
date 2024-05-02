@@ -63,7 +63,14 @@ require "./../includes/side-header.php";
                     <div class="table-responsive">
                         <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        User
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -93,8 +100,8 @@ require "./../includes/side-header.php";
                                             </div>
 
                                             <div>
-                                                <div class="text d-none d-md-flex">
-                                                    Name: <?php echo $fullname?>
+                                                <div class="text">
+                                                    <?php echo $fullname?>
                                                 </div>
                                                 <div class="sub-title">
                                                     <span class="d-none d-md-inline">Username:</span>
