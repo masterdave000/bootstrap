@@ -626,7 +626,7 @@ function inspector(inspectorContainers, selectInspector) {
                     let option8 = createOption('Plumbing', 'Plumbing');
                     let option9 = createOption('Electronics', 'Electronics');
                     let option10 = createOption('Interior', 'Interior');
-                    let option11 = createOption('AccessibilitY', 'AccessibilitY');
+                    let option11 = createOption('Accessibility', 'Accessibility');
                     let option12 = createOption('Fire', 'Fire');
                     let option13 = createOption('Others (Specify)', 'Others (Specify)');
 
