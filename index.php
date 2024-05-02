@@ -148,6 +148,7 @@ require "./config/constants.php";
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['username'] = $user['username'];
             $_SESSION['inspector_img_url'] = $user['inspector_img_url'];
+            $_SESSION['role'] = $user['role'];
 
             header('location:'.SITEURL.'inspection/dashboard/');
             
