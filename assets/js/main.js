@@ -554,7 +554,7 @@ function inspector(inspectorContainers, selectInspector) {
   
           // Make an AJAX request to fetch the inspector details
           let inspector = new XMLHttpRequest();
-          inspector.open("GET", `./../json_response/inspector.php?inspector_id=${inspectorId}`, true);
+          inspector.open("GET", `./json_response/inspector.php?inspector_id=${inspectorId}`, true);
           inspector.onreadystatechange = function () {
               if (inspector.readyState === 4 && inspector.status === 200) {
                   let inspectorDetails = JSON.parse(inspector.responseText);
