@@ -19,14 +19,19 @@ require "./../includes/side-header.php";
                     <a href="./add-inspection.php"
                         class="btn btn-success d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span class="d-none d-lg-inline">Add</span>
+                        <span class="d-none d-lg-inline">Issue</span>
                     </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Category
+                                    </th>
 
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -37,7 +42,7 @@ require "./../includes/side-header.php";
                                     $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
                                     ?>
                                 <?php 
-                                if ($inspections) : 
+                            
                                     foreach ($inspections as $inspection) :
                                 ?>
 
@@ -54,7 +59,6 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline ">Name:</span>
                                                     <?php echo $inspection['bus_name']?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">Date Inspected:
@@ -69,14 +73,6 @@ require "./../includes/side-header.php";
                                    
                                     endforeach;
                                 ?>
-                                <?php else : ?>
-                                <div class="img-fluid no-data-image-container">
-                                    <img src="<?php echo SITEURL?>assets/img/no_data.png" alt="no-data-image"
-                                        class="img-fluid" />
-
-                                </div>
-
-                                <?php endif;?>
 
                             </tbody>
                         </table>

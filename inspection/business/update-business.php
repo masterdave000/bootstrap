@@ -89,7 +89,8 @@ include './../includes/side-header.php';
                                     <label for="owner-name">Owner Name <span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex align-items-center justify-content-center select-container">
-                                        <select name="owner_name" id="owner-name" class="form-control px-3" required>
+                                        <select name="owner_name" id="owner-name" class="form-control form-select px-3"
+                                            required>
 
                                             <option selected value="<?php echo $business['owner_id']?>">
                                                 <?php echo $fullname?>
@@ -141,7 +142,7 @@ include './../includes/side-header.php';
                                     <label for="bus-type">Business Type <span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex align-items-center justify-content-center select-container">
-                                        <select name="bus_type" id="bus-type" class="form-control px-3">
+                                        <select name="bus_type" id="bus-type" class="form-control form-select px-3">
                                             <option selected hidden value="<?php echo $business['bus_type']?>">
                                                 <?php echo $business['bus_type']?></option>
                                             <option value="Retail">Retail</option>

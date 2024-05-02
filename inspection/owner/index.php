@@ -53,9 +53,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Owner
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -64,7 +71,9 @@ require "./../includes/side-header.php";
                                     $ownerQuery = "SELECT * FROM owner ORDER BY owner_id DESC";
                                     $ownerStatement = $pdo->query($ownerQuery);
                                     $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($owners as $owner) {
+
+                                  
+                                    foreach ($owners as $owner) :
                                         $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
                                         $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
                                         $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
@@ -84,7 +93,6 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
                                                     <?php echo $fullname?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">ID:
@@ -113,9 +121,8 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach
                                 ?>
-
                             </tbody>
                         </table>
                     </div>

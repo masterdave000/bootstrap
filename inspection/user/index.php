@@ -61,9 +61,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        User
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -72,12 +79,13 @@ require "./../includes/side-header.php";
                                     $userQuery = "SELECT * FROM user_view ORDER BY user_id";
                                     $userStatement = $pdo->query($userQuery);
                                     $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($users as $user) {
+
+                                    foreach ($users as $user) :
                                         $firstname = htmlspecialchars(ucwords($user['inspector_firstname']));
                                         $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
                                         $lastname = htmlspecialchars(ucwords($user['inspector_lastname']));
                                         $suffix = htmlspecialchars(ucwords($user['inspector_suffix']));
-                                        
+
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
@@ -91,8 +99,8 @@ require "./../includes/side-header.php";
                                             </div>
 
                                             <div>
-                                                <div class="text d-none d-md-flex">
-                                                    Name: <?php echo $fullname?>
+                                                <div class="text">
+                                                    <?php echo $fullname?>
                                                 </div>
                                                 <div class="sub-title">
                                                     <span class="d-none d-md-inline">Username:</span>
@@ -127,7 +135,7 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach  
                                 ?>
 
                             </tbody>

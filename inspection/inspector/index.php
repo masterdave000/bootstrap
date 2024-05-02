@@ -54,9 +54,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Inspector
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -65,14 +72,16 @@ require "./../includes/side-header.php";
                                     $inspectorQuery = "SELECT inspector_id, inspector_firstname, inspector_midname, inspector_lastname, inspector_suffix, contact_number, inspector_img_url FROM inspector ORDER BY inspector_id DESC";
                                     $inspectorStatement = $pdo->query($inspectorQuery);
                                     $inspectors = $inspectorStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($inspectors as $inspector) {
+                                    
+                                
+                                    foreach ($inspectors as $inspector) :
                                         $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
                                         $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
                                         $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
                                         $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
                                         $contact_number = htmlspecialchars($inspector['contact_number']);
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-                                ?>
+                                    ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
@@ -85,9 +94,9 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
                                                     <?php echo $fullname?>
                                                 </div>
+
                                                 <div class=" sub-title d-none d-md-flex">ID:
                                                     <?php echo $inspector['inspector_id']?>
                                                 </div>
@@ -115,9 +124,8 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach;
                                 ?>
-
                             </tbody>
                         </table>
                     </div>

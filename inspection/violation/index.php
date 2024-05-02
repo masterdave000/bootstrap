@@ -54,9 +54,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -66,7 +73,7 @@ require "./../includes/side-header.php";
                                     $violationStatement = $pdo->query($violationQuery);
                                     $violations = $violationStatement->fetchAll(PDO::FETCH_ASSOC);
                                     
-                                    foreach ($violations as $violation) {
+                                    foreach ($violations as $violation) :
                                         $violation_description = $violation['description']
                                 ?>
 
@@ -76,7 +83,7 @@ require "./../includes/side-header.php";
                                             class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Name:</span>
+                                                    <span class="d-none d-md-inline">Description:</span>
                                                     <?php echo $violation_description?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">ID:
@@ -104,7 +111,7 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                endforeach
                                 ?>
 
                             </tbody>

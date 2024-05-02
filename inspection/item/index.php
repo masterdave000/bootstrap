@@ -57,9 +57,16 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
-
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Item
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -68,7 +75,8 @@ require "./../includes/side-header.php";
                                     $itemQuery = "SELECT * FROM item_view ORDER BY item_id";
                                     $itemStatement = $pdo->query($itemQuery);
                                     $items = $itemStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    foreach ($items as $item) {
+                               
+                                    foreach ($items as $item) :
                                         
                                 ?>
 
@@ -82,9 +90,8 @@ require "./../includes/side-header.php";
                                             </div>
 
                                             <div>
-                                                <div class="text d-md-flex">
-                                                    <span class="d-none d-md-inline">Name:
-                                                    </span><?php echo $item['item_name']?>
+                                                <div class="text">
+                                                    <?php echo $item['item_name']?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">Category:
                                                     <?php echo $item['category_name']?></div>
@@ -111,9 +118,8 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach
                                 ?>
-
                             </tbody>
                         </table>
                     </div>

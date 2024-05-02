@@ -4,6 +4,7 @@ require __DIR__ . "/../../login-check.php";
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
+$role = $_SESSION['role'];
 ?>
 
 <!DOCTYPE html>
@@ -33,6 +34,7 @@ $username = $_SESSION['username'];
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="<?php echo SITEURL ?>assets/css/equipment-print.css" rel="stylesheet" media="print">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
 </head>
 
 <body id="page-top">
@@ -94,6 +96,8 @@ $username = $_SESSION['username'];
                     <span>Owner</span></a>
             </li>
 
+            <?php if ($role === 'Administrator'): ?>
+
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/inspector/">
                     <i class="fas fa-fw fa-users"></i>
@@ -106,17 +110,23 @@ $username = $_SESSION['username'];
                     <span>Billing</span></a>
             </li>
 
+            <?php endif;?>
+
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/violation/">
                     <i class="fas fa-fw fa-warning"></i>
                     <span>Violation</span></a>
             </li>
 
+            <?php if ($role === 'Administrator'): ?>
+
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL?>inspection/user/">
                     <i class="fas fa-fw fa-circle-user"></i>
                     <span>User</span></a>
             </li>
+
+            <?php endif;?>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">

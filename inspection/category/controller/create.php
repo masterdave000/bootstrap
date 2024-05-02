@@ -14,7 +14,7 @@ if (filter_has_var(INPUT_POST, 'submit')) {
     $folder_path = "./../images/";
     $filename = $category_name . '(' . date('m-d-Y') . ').png';
 
-    $category_img_url = 'default-image.png';
+    $category_img_url = 'default-img.png';
     
     if ($img_name) {
         if (!in_array($img_extension, $allowed_types)) {

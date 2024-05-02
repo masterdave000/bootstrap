@@ -50,8 +50,8 @@ include './../includes/side-header.php';
                                 <label for="inspector-name">Inspector Name <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="inspector_name" id="inspector-name" class="form-control px-3"
-                                        required>
+                                    <select name="inspector_name" id="inspector-name"
+                                        class="form-control form-select px-3" required>
 
                                         <?php 
                                                 
@@ -106,9 +106,9 @@ include './../includes/side-header.php';
                                 <label for="role">Role <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="role" id="role" class="form-control px-3" required>
+                                    <select name="role" id="role" class="form-control form-select px-3" required>
                                         <option selected disabled hidden value="">Select</option>
-                                        <option value="System Admin">System Admin</option>
+                                        <option value="Administrator">Administrator</option>
                                         <option value="Inspector Admin">Inspector Admin</option>
                                         <option value="Inspector">Inspector</option>
                                     </select>

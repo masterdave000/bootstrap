@@ -64,7 +64,7 @@ include './../includes/side-header.php';
                                 <label for="category-name">Category Name <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" name="category_name" class="form-control p-4" id="category-name"
-                                    aria-describedby="businessaddressHelp" placeholder="Enter Business Address..."
+                                    aria-describedby="businessaddressHelp" placeholder="Enter Category Name..."
                                     required>
                             </div>
 

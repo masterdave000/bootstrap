@@ -1,6 +1,6 @@
 <?php 
 
-$title = "Add Inspection";
+$title = "Issue Annual Certificate";
 include './../includes/side-header.php';
 
 ?>
@@ -32,27 +32,23 @@ include './../includes/side-header.php';
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
                         </div>
-                        <form action="./generate/equipment-inspection.php" method="POST" class="user"
-                            id="inspection-form" enctype="multipart/form-data">
+                        <form action="./generate/annual-certificate.php" method="POST" class="user"
+                            id="certificate-form" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/default-img.png" alt="default-item-image"
+                                    <img src="./../business/images/no-image.png" alt="default-item-image"
                                         class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
                             </div>
 
-                            <div id="inspectionCarousel" class="carousel slide">
+                            <div id="certificateCarousel" class="carousel slide">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="0"
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="0"
                                         class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="1"
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="1"
                                         aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="2"
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="2"
                                         aria-label="Slide 3"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="3"
-                                        aria-label="Slide 4"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="4"
-                                        aria-label="Slide 5"></button>
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active p-2" data-bs-interval="false">
@@ -123,113 +119,16 @@ include './../includes/side-header.php';
                                                 readonly>
                                         </div>
 
-                                        <div class="col col-12 p-0 form-group d-none">
-                                            <label for="bus-type">Business Type <span class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" name="bus_type" class="form-control p-4" id="bus-type"
-                                                placeholder="Enter Business Type..." required readonly>
-                                        </div>
 
-                                        <div class="col col-12 p-0 form-group d-none">
-                                            <label for="bus-contact-number">Business Contact Number <span
-                                                    class="text-danger">*</span>
-                                            </label>
-                                            <input type="text" name="bus_contact_number" class="form-control p-4"
-                                                id="bus-contact-number" placeholder="Enter Business Contact Number..."
-                                                required readonly>
-                                        </div>
-                                        <div class="d-md-flex align-items-center justify-content-center">
-                                            <div class="col col-md-6 p-0 form-group flex-md-grow-1 d-none">
-                                                <label for="floor-area">Floor Area <span class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" name="floor_area" class="form-control p-4"
-                                                    id="floor-area" placeholder="Enter Floor Area..." required readonly>
-                                            </div>
-
-                                            <div class="col col-md-6 p-0 form-group flex-md-grow-1 d-none">
-                                                <label for="signage-area">Signage Area <span
-                                                        class="text-danger">*</span>
-                                                </label>
-                                                <input type="text" name="signage_area" class="form-control p-4"
-                                                    id="signage-area" placeholder="Enter Signage Area..." readonly>
-                                            </div>
-                                        </div>
+                                        <input type="hidden" id="bus-type" disabled>
+                                        <input type="hidden" id="bus-contact-number" disabled>
+                                        <input type="hidden" id="floor-area" disabled>
+                                        <input type="hidden" id="signage-area" disabled>
 
                                     </div>
 
                                     <div class="carousel-item p-2" data-bs-interval="false">
-                                        <div class="d-flex flex-column" id="item-container">
-                                            <div class="d-flex justify-content-between">
-                                                <p class="text font-weight-bolder">Item Information</p>
-                                                <p class="text font-weight-bolder">Total
-                                                    Item: <span id="total-item">0</span>
-                                                </p>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-success btn-md-block mr-3 px-3"
-                                                data-bs-target="#item-list" data-bs-toggle="modal">Add Item</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-item">Delete Item</a>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="carousel-item p-2" data-bs-interval="false">
-
-                                        <p class="text font-weight-bolder">Other Fees Information</p>
-
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="building-fee">Building Fee <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
-                                                </div>
-
-                                                <input type="number" name="building_fee" class="form-control p-4"
-                                                    id="building-fee" placeholder="Enter Building Fee..." step="0.01"
-                                                    value="0.00" min="0.00" required>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="sanitary-fee">Sanitary Fee <span class="text-danger">*</span>
-                                            </label>
-
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
-                                                </div>
-
-                                                <input type="number" name="sanitary_fee" class="form-control p-4"
-                                                    id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01"
-                                                    value="0.00" required>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="signage-fee">Signage Fee <span class="text-danger">*</span>
-                                            </label>
-
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
-                                                </div>
-
-                                                <input type="number" name="signage_fee" class="form-control p-4"
-                                                    id="signage-fee" placeholder="Enter Signage Fee..." step="0.01"
-                                                    value="0.00" required>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="carousel-item p-2" data-bs-interval="false">
-                                        <div class="d-flex flex-column" id="inspector-container">
+                                        <div class="d-flex flex-column" id="inspector-certificate-container">
                                             <div class="d-flex justify-content-between">
                                                 <p class="text font-weight-bolder">Inspector Information</p>
                                                 <p class="text font-weight-bolder">Total
@@ -248,33 +147,49 @@ include './../includes/side-header.php';
                                     </div>
 
                                     <div class="carousel-item p-2" data-bs-interval="false">
-                                        <div class="form-group d-flex flex-column flex-md-grow-1">
-                                            <label for="remarks-id">Remarks <span class="text-danger">*</span>
+
+                                        <p class="text font-weight-bolder">Other Certificate Information</p>
+
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="character-occupancy">Character Of Occupancy <span
+                                                    class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="remarks" id="remarks" class="form-control px-3" required>
-                                                    <option selected disabled hidden value="">Select</option>
-                                                    <option value="No Violation">No Violation</option>
-                                                    <option value="With Violation">With Violation</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-column" id="violation-container">
-                                            <div class="d-flex justify-content-between">
-                                                <p class="text font-weight-bolder">Violation Information</p>
-                                                <p class="text font-weight-bolder">Total
-                                                    Violation: <span id="total-violation">0</span>
-                                                </p>
+
+                                            <div class="input-group">
+                                                <input type="text" name="character_occupancy" class="form-control p-4"
+                                                    id="character-occupancy"
+                                                    placeholder="Enter Character Of Occupancy..." required>
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-success btn-md-block mr-3 px-3"
-                                                data-bs-target="#violation-list" data-bs-toggle="modal">Add
-                                                violation</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-violation">Delete
-                                                Violation</a>
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="group">Group <span class="text-danger">*</span>
+                                            </label>
+
+                                            <div class="input-group">
+                                                <input type="text" name="group" class="form-control p-4" id="group"
+                                                    placeholder="Enter Group..." required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="occupancy-no">Occupancy No. <span class="text-danger">*</span>
+                                            </label>
+
+                                            <div class="input-group">
+                                                <input type="text" name="occupancy_no" class="form-control p-4"
+                                                    id="occupancy-no" placeholder="Enter Occupancy No...">
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group">
+                                            <label for="issued-on">Issued On <span class="text-danger">*</span>
+                                            </label>
+
+                                            <div class="input-group">
+                                                <input type="date" name="issued_on" class="form-control p-4"
+                                                    id="issued-on" placeholder="Enter Issued On...">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -283,14 +198,14 @@ include './../includes/side-header.php';
                                     <div class="previous-container invisible">
                                         <button
                                             class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button"
-                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="prev">
+                                            data-bs-target="#certificateCarousel" role="button" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <div class="next-container">
                                         <button
                                             class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
-                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="next">
+                                            data-bs-target="#certificateCarousel" role="button" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -323,9 +238,7 @@ include './../includes/side-header.php';
 <?php 
 
 require './../includes/footer.php'; 
-require './modals/item.php';
 require './modals/inspector.php';
-require './modals/violation.php';
 ?>
 
 </body>

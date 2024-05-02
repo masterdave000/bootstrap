@@ -56,9 +56,17 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
+                                <tr class="d-flex justify-content-between border-bottom">
+                                    <th>
+                                        Category
+                                    </th>
 
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -67,8 +75,8 @@ require "./../includes/side-header.php";
                                     $businessQuery = "SELECT bus_id, bus_name, owner_firstname, owner_midname, owner_lastname, owner_suffix, bus_img_url FROM business_view ORDER BY bus_id DESC";
                                     $businessStatement = $pdo->query($businessQuery);
                                     $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    
-                                    foreach ($businesses as $business) {
+                                 
+                                    foreach ($businesses as $business) :
                                         $bus_id = htmlspecialchars(ucwords($business['bus_id']));
                                         $bus_name = htmlspecialchars(ucwords($business['bus_name']));
                                         $firstname = htmlspecialchars(ucwords($business['owner_firstname']));
@@ -76,7 +84,6 @@ require "./../includes/side-header.php";
                                         $lastname = htmlspecialchars(ucwords($business['owner_lastname']));
                                         $suffix = htmlspecialchars(ucwords($business['owner_suffix']));
                                         $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-                        
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
@@ -91,7 +98,6 @@ require "./../includes/side-header.php";
 
                                             <div>
                                                 <div class="text">
-                                                    <span class="d-none d-md-inline">Business Name:</span>
                                                     <?php echo $bus_name?>
                                                 </div>
                                                 <div class="sub-title d-none d-md-flex">Owner:
@@ -121,7 +127,7 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                    endforeach
                                 ?>
 
                             </tbody>
