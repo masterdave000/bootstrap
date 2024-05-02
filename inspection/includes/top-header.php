@@ -167,7 +167,8 @@
                 aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $username?></span>
                 <div class="header-image">
-                    <img class="img-profile rounded-circle" src="<?php echo SITEURL?>assets/img/undraw_profile.svg">
+                    <img class="img-profile rounded-circle"
+                        src="<?php echo SITEURL?>inspection/inspector/images/<?php echo $_SESSION['inspector_img_url'] ?? 'default.png'?>">
                 </div>
             </a>
             <!-- Dropdown - User Information -->
