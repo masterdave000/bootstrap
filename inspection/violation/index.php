@@ -66,7 +66,7 @@ require "./../includes/side-header.php";
                                     $violationStatement = $pdo->query($violationQuery);
                                     $violations = $violationStatement->fetchAll(PDO::FETCH_ASSOC);
                                     
-                                    foreach ($violations as $violation) {
+                                    foreach ($violations as $violation) :
                                         $violation_description = $violation['description']
                                 ?>
 
@@ -104,7 +104,7 @@ require "./../includes/side-header.php";
 
                                 <?php
                                 require './modals/delete.php';
-                            }
+                                endforeach
                                 ?>
 
                             </tbody>

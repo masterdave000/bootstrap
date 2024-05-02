@@ -75,9 +75,8 @@ require "./../includes/side-header.php";
                                     $itemQuery = "SELECT * FROM item_view ORDER BY item_id";
                                     $itemStatement = $pdo->query($itemQuery);
                                     $items = $itemStatement->fetchAll(PDO::FETCH_ASSOC);
-
-                                    if ($items) :
-                                        foreach ($items as $item) :
+                               
+                                    foreach ($items as $item) :
                                         
                                 ?>
 
@@ -121,17 +120,6 @@ require "./../includes/side-header.php";
                                 require './modals/delete.php';
                                     endforeach
                                 ?>
-
-                                <?php else : ?>
-
-                                <div class="img-fluid w-100 d-flex flex-column align-items-center bg-white m-0 p-0">
-                                    <img src="<?php echo SITEURL?>assets/img/no_data.png" alt="no-data-image"
-                                        class="img-fluid w-50 m-0 no-data-image" />
-                                    <p class="font-weight-bolder m-0 p-0">No Data</p>
-                                </div>
-
-                                <?php endif;?>
-
                             </tbody>
                         </table>
                     </div>

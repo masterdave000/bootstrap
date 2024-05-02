@@ -56,7 +56,7 @@ require "./../includes/side-header.php";
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-borderless" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-borderless" id="obosTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr class="d-flex justify-content-between border-bottom">
                                     <th>
@@ -75,16 +75,15 @@ require "./../includes/side-header.php";
                                     $businessQuery = "SELECT bus_id, bus_name, owner_firstname, owner_midname, owner_lastname, owner_suffix, bus_img_url FROM business_view ORDER BY bus_id DESC";
                                     $businessStatement = $pdo->query($businessQuery);
                                     $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    if ($businesses) :
-                                        foreach ($businesses as $business) :
-                                            $bus_id = htmlspecialchars(ucwords($business['bus_id']));
-                                            $bus_name = htmlspecialchars(ucwords($business['bus_name']));
-                                            $firstname = htmlspecialchars(ucwords($business['owner_firstname']));
-                                            $midname = htmlspecialchars(ucwords($business['owner_midname'] ? mb_substr($business['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                            $lastname = htmlspecialchars(ucwords($business['owner_lastname']));
-                                            $suffix = htmlspecialchars(ucwords($business['owner_suffix']));
-                                            $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-                            
+                                 
+                                    foreach ($businesses as $business) :
+                                        $bus_id = htmlspecialchars(ucwords($business['bus_id']));
+                                        $bus_name = htmlspecialchars(ucwords($business['bus_name']));
+                                        $firstname = htmlspecialchars(ucwords($business['owner_firstname']));
+                                        $midname = htmlspecialchars(ucwords($business['owner_midname'] ? mb_substr($business['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                        $lastname = htmlspecialchars(ucwords($business['owner_lastname']));
+                                        $suffix = htmlspecialchars(ucwords($business['owner_suffix']));
+                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
@@ -130,15 +129,7 @@ require "./../includes/side-header.php";
                                 require './modals/delete.php';
                                     endforeach
                                 ?>
-                                <?php else : ?>
 
-                                <div class="img-fluid w-100 d-flex flex-column align-items-center bg-white m-0 p-0">
-                                    <img src="<?php echo SITEURL?>assets/img/no_data.png" alt="no-data-image"
-                                        class="img-fluid w-50 m-0 no-data-image" />
-                                    <p class="font-weight-bolder m-0 p-0">No Data</p>
-                                </div>
-
-                                <?php endif;?>
                             </tbody>
                         </table>
                     </div>
