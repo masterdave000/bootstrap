@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <label for="inspector-name">Inspector Name <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="inspector_name" id="inspector-name" class="form-control px-3"
-                                        required>
+                                    <select name="inspector_name" id="inspector-name"
+                                        class="form-control form-select px-3" required>
 
                                         <option selected hidden value="<?php echo $user['inspector_id']?>">
                                             <?php echo $fullname ?></option>
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <label for="role">Role <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="role" id="role" class="form-control px-3" required>
+                                    <select name="role" id="role" class="form-control form-select px-3" required>
                                         <option selected hidden value="<?php echo $user['role']?>">
                                             <?php echo $user['role']?>
                                         </option>

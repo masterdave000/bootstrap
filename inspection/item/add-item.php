@@ -65,7 +65,8 @@ include './../includes/side-header.php';
                                 <label for="category-id">Category <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="category_id" id="category-id" class="form-control px-3" required>
+                                    <select name="category_id" id="category-id" class="form-control form-select px-3"
+                                        required>
                                         <option selected disabled hidden value="">Select</option>
                                         <?php 
                                             $categoryQuery = "SELECT * from category_list";
