@@ -6,6 +6,8 @@ if (alert) {
   }, 6000);
 }
 
+let table = new DataTable('#obosTable');
+
 let printButton = document.getElementById("print-button");
 
 if (printButton) {
