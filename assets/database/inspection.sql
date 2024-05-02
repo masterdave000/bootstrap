@@ -93,6 +93,17 @@ CREATE TABLE inspection_violation (
 	FOREIGN KEY(violation_id) REFERENCES violation(violation_id)
 );
 
+CREATE TABLE equipment_billing (
+	billing_id int NOT NULL AUTO_INCREMENT,
+    category_id int NOT NULL,
+	section varchar(100) NOT NULL,
+    capacity varchar(100) NOT NULL,
+	fee decimal(11, 2) NOT NULL,
+    PRIMARY KEY(billing_id),
+    FOREIGN KEY(category_id) REFERENCES category_list(category_id)
+);
+
+
 CREATE TABLE inspection_item (
 	inspection_id int NOT NULL,
     item_id int NOT NULL,
@@ -105,17 +116,6 @@ CREATE TABLE inspection_item (
     FOREIGN KEY(billing_id) REFERENCES equipment_billing(billing_id)
 );
     
-
-CREATE TABLE equipment_billing (
-	billing_id int NOT NULL AUTO_INCREMENT,
-    category_id int NOT NULL,
-	section varchar(100) NOT NULL,
-    capacity varchar(100) NOT NULL,
-	fee decimal(11, 2) NOT NULL,
-    PRIMARY KEY(billing_id),
-    FOREIGN KEY(category_id) REFERENCES category_list(category_id)
-);
-
     
 CREATE TABLE annual_inspection_certificate (
 	certificate_id int NOT NULL AUTO_INCREMENT,
