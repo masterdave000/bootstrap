@@ -564,7 +564,6 @@ function inspector(inspectorContainers, selectInspector) {
   
                   //Inspector Container
                   let inspectorContainer = document.getElementById(inspectorContainers);
-                  console.log(inspectorContainers);
 
                   //Inspector Content Container
                   let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
@@ -584,7 +583,13 @@ function inspector(inspectorContainers, selectInspector) {
                   let inspectorNameInputField = createInputField('text', `inspector-name-${counter}`, `inspector_name[]`);
                   inspectorNameContainer.appendChild(inspectorNameInputField);
                   inspectorNameInputField.value = inspectorDetails.inspector_name;
-  
+
+                  
+                  if (inspectorContainers == 'inspector-certificate-container') {
+                    inspector_abbr = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
+                    inspectorContent.appendChild(inspector_abbr);
+                    inspector_abbr.value = inspectorDetails.inspector_abbr
+                  }
                   
                   // Update input field values with unique identifiers
                   inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
@@ -633,6 +638,38 @@ function inspector(inspectorContainers, selectInspector) {
                     let option12 = createOption('Fire', 'Fire');
                     let option13 = createOption('Others (Specify)', 'Others (Specify)');
 
+                    // Date Signed
+                    let dateSignedContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                    inspectorContent.appendChild(dateSignedContainer);
+
+                    let dateSignedLabel = createLabel('Date Signed');
+                    dateSignedContainer.appendChild(dateSignedLabel);
+
+                    let dateSignedInputField = createInputField('date', `date-signed-${counter}`, `date_signed[]`, false);
+                    dateSignedContainer.appendChild(dateSignedInputField);
+
+                    let timeInOutContainer = createContainerDiv('d-md-flex align-items-center justify-content-center p-0');
+                    inspectorContent.appendChild(timeInOutContainer);
+                    
+                     // Time In
+                     let timeInContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                     timeInOutContainer.appendChild(timeInContainer);
+ 
+                     let timeInLabel = createLabel('Time In');
+                     timeInContainer.appendChild(timeInLabel);
+ 
+                     let timeInInputField = createInputField('time', `time-in-${counter}`, `time_in[]`, false);
+                     timeInContainer.appendChild(timeInInputField);
+
+                     // Time Out
+                     let timeOutContainer = createContainerDiv('col col-md-6 p-0 form-group mb-1 flex-md-grow-1');
+                     timeInOutContainer.appendChild(timeOutContainer);
+ 
+                     let timeOutLabel = createLabel('Time Out');
+                     timeOutContainer.appendChild(timeOutLabel);
+ 
+                     let timeOutInputField = createInputField('time', `time-out-${counter}`, `time_out[]`, false);
+                     timeOutContainer.appendChild(timeOutInputField);
                   }
                   // Update the displayed count of added inspectors
                   updateInspectorCount(counter);
