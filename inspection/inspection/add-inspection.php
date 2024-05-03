@@ -171,7 +171,8 @@ include './../includes/side-header.php';
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
                                                 data-bs-target="#item-list" data-bs-toggle="modal">Add Item</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-item">Delete Item</a>
+                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-item">Delete
+                                                Item</a>
                                         </div>
 
                                     </div>
@@ -242,7 +243,8 @@ include './../includes/side-header.php';
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
                                                 data-bs-target="#inspector-list" data-bs-toggle="modal">Add
                                                 Inspector</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-inspector">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none"
+                                                id="delete-inspector">Delete
                                                 Inspector</a>
                                         </div>
                                     </div>
@@ -273,7 +275,8 @@ include './../includes/side-header.php';
                                             <a class="btn btn-success btn-md-block mr-3 px-3"
                                                 data-bs-target="#violation-list" data-bs-toggle="modal">Add
                                                 violation</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-violation">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none"
+                                                id="delete-violation">Delete
                                                 Violation</a>
                                         </div>
                                     </div>
