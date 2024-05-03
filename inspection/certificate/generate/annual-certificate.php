@@ -84,7 +84,7 @@
 
                                     <?php for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
                                     $inspector_id = $_POST['inspector_id'][$i];
-                                    $inspector_name = trim(strtoupper($_POST['inspector_name'][$i]));
+                                    $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
                                     $category = trim(strtoupper($_POST['category'][$i]));
 
                                     ?>
@@ -102,106 +102,66 @@
 
                                     <?php } ?>
 
-                                    <div class=" verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">LINE AND GRADE (GEODETIC)
-                                        </p>
-                                    </div>
 
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">ARCHITECTURAL
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
+
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">CIVIL/ STRUCTURAL
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
+
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">ELECTRICAL
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
+
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">MECHANICAL
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
+
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">SANITARY
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
+
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">PLUMBING
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
 
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">ELECTRONICS
-                                        </p>
-                                    </div>
 
                                     <div class="verified-by-container">
                                         <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
+                                            sfsdf
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">INTERIOR
-                                        </p>
-                                    </div>
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">ACCESSIBILITY
-                                        </p>
-                                    </div>
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRYY
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">FIRE
-                                        </p>
-                                    </div>
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            TRY
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position">OTHERS (SPECIFY)
+                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
                                         </p>
                                     </div>
                                 </div>
@@ -264,14 +224,14 @@
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-2">NAME OF LESSEE</th>
-                                        <th colspan="3" class="lessee-name">NAMEEEEEEEEEEEEEEEEEEEEEE</th>
+                                        <th colspan="3" class="lessee-name"> <?= $owner_name . ' / ' . $bus_name?></th>
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-3">LOCATION</th>
-                                        <th colspan="3" class="location">LOCATIONNNNNNNNNNNNNNNNNNNNNNNNNNNNN</th>
+                                        <th colspan="3" class="location"> <?= $bus_address?></th>
                                     </tr>
                                     <tr class="font-seven">
-                                        <th class="p-2" style="width: 15%">DATE SIGNED</th>
+                                        <th style="width: 15%">DATE SIGNED</th>
                                         <th style="width: 55%">NAME OF INSPECTOR</th>
                                         <th style="width: 15%">TIME IN (SIGNED)</th>
                                         <th style="width: 15%">TIME OUT (SIGNED)</th>
@@ -313,19 +273,35 @@
                             <div class="checkbox-container w-100 d-flex justify-content-center pl-5">
                                 <div class="w-75 d-flex flex-wrap">
                                     <div class="d-flex w-50 flex-gap">
-                                        <div class="box"></div>
+                                        <div class="box d-flex justify-content-center align-items-center">
+                                            <?php if ($application_type === 'NEW') :?>
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif?>
+                                        </div>
                                         <div>NEW</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap mb-2">
-                                        <div class="box"></div>
+                                        <div class="box d-flex justify-content-center align-items-center">
+                                            <?php if ($application_type === 'ANNUAL') :?>
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif?>
+                                        </div>
                                         <div>ANNUAL</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap">
-                                        <div class="box"></div>
+                                        <div class="box d-flex justify-content-center align-items-center">
+                                            <?php if ($application_type === 'ADDITIONAL LINE') :?>
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif?>
+                                        </div>
                                         <div>ADDITIONAL LINE</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap">
-                                        <div class="box"></div>
+                                        <div class="box d-flex justify-content-center align-items-center">
+                                            <?php if ($application_type === 'CHANGE ADDRESS') :?>
+                                            <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif?>
+                                        </div>
                                         <div>CHANGE ADDRESS</div>
                                     </div>
                                 </div>
