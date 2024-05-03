@@ -29,8 +29,8 @@ $role = $_SESSION['role'];
 
     <!-- Custom styles for this template-->
     <link href="<?php echo SITEURL ?>assets/css/style.css" rel="stylesheet">
-    <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.css" rel="stylesheet">
     <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?php echo SITEURL ?>assets/css/sb-admin-2.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link href="<?php echo SITEURL ?>assets/css/equipment-print.css" rel="stylesheet" media="print">
@@ -42,7 +42,7 @@ $role = $_SESSION['role'];
     <!-- Page Wrapper -->
     <div id="wrapper">
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion d-print-none" id="accordionSidebar">
+        <ul class="navbar-nav bg-sidebar-primary sidebar sidebar-dark accordion d-print-none" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
