@@ -96,11 +96,6 @@
                                         <p class="w-100 m-0 text-center verified-by-position"> <?php echo $category?>
                                         </p>
                                     </div>
-
-                                    <input type="hidden" name="inspectors_id[]" value="<?= $inspector_id?>">
-                                    <input type="hidden" name="inspectors_name[]" value="<?= $inspector_name?>">
-                                    <input type="hidden" name="categories[]" value="<?= $category?>">
-
                                     <?php } ?>
                                 </div>
                             </div>
@@ -178,22 +173,39 @@
                                 </thead>
                                 <tbody class="inspector_body">
                                     <?php 
+                                    // Initialize an empty array to store unique inspector names
+                                    $uniqueInspectorIds = array();
+
                                     for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
-                                        $inspector_id = $_POST['inspector_id'][$i];
-                                        $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
-                                        $date_signed = $_POST['date_signed'][$i];
-                                        $time_in = $_POST['time_in'][$i];
-                                        $time_out = $_POST['time_out'][$i];
-    
+
+                                        // Check if the inspector name already exists in the unique array
+                                        if (!in_array($_POST['inspector_id'], $uniqueInspectorIds)) {
+                                            // If not, add it to the array
+                                            $uniqueInspectorIds[] = $_POST['inspector_id'];
+                                            $inspector_id = $_POST['inspector_id'][$i];
+                                            $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
+                                            $date_signed = $_POST['date_signed'][$i];
+                                            $time_in = $_POST['time_in'][$i];
+                                            $time_out = $_POST['time_out'][$i];
+
                                     ?>
                                     <tr>
-                                        <td><?= $date_signed?></td>
-                                        <td><?= $inspector_name?></td>
-                                        <td><?= $time_in?></td>
-                                        <td><?= $time_out?></td>
+                                        <td><?= $date_signed ?></td>
+                                        <td><?= $inspector_name ?></td>
+                                        <td><?= $time_in ?></td>
+                                        <td><?= $time_out ?></td>
                                     </tr>
 
-                                    <?php } ?>
+                                    <input type="hidden" name="inspectors_id[]" value="<?= $inspector_id?>">
+                                    <input type="hidden" name="inspectors_name[]" value="<?= $inspector_name?>">
+                                    <input type="hidden" name="categories[]" value="<?= $category?>">
+                                    <input type="hidden" name="dates_signed[]" value="<?= $date_signed?>">
+                                    <input type="hidden" name="time_ins[]" value="<?= $time_in?>">
+                                    <input type="hidden" name="time_outs[]" value="<?= $time_out?>">
+                                    <?php
+                                        }
+                                    }
+                                    ?>
                                 </tbody>
                             </table>
 

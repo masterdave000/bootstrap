@@ -53,11 +53,17 @@ $certificate_id = $pdo->lastInsertId();
 $certificateInspectorInsert = "INSERT INTO annual_inspection_certificate_inspector (
     certificate_id,
     inspector_id,
-    category
+    category,
+    date_signed,
+    time_in,
+    time_out
 ) VALUES (
     :certificate_id,
     :inspector_id,
-    :category
+    :category,
+    :date_signed,
+    :time_in,
+    :time_out
 )";
 
 
@@ -67,6 +73,9 @@ for ($i = 0; $i < count($_POST['inspectors_id']); $i++) {
     $certificateInspectorStatement->bindParam('certificate_id', $certificate_id);
     $certificateInspectorStatement->bindParam('inspector_id', $_POST['inspectors_id'][$i]);
     $certificateInspectorStatement->bindParam('category', $_POST['categories'][$i]);
+    $certificateInspectorStatement->bindParam('date_signed', $_POST['dates_signed'][$i]);
+    $certificateInspectorStatement->bindParam('time_in', $_POST['time_ins'][$i]);
+    $certificateInspectorStatement->bindParam('time_out', $_POST['time_outs'][$i]);
     $certificateInspectorStatement->execute();
 }
 
