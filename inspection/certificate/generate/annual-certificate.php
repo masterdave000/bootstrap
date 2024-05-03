@@ -82,7 +82,9 @@
 
                                 <div class="verified-by-wrapper d-flex justify-content-center flex-wrap">
 
-                                    <?php for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
+                                    <?php 
+                                    
+                                    for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
                                     $inspector_id = $_POST['inspector_id'][$i];
                                     $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
                                     $category = trim(strtoupper($_POST['category'][$i]));
@@ -216,11 +218,11 @@
 
                         <div class="annual-sheet-right">
                             <div class="d-flex justify-content-end official-bin">BIN:</div>
-                            <table class="mb-2 table-one">
+                            <table class="table table-bordered mb-2 table-one">
                                 <thead>
-                                    <tr class="font-seven">
-                                        <th colspan="3" class="text-left">CERTIFICATE ANNUAL INSPECTION</th>
-                                        <th>DATE INSPECTED</th>
+                                    <tr class="font-seven border-0">
+                                        <th colspan="2" class="text-left">CERTIFICATE ANNUAL INSPECTION</th>
+                                        <th colspan="2">DATE INSPECTED: <?= $date_inspected?></th>
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-2">NAME OF LESSEE</th>
@@ -230,34 +232,32 @@
                                         <th class="font-seven p-3">LOCATION</th>
                                         <th colspan="3" class="location"> <?= $bus_address?></th>
                                     </tr>
-                                    <tr class="font-seven">
+
+                                    <tr class="font-seven inspector_head">
                                         <th style="width: 15%">DATE SIGNED</th>
                                         <th style="width: 55%">NAME OF INSPECTOR</th>
                                         <th style="width: 15%">TIME IN (SIGNED)</th>
                                         <th style="width: 15%">TIME OUT (SIGNED)</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="inspector_body">
+                                    <?php 
+                                    for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
+                                        $inspector_id = $_POST['inspector_id'][$i];
+                                        $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
+                                        $date_signed = $_POST['date_signed'][$i];
+                                        $time_in = $_POST['time_in'][$i];
+                                        $time_out = $_POST['time_out'][$i];
+    
+                                    ?>
                                     <tr>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
+                                        <td><?= $date_signed?></td>
+                                        <td><?= $inspector_name?></td>
+                                        <td><?= $time_in?></td>
+                                        <td><?= $time_out?></td>
                                     </tr>
 
-                                    <tr>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
-                                        <td>try</td>
-                                    </tr>
+                                    <?php } ?>
                                 </tbody>
                             </table>
 
