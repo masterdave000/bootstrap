@@ -674,6 +674,7 @@ function inspector(inspectorContainers, selectInspector) {
                   // Update the displayed count of added inspectors
                   updateInspectorCount(counter);
   
+                  deleteInspectorButton.classList.remove('d-none');
                   // Close the modal
                   let modal = bootstrap.Modal.getInstance(wrapper);
                   modal.hide();
@@ -686,16 +687,19 @@ function inspector(inspectorContainers, selectInspector) {
     // If delete button is available, add event listener to it
     if (deleteInspectorButton) {
       deleteInspectorButton.addEventListener("click", function () {
-          // Remove the last added inspector field
-          let lastInspectorTitle = document.getElementById(`inspector-title-${counter}`);
-          let lastInspector = document.getElementById(`inspector-name-${counter}`);
+        // Remove the last added inspector field
+        let lastInspectorTitle = document.getElementById(`inspector-title-${counter}`);
+        let lastInspector = document.getElementById(`inspector-name-${counter}`);
           
-          if (lastInspector) {
-            lastInspectorTitle.parentElement.remove();
-              counter--;
-  
-            // Update the displayed count of added inspector
-            updateInspectorCount(counter);
+        if (lastInspector) {
+          lastInspectorTitle.parentElement.remove();
+            counter--;
+
+            if (counter === 0) {
+              deleteInspectorButton.classList.add('d-none');
+            }
+          // Update the displayed count of added inspector
+          updateInspectorCount(counter);
         }
       });
     }
