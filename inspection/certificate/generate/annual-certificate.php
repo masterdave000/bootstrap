@@ -80,8 +80,7 @@
                                     VERIFIED AS TO THE FOLLOWING
                                 </div>
 
-                                <div class="verified-by-wrapper d-flex justify-content-center flex-wrap">
-
+                                <div class="verified-by-wrapper w-100 d-flex justify-content-center flex-wrap">
                                     <?php 
                                     
                                     for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
@@ -103,69 +102,6 @@
                                     <input type="hidden" name="categories[]" value="<?= $category?>">
 
                                     <?php } ?>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
-
-
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            sfsdf
-                                        </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> sdfsdf
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
 
