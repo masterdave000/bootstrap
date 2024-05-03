@@ -136,6 +136,9 @@ CREATE TABLE annual_inspection_certificate_inspector (
 	certificate_id int NOT NULL,
     inspector_id int NOT NULL,
     category varchar(100) NOT NULL,
+    date_signed date NOT NULL,
+    time_in time NULL,
+    time_out time NULL,
     FOREIGN KEY(certificate_id) REFERENCES annual_inspection_certificate(certificate_id),
 	FOREIGN KEY(inspector_id) REFERENCES inspector(inspector_id)
 ); 
@@ -182,11 +185,10 @@ LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
-
 CREATE VIEW annual_inspection_certificate_view AS
 SELECT aic.certificate_id, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
-i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aic.date_inspected
+i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_inspected
 FROM annual_inspection_certificate aic 
 LEFT JOIN business b ON aic.bus_id = b.bus_id
 LEFT JOIN owner o ON aic.owner_id = o.owner_id
