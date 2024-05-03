@@ -104,7 +104,7 @@ require "./../includes/side-header.php";
 
                                     <td class="d-flex justify-content-end">
                                         <a href="./update-owner.php?owner_id=<?php echo $owner['owner_id']?>"
-                                            class="btn btn-primary mr-2 text-center d-flex align-items-center">
+                                            class="btn btn-info mr-2 text-center d-flex align-items-center">
                                             <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>
