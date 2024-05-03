@@ -253,7 +253,7 @@
                             </table>
                         </div>
                         <section class="position-absolute left bottom-0 end-0 d-print-none">
-                            <button class="btn btn-success btn-md-block mr-3 px-3" id="print-button">Print
+                            <button class="btn btn-primary btn-md-block mr-3 px-3" id="print-button">Print
                                 Report</a>
                         </section>
                     </div>

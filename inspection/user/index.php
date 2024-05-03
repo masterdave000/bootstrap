@@ -54,7 +54,7 @@ require "./../includes/side-header.php";
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-user.php" class="btn btn-success d-flex justify-content-center align-items-center">
+                    <a href="./add-user.php" class="btn btn-primary d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
