@@ -13,14 +13,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $inspector = $inspectorStatement->fetch(PDO::FETCH_ASSOC);
     
     $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
-    $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
+  
+
+    // Split the first name into an array of words
+    $words = explode(' ', $firstname);
+
+    // Initialize a variable to store the initials
+    $initials = '';
+
+    // Iterate through each word and append the first letter to the initials
+    foreach ($words as $word) {
+        $initials .= strtoupper(substr($word, 0, 1));
+    }
+    
+    $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') : ""));
     $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
     $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
     $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+    $inspector_abbr = trim($initials . $midname . ' ' . $lastname . ' ' . $suffix);
     
     $response = array(
         'inspector_id' => $inspector_id,
-        'inspector_name' => $fullname
+        'inspector_name' => $fullname,
+        'inspector_abbr' => $inspector_abbr
     );
 
     header('Content-Type: application/json');
