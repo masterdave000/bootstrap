@@ -50,7 +50,7 @@
 
                             </td>
                             <td>
-                                <a class="btn btn-success py-1">
+                                <a class="btn btn-primary py-1">
                                     Select
                                 </a>
                             </td>

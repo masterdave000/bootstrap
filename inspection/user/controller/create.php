@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$username = htmlspecialchars($_POST["username"]);
 	$password1 = htmlspecialchars(md5($_POST["password1"]));
 	$password2 = htmlspecialchars(md5($_POST["password2"]));
-	$role = htmlspecialchars($_POST['role']);
+	$role = htmlspecialchars(ucwords($_POST['role']));
 
 	if ($password1 == $password2) {
 
@@ -73,5 +73,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		header("location:" . SITEURL . 'inspection/user/add-user.php');
 	}
 }
-
-?>

@@ -44,7 +44,7 @@
 
                             </td>
                             <td>
-                                <a class="btn btn-success py-1 select-item">
+                                <a class="btn btn-primary py-1 select-item">
                                     Select
                                 </a>
                             </td>

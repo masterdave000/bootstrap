@@ -51,7 +51,7 @@ require "./../includes/side-header.php";
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
                     <a href="./add-category.php"
-                        class="btn btn-success d-flex justify-content-center align-items-center">
+                        class="btn btn-primary d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -103,7 +103,7 @@ require "./../includes/side-header.php";
 
                                     <td class="d-flex justify-content-end">
                                         <a href="./update-category.php?category_id=<?php echo $category['category_id']?>"
-                                            class="btn btn-primary mr-2 text-center d-flex align-items-center">
+                                            class="btn btn-info mr-2 text-center d-flex align-items-center">
                                             <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
                                             <span class="d-none d-lg-inline">Edit</span>
                                         </a>

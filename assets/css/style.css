@@ -460,6 +460,11 @@ input[readonly] {
   font-size: 8pt;
 }
 
+.annual-sheet-right tbody.inspector_body tr,
+.annual-sheet-right thead tr.inspector_head{
+  text-align: center;
+}
+
 .annual-sheet-right .checkbox-container{
   margin-bottom: 40px;
 }

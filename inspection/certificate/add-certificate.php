@@ -138,10 +138,11 @@ include './../includes/side-header.php';
 
                                         </div>
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-success btn-md-block mr-3 px-3"
+                                            <a class="btn btn-primary btn-md-block px-3"
                                                 data-bs-target="#inspector-list" data-bs-toggle="modal">Add
                                                 Inspector</a>
-                                            <a class="btn btn-danger btn-md-block px-3" id="delete-inspector">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none"
+                                                id="delete-inspector">Delete
                                                 Inspector</a>
                                         </div>
                                     </div>
