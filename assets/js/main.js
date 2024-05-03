@@ -434,6 +434,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Update the displayed count of added items
                 updateItemCount(counter);
 
+                deleteItemButton.classList.remove('d-none');
                 // Close the modal
                 let modal = bootstrap.Modal.getInstance(wrapper);
                 modal.hide();
@@ -465,6 +466,10 @@ document.addEventListener("DOMContentLoaded", function () {
           lastPowerRating.parentElement.remove(); // Remove the container div
           lastFee.parentElement.remove(); // Remove the container div
           counter--;
+
+          if (counter === 0) {
+            deleteItemButton.classList.add('d-none');
+          }
 
           // Update the displayed count of added items
           updateItemCount(counter);
@@ -771,6 +776,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Update the displayed count of added violations
                 updateViolationCount(counter);
 
+                deleteViolationButton.classList.remove('d-none');
+
                 // Close the modal
                 let modal = bootstrap.Modal.getInstance(wrapper);
                 modal.hide();
@@ -791,6 +798,9 @@ document.addEventListener("DOMContentLoaded", function () {
           lastViolationTitle.parentElement.remove();
             counter--;
 
+            if (counter === 0) {
+              deleteViolationButton.classList.add('d-none');
+            }
           // Update the displayed count of added violation
           updateViolationCount(counter);
       }
