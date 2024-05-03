@@ -169,8 +169,8 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block mr-3 px-3"
-                                                data-bs-target="#item-list" data-bs-toggle="modal">Add Item</a>
+                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#item-list"
+                                                data-bs-toggle="modal">Add Item</a>
                                             <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-item">Delete
                                                 Item</a>
                                         </div>
@@ -272,7 +272,7 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block mr-3 px-3"
+                                            <a class="btn btn-primary btn-md-block px-3"
                                                 data-bs-target="#violation-list" data-bs-toggle="modal">Add
                                                 violation</a>
                                             <a class="btn btn-danger btn-md-block px-3 d-none"
