@@ -435,6 +435,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateItemCount(counter);
 
                 deleteItemButton.classList.remove('d-none');
+                deleteItemButton.classList.add('ml-3');
                 // Close the modal
                 let modal = bootstrap.Modal.getInstance(wrapper);
                 modal.hide();
@@ -680,6 +681,8 @@ function inspector(inspectorContainers, selectInspector) {
                   updateInspectorCount(counter);
   
                   deleteInspectorButton.classList.remove('d-none');
+                  deleteInspectorButton.classList.add('ml-3');
+
                   // Close the modal
                   let modal = bootstrap.Modal.getInstance(wrapper);
                   modal.hide();
@@ -777,6 +780,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 updateViolationCount(counter);
 
                 deleteViolationButton.classList.remove('d-none');
+                deleteViolationButton.classList.add('ml-3');
 
                 // Close the modal
                 let modal = bootstrap.Modal.getInstance(wrapper);
