@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     
     $firstname = htmlspecialchars(ucwords($inspector['inspector_firstname']));
   
-
     // Split the first name into an array of words
     $words = explode(' ', $firstname);
 
@@ -26,11 +25,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $initials .= strtoupper(substr($word, 0, 1));
     }
     
-    $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') : ""));
+    $midname_without_period = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') : ""));
+    $midname = htmlspecialchars(ucwords($inspector['inspector_midname'] ? mb_substr($inspector['inspector_midname'], 0, 1, 'UTF-8') . '.' : ""));
     $lastname = htmlspecialchars(ucwords($inspector['inspector_lastname']));
     $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
     $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-    $inspector_abbr = trim($initials . $midname . ' ' . $lastname . ' ' . $suffix);
+    $inspector_abbr = trim($initials . $midname_without_period . ' ' . $lastname . ' ' . $suffix);
     
     $response = array(
         'inspector_id' => $inspector_id,
