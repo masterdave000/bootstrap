@@ -595,7 +595,7 @@ function inspector(inspectorContainers, selectInspector) {
                   inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
                   document.getElementById(`inspector-id-${counter}`).value = inspectorDetails.inspector_id;
   
-                  if (inspectorContainers == 'inspector-certificate-container') {
+                  if (inspectorContainers === 'inspector-certificate-container') {
                     // Inspector Name ABBR
                     inspector_abbr = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
                     inspectorContent.appendChild(inspector_abbr);
@@ -603,7 +603,7 @@ function inspector(inspectorContainers, selectInspector) {
 
                     // Inspector Lastname
                     inspectorLastname = createHiddenInput("inspector_lastname[]", `inspector-lastname-${counter}`, true)
-                    inspectorContent.appendChild(inspector_lastname);
+                    inspectorContent.appendChild(inspectorLastname);
                     inspectorLastname.value = inspectorDetails.inspector_lastname
 
                     // Category Field

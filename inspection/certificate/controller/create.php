@@ -10,28 +10,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
     $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
         
+    $bin = trim(strtoupper($_POST['bin']));
     $application_type = trim(strtoupper($_POST['application_type']));
     $character_of_occupancy = trim(strtoupper($_POST['character_occupancy']));
     $bus_group = trim(strtoupper($_POST['bus_group']));
     $occupancy_no = $_POST['occupancy_no'];
     $date_inspected = date('Y-m-d H:i:s');
+    $date_complied = $_POST['date_complied'];
     $issued_on = $_POST['issued_on'];
 }
 
 $certificateInspectionInsert = "INSERT INTO annual_inspection_certificate (
     bus_id,
     owner_id,
+    bin,
     bus_group,
     character_of_occupancy,
     occupancy_no,
+    date_complied,
     issued_on,
     date_inspected
 ) VALUES (
     :bus_id,
     :owner_id,
+    :bin,
     :bus_group,
     :character_of_occupancy,
     :occupancy_no,
+    :date_complied,
     :issued_on,
     :date_inspected
 )";
@@ -41,9 +47,11 @@ $certificateInspectionStatement = $pdo->prepare($certificateInspectionInsert);
 
 $certificateInspectionStatement->bindParam(':bus_id', $bus_id);
 $certificateInspectionStatement->bindParam(':owner_id', $owner_id);
+$certificateInspectionStatement->bindParam(':bin', $bin);
 $certificateInspectionStatement->bindParam(':bus_group', $bus_group);
 $certificateInspectionStatement->bindParam(':character_of_occupancy', $character_of_occupancy);
 $certificateInspectionStatement->bindParam(':occupancy_no', $occupancy_no);
+$certificateInspectionStatement->bindParam(':date_complied', $date_complied);
 $certificateInspectionStatement->bindParam(':issued_on', $issued_on);
 $certificateInspectionStatement->bindParam(':date_inspected', $date_inspected);
 $certificateInspectionStatement->execute();

@@ -13,6 +13,7 @@
         $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
         $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
      
+        $bin = $_POST['bin'];
         $owner_name = trim(strtoupper($_POST['owner_name']));
 
         $bus_name = trim(strtoupper($_POST['bus_name']));
@@ -23,6 +24,7 @@
         $group = trim(strtoupper($_POST['group']));
         $occupancy_no = $_POST['occupancy_no'];
         $date_inspected = date('m-d-Y');
+        $date_complied = $_POST['date_complied'];
         $issued_on = $_POST['issued_on'];
     }
 ?>
@@ -148,7 +150,7 @@
                         </div>
 
                         <div class="annual-sheet-right">
-                            <div class="d-flex justify-content-end official-bin">BIN:</div>
+                            <div class="d-flex justify-content-end official-bin">BIN: <?= $bin?></div>
                             <table class="table table-bordered mb-2 table-one">
                                 <thead>
                                     <tr class="font-seven border-0">
@@ -245,7 +247,9 @@
 
                                 </div>
                                 <div>
-                                    DATE COMPLIED: <span><b>01-09-2024</b></span>
+                                    DATE COMPLIED: <span><b>
+                                            <?= date('d/m/Y', strtotime($date_complied));?>
+                                        </b></span>
                                 </div>
                             </div>
 
@@ -360,11 +364,13 @@
 
             <input type="hidden" name="bus_id" value="<?= $bus_id?>">
             <input type="hidden" name="owner_id" value="<?= $owner_id?>">
+            <input type="hidden" name="bin" value="<?= $bin?>">
             <input type="hidden" name="application_type" value="<?= $application_type?>">
             <input type="hidden" name="character_occupancy" value="<?= $character_occupancy?>">
             <input type="hidden" name="bus_group" value="<?= $group?>">
             <input type="hidden" name="occupancy_no" value="<?= $occupancy_no?>">
             <input type="hidden" name="issued_on" value="<?= $issued_on?>">
+            <input type="hidden" name="date_complied" value="<?= $date_complied?>">
 
         </form>
     </div>
