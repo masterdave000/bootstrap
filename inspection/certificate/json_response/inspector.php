@@ -35,7 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $response = array(
         'inspector_id' => $inspector_id,
         'inspector_name' => $fullname,
-        'inspector_abbr' => $inspector_abbr
+        'inspector_abbr' => $inspector_abbr,
+        'inspector_lastname' => $lastname
     );
 
     header('Content-Type: application/json');

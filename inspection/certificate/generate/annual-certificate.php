@@ -1,8 +1,8 @@
 <?php 
 
+
     $title = "Equipment List Certificate";
     include './../../includes/side-header.php';
-
 
     // var_dump($_POST);
     // exit;
@@ -213,7 +213,35 @@
 
                             <div class="d-flex justify-content-between inspector">
                                 <div>
-                                    ANNUAL INSPECTION TEAM: <b>ERNESTO, VILLAFUERTE, MALARAN</b>
+                                    ANNUAL INSPECTION TEAM:
+                                    <b>
+                                        <?php 
+                                        $uniqueLastnames = array();
+
+                                        for ($i = 0; $i < count($_POST['inspector_lastname']); $i++) {
+                                            if (!in_array($_POST['inspector_lastname'][$i], $uniqueLastnames)) {
+
+                                                $uniqueLastnames[] = $_POST['inspector_lastname'][$i];
+
+                                                $lastname = strtoupper($_POST['inspector_lastname'][$i]) . ', ';
+                                                
+                                                 // Check if this is the last iteration of the loop
+                                                if ($i == count($_POST['inspector_lastname']) - 1) {
+                                                    $lastname = strtoupper($_POST['inspector_lastname'][$i]); // Output the last name without a comma
+                                               
+                                                }                              
+
+                                                ?>
+
+                                        <?php echo $lastname;?>
+
+                                        <?php
+                                            }
+                                        }
+                                        
+                                        ?>
+                                    </b>
+
                                 </div>
                                 <div>
                                     DATE COMPLIED: <span><b>01-09-2024</b></span>

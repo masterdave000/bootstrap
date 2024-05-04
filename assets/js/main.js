@@ -590,18 +590,22 @@ function inspector(inspectorContainers, selectInspector) {
                   inspectorNameContainer.appendChild(inspectorNameInputField);
                   inspectorNameInputField.value = inspectorDetails.inspector_name;
 
-                  
-                  if (inspectorContainers == 'inspector-certificate-container') {
-                    inspector_abbr = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
-                    inspectorContent.appendChild(inspector_abbr);
-                    inspector_abbr.value = inspectorDetails.inspector_abbr
-                  }
-                  
+              
                   // Update input field values with unique identifiers
                   inspectorContent.appendChild(createHiddenInput("inspector_id[]", `inspector-id-${counter}`, true));
                   document.getElementById(`inspector-id-${counter}`).value = inspectorDetails.inspector_id;
   
                   if (inspectorContainers == 'inspector-certificate-container') {
+                    // Inspector Name ABBR
+                    inspector_abbr = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
+                    inspectorContent.appendChild(inspector_abbr);
+                    inspector_abbr.value = inspectorDetails.inspector_abbr
+
+                    // Inspector Lastname
+                    inspectorLastname = createHiddenInput("inspector_lastname[]", `inspector-lastname-${counter}`, true)
+                    inspectorContent.appendChild(inspector_lastname);
+                    inspectorLastname.value = inspectorDetails.inspector_lastname
+
                     // Category Field
                     let categoryContainer = createContainerDiv('form-group flex-column flex-md-grow-1');
                     inspectorContent.appendChild(categoryContainer);
