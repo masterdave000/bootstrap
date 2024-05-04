@@ -190,14 +190,15 @@
                                             // If not, add it to the array
                                             $uniqueInspectorIds[] = $_POST['inspector_id'][$i];
                                             $inspector_id = $_POST['inspector_id'][$i];
+                                            $date_signed = $_POST['date_signed'][$i];
                                             $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
-                                            $date_signed = date('m/d/Y', strtotime($_POST['date_signed'][$i]));
-                                            $time_in = date('h:i A' ,strtotime($_POST['time_in'][$i]));
-                                            $time_out = date('h:i A' ,strtotime($_POST['time_out'][$i]));
+                                            $date_signed_format = date('m/d/Y', strtotime($date_signed[$i]));
+                                            $time_in = date('h:i A', strtotime($_POST['time_in'][$i]));
+                                            $time_out = date('h:i A', strtotime($_POST['time_out'][$i]));
 
                                     ?>
                                     <tr>
-                                        <td><?= $date_signed ?></td>
+                                        <td><?= $date_signed_format ?></td>
                                         <td><?= $inspector_name ?></td>
                                         <td><?= $time_in ?></td>
                                         <td><?= $time_out ?></td>
