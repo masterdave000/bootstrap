@@ -179,9 +179,9 @@
                                     for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
 
                                         // Check if the inspector name already exists in the unique array
-                                        if (!in_array($_POST['inspector_id'], $uniqueInspectorIds)) {
+                                        if (!in_array($_POST['inspector_id'][$i], $uniqueInspectorIds)) {
                                             // If not, add it to the array
-                                            $uniqueInspectorIds[] = $_POST['inspector_id'];
+                                            $uniqueInspectorIds[] = $_POST['inspector_id'][$i];
                                             $inspector_id = $_POST['inspector_id'][$i];
                                             $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
                                             $date_signed = date('d/m/Y', strtotime($_POST['date_signed'][$i]));
