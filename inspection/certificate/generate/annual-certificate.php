@@ -156,12 +156,14 @@
                                         <th colspan="2">DATE INSPECTED: <?= $date_inspected?></th>
                                     </tr>
                                     <tr>
-                                        <th class="font-seven p-2">NAME OF LESSEE</th>
-                                        <th colspan="3" class="lessee-name"> <?= $owner_name . ' / ' . $bus_name?></th>
+                                        <th class="font-seven p-2 text-center">NAME OF LESSEE</th>
+                                        <th colspan="3" class="lessee-name text-center">
+                                            <?= $owner_name . ' / ' . $bus_name?>
+                                        </th>
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-3">LOCATION</th>
-                                        <th colspan="3" class="location"> <?= $bus_address?></th>
+                                        <th colspan="3" class="location text-center"> <?= $bus_address?></th>
                                     </tr>
 
                                     <tr class="font-seven inspector_head">
