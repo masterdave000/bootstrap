@@ -123,7 +123,7 @@ CREATE TABLE annual_inspection_certificate (
 	owner_id int NOT NULL,
     bin varchar(100) NOT NULL,
 	bus_group varchar(10) NOT NULL,    
-    character_of_occupancy int NOT NULL,
+    character_of_occupancy varchar(100) NOT NULL,
     occupancy_no varchar(50) NOT NULL,
     date_compiled date NOT NULL,
 	issued_on datetime NULL,
