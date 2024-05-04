@@ -37,6 +37,10 @@ $role = $_SESSION['role'];
     <?php if ($title === 'Equipment List Certificate'): ?>
     <link href="<?php echo SITEURL ?>assets/css/equipment-print.css" rel="stylesheet" media="print">
     <?php endif ?>
+
+    <?php if ($title === 'Annual Certificate'): ?>
+    <link href="<?php echo SITEURL ?>assets/css/certificate-print.css" rel="stylesheet" media="print">
+    <?php endif ?>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css" />
 </head>
 
