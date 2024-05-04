@@ -107,7 +107,9 @@
                                 <u>
                                     <?= $occupancy_no ?? 'N/A' ?></u>
                                 ISSUED
-                                ON <u><?= $issued_on ?? 'N/A' ?></u> HAS BEEN VERIFIED AND FOUND SUBSTANTIALLY
+                                ON <u><?= date('d/m/Y', strtotime($issued_on)) ?? 'N/A' ?></u> HAS BEEN VERIFIED AND
+                                FOUND
+                                SUBSTANTIALLY
                                 SATISFACTORY COMPLIED, THEREFORE
                                 THE
                                 “CERTIFICATE OF ANNUAL INSPECTION” IS HEREBY RECOMMENDED FOR ISSUANCE.
