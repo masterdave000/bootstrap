@@ -1,7 +1,7 @@
 <?php 
 
 
-    $title = "Equipment List Certificate";
+    $title = "Annual Certificate";
     include './../../includes/side-header.php';
 
     // var_dump($_POST);
@@ -152,7 +152,7 @@
                         </div>
 
                         <div class="annual-sheet-right">
-                            <div class="d-flex justify-content-end official-bin">BIN: <?= $bin?></div>
+                            <div class="d-flex justify-content-end official-bin">BIN: <?= strtoupper($bin);?></div>
                             <table class="table table-bordered mb-2 table-one">
                                 <thead>
                                     <tr class="font-seven border-0">
@@ -378,7 +378,7 @@
     </div>
 </div>
 
-<a class=" scroll-to-top rounded" href="#page-top">
+<a class=" scroll-to-top rounded d-print-none" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
