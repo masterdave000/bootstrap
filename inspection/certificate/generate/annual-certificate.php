@@ -286,13 +286,66 @@
                                 </div>
                             </div>
 
-                            <table>
-                                <tr>
-                                    <td style="width: 15%">sdfsdf</td>
-                                    <td style="width: 55%">sdfsdf</td>
-                                    <td style="width: 15%">sdfsdf</td>
-                                    <td style="width: 15%">sdfsdf</td>
-                                </tr>
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr class="p-0 m-0">
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center m-0" style="width: 55%">ENGR. GREGORY KARL D. SAN JUAN
+                                        </td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center" style="width: 55%">INSPECTION AND ENFORCEMENT SECTION
+                                            CHIEF</td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center no-data" style="width: 55%"></td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center" style="width: 55%">ENGR. EMMANUEL T. AWAYAN</td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center" style="width: 55%">INSPECTION AND ENFORCEMENT DIVISION
+                                            CHIEF</td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center no-data" style="width: 55%"></td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center" style="width: 55%">ENGR. AUREA M. PASCUAL</td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center" style="width: 55%"> BUILDING OFFICIAL</td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%"></td>
+                                        <td class="text-center no-data" style="width: 55%"></td>
+                                        <td style="width: 15%"></td>
+                                        <td style="width: 15%"></td>
+                                    </tr>
+                                </tbody>
                             </table>
                         </div>
                         <section class="position-absolute left bottom-0 end-0 d-print-none">
