@@ -163,12 +163,13 @@
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-3">LOCATION</th>
-                                        <th colspan="3" class="location text-center"> <?= $bus_address?></th>
+                                        <th colspan="3" class="location text-center align-middle"> <?= $bus_address?>
+                                        </th>
                                     </tr>
 
                                     <tr class="font-seven inspector_head">
-                                        <th style="width: 15%">DATE SIGNED</th>
-                                        <th style="width: 55%">NAME OF INSPECTOR</th>
+                                        <th class="align-middle" style="width: 15%">DATE SIGNED</th>
+                                        <th class="align-middle" style="width: 55%">NAME OF INSPECTOR</th>
                                         <th style="width: 15%">TIME IN (SIGNED)</th>
                                         <th style="width: 15%">TIME OUT (SIGNED)</th>
                                     </tr>
