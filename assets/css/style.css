@@ -445,6 +445,11 @@ input[readonly] {
   
 }
 
+.annual-sheet-right tbody td:not(.no-data) {
+  padding: 0 !important;
+  vertical-align: middle;
+}
+
 .annual-sheet-right .font-seven,
 .annual-sheet-right table td, 
 .annual-sheet-right .inspector {
