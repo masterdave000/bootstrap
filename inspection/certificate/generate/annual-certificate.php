@@ -187,8 +187,8 @@
                                             $inspector_id = $_POST['inspector_id'][$i];
                                             $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
                                             $date_signed = date('d/m/Y', strtotime($_POST['date_signed'][$i]));
-                                            $time_in = $_POST['time_in'][$i];
-                                            $time_out = $_POST['time_out'][$i];
+                                            $time_in = date('h:i A' ,strtotime($_POST['time_in'][$i]));
+                                            $time_out = date('h:i A' ,strtotime($_POST['time_out'][$i]));
 
                                     ?>
                                     <tr>
