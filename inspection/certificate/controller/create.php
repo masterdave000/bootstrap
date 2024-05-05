@@ -23,6 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $certificateInspectionInsert = "INSERT INTO annual_inspection_certificate (
     bus_id,
     owner_id,
+    application_type,
     bin,
     bus_group,
     character_of_occupancy,
@@ -33,6 +34,7 @@ $certificateInspectionInsert = "INSERT INTO annual_inspection_certificate (
 ) VALUES (
     :bus_id,
     :owner_id,
+    :application_type,
     :bin,
     :bus_group,
     :character_of_occupancy,
@@ -47,6 +49,7 @@ $certificateInspectionStatement = $pdo->prepare($certificateInspectionInsert);
 
 $certificateInspectionStatement->bindParam(':bus_id', $bus_id);
 $certificateInspectionStatement->bindParam(':owner_id', $owner_id);
+$certificateInspectionStatement->bindParam(':application_type', $application_type);
 $certificateInspectionStatement->bindParam(':bin', $bin);
 $certificateInspectionStatement->bindParam(':bus_group', $bus_group);
 $certificateInspectionStatement->bindParam(':character_of_occupancy', $character_of_occupancy);
