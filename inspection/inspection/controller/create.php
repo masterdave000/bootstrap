@@ -18,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $inspectors_id = $_POST['inspectors_id'];
     
     $application_type = $_POST['application_type'];
+    $remarks = $_POST['remarks'];
     
     $power_ratings = $_POST['power_ratings'];
     $quantities = $_POST['quantities'];
@@ -56,6 +57,7 @@ $inspectionInsert = "INSERT INTO inspection(
     bus_id,
     business_billing_id,
     application_type,
+    remarks,
     date_inspected
     
 ) VALUES(
@@ -63,6 +65,7 @@ $inspectionInsert = "INSERT INTO inspection(
     :bus_id,
     :business_billing_id,
     :application_type,
+    :remarks,
     :date_inspected
 )";
 
@@ -71,6 +74,7 @@ $inspectionStatement->bindParam(':owner_id', $owner_id);
 $inspectionStatement->bindParam(':bus_id', $business_id);
 $inspectionStatement->bindParam(':business_billing_id', $business_billing_id);
 $inspectionStatement->bindParam(':application_type', $application_type);
+$inspectionStatement->bindParam(':remarks', $remarks);
 $inspectionStatement->bindParam(':date_inspected', $date_inspected);
 $inspectionStatement->execute();
 

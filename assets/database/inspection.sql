@@ -66,6 +66,7 @@ CREATE TABLE inspection (
 	bus_id int NOT NULL,
 	business_billing_id int NOT NULL,
 	application_type varchar(50) NOT NULL DEFAULT 'Annual',
+    remarks varchar(50) NOT NULL,
 	date_inspected datetime NOT NULL default current_timestamp(),
 	date_signed datetime NOT NULL,
 	PRIMARY KEY(inspection_id),
@@ -121,9 +122,10 @@ CREATE TABLE annual_inspection_certificate (
 	certificate_id int NOT NULL AUTO_INCREMENT,
 	bus_id int NOT NULL,
 	owner_id int NOT NULL,
+    application_type varchar(50) NOT NULL,
     bin varchar(100) NOT NULL,
 	bus_group varchar(10) NOT NULL,    
-    character_of_occupancy int NOT NULL,
+    character_of_occupancy varchar(100) NOT NULL,
     occupancy_no varchar(50) NOT NULL,
     date_compiled date NOT NULL,
 	issued_on datetime NULL,
@@ -174,7 +176,8 @@ CREATE VIEW inspection_view AS
 SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
 b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
 bb.building_fee, bb.sanitary_fee, bb.signage_fee,
-i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, b.bus_img_url, i.date_inspected
+i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, 
+ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, i.remarks, b.bus_img_url, i.date_inspected
 FROM inspection i 
 LEFT JOIN business b ON i.bus_id = b.bus_id
 LEFT JOIN owner o ON i.owner_id = o.owner_id
@@ -183,11 +186,13 @@ LEFT JOIN item_list il ON ii.item_id = il.item_id
 LEFT JOIN category_list cl ON il.category_id = cl.category_id
 LEFT JOIN business_billing bb ON i.business_billing_id = bb.business_billing_id
 LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
+LEFT JOIN inspection_inspector iins ON i.inspection_id = iins.inspection_id
+LEFT JOIN inspector ins ON iins.inspector_id = ins.inspector_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 CREATE VIEW annual_inspection_certificate_view AS
-SELECT aic.certificate_id, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
+SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
 i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_complied, aic.date_inspected
 FROM annual_inspection_certificate aic 
