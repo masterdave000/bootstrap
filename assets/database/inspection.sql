@@ -121,6 +121,7 @@ CREATE TABLE annual_inspection_certificate (
 	certificate_id int NOT NULL AUTO_INCREMENT,
 	bus_id int NOT NULL,
 	owner_id int NOT NULL,
+    application_type varchar(50) NOT NULL,
     bin varchar(100) NOT NULL,
 	bus_group varchar(10) NOT NULL,    
     character_of_occupancy varchar(100) NOT NULL,
@@ -187,7 +188,7 @@ LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 CREATE VIEW annual_inspection_certificate_view AS
-SELECT aic.certificate_id, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
+SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
 i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_complied, aic.date_inspected
 FROM annual_inspection_certificate aic 
