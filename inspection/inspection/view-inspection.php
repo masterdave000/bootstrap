@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
         sanitary_fee, 
         signage_fee, 
         application_type, 
+        remarks,
         GROUP_CONCAT(DISTINCT item_name) AS item_names, 
         GROUP_CONCAT(DISTINCT category_name) AS category_names, 
         GROUP_CONCAT(DISTINCT section) AS sections, 

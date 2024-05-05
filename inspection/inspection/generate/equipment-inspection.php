@@ -28,6 +28,7 @@
         $signage_area = $_POST['signage_area'];
 
         $application_type = $_POST['application_type'];
+        $remarks = $_POST['remarks'];
 
         $building_fee = $_POST['building_fee'];
         $sanitary_fee = $_POST['sanitary_fee'];
@@ -218,7 +219,7 @@
                                             </div>
 
                                             <div class="d-flex justify-content-center m-0">
-                                                <span><?php echo $_POST['remarks']?></span>
+                                                <span><?php echo $remarks?></span>
                                             </div>
                                             <div></div>
                                             <div></div>
@@ -340,6 +341,7 @@
                 <input type="hidden" name="building_fee" value="<?php echo $building_fee?>">
                 <input type="hidden" name="sanitary_fee" value="<?php echo $sanitary_fee?>">
                 <input type="hidden" name="signage_fee" value="<?php echo $signage_fee?>">
+                <input type="hidden" name="remarks" value="<?php echo $remarks?>">
             </form>
         </div>
     </div>

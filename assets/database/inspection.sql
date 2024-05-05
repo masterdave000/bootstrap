@@ -66,6 +66,7 @@ CREATE TABLE inspection (
 	bus_id int NOT NULL,
 	business_billing_id int NOT NULL,
 	application_type varchar(50) NOT NULL DEFAULT 'Annual',
+    remarks varchar(50) NOT NULL,
 	date_inspected datetime NOT NULL default current_timestamp(),
 	date_signed datetime NOT NULL,
 	PRIMARY KEY(inspection_id),
@@ -176,7 +177,7 @@ SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_la
 b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
 bb.building_fee, bb.sanitary_fee, bb.signage_fee,
 i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, 
-ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, b.bus_img_url, i.date_inspected
+ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, i.remarks, b.bus_img_url, i.date_inspected
 FROM inspection i 
 LEFT JOIN business b ON i.bus_id = b.bus_id
 LEFT JOIN owner o ON i.owner_id = o.owner_id
