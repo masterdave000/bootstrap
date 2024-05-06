@@ -39,6 +39,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+$itemDuplicate = "SELECT item_id FROM item_list WHERE item_name = :item_name";
+$itemStatement = $pdo->prepare($itemDuplicate);
+$itemStatement->bindParam(':item_name', $item_name);
+$itemStatement->execute();
+
+$itemCount = $itemStatement->rowCount();
+
+if ($itemCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $item_name Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . 'inspection/item/add-item.php');
+    exit;
+}
+
+
 $itemQuery = "INSERT INTO item_list (
     category_id,
     item_name,
