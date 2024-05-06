@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['duplicate'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>	
-                $section Fee Already Exist
+                $section - $capacity Fee Already Exist
             </div>
         </div>
         
