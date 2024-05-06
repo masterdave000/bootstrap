@@ -31,6 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             //Removing session message
             unset($_SESSION['update']);
         }
+
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
         <?php require './../includes/top-header.php' ?>
@@ -165,14 +172,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             </div>
 
 
-                            <div class="form-group flex-column flex-md-grow-1 <?php echo $item['category_name'] === 'Electronics' ? 'd-flex' : "d-none" ?>" id="electronic-section">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $item['category_name'] === 'Electronic' ? 'd-flex' : "d-none" ?>" id="electronic-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $item['category_name'] === 'Electronics' ? "" : "disabled" ?>>
+                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $item['category_name'] === 'Electronic' ? "" : "disabled" ?>>
 
                                         <option selected hidden value="<?php echo $item['category_name'] === 'Electronics' ? $item['section'] : "Select" ?>">
-                                            <?php echo $item['category_name'] === 'Electronics' ? $item['section'] : "Select" ?>
+                                            <?php echo $item['category_name'] === 'Electronic' ? $item['section'] : "Select" ?>
                                         </option>
                                     </select>
                                 </div>

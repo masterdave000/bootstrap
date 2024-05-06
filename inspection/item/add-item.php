@@ -19,6 +19,13 @@ include './../includes/side-header.php';
             //Removing session message
             unset($_SESSION['add']);
         }
+
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
         <?php require './../includes/top-header.php' ?>
