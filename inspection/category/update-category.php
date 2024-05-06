@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Update Category";
 include './../includes/side-header.php';
@@ -28,15 +28,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         <?php
 
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['update'];
-                //Removing session message
-                unset($_SESSION['update']);
-            }
+        if (isset($_SESSION['update'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['update'];
+            //Removing session message
+            unset($_SESSION['update']);
+        }
+
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -45,24 +52,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $category_img_url ?: 'default-img.png'?>"
-                                        alt="default-category-image" class="img-fluid rounded-circle" />
+                                    <img src="./images/<?php echo $category_img_url ?: 'default-img.png' ?>" alt="default-category-image" class="img-fluid rounded-circle" />
                                 </div>
 
-                                <p class="h3 text-gray-900 mb-4 "><?php echo $category_name?></p>
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $category_name ?></p>
 
                                 <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="category_img" id="category-img" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG" />
+                                    <input type="file" name="category_img" id="category-img" class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
 
-                                    <input type="hidden" name="current_category_img" id="category-img"
-                                        class="border w-75" accept="image/JPEG, image/JPG, image/PNG"
-                                        value="<?php echo $category_img_url?>" />
+                                    <input type="hidden" name="current_category_img" id="category-img" class="border w-75" accept="image/JPEG, image/JPG, image/PNG" value="<?php echo $category_img_url ?>" />
 
 
                                     <?php
@@ -85,15 +88,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             <div class="col col-12 p-0 form-group">
                                 <label for="category-name">Category Name <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="category_name" class="form-control p-4" id="category-name"
-                                    aria-describedby="businessaddressHelp" placeholder="Enter Business Address..."
-                                    value="<?php echo $category_name?>" required>
+                                <input type="text" name="category_name" class="form-control p-4" id="category-name" aria-describedby="businessaddressHelp" placeholder="Enter Business Address..." value="<?php echo $category_name ?>" required>
                             </div>
 
                             <input type="hidden" name="category_id" value="<?php echo $category_id ?>">
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">
                         </form>
                     </div>
                 </div>
