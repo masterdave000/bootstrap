@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include './../../../config/constants.php';
 
@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signage_area = htmlspecialchars($_POST['signage_area']);
     $clean_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $email = strtolower(trim(filter_var($clean_email, FILTER_VALIDATE_EMAIL)));
-    
+
     $img_name = basename($_FILES['bus_img']['name']);
     $temp_name = $_FILES['bus_img']['tmp_name'];
     $img_size = $_FILES['bus_img']['size'];
@@ -26,25 +26,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filename = $bus_name . '(' . date('m-d-Y') . ').png';
 
     $bus_img_url = $_POST['current_bus_img'];
-    
+
     if ($img_name) {
         if (!in_array($img_extension, $allowed_types)) {
-                $_SESSION['error'] = "Only JPEG, JPG, and PNG files are allowed.";
+            $_SESSION['error'] = "Only JPEG, JPG, and PNG files are allowed.";
         } elseif ($img_size >= $max_size) {
-                $_SESSION['error'] = "File size must be less than 1MB.";
+            $_SESSION['error'] = "File size must be less than 1MB.";
         } else {
-                $upload = $filename;
-                move_uploaded_file($temp_name, $folder_path . $upload);
-                $bus_img_url = $upload;
+            $upload = $filename;
+            move_uploaded_file($temp_name, $folder_path . $upload);
+            $bus_img_url = $upload;
         }
 
         // Redirect to the form file with an error message
         if (isset($_SESSION['error'])) {
-                header("Location: ../update-business.php?bus_id='$bus_id'");
-                exit();
+            header("Location: ../update-business.php?bus_id='$bus_id'");
+            exit();
         }
-    } 
-}      
+    }
+}
+
+$businessDuplicate = "SELECT bus_id FROM business WHERE bus_name = :bus_name";
+$businessStatement = $pdo->prepare($businessDuplicate);
+$businessStatement->bindParam(':bus_name', $bus_name);
+$businessStatement->execute();
+
+$businessCount = $businessStatement->rowCount();
+
+if ($businessCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $bus_name Record Already Exist
+        </div>
+    </div>
+    ";
+
+    header('location:' . SITEURL . "inspection/business/update-business.php?bus_id=$bus_id");
+    exit;
+}
+
 
 $businessQuery = "UPDATE business SET
     owner_id = :owner_id, 
