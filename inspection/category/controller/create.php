@@ -36,6 +36,28 @@ if (filter_has_var(INPUT_POST, 'submit')) {
     }
 }
 
+$categoryDuplicate = "SELECT category_id FROM category_list WHERE category_name = :category_name";
+$categoryStatement = $pdo->prepare($categoryDuplicate);
+$categoryStatement->bindParam(':category_name', $category_name);
+$categoryStatement->execute();
+
+$categoryCount = $categoryStatement->rowCount();
+
+if ($categoryCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $category_name Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . 'inspection/category/add-category.php');
+    exit;
+}
+
+
 $categoryQuery = "INSERT INTO category_list(
     category_name,
     category_img_url
