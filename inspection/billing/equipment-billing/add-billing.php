@@ -1,7 +1,7 @@
 <?php 
 
 $title = "Add Billing";
-include './../includes/side-header.php';
+include './../../includes/side-header.php';
 
 ?>
 
@@ -28,7 +28,7 @@ include './../includes/side-header.php';
             }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../../includes/top-header.php'?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -158,11 +158,8 @@ include './../includes/side-header.php';
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 <!-- End of Main Content -->
 
@@ -171,7 +168,7 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php require './../includes/footer.php'; ?>
+<?php require './../../includes/footer.php'; ?>
 </body>
 
 </html>

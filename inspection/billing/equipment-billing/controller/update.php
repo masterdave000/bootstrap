@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include './../../../config/constants.php';
+include './../../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_billing_id = filter_var($_POST['billing_id'], FILTER_SANITIZE_NUMBER_INT);
@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $section = $_POST['section'];
     $capacity = $_POST['capacity'];
     $fee = $_POST['fee'];
-    
 }
 
 $billingQuery = "UPDATE equipment_billing SET
@@ -32,20 +31,20 @@ if ($billingStatement->execute()) {
     $_SESSION['update'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Billing Updated Successfully
+                Billing Updated Equipment Successfully
             </div>
         </div>
     ";
 
-    header('location:' . SITEURL . 'inspection/billing/');
+    header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
 } else {
     $_SESSION['update'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>	
-                Failed to Update Billing
+                Failed to Update Equipment Billing
             </div>
         </div>
     ";
 
-    header('location:' . SITEURL . "inspection/billing/update-billing.php?billing_id='$billing_id'");
+    header('location:' . SITEURL . "inspection/billing/equipment-billing/update-billing.php?billing_id='$billing_id'");
 }

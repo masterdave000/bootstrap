@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include './../../../config/constants.php';
+include './../../../../config/constants.php';
 
 if (filter_has_var(INPUT_POST, 'password')) {
 
@@ -21,14 +21,13 @@ if (filter_has_var(INPUT_POST, 'password')) {
 
         ";
         //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
         exit;
     }
-    
 }
 
 //Get the id to be deleted
-if (filter_has_var(INPUT_POST, 'billing_id')) { 
+if (filter_has_var(INPUT_POST, 'billing_id')) {
     $clean_billing_id = filter_var($_POST['billing_id'], FILTER_SANITIZE_NUMBER_INT);
     $billing_id = filter_var($clean_billing_id, FILTER_VALIDATE_INT);
 
@@ -41,24 +40,24 @@ if (filter_has_var(INPUT_POST, 'billing_id')) {
         $_SESSION['delete'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Billing Details Deleted Successfully
+                Equipment Billing Record Deleted Successfully
             </div>
         </div>
         ";
         //Redirecting to the manage display page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
     } else {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>
-                Failed to Delete Billing Details, Please try again
+                Failed to Delete Equipment Billing Record, Please try again
             </div>
         </div>
 
         ";
         //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
     }
 } else {
 
@@ -70,6 +69,6 @@ if (filter_has_var(INPUT_POST, 'billing_id')) {
         </div>
 
         ";
-        //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+    //Redirecting to the manage billing page.
+    header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
 }

@@ -1,6 +1,6 @@
 <?php
 
-include './../../../config/constants.php';
+include './../../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         ";
 
-        header('location:' . SITEURL . 'inspection/billing/add-billing.php');
+        header('location:' . SITEURL . 'inspection/billing/equipment-billing/add-billing.php');
         exit;
     }
 }
@@ -56,20 +56,20 @@ if ($billingStatement->execute()) {
     $_SESSION['add'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Billing Added Successfully
+                Equipment Billing Added Successfully
             </div>
         </div>
     ";
 
-    header('location:' . SITEURL . 'inspection/billing/');
+    header('location:' . SITEURL . 'inspection/billing/equipment-billing/');
 } else {
     $_SESSION['add'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>	
-                Failed to Add Billing
+                Failed to Add Equipment Billing
             </div>
         </div>
     ";
 
-    header('location:' . SITEURL . 'inspection/billing/add-billing.php');
+    header('location:' . SITEURL . 'inspection/billing/equipment-billing/add-billing.php');
 }

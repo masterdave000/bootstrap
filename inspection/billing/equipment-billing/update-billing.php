@@ -1,7 +1,7 @@
 <?php
 
-$title = "Update Billing";
-include './../includes/side-header.php';
+$title = "Update Equipment Billing";
+include './../../includes/side-header.php';
 
 
 ?>
@@ -43,7 +43,7 @@ include './../includes/side-header.php';
         }
         ?>
 
-        <?php require './../includes/top-header.php' ?>
+        <?php require './../../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -144,14 +144,14 @@ include './../includes/side-header.php';
                             </div>
 
 
-                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronics' ? 'd-flex' : "d-none" ?>" id="electronic-section">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronic' ? 'd-flex' : "d-none" ?>" id="electronic-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $billing['category_name'] === 'Electronics' ? "" : "disabled" ?>>
+                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $billing['category_name'] === 'Electronic' ? "" : "disabled" ?>>
 
                                         <option selected hidden value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>">
-                                            <?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>
+                                            <?php echo $billing['category_name'] === 'Electronic' ? $billing['section'] : "Select" ?>
                                         </option>
                                     </select>
                                 </div>
@@ -197,7 +197,7 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php require './../includes/footer.php'; ?>
+<?php require './../../includes/footer.php'; ?>
 </body>
 
 </html>
