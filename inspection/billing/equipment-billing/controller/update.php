@@ -12,6 +12,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fee = $_POST['fee'];
 }
 
+
+$fetchBilling = "SELECT billing_id FROM equipment_billing_view WHERE section = :section AND capacity = :capacity";
+$fetchBillingStatement = $pdo->prepare($fetchBilling);
+$fetchBillingStatement->bindParam(':section', $section);
+$fetchBillingStatement->bindParam(':capacity', $capacity);
+$fetchBillingStatement->execute();
+
+$billingRecordCount = $fetchBillingStatement->rowCount();
+if ($billingRecordCount > 0) {
+
+    $_SESSION['duplicate'] = "
+        <div class='msgalert alert--danger' id='alert'>
+            <div class='alert__message'>	
+                $section - $capacity Fee Already Exist
+            </div>
+        </div>
+        
+        ";
+
+    header('location:' . SITEURL . "inspection/billing/equipment-billing/update-billing.php?billing_id=$billing_id");
+    exit;
+}
+
+
 $billingQuery = "UPDATE equipment_billing SET
     category_id = :category_id,
     section = :section,
