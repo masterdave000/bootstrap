@@ -1,4 +1,4 @@
-<?php 
+<?php
 include './../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -11,11 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $itemStatement->execute();
 
     $item = $itemStatement->fetch(PDO::FETCH_ASSOC);
-    
+
     $response = array(
         'item_id' => $item['item_id'],
         'item_name' => $item['item_name'],
-        'category_name' => $item['category_name']
+        'category_name' => $item['category_name'],
+        'section' => $item['section']
     );
 
     header('Content-Type: application/json');
