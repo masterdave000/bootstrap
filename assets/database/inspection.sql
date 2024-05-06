@@ -36,6 +36,7 @@ CREATE TABLE item_list (
 	item_id int NOT NULL AUTO_INCREMENT,
 	category_id int NOT NULL,        
 	item_name varchar(100) NOT NULL,
+    section varchar(100) NOT NULL,
     img_url varchar(100) NOT NULL,
 	PRIMARY KEY(item_id),
 	FOREIGN KEY(category_id) REFERENCES category_list(category_id)
@@ -168,7 +169,7 @@ FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
 
 CREATE VIEW item_view AS 
-SELECT i.item_id, i.item_name, i.img_url, c.category_name 
+SELECT i.item_id, i.item_name, c.category_name, i.section, i.img_url
 FROM item_list i
 LEFT JOIN category_list c ON i.category_id = c.category_id;
 
