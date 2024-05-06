@@ -224,29 +224,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 categoryNameContainer.appendChild(categoryName);
 
                 let categoryNameInputField = createInputField('text', `category-name-${counter}`, `category_name[]`);
-                categoryNameInputField.readOnly = true; // Disabled
+                categoryNameInputField.readOnly = true; // Readonly
                 categoryNameContainer.appendChild(categoryNameInputField);
                 categoryNameInputField.value = itemDetails.category_name;
 
                 // Section Field
-                let sectionContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
+                let sectionContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
                 itemContent.appendChild(sectionContainer);
 
-                let sectionLabel = createLabel(`Section`);
-                sectionContainer.appendChild(sectionLabel);
+                let section = createLabel(`Section`);
+                sectionContainer.appendChild(section);
 
-                let sectionFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
-                sectionContainer.appendChild(sectionFieldContainer);
-
-                let sectionSelect = document.createElement('select');
-                sectionSelect.classList.add('form-control');
-                sectionSelect.classList.add('form-select');
-                sectionSelect.id = `section-${counter}`;
-                sectionSelect.name = 'section[]';
-                sectionFieldContainer.appendChild(sectionSelect);
+                let sectionInputField = createInputField('text', `section-${counter}`, `section[]`);
+                sectionInputField.readOnly = true; // Readonly
+                sectionContainer.appendChild(sectionInputField);
+                sectionInputField.value = itemDetails.section ? itemDetails.section: 'No Data';
 
                 // Capacity Field
-                let capacityContainer = createContainerDiv('form-group d-none flex-column flex-md-grow-1');
+                let capacityContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
                 itemContent.appendChild(capacityContainer);
 
                 let capacityLabel = createLabel(`Capacity`);
@@ -261,48 +256,47 @@ document.addEventListener("DOMContentLoaded", function () {
                 capacitySelect.id = `capacity-${counter}`;
                 capacitySelect.name = 'capacity[]';
                 capacityFieldContainer.appendChild(capacitySelect);
-                
-
-                function updateSections() {
-                  var selectedCategory = categoryNameInputField.value;
-                  // Make an AJAX request to fetch sections
+              
+                // Function to update the capacities based on the selected section
+                function updateCapacities() {
+                  let selectedSection = itemDetails.section;
+                  // Make an AJAX request to fetch capacities
                   let xhr = new XMLHttpRequest();
-                  xhr.open("POST", "./json_response/sections.php", true);
+                  xhr.open("POST", "./json_response/capacities.php", true);
                   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                   xhr.onreadystatechange = function () {
                       if (xhr.readyState === 4 && xhr.status === 200) {
-                          let response = JSON.parse(xhr.responseText);
+                        let response = JSON.parse(xhr.responseText);
+                          
+                        capacitySelect.innerHTML = "";
+                        
+                        // Capacity Default Option
+                        let capacityDefaultOption = document.createElement("option");
+                        capacityDefaultOption.value = "";
+                        capacityDefaultOption.text = selectedSection ? "Select" : "No Data";
+                        capacityDefaultOption.selected = true;
+                        capacityDefaultOption.disabled = true;
+                        capacityDefaultOption.hidden = true;
+                        capacitySelect.appendChild(capacityDefaultOption);
 
-                          // Section Default option
-                          let sectionDefaultOption = document.createElement("option");
-                          sectionDefaultOption.value = "";
-                          sectionDefaultOption.text = "Select";
-                          sectionDefaultOption.selected = true;
-                          sectionDefaultOption.disabled = true;
-                          sectionDefaultOption.hidden = true;
-                          sectionSelect.appendChild(sectionDefaultOption);
-
-                   
-                          // Populate section select field with fetched sections
-                          response.sections.forEach(section => {
-                              let option = document.createElement("option");
-                              option.value = section;
-                              option.text = section;
-                              sectionSelect.appendChild(option);
+                        if (selectedSection) {
+                          response.capacities.forEach(capacity => {
+                            let option = document.createElement("option");
+                            option.value = capacity;
+                            option.text = capacity;
+                            capacitySelect.appendChild(option);
                           });
+
+                        }
+                        
                       }
                   };
-                  // Send selected category as parameter
-                  xhr.send(`category=${selectedCategory}`);
+                  // Send selected section as parameter
+                  xhr.send(`section=${selectedSection}`);
                 }
 
-                // Call updateSections to populate sections initially
-                updateSections();
-                
-                // Add event listener for section change event
-                sectionSelect.addEventListener("change", function () {
-                    updateCapacities();
-                });
+                updateCapacities();
+               
 
                 capacitySelect.addEventListener("change", function () {
                     updateFee();
@@ -348,43 +342,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 let billingIdHiddenInput = createHiddenInput("billing_id[]", `billing-id-${counter}`, true)
                 itemContent.appendChild(billingIdHiddenInput);
-
-                // Function to update the capacities based on the selected section
-                function updateCapacities() {
-                  let selectedSection = sectionSelect.value;
-                  // Make an AJAX request to fetch capacities
-                  let xhr = new XMLHttpRequest();
-                  xhr.open("POST", "./json_response/capacities.php", true);
-                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                  xhr.onreadystatechange = function () {
-                      if (xhr.readyState === 4 && xhr.status === 200) {
-                        let response = JSON.parse(xhr.responseText);
-                          
-                        capacitySelect.innerHTML = "";
-
-                        capacityContainer.classList.remove('d-none');
-                        capacityContainer.classList.add('d-flex');
-                        // Capacity Default Option
-                        let capacityDefaultOption = document.createElement("option");
-                        capacityDefaultOption.value = "";
-                        capacityDefaultOption.text = "Select";
-                        capacityDefaultOption.selected = true;
-                        capacityDefaultOption.disabled = true;
-                        capacityDefaultOption.hidden = true;
-                        capacitySelect.appendChild(capacityDefaultOption);
-
-                        response.capacities.forEach(capacity => {
-                          let option = document.createElement("option");
-                          option.value = capacity;
-                          option.text = capacity;
-                          capacitySelect.appendChild(option);
-                        });
-
-                      }
-                  };
-                  // Send selected section as parameter
-                  xhr.send(`section=${selectedSection}`);
-                }
 
                 let originalFeeValue;
 
