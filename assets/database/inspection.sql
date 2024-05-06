@@ -127,7 +127,7 @@ CREATE TABLE annual_inspection_certificate (
 	bus_group varchar(10) NOT NULL,    
     character_of_occupancy varchar(100) NOT NULL,
     occupancy_no varchar(50) NOT NULL,
-    date_compiled date NOT NULL,
+    date_complied date NOT NULL,
 	issued_on datetime NULL,
     date_inspected datetime NOT NULL default current_timestamp(),
 	PRIMARY KEY(certificate_id),
