@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Update Billing";
 include './../includes/side-header.php';
@@ -14,37 +14,36 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['update'];
-                //Removing session message
-                unset($_SESSION['update']);
-            }
+        if (isset($_SESSION['update'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['update'];
+            //Removing session message
+            unset($_SESSION['update']);
+        }
 
-            if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['duplicate'];
-                //Removing session message
-                unset($_SESSION['duplicate']);
-            }
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
 
 
-            if (filter_has_var(INPUT_GET, 'billing_id')) {
+        if (filter_has_var(INPUT_GET, 'billing_id')) {
 
-                $clean_billing_id = filter_var($_GET['billing_id'], FILTER_SANITIZE_NUMBER_INT);
-                $billing_id = filter_var($clean_billing_id, FILTER_VALIDATE_INT);
+            $clean_billing_id = filter_var($_GET['billing_id'], FILTER_SANITIZE_NUMBER_INT);
+            $billing_id = filter_var($clean_billing_id, FILTER_VALIDATE_INT);
 
-                $billingQuery = "SELECT * FROM equipment_billing_view WHERE billing_id = :billing_id";
-                $billingStatement = $pdo->prepare($billingQuery);
-                $billingStatement->bindParam(':billing_id', $billing_id);
-                $billingStatement->execute();
+            $billingQuery = "SELECT * FROM equipment_billing_view WHERE billing_id = :billing_id";
+            $billingStatement = $pdo->prepare($billingQuery);
+            $billingStatement->bindParam(':billing_id', $billing_id);
+            $billingStatement->execute();
 
-                $billing = $billingStatement->fetch(PDO::FETCH_ASSOC);
-                
-            }
+            $billing = $billingStatement->fetch(PDO::FETCH_ASSOC);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -53,7 +52,7 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
 
@@ -62,19 +61,17 @@ include './../includes/side-header.php';
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
                                     <select name="category_id" id="category-id" class="form-control px-3" required>
-                                        <?php 
-                                            $categoryQuery = "SELECT * from category_list";
-                                            $categoryStatement = $pdo->query($categoryQuery);
-                                            $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
-                                            
-                                            foreach ($categories as $category) {
-                                                ?>
+                                        <?php
+                                        $categoryQuery = "SELECT * from category_list";
+                                        $categoryStatement = $pdo->query($categoryQuery);
+                                        $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                        <option
-                                            <?php echo $category['category_id'] === $billing['category_id']? 'selected' : ''?>
-                                            value="<?php echo $category['category_id']?>">
-                                            <?php echo $category['category_name']?>
-                                        </option>
+                                        foreach ($categories as $category) {
+                                        ?>
+
+                                            <option <?php echo $category['category_id'] === $billing['category_id'] ? 'selected' : '' ?> value="<?php echo $category['category_id'] ?>">
+                                                <?php echo $category['category_name'] ?>
+                                            </option>
 
                                         <?php
                                         }
@@ -85,17 +82,14 @@ include './../includes/side-header.php';
                             </div>
 
 
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electrical' ? 'd-flex' : ""?>"
-                                id="electrical-section">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electrical' ? 'd-flex' : "d-none" ?>" id="electrical-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electrical"
-                                        <?php echo $billing['category_name'] === 'Electrical' ? "" : "disabled"?>>
+                                    <select name="section" class="form-control px-3" id="electrical" <?php echo $billing['category_name'] === 'Electrical' ? "" : "disabled" ?>>
 
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : ""?>
+                                        <option selected hidden value="<?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : "" ?>">
+                                            <?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : "Select" ?>
                                         </option>
                                         <option value="Total Connected Load">Total Connected Load</option>
                                         <option value="Total Transformer / Uninterrupted Power Supply">Total Transformer
@@ -109,16 +103,13 @@ include './../includes/side-header.php';
 
 
 
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Mechanical' ? 'd-flex' : ""?>"
-                                id="mechanical-section">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Mechanical' ? 'd-flex' : "d-none" ?>" id="mechanical-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="mechanical"
-                                        <?php echo $billing['category_name'] === 'Mechanical' ? "" : "disabled"?>>
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : ""?>
+                                    <select name="section" class="form-control px-3" id="mechanical" <?php echo $billing['category_name'] === 'Mechanical' ? "" : "disabled" ?>>
+                                        <option selected hidden value="<?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : "" ?>">
+                                            <?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : "Select" ?>
                                         </option>
                                         <option value="Refrigeration and Ice Plant">Refrigeration and Ice Plant</option>
                                         <option value="Air Conditioning Systems">Air Conditioning Systems</option>
@@ -153,17 +144,14 @@ include './../includes/side-header.php';
                             </div>
 
 
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronics' ? 'd-flex' : ""?>"
-                                id="electronic-section">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronics' ? 'd-flex' : "d-none" ?>" id="electronic-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic"
-                                        <?php echo $billing['category_name'] === 'Electronics' ? "" : "disabled"?>>
+                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $billing['category_name'] === 'Electronics' ? "" : "disabled" ?>>
 
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : ""?>
+                                        <option selected hidden value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>">
+                                            <?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>
                                         </option>
                                     </select>
                                 </div>
@@ -173,8 +161,7 @@ include './../includes/side-header.php';
                             <div class="col col-12 p-0 form-group">
                                 <label for="capacity">Capacity <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="capacity" class="form-control p-4" id="capacity"
-                                    placeholder="Enter Capacity..." value="<?php echo $billing['capacity']?>" required>
+                                <input type="text" name="capacity" class="form-control p-4" id="capacity" placeholder="Enter Capacity..." value="<?php echo $billing['capacity'] ?>" required>
                             </div>
 
                             <div class="col col-12 p-0 form-group">
@@ -186,17 +173,13 @@ include './../includes/side-header.php';
                                         <span class="input-group-text">₱</span>
                                     </div>
 
-                                    <input type="number" name="fee" class="form-control p-4" id="fee"
-                                        placeholder="Enter Fee..." step="0.01" min="0.00"
-                                        value="<?php echo $billing['fee']?>" required>
+                                    <input type="number" name="fee" class="form-control p-4" id="fee" placeholder="Enter Fee..." step="0.01" min="0.00" value="<?php echo $billing['fee'] ?>" required>
                                 </div>
                             </div>
 
-                            <input type="hidden" name="billing_id" value="<?php echo $billing['billing_id']?>"
-                                value="Edit">
+                            <input type="hidden" name="billing_id" value="<?php echo $billing['billing_id'] ?>" value="Edit">
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">
                         </form>
                     </div>
                 </div>
