@@ -115,53 +115,53 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  let equipmentCategory = document.getElementById("category-id");
-  let electricalSection = document.getElementById("electrical-section");
-  let mechanicalSection = document.getElementById("mechanical-section");
-  let electronicSection = document.getElementById("electronic-section");
+  let category = document.getElementById("category-id");
+  let Section1 = document.getElementById("electrical-section");
+  let Section2 = document.getElementById("mechanical-section");
+  let Section3 = document.getElementById("electronic-section");
 
-  if (equipmentCategory) {
-    equipmentCategory.addEventListener("change", () => {
-      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-      let equipmentCategoryText = selectedOption.innerText.trim();
+  if (category) {
+    category.addEventListener("change", () => {
+      let selectedOption = category.options[category.selectedIndex];
+      let categoryText = selectedOption.innerText.trim();
   
   
-      if (equipmentCategoryText === 'Electrical') {
-        electricalSection.classList.replace('d-none', 'd-flex');
-        electricalSection.querySelector('select').removeAttribute("disabled");
-        electricalSection.querySelector('select').setAttribute('required', 'required');
+      if (categoryText === 'Electrical') {
+        Section1.classList.replace('d-none', 'd-flex');
+        Section1.querySelector('select').removeAttribute("disabled");
+        Section1.querySelector('select').setAttribute('required', 'required');
   
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+        Section2.classList.replace('d-flex', 'd-none');
+        Section2.querySelector('select').removeAttribute("required");
+        Section2.querySelector('select').setAttribute('disabled', 'disabled');
   
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Mechanical') {
-        mechanicalSection.classList.replace('d-none', 'd-flex');
-        mechanicalSection.querySelector('select').removeAttribute("disabled");
-        mechanicalSection.querySelector('select').setAttribute('required', 'required');
+        Section3.classList.replace('d-flex', 'd-none');
+        Section3.querySelector('select').removeAttribute("required");
+        Section3.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (categoryText === 'Mechanical') {
+        Section2.classList.replace('d-none', 'd-flex');
+        Section2.querySelector('select').removeAttribute("disabled");
+        Section2.querySelector('select').setAttribute('required', 'required');
   
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+        Section1.classList.replace('d-flex', 'd-none');
+        Section1.querySelector('select').removeAttribute("required");
+        Section1.querySelector('select').setAttribute('disabled', 'disabled');
   
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Electronic') {
-        electronicSection.classList.replace('d-none', 'd-flex');
-        electronicSection.querySelector('select').removeAttribute("disabled");
-        electronicSection.querySelector('select').setAttribute('required', 'required');
+        Section3.classList.replace('d-flex', 'd-none');
+        Section3.querySelector('select').removeAttribute("required");
+        Section3.querySelector('select').setAttribute('disabled', 'disabled');
+      } else if (categoryText === 'Electronic') {
+        Section3.classList.replace('d-none', 'd-flex');
+        Section3.querySelector('select').removeAttribute("disabled");
+        Section3.querySelector('select').setAttribute('required', 'required');
   
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
+        Section1.classList.replace('d-flex', 'd-none');
+        Section1.querySelector('select').removeAttribute("required");
+        Section1.querySelector('select').setAttribute('disabled', 'disabled');
   
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+        Section2.classList.replace('d-flex', 'd-none');
+        Section2.querySelector('select').removeAttribute("required");
+        Section2.querySelector('select').setAttribute('disabled', 'disabled');
       }
     });
   }
@@ -444,59 +444,64 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let equipmentCategory = document.getElementById("category-id");
-  let electricalSection = document.getElementById("electrical-section");
-  let mechanicalSection = document.getElementById("mechanical-section");
-  let electronicSection = document.getElementById("electronic-section");
+function billing(category, section1, section2, section3) {
+  document.addEventListener("DOMContentLoaded", () => {
+    let Category = document.getElementById(category);
+    let Section1 = document.getElementById(section1);
+    let Section2 = document.getElementById(section2);
+    let Section3 = document.getElementById(section3);
+  
+    if (Category) {
+      Category.addEventListener("change", () => {
+        let selectedOption = Category.options[Category.selectedIndex];
+        let CategoryText = selectedOption.innerText.trim();
+    
+    
 
-  if (equipmentCategory) {
-    equipmentCategory.addEventListener("change", () => {
-      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-      let equipmentCategoryText = selectedOption.innerText.trim();
-  
-  
-      if (equipmentCategoryText === 'Electrical') {
-        electricalSection.classList.replace('d-none', 'd-flex');
-        electricalSection.querySelector('select').removeAttribute("disabled");
-        electricalSection.querySelector('select').setAttribute('required', 'required');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Mechanical') {
-        mechanicalSection.classList.replace('d-none', 'd-flex');
-        mechanicalSection.querySelector('select').removeAttribute("disabled");
-        mechanicalSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Electronic') {
-        electronicSection.classList.replace('d-none', 'd-flex');
-        electronicSection.querySelector('select').removeAttribute("disabled");
-        electronicSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-      }
-    });
-  }
-  
-});
+        if (CategoryText === 'Electrical') {
+          Section1.classList.replace('d-none', 'd-flex');
+          Section1.querySelector('select').removeAttribute("disabled");
+          Section1.querySelector('select').setAttribute('required', 'required');
+    
+          Section2.classList.replace('d-flex', 'd-none');
+          Section2.querySelector('select').removeAttribute("required");
+          Section2.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section3.classList.replace('d-flex', 'd-none');
+          Section3.querySelector('select').removeAttribute("required");
+          Section3.querySelector('select').setAttribute('disabled', 'disabled');
+        } else if (CategoryText === 'Mechanical') {
+          Section2.classList.replace('d-none', 'd-flex');
+          Section2.querySelector('select').removeAttribute("disabled");
+          Section2.querySelector('select').setAttribute('required', 'required');
+    
+          Section1.classList.replace('d-flex', 'd-none');
+          Section1.querySelector('select').removeAttribute("required");
+          Section1.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section3.classList.replace('d-flex', 'd-none');
+          Section3.querySelector('select').removeAttribute("required");
+          Section3.querySelector('select').setAttribute('disabled', 'disabled');
+        } else if (CategoryText === 'Electronic') {
+          Section3.classList.replace('d-none', 'd-flex');
+          Section3.querySelector('select').removeAttribute("disabled");
+          Section3.querySelector('select').setAttribute('required', 'required');
+    
+          Section1.classList.replace('d-flex', 'd-none');
+          Section1.querySelector('select').removeAttribute("required");
+          Section1.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section2.classList.replace('d-flex', 'd-none');
+          Section2.querySelector('select').removeAttribute("required");
+          Section2.querySelector('select').setAttribute('disabled', 'disabled');
+        }
+      });
+    }
+    
+  });
+}
+
+billing('category-id', 'electrical-section', 'mechanical-section', 'electronic-section');
 
 
 
