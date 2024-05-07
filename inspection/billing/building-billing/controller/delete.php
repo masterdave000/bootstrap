@@ -40,24 +40,24 @@ if (filter_has_var(INPUT_POST, 'bldg_billing_id')) {
         $_SESSION['delete'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Business Billing Record Deleted Successfully
+                Building Billing Record Deleted Successfully
             </div>
         </div>
         ";
         //Redirecting to the manage display page.
-        header('location:' . SITEURL . 'inspection/billing/business-billing/');
+        header('location:' . SITEURL . 'inspection/billing/building-billing/');
     } else {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>
-                Failed to Delete Business Billing Record, Please try again
+                Failed to Delete Building Billing Record, Please try again
             </div>
         </div>
 
         ";
         //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/business-billing/');
+        header('location:' . SITEURL . 'inspection/billing/building-billing/');
     }
 } else {
 
@@ -70,5 +70,5 @@ if (filter_has_var(INPUT_POST, 'bldg_billing_id')) {
 
         ";
     //Redirecting to the manage billing page.
-    header('location:' . SITEURL . 'inspection/billing/business-billing/');
+    header('location:' . SITEURL . 'inspection/billing/building-billing/');
 }
