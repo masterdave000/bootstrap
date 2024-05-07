@@ -72,7 +72,7 @@ require "./../../includes/side-header.php";
                             <tbody>
 
                                 <?php 
-                                    $billingQuery = "SELECT billing_id, category_name, section FROM equipment_billing_view ORDER BY billing_id DESC";
+                                    $billingQuery = "SELECT billing_id, category_name, section, capacity FROM equipment_billing_view ORDER BY billing_id DESC";
                                     $billingStatement = $pdo->query($billingQuery);
                                     $billings = $billingStatement->fetchAll(PDO::FETCH_ASSOC);
                                     
@@ -92,6 +92,10 @@ require "./../../includes/side-header.php";
 
                                                 <div class="sub-title d-none d-md-flex">Section:
                                                     <?php echo $billing['section']?>
+                                                </div>
+
+                                                <div class="sub-title d-none d-md-flex">Section:
+                                                    <?php echo $billing['capacity']?>
                                                 </div>
                                             </div>
                                         </a>
