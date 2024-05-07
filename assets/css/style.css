@@ -484,3 +484,13 @@ input[readonly] {
   height: 20px;
   
 }
+
+/* Billing */
+
+.billing-container {
+  height: 85vh;
+}
+
+.billing-link-container {
+  padding: 30px 40px;
+}
