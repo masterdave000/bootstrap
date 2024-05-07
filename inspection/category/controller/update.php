@@ -38,8 +38,9 @@ if (filter_has_var(INPUT_POST, 'category_id')) {
     }
 }
 
-$categoryDuplicate = "SELECT category_id FROM category_list WHERE category_name = :category_name";
+$categoryDuplicate = "SELECT category_id FROM category_list WHERE category_name = :category_name AND category_id != :category_id";
 $categoryStatement = $pdo->prepare($categoryDuplicate);
+$categoryStatement->bindParam(':category_id', $category_id);
 $categoryStatement->bindParam(':category_name', $category_name);
 $categoryStatement->execute();
 

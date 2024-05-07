@@ -42,8 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-$itemDuplicate = "SELECT item_id FROM item_list WHERE item_name = :item_name";
+$itemDuplicate = "SELECT item_id FROM item_list WHERE item_name = :item_name AND item_id != :item_id";
 $itemStatement = $pdo->prepare($itemDuplicate);
+$itemStatement->bindParam(':item_id', $item_id);
 $itemStatement->bindParam(':item_name', $item_name);
 $itemStatement->execute();
 

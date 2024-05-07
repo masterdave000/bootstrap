@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = trim(ucfirst($_POST['description']));
 }
 
-$violationDuplicate = "SELECT violation_id FROM violation WHERE description = :description";
+$violationDuplicate = "SELECT violation_id FROM violation WHERE description = :description AND violation_id != :violation_id";
 $violationStatement = $pdo->prepare($violationDuplicate);
+$violationStatement->bindParam(':violation_id', $violation_id);
 $violationStatement->bindParam(':description', $description);
 $violationStatement->execute();
 

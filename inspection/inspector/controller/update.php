@@ -46,8 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$inspectorDuplicate = "SELECT inspector_id FROM inspector WHERE inspector_firstname = :inspector_firstname AND inspector_midname = :inspector_midname AND inspector_lastname = :inspector_lastname AND inspector_suffix = :inspector_suffix";
+$inspectorDuplicate = "SELECT inspector_id FROM inspector WHERE inspector_firstname = :inspector_firstname AND inspector_midname = :inspector_midname AND inspector_lastname = :inspector_lastname AND inspector_suffix = :inspector_suffix AND inspector_id != :inspector_id";
 $inspectorStatement = $pdo->prepare($inspectorDuplicate);
+$inspectorStatement->bindParam(':inspector_id', $inspector_id);
 $inspectorStatement->bindParam(':inspector_firstname', $inspector_firstname);
 $inspectorStatement->bindParam(':inspector_midname', $inspector_midname);
 $inspectorStatement->bindParam(':inspector_lastname', $inspector_lastname);

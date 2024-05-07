@@ -46,8 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$businessDuplicate = "SELECT bus_id FROM business WHERE bus_name = :bus_name";
+$businessDuplicate = "SELECT bus_id FROM business WHERE bus_name = :bus_name AND bus_id != :bus_id";
 $businessStatement = $pdo->prepare($businessDuplicate);
+$businessStatement->bindParam(':bus_id', $bus_id);
 $businessStatement->bindParam(':bus_name', $bus_name);
 $businessStatement->execute();
 

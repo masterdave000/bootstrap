@@ -13,8 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 
-$fetchBilling = "SELECT billing_id FROM equipment_billing_view WHERE section = :section AND capacity = :capacity";
+$fetchBilling = "SELECT billing_id FROM equipment_billing_view WHERE section = :section AND capacity = :capacity AND billing_id != :billing_id";
 $fetchBillingStatement = $pdo->prepare($fetchBilling);
+$fetchBillingStatement->bindParam(':billing_id', $billing_id);
 $fetchBillingStatement->bindParam(':section', $section);
 $fetchBillingStatement->bindParam(':capacity', $capacity);
 $fetchBillingStatement->execute();

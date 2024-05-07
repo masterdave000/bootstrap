@@ -46,8 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$ownerDuplicate = "SELECT owner_id FROM owner WHERE owner_firstname = :owner_firstname AND owner_midname = :owner_midname AND owner_lastname = :owner_lastname AND owner_suffix = :owner_suffix";
+$ownerDuplicate = "SELECT owner_id FROM owner WHERE owner_firstname = :owner_firstname AND owner_midname = :owner_midname AND owner_lastname = :owner_lastname AND owner_suffix = :owner_suffix AND owner_id != :owner_id";
 $ownerStatement = $pdo->prepare($ownerDuplicate);
+$ownerStatement->bindParam(':owner_id', $owner_id);
 $ownerStatement->bindParam(':owner_firstname', $owner_firstname);
 $ownerStatement->bindParam(':owner_midname', $owner_midname);
 $ownerStatement->bindParam(':owner_lastname', $owner_lastname);

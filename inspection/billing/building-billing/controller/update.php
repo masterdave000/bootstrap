@@ -11,8 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $property_attribute = trim(ucfirst($_POST['property_attribute']));
     $fee = $_POST['fee'];
 
-    $fetchBilling = "SELECT bldg_billing_id FROM building_billing WHERE bldg_section = :section AND bldg_property_attribute = :property_attribute";
+    $fetchBilling = "SELECT bldg_billing_id FROM building_billing WHERE bldg_section = :section AND bldg_property_attribute = :property_attribute AND bldg_billing_id != :bldg_billing_id";
     $fetchBillingStatement = $pdo->prepare($fetchBilling);
+    $fetchBillingStatement->bindParam(':bldg_billing_id', $bldg_billing_id);
     $fetchBillingStatement->bindParam(':section', $section);
     $fetchBillingStatement->bindParam(':property_attribute', $property_attribute);
     $fetchBillingStatement->execute();
