@@ -54,18 +54,29 @@ CREATE TABLE inspector (
 	PRIMARY KEY(inspector_id)
 );
 
-CREATE TABLE business_billing (
-	business_billing_id int NOT NULL AUTO_INCREMENT,
-	building_fee decimal(10, 2) NOT NULL,
-	sanitary_fee decimal(10, 2) NOT NULL,
-	signage_fee decimal(10, 2) NOT NULL,
-	PRIMARY KEY(business_billing_id)
+CREATE TABLE building_billing (
+	bldg_billing_id int NOT NULL AUTO_INCREMENT,
+    bldg_category varchar(100) NOT NULL,
+    bldg_section varchar(100) NOT NULL,
+    bldg_property_attribute varchar(100) NOT NULL,
+	bldg_fee decimal(10, 2) NOT NULL,
+	PRIMARY KEY(bldg_billing_id)
 );
+
+CREATE TABLE signage_billing (
+	signage_id int NOT NULL AUTO_INCREMENT,
+	display_type varchar(100) NOT NULL,
+    sign_type varchar(100) NOT NULL,
+    signage_fee decimal(10, 2) NOT NULL,
+    PRIMARY KEY(signage_id)
+);
+
 CREATE TABLE inspection ( 
 	inspection_id int NOT NULL AUTO_INCREMENT,
 	owner_id int NOT NULL,
 	bus_id int NOT NULL,
-	business_billing_id int NOT NULL,
+    signage_id int NOT NULL,
+    bldg_billing_id int NOT NULL,
 	application_type varchar(50) NOT NULL DEFAULT 'Annual',
     remarks varchar(50) NOT NULL,
 	date_inspected datetime NOT NULL default current_timestamp(),
@@ -73,9 +84,10 @@ CREATE TABLE inspection (
 	PRIMARY KEY(inspection_id),
 	FOREIGN KEY(owner_id) REFERENCES owner(owner_id),
 	FOREIGN KEY(bus_id) REFERENCES business(bus_id),
-	FOREIGN KEY(business_billing_id) REFERENCES business_billing(business_billing_id)
+    FOREIGN KEY(signage_id) REFERENCES signage_billing(signage_id),
+    FOREIGN KEY(bldg_billing_id) REFERENCES building_billing(bldg_billing_id)
 );
-   
+
 CREATE TABLE inspection_inspector (
 	inspector_id int NOT NULL,
     inspection_id int NOT NULL,
@@ -176,7 +188,8 @@ LEFT JOIN category_list c ON i.category_id = c.category_id;
 CREATE VIEW inspection_view AS
 SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
 b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
-bb.building_fee, bb.sanitary_fee, bb.signage_fee,
+bb.bldg_category, bb.bldg_section, bb.bldg_property_attribute, bb.bldg_fee,
+sb.display_type, sb.sign_type, sb.signage_fee,
 i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, 
 ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, i.remarks, b.bus_img_url, i.date_inspected
 FROM inspection i 
@@ -185,13 +198,13 @@ LEFT JOIN owner o ON i.owner_id = o.owner_id
 LEFT JOIN inspection_item ii ON i.inspection_id = ii.inspection_id
 LEFT JOIN item_list il ON ii.item_id = il.item_id
 LEFT JOIN category_list cl ON il.category_id = cl.category_id
-LEFT JOIN business_billing bb ON i.business_billing_id = bb.business_billing_id
+LEFT JOIN building_billing bb ON i.bldg_billing_id = bb.bldg_billing_id
+LEFT JOIN signage_billing sb ON i.signage_id = sb.signage_id
 LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
 LEFT JOIN inspection_inspector iins ON i.inspection_id = iins.inspection_id
 LEFT JOIN inspector ins ON iins.inspector_id = ins.inspector_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
-
 CREATE VIEW annual_inspection_certificate_view AS
 SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
