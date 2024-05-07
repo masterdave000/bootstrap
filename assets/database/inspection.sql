@@ -56,7 +56,6 @@ CREATE TABLE inspector (
 
 CREATE TABLE building_billing (
 	bldg_billing_id int NOT NULL AUTO_INCREMENT,
-    bldg_category varchar(100) NOT NULL,
     bldg_section varchar(100) NOT NULL,
     bldg_property_attribute varchar(100) NOT NULL,
 	bldg_fee decimal(10, 2) NOT NULL,
@@ -188,7 +187,7 @@ LEFT JOIN category_list c ON i.category_id = c.category_id;
 CREATE VIEW inspection_view AS
 SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
 b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
-bb.bldg_category, bb.bldg_section, bb.bldg_property_attribute, bb.bldg_fee,
+bb.bldg_section, bb.bldg_property_attribute, bb.bldg_fee,
 sb.display_type, sb.sign_type, sb.signage_fee,
 i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, 
 ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, i.remarks, b.bus_img_url, i.date_inspected

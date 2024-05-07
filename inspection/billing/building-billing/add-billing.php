@@ -41,12 +41,6 @@ include './../../includes/side-header.php';
                         </div>
                         <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
 
-                            <div class="col col-12 p-0 form-group">
-                                <label for="building-category">Category <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" name="building_category" class="form-control p-4" id="building-category" value="Buidling" required readonly>
-                            </div>
-
                             <div class="form-group d-flex flex-column flex-md-grow-1">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>

@@ -59,7 +59,7 @@ require "./../../includes/side-header.php";
                             <thead>
                                 <tr class="d-flex justify-content-between border-bottom">
                                     <th>
-                                        Category
+                                        Section
                                     </th>
 
                                     <th>
@@ -71,7 +71,7 @@ require "./../../includes/side-header.php";
                             <tbody>
 
                                 <?php
-                                $billingQuery = "SELECT bldg_billing_id, bldg_category, bldg_section, bldg_property_attribute FROM building_billing ORDER BY bldg_billing_id DESC";
+                                $billingQuery = "SELECT bldg_billing_id, bldg_section, bldg_property_attribute FROM building_billing ORDER BY bldg_billing_id DESC";
                                 $billingStatement = $pdo->query($billingQuery);
                                 $billings = $billingStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,10 +85,6 @@ require "./../../includes/side-header.php";
                                             <a href="view-billing.php?bldg_billing_id=<?php echo $billing['bldg_billing_id'] ?>" class="d-flex flex-row align-items-center text-decoration-none text-gray-700 flex-gap">
                                                 <div>
                                                     <div class="text">
-                                                        <?php echo $billing['bldg_category'] ?>
-                                                    </div>
-
-                                                    <div class="sub-title d-none d-md-flex">Section:
                                                         <?php echo $billing['bldg_section'] ?>
                                                     </div>
 

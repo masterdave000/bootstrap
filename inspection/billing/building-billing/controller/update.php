@@ -6,7 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_bldg_billing_id = filter_var($_POST['bldg_billing_id'], FILTER_SANITIZE_NUMBER_INT);
     $bldg_billing_id = filter_var($clean_bldg_billing_id, FILTER_VALIDATE_INT);
 
-    $building_category = trim(ucwords($_POST['building_category']));
     $section = trim($_POST['section']);
     $property_attribute = trim(ucfirst($_POST['property_attribute']));
     $fee = $_POST['fee'];
@@ -36,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $billingQuery = "UPDATE building_billing SET
-    bldg_category = :category,
     bldg_section = :section,
     bldg_property_attribute = :property_attribute,
     bldg_fee = :fee
@@ -45,7 +43,6 @@ $billingQuery = "UPDATE building_billing SET
 
 $billingStatement = $pdo->prepare($billingQuery);
 $billingStatement->bindParam(':bldg_billing_id', $bldg_billing_id);
-$billingStatement->bindParam(':category', $building_category);
 $billingStatement->bindParam(':section', $section);
 $billingStatement->bindParam(':property_attribute', $property_attribute);
 $billingStatement->bindParam(':fee', $fee);

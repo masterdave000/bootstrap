@@ -3,8 +3,6 @@
 include './../../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $building_category = trim(ucwords($_POST['building_category']));
     $section = trim($_POST['section']);
     $property_attribute = trim(ucfirst($_POST['property_attribute']));
     $fee = $_POST['fee'];
@@ -33,12 +31,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $billingQuery = "INSERT INTO building_billing (
-    bldg_category,
     bldg_section,
     bldg_property_attribute,
     bldg_fee   
 ) VALUES (
-    :category,
     :section,
     :property_attribute,
     :fee 
@@ -46,7 +42,6 @@ $billingQuery = "INSERT INTO building_billing (
 
 
 $billingStatement = $pdo->prepare($billingQuery);
-$billingStatement->bindParam(':category', $building_category);
 $billingStatement->bindParam(':section', $section);
 $billingStatement->bindParam(':property_attribute', $property_attribute);
 $billingStatement->bindParam(':fee', $fee);

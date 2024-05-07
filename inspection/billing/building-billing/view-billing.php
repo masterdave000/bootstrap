@@ -51,13 +51,6 @@ include './../../includes/side-header.php';
                         <form class="user" enctype="multipart/form-data">
 
                             <div class="col col-12 p-0 form-group">
-                                <label>Capacity <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" class="form-control p-4"
-                                    value="<?php echo $billing['bldg_category']?>" disabled>
-                            </div>
-
-                            <div class="col col-12 p-0 form-group">
                                 <label>Section <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" class="form-control p-4" value="<?php echo $billing['bldg_section']?>"
