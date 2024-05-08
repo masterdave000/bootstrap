@@ -246,6 +246,83 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// SIGNAGE BILLING
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('display-type')) {
+    let displayType = document.getElementById('display-type');
+    let signTypeContainer = document.getElementById('sign-type-container');
+
+    displayType.addEventListener('change', function() {
+      let displayTypeValue = displayType.value;
+
+      if (displayTypeValue) {
+        
+        let signType = document.getElementById('sign-type');
+
+        let sign_type = new XMLHttpRequest();
+        sign_type.open("GET", `./json_response/sign-type.php?display_type=${displayTypeValue}`);
+
+        sign_type.onreadystatechange = function () {
+          if (sign_type.readyState === 4 && sign_type.status === 200) {
+            let sign_type_details = JSON.parse(sign_type.responseText);
+
+            signType.innerHTML = "";
+
+            let signTypeDefaultOption = document.createElement("option");
+            signTypeDefaultOption.value = "";
+            signTypeDefaultOption.text = displayTypeValue ? "Select" : "No Data";
+            signTypeDefaultOption.selected = true;
+            signTypeDefaultOption.disabled = true;
+            signTypeDefaultOption.hidden = true;
+            signType.appendChild(signTypeDefaultOption);
+
+            sign_type_details.sign_types.forEach(sign_type => {
+              let option = document.createElement("option");
+              option.value = sign_type;
+              option.text = sign_type;
+              signType.appendChild(option);
+            });
+
+            signTypeContainer.classList.remove('d-none');
+            document.getElementById("signage-fee-container").classList.add('d-none');
+
+          }
+        }
+        sign_type.send();
+  
+        signType.addEventListener('change', function () {
+          
+          let signTypeValue = signType.value;
+
+          let signageBilling = new XMLHttpRequest();
+          signageBilling.open("GET", `./json_response/signage-fee.php?display_type=${encodeURIComponent(displayTypeValue)}&sign_type=${encodeURIComponent(signTypeValue)}`, true);
+
+          signageBilling.onreadystatechange = function () {
+            if (signageBilling.readyState === 4 && signageBilling.status === 200) {
+              let signageBillingDetails = JSON.parse(signageBilling.responseText);
+              console.log(signageBillingDetails);
+
+              document.getElementById("signage-fee-container").classList.remove('d-none');
+              let signageId = document.getElementById('signage-id');
+              signageId.value = signageBillingDetails.signage_id;
+              
+              let signageFee = document.getElementById('signage-fee');
+              signageFee.value = signageBillingDetails.signage_fee;
+            
+            }
+          }
+
+          signageBilling.send();
+        });
+        
+      }
+
+    });
+  }
+
+});
+
+
 document.addEventListener("DOMContentLoaded", function () {
   let wrapper = document.getElementById("item-list");
   let selectItemButtons = document.querySelectorAll(".select-item");
