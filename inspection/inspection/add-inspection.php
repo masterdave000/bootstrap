@@ -202,20 +202,36 @@ include './../includes/side-header.php';
                                             </div>
                                         </div>
 
-                                        <p class="text font-weight-bolder">Sanitary Information</p>
+                                        <p class="text font-weight-bolder">Sanitary/Plumbing Information</p>
 
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="sanitary-fee">Sanitary Fee <span class="text-danger">*</span>
-                                            </label>
+                                        <div class="d-md-flex align-items-center justify-content-center">
+                                            <div class="col col-md-6 p-0 form-group flex-md-grow-1">
+                                                <label for="sanitary-fee">Fee <span class="text-danger">*</span>
+                                                </label>
 
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text">₱</span>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text">₱</span>
+                                                    </div>
+
+                                                    <?php 
+                                                        $sanitaryQuery = "SELECT * FROM sanitary_billing WHERE sanitary_section = :sanitary_section";
+                                                        $sanitaryStatement = $pdo->prepare($sanitaryQuery);
+                                                        $sanitaryStatement->bindValue(':sanitary_section','Plumbing');
+                                                        $sanitaryStatement->execute();
+
+                                                        $sanitaryBilling = $sanitaryStatement->fetch(PDO::FETCH_ASSOC);
+
+                                                    ?>
+                                                    <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="<?= $sanitaryBilling['sanitary_fee']?>" readonly>
                                                 </div>
-
-                                                <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="0.00" required>
                                             </div>
 
+                                            <div class="col col-md-6 p-0 form-group flex-md-grow-1">
+                                                <label for="sanitary-quantity">Quantity <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="number" name="sanitary_quantity" class="form-control p-4" id="sanitary-quantity" placeholder="Enter Quantity..." value="1" required>
+                                            </div>
                                         </div>
 
                                         <p class="text font-weight-bolder">Signage Information</p>
@@ -267,7 +283,7 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <input type="hidden" name="bldg_billing_id" id="bldg-billing-id">
-                                        <input type="hidden" name="sanitary_id" id="sanitary-id">
+                                        <input type="hidden" name="sanitary_id" id="sanitary-id" value="<?= $sanitaryBilling['sanitary_id']?>">
                                         <input type="hidden" name="signage_id" id="signage-id">
                                     </div>
 
