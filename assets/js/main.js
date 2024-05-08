@@ -118,7 +118,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let category = document.getElementById("category-id");
   let Section1 = document.getElementById("electrical-section");
   let Section2 = document.getElementById("mechanical-section");
-  let Section3 = document.getElementById("electronic-section");
 
   if (category) {
     category.addEventListener("change", () => {
@@ -150,18 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
         Section3.classList.replace('d-flex', 'd-none');
         Section3.querySelector('select').removeAttribute("required");
         Section3.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (categoryText === 'Electronic') {
-        Section3.classList.replace('d-none', 'd-flex');
-        Section3.querySelector('select').removeAttribute("disabled");
-        Section3.querySelector('select').setAttribute('required', 'required');
-  
-        Section1.classList.replace('d-flex', 'd-none');
-        Section1.querySelector('select').removeAttribute("required");
-        Section1.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        Section2.classList.replace('d-flex', 'd-none');
-        Section2.querySelector('select').removeAttribute("required");
-        Section2.querySelector('select').setAttribute('disabled', 'disabled');
       }
     });
   }

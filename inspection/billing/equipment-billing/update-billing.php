@@ -143,21 +143,6 @@ include './../../includes/side-header.php';
                                 </div>
                             </div>
 
-
-                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronic' ? 'd-flex' : "d-none" ?>" id="electronic-section">
-                                <label for="section">Section<span class="text-danger">*</span>
-                                </label>
-                                <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic" <?php echo $billing['category_name'] === 'Electronic' ? "" : "disabled" ?>>
-
-                                        <option selected hidden value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>">
-                                            <?php echo $billing['category_name'] === 'Electronic' ? $billing['section'] : "Select" ?>
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
-
-
                             <div class="col col-12 p-0 form-group">
                                 <label for="capacity">Capacity <span class="text-danger">*</span>
                                 </label>

@@ -120,17 +120,6 @@ include './../../includes/side-header.php';
                                 </div>
                             </div>
 
-                            <div class="form-group d-none flex-column flex-md-grow-1" id="electronic-section">
-                                <label for="section">Section<span class="text-danger">*</span>
-                                </label>
-                                <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic">
-                                        <option selected disabled hidden value="">Select</option>
-
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="col col-12 p-0 form-group">
                                 <label for="capacity">Capacity <span class="text-danger">*</span>
                                 </label>
