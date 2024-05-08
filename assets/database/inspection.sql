@@ -73,7 +73,7 @@ CREATE TABLE signage_billing (
 CREATE TABLE sanitary_billing (
 	sanitary_id int NOT NULL AUTO_INCREMENT,
     sanitary_section varchar(100) NOT NULL,
-    sanitary_fee decimal(10, 2) NOT NULL,
+    sanitary_fee decimal(11, 2) NOT NULL,
     PRIMARY KEY(sanitary_id)
 );
 
