@@ -70,6 +70,15 @@ CREATE TABLE signage_billing (
     PRIMARY KEY(signage_id)
 );
 
+CREATE TABLE sanitary_billing (
+	sanitary_id int NOT NULL AUTO_INCREMENT,
+    sanitary_section varchar(100) NOT NULL,
+    sanitary_fee decimal(10, 2) NOT NULL,
+    PRIMARY KEY(sanitary_id)
+);
+
+INSERT INTO sanitary_billing (sanitary_id, sanitary_section, sanitary_fee) VALUES (1, 'Plumbing', 60.00);
+
 CREATE TABLE inspection ( 
 	inspection_id int NOT NULL AUTO_INCREMENT,
 	owner_id int NOT NULL,
@@ -85,6 +94,14 @@ CREATE TABLE inspection (
 	FOREIGN KEY(bus_id) REFERENCES business(bus_id),
     FOREIGN KEY(signage_id) REFERENCES signage_billing(signage_id),
     FOREIGN KEY(bldg_billing_id) REFERENCES building_billing(bldg_billing_id)
+);
+
+CREATE TABLE inspection_sanitary_billing (
+    inspection_id int NOT NULL,
+    sanitary_id int NOT NULL,
+    quantity int NOT NULL,
+    FOREIGN KEY (inspection_id) REFERENCES inspection (inspection_id),
+    FOREIGN KEY (sanitary_id) REFERENCES sanitary_billing (sanitary_id)
 );
 
 CREATE TABLE inspection_inspector (
@@ -204,6 +221,7 @@ LEFT JOIN inspection_inspector iins ON i.inspection_id = iins.inspection_id
 LEFT JOIN inspector ins ON iins.inspector_id = ins.inspector_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
+
 CREATE VIEW annual_inspection_certificate_view AS
 SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
