@@ -244,31 +244,16 @@ include './../includes/side-header.php';
                                             </div>
                                         </div>
 
-                                        <div class="form-group d-none flex-column flex-md-grow-1">
+                                        <div class="form-group d-none flex-column flex-md-grow-1" id="sign-type-container">
                                             <label for="sign-type">Sign Type <span class="text-danger">*</span>
                                             </label>
                                             <div class="d-flex align-items-center justify-content-center select-container">
                                                 <select name="sign_type" id="sign-type" class="form-control form-select px-3" required>
-                                                    <option selected disabled hidden value="">Select</option>
-                                                    <?php
-                                                    $signageQuery = "SELECT sign_type from signage_billing";
-                                                    $signageStatement = $pdo->query($signageQuery);
-                                                    $signages = $signageStatement->fetchAll(PDO::FETCH_ASSOC);
-
-                                                    foreach ($signages as $signage) :
-                                                    ?>
-
-                                                        <option value="<?php echo $signage['sign_type'] ?>">
-                                                            <?php echo $signage['sign_type'] ?>
-                                                        </option>
-                                                    <?php
-                                                    endforeach;
-                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="col col-12 p-0 form-group d-none">
+                                        <div class="col col-12 p-0 form-group d-none" id="signage-fee-container">
                                             <label for="signage-fee">Fee <span class="text-danger">*</span>
                                             </label>
 
@@ -277,7 +262,7 @@ include './../includes/side-header.php';
                                                     <span class="input-group-text">₱</span>
                                                 </div>
 
-                                                <input type="number" name="signage_fee" class="form-control p-4" id="signage-fee" placeholder="Enter Signage Fee..." step="0.01" value="0.00" required>
+                                                <input type="number" name="signage_fee" class="form-control p-4" id="signage-fee" placeholder="Enter Signage Fee..." step="0.01" required readonly>
                                             </div>
                                         </div>
 
