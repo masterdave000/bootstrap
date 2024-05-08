@@ -48,7 +48,7 @@ $billingStatement->bindParam(':property_attribute', $property_attribute);
 $billingStatement->bindParam(':fee', $fee);
 
 if ($billingStatement->execute()) {
-    $_SESSION['add'] = "
+    $_SESSION['update'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
                 Building Billing Updated Successfully
@@ -58,10 +58,10 @@ if ($billingStatement->execute()) {
 
     header('location:' . SITEURL . 'inspection/billing/building-billing/');
 } else {
-    $_SESSION['add'] = "
+    $_SESSION['update'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>	
-                Failed to Add Building Billing
+                Failed to Update Building Billing
             </div>
         </div>
     ";

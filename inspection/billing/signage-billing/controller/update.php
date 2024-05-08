@@ -48,7 +48,7 @@ $billingStatement->bindParam(':sign_type', $sign_type);
 $billingStatement->bindParam(':signage_fee', $signage_fee);
 
 if ($billingStatement->execute()) {
-    $_SESSION['add'] = "
+    $_SESSION['update'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
                 Signage Billing Updated Successfully
@@ -58,7 +58,7 @@ if ($billingStatement->execute()) {
 
     header('location:' . SITEURL . 'inspection/billing/signage-billing/');
 } else {
-    $_SESSION['add'] = "
+    $_SESSION['update'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>	
                 Failed to Update Signage Billing
