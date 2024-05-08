@@ -300,15 +300,14 @@ document.addEventListener('DOMContentLoaded', function() {
           signageBilling.onreadystatechange = function () {
             if (signageBilling.readyState === 4 && signageBilling.status === 200) {
               let signageBillingDetails = JSON.parse(signageBilling.responseText);
-              console.log(signageBillingDetails);
 
               document.getElementById("signage-fee-container").classList.remove('d-none');
+
               let signageId = document.getElementById('signage-id');
               signageId.value = signageBillingDetails.signage_id;
-              
+
               let signageFee = document.getElementById('signage-fee');
               signageFee.value = signageBillingDetails.signage_fee;
-            
             }
           }
 
@@ -421,19 +420,20 @@ document.addEventListener("DOMContentLoaded", function () {
                   xhr.onreadystatechange = function () {
                       if (xhr.readyState === 4 && xhr.status === 200) {
                         let response = JSON.parse(xhr.responseText);
-                          
+                        
                         capacitySelect.innerHTML = "";
                         
                         // Capacity Default Option
                         let capacityDefaultOption = document.createElement("option");
                         capacityDefaultOption.value = "";
-                        capacityDefaultOption.text = selectedSection ? "Select" : "No Data";
+                        capacityDefaultOption.text = response.capacities.length > 0 ? "Select" : "No Data";
                         capacityDefaultOption.selected = true;
                         capacityDefaultOption.disabled = true;
                         capacityDefaultOption.hidden = true;
                         capacitySelect.appendChild(capacityDefaultOption);
+                        capacitySelect.disabled = response.capacities.length > 0 ? false : true;
 
-                        if (selectedSection) {
+                        if (response.capacities.length > 0) {
                           response.capacities.forEach(capacity => {
                             let option = document.createElement("option");
                             option.value = capacity;
@@ -446,7 +446,7 @@ document.addEventListener("DOMContentLoaded", function () {
                       }
                   };
                   // Send selected section as parameter
-                  xhr.send(`section=${selectedSection}`);
+                  xhr.send(`section=${encodeURIComponent(selectedSection)}`);
                 }
 
                 updateCapacities();
