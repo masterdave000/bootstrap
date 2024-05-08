@@ -88,7 +88,7 @@ require "./../../includes/side-header.php";
                                                     <?php echo $billing['display_type'] ?>
                                                     </div>
 
-                                                    <div class="sub-title d-none d-md-flex">Property:
+                                                    <div class="sub-title d-none d-md-flex">Sign Type:
                                                         <?php echo $billing['sign_type'] ?>
                                                     </div>
                                                 </div>
