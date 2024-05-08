@@ -246,6 +246,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+// SANITARY BILLING
+if (document.getElementById("sanitary-quantity")) {
+  let sanitaryFee = document.getElementById("sanitary-fee");
+  let sanitaryFeeValue = sanitaryFee.value
+  let sanitaryQuantity = document.getElementById("sanitary-quantity");
+
+  // Function to calculate total fee
+  function calculateTotalFee() {
+    let quantity = parseFloat(sanitaryQuantity.value);
+    let fee = parseFloat(sanitaryFeeValue).toFixed(2);
+    if (isNaN(quantity) || isNaN(fee) || quantity === 0) {
+        // If either quantity or fee is not a number, reset fee input field
+        sanitaryFee.value = parseFloat(sanitaryFeeValue).toFixed(2);
+    } else {
+        // Calculate total fee and update fee input field
+        let totalFee = quantity * fee;
+        sanitaryFee.value = totalFee.toFixed(2); // assuming you want to keep it as a float with 2 decimal places
+    }
+  }
+
+  sanitaryQuantity.addEventListener("input", function() {
+    calculateTotalFee();
+  });
+  
+}
+
+
 // SIGNAGE BILLING
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('display-type')) {
@@ -320,6 +347,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
