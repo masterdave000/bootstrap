@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Add Inspection";
 include './../includes/side-header.php';
@@ -13,15 +13,15 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden">
@@ -30,29 +30,22 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
-                        <form action="./generate/equipment-inspection.php" method="POST" class="user"
-                            id="inspection-form" enctype="multipart/form-data">
+                        <form action="./generate/equipment-inspection.php" method="POST" class="user" id="inspection-form" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/default-img.png" alt="default-item-image"
-                                        class="img-fluid rounded-circle" id="bus-img" />
+                                    <img src="./images/default-img.png" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
                             </div>
 
                             <div id="inspectionCarousel" class="carousel slide">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="0"
-                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="3"
-                                        aria-label="Slide 4"></button>
-                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="4"
-                                        aria-label="Slide 5"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                    <button type="button" data-bs-target="#inspectionCarousel" data-bs-slide-to="4" aria-label="Slide 5"></button>
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active p-2" data-bs-interval="false">
@@ -60,20 +53,15 @@ include './../includes/side-header.php';
                                         <p class="text font-weight-bolder">Business Information</p>
 
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
-                                            <label for="application-type">Application Type <span
-                                                    class="text-danger">*</span>
+                                            <label for="application-type">Application Type <span class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="application_type" id="application-type"
-                                                    class="form-control form-select px-3" required>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="application_type" id="application-type" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="Annual">Annual</option>
                                                     <option value="New">New</option>
                                                     <option value="Change Address">Change Address</option>
                                                     <option value="Change Name">Change Name</option>
-
-
                                                 </select>
                                             </div>
                                         </div>
@@ -81,22 +69,20 @@ include './../includes/side-header.php';
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="business-id">Business Name <span class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="business_id" id="business-id"
-                                                    class="form-control form-select px-3" required>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="business_id" id="business-id" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
-                                                    <?php 
-                                            $businessQuery = "SELECT * from business";
-                                            $businessStatement = $pdo->query($businessQuery);
-                                            $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-                                            
-                                            foreach ($businesses as $business) {
-                                                ?>
+                                                    <?php
+                                                    $businessQuery = "SELECT * from business";
+                                                    $businessStatement = $pdo->query($businessQuery);
+                                                    $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                                    <option value="<?php echo $business['bus_id']?>">
-                                                        <?php echo $business['bus_name']?>
-                                                    </option>
+                                                    foreach ($businesses as $business) {
+                                                    ?>
+
+                                                        <option value="<?php echo $business['bus_id'] ?>">
+                                                            <?php echo $business['bus_name'] ?>
+                                                        </option>
                                                     <?php
                                                     }
                                                     ?>
@@ -104,54 +90,43 @@ include './../includes/side-header.php';
                                             </div>
                                         </div>
 
-                                        <input type="hidden" name="bus_name" class="form-control p-4" id="bus-name"
-                                            required readonly>
+                                        <input type="hidden" name="bus_name" class="form-control p-4" id="bus-name" required readonly>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="owner-name">Owner Name <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="owner_name" class="form-control p-4"
-                                                id="owner-name" placeholder="Enter Owner Name..." required readonly>
+                                            <input type="text" name="owner_name" class="form-control p-4" id="owner-name" placeholder="Enter Owner Name..." required readonly>
                                             <input type="hidden" id="owner-id" name="owner_id">
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="bus-address">Business Address<span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_address" class="form-control p-4"
-                                                id="bus-address" placeholder="Enter Business Address..." required
-                                                readonly>
+                                            <input type="text" name="bus_address" class="form-control p-4" id="bus-address" placeholder="Enter Business Address..." required readonly>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="bus-type">Business Type <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_type" class="form-control p-4" id="bus-type"
-                                                placeholder="Enter Business Type..." required readonly>
+                                            <input type="text" name="bus_type" class="form-control p-4" id="bus-type" placeholder="Enter Business Type..." required readonly>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
-                                            <label for="bus-contact-number">Business Contact Number <span
-                                                    class="text-danger">*</span>
+                                            <label for="bus-contact-number">Business Contact Number <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_contact_number" class="form-control p-4"
-                                                id="bus-contact-number" placeholder="Enter Business Contact Number..."
-                                                required readonly>
+                                            <input type="text" name="bus_contact_number" class="form-control p-4" id="bus-contact-number" placeholder="Enter Business Contact Number..." required readonly>
                                         </div>
                                         <div class="d-md-flex align-items-center justify-content-center">
                                             <div class="col col-md-6 p-0 form-group flex-md-grow-1 d-none">
                                                 <label for="floor-area">Floor Area <span class="text-danger">*</span>
                                                 </label>
-                                                <input type="text" name="floor_area" class="form-control p-4"
-                                                    id="floor-area" placeholder="Enter Floor Area..." required readonly>
+                                                <input type="text" name="floor_area" class="form-control p-4" id="floor-area" placeholder="Enter Floor Area..." required readonly>
                                             </div>
 
                                             <div class="col col-md-6 p-0 form-group flex-md-grow-1 d-none">
-                                                <label for="signage-area">Signage Area <span
-                                                        class="text-danger">*</span>
+                                                <label for="signage-area">Signage Area <span class="text-danger">*</span>
                                                 </label>
-                                                <input type="text" name="signage_area" class="form-control p-4"
-                                                    id="signage-area" placeholder="Enter Signage Area..." readonly>
+                                                <input type="text" name="signage_area" class="form-control p-4" id="signage-area" placeholder="Enter Signage Area..." readonly>
                                             </div>
                                         </div>
 
@@ -169,8 +144,7 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#item-list"
-                                                data-bs-toggle="modal">Add Item</a>
+                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#item-list" data-bs-toggle="modal">Add Item</a>
                                             <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-item">Delete
                                                 Item</a>
                                         </div>
@@ -179,22 +153,56 @@ include './../includes/side-header.php';
 
                                     <div class="carousel-item p-2" data-bs-interval="false">
 
-                                        <p class="text font-weight-bolder">Other Fees Information</p>
+                                        <p class="text font-weight-bolder">Building Information</p>
 
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="building-fee">Building Fee <span class="text-danger">*</span>
+                                        <div class="form-group d-flex flex-column flex-md-grow-1">
+                                            <label for="bldg-section">Section <span class="text-danger">*</span>
                                             </label>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="bldg_section" id="bldg-section" class="form-control form-select px-3" required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <?php
+                                                    $buildingQuery = "SELECT bldg_section from building_billing";
+                                                    $buildingStatement = $pdo->query($buildingQuery);
+                                                    $buildings = $buildingStatement->fetchAll(PDO::FETCH_ASSOC);
+
+                                                    foreach ($buildings as $building) :
+                                                    ?>
+
+                                                        <option value="<?php echo $building['bldg_section'] ?>">
+                                                            <?php echo $building['bldg_section'] ?>
+                                                        </option>
+                                                    <?php
+                                                    endforeach;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group d-none flex-column flex-md-grow-1" id="prop-attr-container">
+                                            <label for="bldg-property-attribute">Property Attribute <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="bldg_property_attribute" id="bldg-property-attribute" class="form-control form-select px-3" required>
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col col-12 p-0 form-group d-none" id="bldg-fee-container">
+                                            <label for="bldg-fee">Fee <span class="text-danger">*</span>
+                                            </label>
+
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text">₱</span>
                                                 </div>
 
-                                                <input type="number" name="building_fee" class="form-control p-4"
-                                                    id="building-fee" placeholder="Enter Building Fee..." step="0.01"
-                                                    value="0.00" min="0.00" required>
+                                                <input type="number" name="bldg_fee" class="form-control p-4" id="bldg-fee" placeholder="Enter Building Fee..." step="0.01" value="0.00" required readonly>
                                             </div>
-
                                         </div>
+
+                                        <p class="text font-weight-bolder">Sanitary Information</p>
 
                                         <div class="col col-12 p-0 form-group">
                                             <label for="sanitary-fee">Sanitary Fee <span class="text-danger">*</span>
@@ -205,15 +213,63 @@ include './../includes/side-header.php';
                                                     <span class="input-group-text">₱</span>
                                                 </div>
 
-                                                <input type="number" name="sanitary_fee" class="form-control p-4"
-                                                    id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01"
-                                                    value="0.00" required>
+                                                <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="0.00" required>
                                             </div>
 
                                         </div>
 
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="signage-fee">Signage Fee <span class="text-danger">*</span>
+                                        <p class="text font-weight-bolder">Signage Information</p>
+
+                                        <div class="form-group d-flex flex-column flex-md-grow-1">
+                                            <label for="display-type">Display Type <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="display_type" id="display-type" class="form-control form-select px-3" required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <?php
+                                                    $signageQuery = "SELECT display_type from signage_billing";
+                                                    $signageStatement = $pdo->query($signageQuery);
+                                                    $signages = $signageStatement->fetchAll(PDO::FETCH_ASSOC);
+
+                                                    foreach ($signages as $signage) :
+                                                    ?>
+
+                                                        <option value="<?php echo $signage['display_type'] ?>">
+                                                            <?php echo $signage['display_type'] ?>
+                                                        </option>
+                                                    <?php
+                                                    endforeach;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group d-none flex-column flex-md-grow-1">
+                                            <label for="sign-type">Sign Type <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="sign_type" id="sign-type" class="form-control form-select px-3" required>
+                                                    <option selected disabled hidden value="">Select</option>
+                                                    <?php
+                                                    $signageQuery = "SELECT sign_type from signage_billing";
+                                                    $signageStatement = $pdo->query($signageQuery);
+                                                    $signages = $signageStatement->fetchAll(PDO::FETCH_ASSOC);
+
+                                                    foreach ($signages as $signage) :
+                                                    ?>
+
+                                                        <option value="<?php echo $signage['sign_type'] ?>">
+                                                            <?php echo $signage['sign_type'] ?>
+                                                        </option>
+                                                    <?php
+                                                    endforeach;
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group d-none">
+                                            <label for="signage-fee">Fee <span class="text-danger">*</span>
                                             </label>
 
                                             <div class="input-group">
@@ -221,12 +277,13 @@ include './../includes/side-header.php';
                                                     <span class="input-group-text">₱</span>
                                                 </div>
 
-                                                <input type="number" name="signage_fee" class="form-control p-4"
-                                                    id="signage-fee" placeholder="Enter Signage Fee..." step="0.01"
-                                                    value="0.00" required>
+                                                <input type="number" name="signage_fee" class="form-control p-4" id="signage-fee" placeholder="Enter Signage Fee..." step="0.01" value="0.00" required>
                                             </div>
-
                                         </div>
+
+                                        <input type="hidden" name="bldg_billing_id" id="bldg-billing-id">
+                                        <input type="hidden" name="sanitary_id" id="sanitary-id">
+                                        <input type="hidden" name="signage_id" id="signage-id">
                                     </div>
 
                                     <div class="carousel-item p-2" data-bs-interval="false">
@@ -240,11 +297,9 @@ include './../includes/side-header.php';
 
                                         </div>
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block px-3"
-                                                data-bs-target="#inspector-list" data-bs-toggle="modal">Add
+                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#inspector-list" data-bs-toggle="modal">Add
                                                 Inspector</a>
-                                            <a class="btn btn-danger btn-md-block px-3 d-none"
-                                                id="delete-inspector">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-inspector">Delete
                                                 Inspector</a>
                                         </div>
                                     </div>
@@ -253,8 +308,7 @@ include './../includes/side-header.php';
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="remarks-id">Remarks <span class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
+                                            <div class="d-flex align-items-center justify-content-center select-container">
                                                 <select name="remarks" id="remarks" class="form-control px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="No Violation">No Violation</option>
@@ -272,11 +326,9 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block px-3"
-                                                data-bs-target="#violation-list" data-bs-toggle="modal">Add
+                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#violation-list" data-bs-toggle="modal">Add
                                                 violation</a>
-                                            <a class="btn btn-danger btn-md-block px-3 d-none"
-                                                id="delete-violation">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-violation">Delete
                                                 Violation</a>
                                         </div>
                                     </div>
@@ -284,16 +336,12 @@ include './../includes/side-header.php';
 
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="previous-container invisible">
-                                        <button
-                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button"
-                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="prev">
+                                        <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button" data-bs-target="#inspectionCarousel" role="button" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <div class="next-container">
-                                        <button
-                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
-                                            data-bs-target="#inspectionCarousel" role="button" data-bs-slide="next">
+                                        <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button" data-bs-target="#inspectionCarousel" role="button" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -301,8 +349,7 @@ include './../includes/side-header.php';
                             </div>
 
                             <div class="text-center mt-4 d-none formSubmit">
-                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                    value="Add">
+                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
                             </div>
                         </form>
                     </div>
@@ -323,9 +370,9 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
+<?php
 
-require './../includes/footer.php'; 
+require './../includes/footer.php';
 require './modals/item.php';
 require './modals/inspector.php';
 require './modals/violation.php';
