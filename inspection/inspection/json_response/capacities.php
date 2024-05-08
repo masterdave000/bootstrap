@@ -2,11 +2,11 @@
 include './../../../config/constants.php';
 // Check if section is set in the POST request
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $section = $_POST['section'];
+    $section = htmlspecialchars($_POST['section']);
 
     // Fetch capacities from the database based on the selected section
     // Modify this query according to your database structure
-    $query = "SELECT DISTINCT capacity FROM equipment_billing_view WHERE section = :section";
+    $query = "SELECT capacity FROM equipment_billing_view WHERE section = :section";
 
     // Prepare and execute the query
     $statement = $pdo->prepare($query);
