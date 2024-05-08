@@ -168,6 +168,83 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+// BUILDING BILLING
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('bldg-section')) {
+    let buildingSection = document.getElementById('bldg-section');
+    let propertyAttributeContainer = document.getElementById('prop-attr-container');
+
+    buildingSection.addEventListener('change', function() {
+      let buildingSectionValue = buildingSection.value;
+
+      if (buildingSectionValue) {
+        
+        let propertyAttribute = document.getElementById('bldg-property-attribute');
+
+        let bldgPropAttr = new XMLHttpRequest();
+        bldgPropAttr.open("GET", `./json_response/building-property-attribute.php?bldg_section=${buildingSectionValue}`);
+
+        bldgPropAttr.onreadystatechange = function () {
+          if (bldgPropAttr.readyState === 4 && bldgPropAttr.status === 200) {
+            let bldgPropAttrDetails = JSON.parse(bldgPropAttr.responseText);
+
+            propertyAttribute.innerHTML = "";
+
+            let propAttrDefaultOption = document.createElement("option");
+            propAttrDefaultOption.value = "";
+            propAttrDefaultOption.text = buildingSectionValue ? "Select" : "No Data";
+            propAttrDefaultOption.selected = true;
+            propAttrDefaultOption.disabled = true;
+            propAttrDefaultOption.hidden = true;
+            propertyAttribute.appendChild(propAttrDefaultOption);
+
+            bldgPropAttrDetails.bldg_property_attributes.forEach(bldg_property_attribute => {
+              let option = document.createElement("option");
+              option.value = bldg_property_attribute;
+              option.text = bldg_property_attribute;
+              propertyAttribute.appendChild(option);
+            });
+
+            propertyAttributeContainer.classList.remove('d-none');
+            document.getElementById("bldg-fee-container").classList.add('d-none');
+
+          }
+        }
+        bldgPropAttr.send();
+  
+        propertyAttribute.addEventListener('change', function () {
+          
+          let propertyAttributeValue = propertyAttribute.value;
+
+          let buildingBilling = new XMLHttpRequest();
+          buildingBilling.open("GET", `./json_response/building-fee.php?bldg_section=${encodeURIComponent(buildingSectionValue)}&bldg_property_attribute=${encodeURIComponent(propertyAttributeValue)}`, true);
+
+          buildingBilling.onreadystatechange = function () {
+            if (buildingBilling.readyState === 4 && buildingBilling.status === 200) {
+              let buildingBillingDetails = JSON.parse(buildingBilling.responseText);
+
+              document.getElementById("bldg-fee-container").classList.remove('d-none');
+
+              let buildingFee = document.getElementById('bldg-fee');
+              buildingFee.value = buildingBillingDetails.bldg_fee;
+
+              let bldgBillingId = document.getElementById('bldg-billing-id');
+              bldgBillingId.value = buildingBillingDetails.bldg_billing_id;
+
+
+
+            }
+          }
+
+          buildingBilling.send();
+        });
+        
+      }
+
+    });
+  }
+
+});
 
 document.addEventListener("DOMContentLoaded", function () {
   let wrapper = document.getElementById("item-list");
