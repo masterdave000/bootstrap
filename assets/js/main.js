@@ -441,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Capacity Default Option
                         let capacityDefaultOption = document.createElement("option");
                         capacityDefaultOption.value = "";
-                        capacityDefaultOption.text = response.capacities.length > 0 ? "Select" : "No Data";
+                        capacityDefaultOption.text = response.capacities.length > 0 ? "Select" : "No Registered Equipment Billing";
                         capacityDefaultOption.selected = true;
                         capacityDefaultOption.disabled = true;
                         capacityDefaultOption.hidden = true;
