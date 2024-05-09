@@ -21,7 +21,7 @@
         
         $application_type = trim(strtoupper($_POST['application_type']));
         $character_occupancy = trim(strtoupper($_POST['character_occupancy']));
-        $group = trim(strtoupper($_POST['group']));
+        $group = trim(strtoupper($_POST['bus_group']));
         $occupancy_no = $_POST['occupancy_no'];
         $date_inspected = date('m-d-Y');
         $date_complied = $_POST['date_complied'];
