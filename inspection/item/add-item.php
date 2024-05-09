@@ -104,7 +104,7 @@ include './../includes/side-header.php';
                                     <select name="section" class="form-control px-3" id="electrical">
                                         <option selected disabled hidden value="">Select</option>
                                         <?php
-                                        $sectionQuery = "SELECT section from equipment_billing_view WHERE category_name = :category_name";
+                                        $sectionQuery = "SELECT DISTINCT section from equipment_billing_view WHERE category_name = :category_name";
                                         $sectionStatement = $pdo->prepare($sectionQuery);
                                         $sectionStatement->bindValue(':category_name', 'Electrical');
                                         $sectionStatement->execute();
@@ -132,7 +132,7 @@ include './../includes/side-header.php';
                                         <option selected disabled hidden value="">Select</option>
                                         <?php
 
-                                        $sectionQuery = "SELECT section from equipment_billing_view WHERE category_name = :category_name";
+                                        $sectionQuery = "SELECT DISTINCT section from equipment_billing_view WHERE category_name = :category_name";
                                         $sectionStatement = $pdo->prepare($sectionQuery);
                                         $sectionStatement->bindValue(':category_name', 'Mechanical');
                                         $sectionStatement->execute();
@@ -160,7 +160,7 @@ include './../includes/side-header.php';
                                         <option selected disabled hidden value="">Select</option>
                                         <?php
 
-                                        $sectionQuery = "SELECT section from equipment_billing_view WHERE category_name = :category_name";
+                                        $sectionQuery = "SELECT DISTINCT section from equipment_billing_view WHERE category_name = :category_name";
                                         $sectionStatement = $pdo->prepare($sectionQuery);
                                         $sectionStatement->bindValue(':category_name', 'Electronics');
                                         $sectionStatement->execute();
