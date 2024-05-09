@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Issue Annual Certificate";
 include './../includes/side-header.php';
@@ -13,15 +13,15 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden">
@@ -30,25 +30,20 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
-                        <form action="./generate/annual-certificate.php" method="POST" class="user"
-                            id="certificate-form" enctype="multipart/form-data">
+                        <form action="./generate/annual-certificate.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./../business/images/no-image.png" alt="default-item-image"
-                                        class="img-fluid rounded-circle" id="bus-img" />
+                                    <img src="./../business/images/no-image.png" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
                             </div>
 
                             <div id="certificateCarousel" class="carousel slide">
                                 <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="0"
-                                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="1"
-                                        aria-label="Slide 2"></button>
-                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="2"
-                                        aria-label="Slide 3"></button>
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                    <button type="button" data-bs-target="#certificateCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
                                     <div class="carousel-item active p-2" data-bs-interval="false">
@@ -56,13 +51,10 @@ include './../includes/side-header.php';
                                         <p class="text font-weight-bolder">Business Information</p>
 
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
-                                            <label for="application-type">Application Type <span
-                                                    class="text-danger">*</span>
+                                            <label for="application-type">Application Type <span class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="application_type" id="application-type"
-                                                    class="form-control form-select px-3" required>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="application_type" id="application-type" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <option value="Annual">Annual</option>
                                                     <option value="New">New</option>
@@ -77,22 +69,20 @@ include './../includes/side-header.php';
                                         <div class="form-group d-flex flex-column flex-md-grow-1">
                                             <label for="business-id">Business Name <span class="text-danger">*</span>
                                             </label>
-                                            <div
-                                                class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="business_id" id="business-id"
-                                                    class="form-control form-select px-3" required>
+                                            <div class="d-flex align-items-center justify-content-center select-container">
+                                                <select name="business_id" id="business-id" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
-                                                    <?php 
-                                            $businessQuery = "SELECT * from business";
-                                            $businessStatement = $pdo->query($businessQuery);
-                                            $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-                                            
-                                            foreach ($businesses as $business) {
-                                                ?>
+                                                    <?php
+                                                    $businessQuery = "SELECT * from business";
+                                                    $businessStatement = $pdo->query($businessQuery);
+                                                    $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                                    <option value="<?php echo $business['bus_id']?>">
-                                                        <?php echo $business['bus_name']?>
-                                                    </option>
+                                                    foreach ($businesses as $business) {
+                                                    ?>
+
+                                                        <option value="<?php echo $business['bus_id'] ?>">
+                                                            <?php echo $business['bus_name'] ?>
+                                                        </option>
                                                     <?php
                                                     }
                                                     ?>
@@ -100,25 +90,33 @@ include './../includes/side-header.php';
                                             </div>
                                         </div>
 
-                                        <input type="hidden" name="bus_name" class="form-control p-4" id="bus-name"
-                                            required readonly>
+                                        <input type="hidden" name="bus_name" class="form-control p-4" id="bus-name" required readonly>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="owner-name">Owner Name <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="owner_name" class="form-control p-4"
-                                                id="owner-name" placeholder="Enter Owner Name..." required readonly>
+                                            <input type="text" name="owner_name" class="form-control p-4" id="owner-name" required readonly>
                                             <input type="hidden" id="owner-id" name="owner_id">
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="bus-address">Business Address<span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_address" class="form-control p-4"
-                                                id="bus-address" placeholder="Enter Business Address..." required
-                                                readonly>
+                                            <input type="text" name="bus_address" class="form-control p-4" id="bus-address" required readonly>
                                         </div>
 
+
+                                        <div class="col col-12 p-0 form-group d-none">
+                                            <label for="bus-group">Business Group<span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="bus_group" class="form-control p-4" id="bus-group" required readonly>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group d-none">
+                                            <label for="character-of-occupancy">Character of Occupancy<span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="character_of_occupancy" class="form-control p-4" id="character-of-occupancy" required readonly>
+                                        </div>
 
                                         <input type="hidden" id="bus-type" disabled>
                                         <input type="hidden" id="bus-contact-number" disabled>
@@ -138,11 +136,9 @@ include './../includes/side-header.php';
 
                                         </div>
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block px-3"
-                                                data-bs-target="#inspector-list" data-bs-toggle="modal">Add
+                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#inspector-list" data-bs-toggle="modal">Add
                                                 Inspector</a>
-                                            <a class="btn btn-danger btn-md-block px-3 d-none"
-                                                id="delete-inspector">Delete
+                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-inspector">Delete
                                                 Inspector</a>
                                         </div>
                                     </div>
@@ -155,30 +151,7 @@ include './../includes/side-header.php';
                                             <label for="bin">BIN</label>
 
                                             <div class="input-group">
-                                                <input type="text" name="bin" class="form-control p-4" id="bin"
-                                                    placeholder="Enter BIN...">
-                                            </div>
-                                        </div>
-
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="character-occupancy">Character Of Occupancy <span
-                                                    class="text-danger">*</span>
-                                            </label>
-
-                                            <div class="input-group">
-                                                <input type="text" name="character_occupancy" class="form-control p-4"
-                                                    id="character-occupancy"
-                                                    placeholder="Enter Character Of Occupancy..." required>
-                                            </div>
-                                        </div>
-
-                                        <div class="col col-12 p-0 form-group">
-                                            <label for="group">Group <span class="text-danger">*</span>
-                                            </label>
-
-                                            <div class="input-group">
-                                                <input type="text" name="group" class="form-control p-4" id="group"
-                                                    placeholder="Enter Group..." required>
+                                                <input type="text" name="bin" class="form-control p-4" id="bin" placeholder="Enter BIN...">
                                             </div>
                                         </div>
 
@@ -187,8 +160,7 @@ include './../includes/side-header.php';
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="text" name="occupancy_no" class="form-control p-4"
-                                                    id="occupancy-no" placeholder="Enter Occupancy No...">
+                                                <input type="text" name="occupancy_no" class="form-control p-4" id="occupancy-no" placeholder="Enter Occupancy No...">
                                             </div>
                                         </div>
 
@@ -198,8 +170,7 @@ include './../includes/side-header.php';
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="date_complied" class="form-control p-4"
-                                                    id="date-complied" placeholder="Enter Date Compiled...">
+                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled...">
                                             </div>
                                         </div>
 
@@ -208,8 +179,7 @@ include './../includes/side-header.php';
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="issued_on" class="form-control p-4"
-                                                    id="issued-on" placeholder="Enter Issued On...">
+                                                <input type="date" name="issued_on" class="form-control p-4" id="issued-on" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Issued On...">
                                             </div>
                                         </div>
                                     </div>
@@ -217,16 +187,12 @@ include './../includes/side-header.php';
 
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="previous-container invisible">
-                                        <button
-                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button"
-                                            data-bs-target="#certificateCarousel" role="button" data-bs-slide="prev">
+                                        <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button" data-bs-target="#certificateCarousel" role="button" data-bs-slide="prev">
                                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
                                     <div class="next-container">
-                                        <button
-                                            class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button"
-                                            data-bs-target="#certificateCarousel" role="button" data-bs-slide="next">
+                                        <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button" data-bs-target="#certificateCarousel" role="button" data-bs-slide="next">
                                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                         </button>
                                     </div>
@@ -234,8 +200,7 @@ include './../includes/side-header.php';
                             </div>
 
                             <div class="text-center mt-4 d-none formSubmit">
-                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                    value="Add">
+                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
                             </div>
                         </form>
                     </div>
@@ -256,9 +221,9 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
+<?php
 
-require './../includes/footer.php'; 
+require './../includes/footer.php';
 require './modals/inspector.php';
 ?>
 

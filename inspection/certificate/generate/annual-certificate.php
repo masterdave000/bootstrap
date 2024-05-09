@@ -1,32 +1,33 @@
-<?php 
+<?php
 
 
-    $title = "Annual Certificate";
-    include './../../includes/side-header.php';
+$title = "Annual Certificate";
+include './../../includes/side-header.php';
 
-    // var_dump($_POST);
-    // exit;
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $clean_bus_id = filter_var($_POST['business_id'], FILTER_SANITIZE_NUMBER_INT);
-        $bus_id = filter_var($clean_bus_id, FILTER_VALIDATE_INT);
+// var_dump($_POST);
+// exit;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $clean_bus_id = filter_var($_POST['business_id'], FILTER_SANITIZE_NUMBER_INT);
+    $bus_id = filter_var($clean_bus_id, FILTER_VALIDATE_INT);
 
-        $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
-        $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
-     
-        $bin = $_POST['bin'];
-        $owner_name = trim(strtoupper($_POST['owner_name']));
+    $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
+    $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
 
-        $bus_name = trim(strtoupper($_POST['bus_name']));
-        $bus_address = trim(strtoupper($_POST['bus_address']));
-        
-        $application_type = trim(strtoupper($_POST['application_type']));
-        $character_occupancy = trim(strtoupper($_POST['character_occupancy']));
-        $group = trim(strtoupper($_POST['group']));
-        $occupancy_no = $_POST['occupancy_no'];
-        $date_inspected = date('m-d-Y');
-        $date_complied = $_POST['date_complied'];
-        $issued_on = $_POST['issued_on'];
-    }
+    $bin = $_POST['bin'];
+    $owner_name = trim(strtoupper($_POST['owner_name']));
+
+    $bus_name = trim(strtoupper($_POST['bus_name']));
+    $bus_address = trim(strtoupper($_POST['bus_address']));
+
+    $application_type = trim(strtoupper($_POST['application_type']));
+    $character_occupancy = trim(strtoupper($_POST['character_of_occupancy']));
+    $group_substr = trim(strtoupper(substr($_POST['bus_group'], -1)));
+    $group = trim(strtoupper($_POST['bus_group']));
+    $occupancy_no = $_POST['occupancy_no'];
+    $date_inspected = date('m-d-Y');
+    $date_complied = $_POST['date_complied'];
+    $issued_on = $_POST['issued_on'];
+}
 ?>
 
 <div id="content-wrapper">
@@ -37,23 +38,20 @@
             <div class="container-fluid d-flex justify-content-center py-5">
                 <div class="annual-container">
                     <div class="annual-sheet">
-                        <img src="./../../../assets/img/annual-certificate.jpg" alt="annual-certificate"
-                            class="annual-sheet-image">
+                        <img src="./../../../assets/img/annual-certificate.jpg" alt="annual-certificate" class="annual-sheet-image">
                         <div class="annual-sheet-left">
-                            <div
-                                class="d-flex justify-content-center annual-header annual-business-name mb-2 pb-1 annual-data">
-                                <?= $owner_name . ' / ' . $bus_name?>
+                            <div class="d-flex justify-content-center annual-header annual-business-name mb-2 pb-1 annual-data">
+                                <?= $owner_name . ' / ' . $bus_name ?>
                             </div>
 
-                            <div
-                                class="d-flex justify-content-center annual-header annual-business-address pb-1 mb-1 annual-data">
-                                <?= $bus_address?>
+                            <div class="d-flex justify-content-center annual-header annual-business-address pb-1 mb-1 annual-data">
+                                <?= $bus_address ?>
                             </div>
 
                             <div class="w-100 d-flex justify-content-between flex-gap annual-owner-wrapper">
                                 <div class=" w-50 d-flex flex-column justify-content-center align-items-center ">
                                     <div class="w-100 d-flex justify-content-center annual-owner p-1 annual-data">
-                                        <?= $character_occupancy?>
+                                        <?= $character_occupancy ?>
                                     </div>
                                     <p class="w-100 m-0 text-center annual-owner-title">CHARACTER OF OCCUPANCY</p>
                                 </div>
@@ -61,7 +59,7 @@
 
                                 <div class="w-50 d-flex flex-column justify-content-center align-items-center">
                                     <div class="w-100 d-flex justify-content-center annual-group p-1 annual-data">
-                                        <?= $group?>
+                                        <?= $group_substr ?>
                                     </div>
                                     <p class="w-100 m-0 text-center annual-group-title">Group</p>
                                 </div>
@@ -83,21 +81,21 @@
                                 </div>
 
                                 <div class="verified-by-wrapper w-100 d-flex justify-content-center flex-wrap">
-                                    <?php 
-                                    
+                                    <?php
+
                                     for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
-                                    $inspector_id = $_POST['inspector_id'][$i];
-                                    $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
-                                    $category = trim(strtoupper($_POST['category'][$i]));
+                                        $inspector_id = $_POST['inspector_id'][$i];
+                                        $inspector_name = trim(strtoupper($_POST['inspector_abbr'][$i]));
+                                        $category = trim(strtoupper($_POST['category'][$i]));
 
                                     ?>
-                                    <div class="verified-by-container">
-                                        <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
-                                            <?php echo $inspector_name?>
+                                        <div class="verified-by-container">
+                                            <div class="verified-by-names w-100 d-flex justify-content-center annual-data">
+                                                <?php echo $inspector_name ?>
+                                            </div>
+                                            <p class="w-100 m-0 text-center verified-by-position"> <?php echo $category ?>
+                                            </p>
                                         </div>
-                                        <p class="w-100 m-0 text-center verified-by-position"> <?php echo $category?>
-                                        </p>
-                                    </div>
                                     <?php } ?>
                                 </div>
                             </div>
@@ -152,22 +150,22 @@
                         </div>
 
                         <div class="annual-sheet-right">
-                            <div class="d-flex justify-content-end official-bin">BIN: <?= strtoupper($bin);?></div>
+                            <div class="d-flex justify-content-end official-bin">BIN: <?= strtoupper($bin); ?></div>
                             <table class="table table-bordered mb-2 table-one">
                                 <thead>
                                     <tr class="font-seven border-0">
                                         <th colspan="2" class="text-left">CERTIFICATE ANNUAL INSPECTION</th>
-                                        <th colspan="2">DATE INSPECTED: <?= $date_inspected?></th>
+                                        <th colspan="2">DATE INSPECTED: <?= $date_inspected ?></th>
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-2 text-center">NAME OF LESSEE</th>
                                         <th colspan="3" class="lessee-name text-center">
-                                            <?= $owner_name . ' / ' . $bus_name?>
+                                            <?= $owner_name . ' / ' . $bus_name ?>
                                         </th>
                                     </tr>
                                     <tr>
                                         <th class="font-seven p-3">LOCATION</th>
-                                        <th colspan="3" class="location text-center align-middle"> <?= $bus_address?>
+                                        <th colspan="3" class="location text-center align-middle"> <?= $bus_address ?>
                                         </th>
                                     </tr>
 
@@ -179,7 +177,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="inspector_body">
-                                    <?php 
+                                    <?php
                                     // Initialize an empty array to store unique inspector names
                                     $uniqueInspectorIds = array();
 
@@ -197,19 +195,19 @@
                                             $time_out = date('h:i A', strtotime($_POST['time_out'][$i]));
 
                                     ?>
-                                    <tr>
-                                        <td><?= $date_signed_format ?></td>
-                                        <td><?= $inspector_name ?></td>
-                                        <td><?= $time_in ?></td>
-                                        <td><?= $time_out ?></td>
-                                    </tr>
+                                            <tr>
+                                                <td><?= $date_signed_format ?></td>
+                                                <td><?= $inspector_name ?></td>
+                                                <td><?= $time_in ?></td>
+                                                <td><?= $time_out ?></td>
+                                            </tr>
 
-                                    <input type="hidden" name="inspectors_id[]" value="<?= $inspector_id?>">
-                                    <input type="hidden" name="inspectors_name[]" value="<?= $inspector_name?>">
-                                    <input type="hidden" name="categories[]" value="<?= $category?>">
-                                    <input type="hidden" name="dates_signed[]" value="<?= $date_signed?>">
-                                    <input type="hidden" name="time_ins[]" value="<?= $time_in?>">
-                                    <input type="hidden" name="time_outs[]" value="<?= $time_out?>">
+                                            <input type="hidden" name="inspectors_id[]" value="<?= $inspector_id ?>">
+                                            <input type="hidden" name="inspectors_name[]" value="<?= $inspector_name ?>">
+                                            <input type="hidden" name="categories[]" value="<?= $category ?>">
+                                            <input type="hidden" name="dates_signed[]" value="<?= $date_signed ?>">
+                                            <input type="hidden" name="time_ins[]" value="<?= $time_in ?>">
+                                            <input type="hidden" name="time_outs[]" value="<?= $time_out ?>">
                                     <?php
                                         }
                                     }
@@ -221,7 +219,7 @@
                                 <div>
                                     ANNUAL INSPECTION TEAM:
                                     <b>
-                                        <?php 
+                                        <?php
                                         $uniqueLastnames = array();
 
                                         for ($i = 0; $i < count($_POST['inspector_lastname']); $i++) {
@@ -230,28 +228,28 @@
                                                 $uniqueLastnames[] = $_POST['inspector_lastname'][$i];
 
                                                 $lastname = strtoupper($_POST['inspector_lastname'][$i]) . ', ';
-                                                
-                                                 // Check if this is the last iteration of the loop
+
+                                                // Check if this is the last iteration of the loop
                                                 if ($i == count($_POST['inspector_lastname']) - 1) {
                                                     $lastname = strtoupper($_POST['inspector_lastname'][$i]); // Output the last name without a comma
-                                               
-                                                }                              
 
-                                                ?>
+                                                }
 
-                                        <?php echo $lastname;?>
+                                        ?>
+
+                                                <?php echo $lastname; ?>
 
                                         <?php
                                             }
                                         }
-                                        
+
                                         ?>
                                     </b>
 
                                 </div>
                                 <div>
                                     DATE COMPLIED: <span><b>
-                                            <?= date('m/d/Y', strtotime($date_complied));?>
+                                            <?= date('m/d/Y', strtotime($date_complied)); ?>
                                         </b></span>
                                 </div>
                             </div>
@@ -260,33 +258,33 @@
                                 <div class="w-75 d-flex flex-wrap">
                                     <div class="d-flex w-50 flex-gap">
                                         <div class="box d-flex justify-content-center align-items-center">
-                                            <?php if ($application_type === 'NEW') :?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif?>
+                                            <?php if ($application_type === 'NEW') : ?>
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif ?>
                                         </div>
                                         <div>NEW</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap mb-2">
                                         <div class="box d-flex justify-content-center align-items-center">
-                                            <?php if ($application_type === 'ANNUAL') :?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif?>
+                                            <?php if ($application_type === 'ANNUAL') : ?>
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif ?>
                                         </div>
                                         <div>ANNUAL</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap">
                                         <div class="box d-flex justify-content-center align-items-center">
-                                            <?php if ($application_type === 'ADDITIONAL LINE') :?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif?>
+                                            <?php if ($application_type === 'ADDITIONAL LINE') : ?>
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif ?>
                                         </div>
                                         <div>ADDITIONAL LINE</div>
                                     </div>
                                     <div class="d-flex w-50 flex-gap">
                                         <div class="box d-flex justify-content-center align-items-center">
-                                            <?php if ($application_type === 'CHANGE ADDRESS') :?>
-                                            <i class="fa fa-check" aria-hidden="true"></i>
-                                            <?php endif?>
+                                            <?php if ($application_type === 'CHANGE ADDRESS') : ?>
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                            <?php endif ?>
                                         </div>
                                         <div>CHANGE ADDRESS</div>
                                     </div>
@@ -365,15 +363,15 @@
 
             </div>
 
-            <input type="hidden" name="bus_id" value="<?= $bus_id?>">
-            <input type="hidden" name="owner_id" value="<?= $owner_id?>">
-            <input type="hidden" name="bin" value="<?= $bin?>">
-            <input type="hidden" name="application_type" value="<?= $application_type?>">
-            <input type="hidden" name="character_occupancy" value="<?= $character_occupancy?>">
-            <input type="hidden" name="bus_group" value="<?= $group?>">
-            <input type="hidden" name="occupancy_no" value="<?= $occupancy_no?>">
-            <input type="hidden" name="issued_on" value="<?= $issued_on?>">
-            <input type="hidden" name="date_complied" value="<?= $date_complied?>">
+            <input type="hidden" name="bus_id" value="<?= $bus_id ?>">
+            <input type="hidden" name="owner_id" value="<?= $owner_id ?>">
+            <input type="hidden" name="bin" value="<?= $bin ?>">
+            <input type="hidden" name="application_type" value="<?= $application_type ?>">
+            <input type="hidden" name="character_occupancy" value="<?= $character_occupancy ?>">
+            <input type="hidden" name="bus_group" value="<?= $group ?>">
+            <input type="hidden" name="occupancy_no" value="<?= $occupancy_no ?>">
+            <input type="hidden" name="issued_on" value="<?= $issued_on ?>">
+            <input type="hidden" name="date_complied" value="<?= $date_complied ?>">
 
         </form>
     </div>
@@ -383,8 +381,8 @@
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
-require './../../includes/footer.php'; 
+<?php
+require './../../includes/footer.php';
 ?>
 </body>
 

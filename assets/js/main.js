@@ -88,6 +88,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 let busContactNumber = document.getElementById("bus-contact-number");
                 busContactNumber.value = businessDetails.bus_contact_number;
 
+                let busGroup = document.getElementById("bus-group");
+                busGroup.value = businessDetails.bus_group;
+
+                let characterOfOccupancy = document.getElementById("character-of-occupancy");
+                characterOfOccupancy.value = businessDetails.character_of_occupancy;
+                
                 let floorArea = document.getElementById("floor-area");
                 floorArea.value = businessDetails.floor_area;
 
@@ -993,6 +999,10 @@ function createInputField(type, id, name, readOnly = true, required = true) {
 
     }
   
+  } else if (type === "date") {
+    let currentDate = new Date().toISOString().split('T')[0];
+    input.max = currentDate;
+
   }
   return input;
 }

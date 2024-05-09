@@ -25,8 +25,6 @@ $certificateInspectionInsert = "INSERT INTO annual_inspection_certificate (
     owner_id,
     application_type,
     bin,
-    bus_group,
-    character_of_occupancy,
     occupancy_no,
     date_complied,
     issued_on,
@@ -36,8 +34,6 @@ $certificateInspectionInsert = "INSERT INTO annual_inspection_certificate (
     :owner_id,
     :application_type,
     :bin,
-    :bus_group,
-    :character_of_occupancy,
     :occupancy_no,
     :date_complied,
     :issued_on,
@@ -51,8 +47,6 @@ $certificateInspectionStatement->bindParam(':bus_id', $bus_id);
 $certificateInspectionStatement->bindParam(':owner_id', $owner_id);
 $certificateInspectionStatement->bindParam(':application_type', $application_type);
 $certificateInspectionStatement->bindParam(':bin', $bin);
-$certificateInspectionStatement->bindParam(':bus_group', $bus_group);
-$certificateInspectionStatement->bindParam(':character_of_occupancy', $character_of_occupancy);
 $certificateInspectionStatement->bindParam(':occupancy_no', $occupancy_no);
 $certificateInspectionStatement->bindParam(':date_complied', $date_complied);
 $certificateInspectionStatement->bindParam(':issued_on', $issued_on);

@@ -17,6 +17,8 @@ CREATE TABLE business (
 	bus_address varchar(100) NOT NULL,
 	bus_type varchar(50) DEFAULT NULL,
 	bus_contact_number varchar(11) NOT NULL,
+    bus_group varchar(100) NOT NULL,
+    character_of_occupancy varchar(100) NOT NULL, 
 	email varchar(50) DEFAULT NULL,
 	floor_area double DEFAULT NULL,
 	signage_area double DEFAULT NULL,
@@ -153,11 +155,9 @@ CREATE TABLE annual_inspection_certificate (
 	owner_id int NOT NULL,
     application_type varchar(50) NOT NULL,
     bin varchar(100) NULL DEFAULT NULL,
-	bus_group varchar(10) NOT NULL,    
-    character_of_occupancy varchar(100) NOT NULL,
     occupancy_no varchar(50) NOT NULL,
     date_complied date NOT NULL,
-	issued_on datetime NULL,
+	issued_on date NULL,
     date_inspected datetime NOT NULL default current_timestamp(),
 	PRIMARY KEY(certificate_id),
 	FOREIGN KEY(bus_id) REFERENCES business(bus_id),
@@ -191,7 +191,7 @@ FROM users u LEFT JOIN inspector i
 ON u.inspector_id = i.inspector_id;
     
 CREATE VIEW business_view AS
-SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.email, floor_area, signage_area, bus_img_url, 
+SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.bus_group, bus.character_of_occupancy, bus.email, floor_area, signage_area, bus_img_url, 
 owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_suffix 
 FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
@@ -226,7 +226,7 @@ LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 CREATE VIEW annual_inspection_certificate_view AS
-SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_img_url, aic.bus_group, aic.character_of_occupancy, aic.occupancy_no, aic.issued_on,
+SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_group, b.character_of_occupancy, b.bus_img_url, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
 i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_complied, aic.date_inspected
 FROM annual_inspection_certificate aic 
