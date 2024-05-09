@@ -224,6 +224,8 @@ include './../includes/side-header.php';
 
                                                     ?>
                                                     <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="<?= $sanitaryBilling['sanitary_fee']?>" readonly>
+
+                                                    <input type="hidden" name="sanitary_id" value="<?= $sanitaryBilling['sanitary_id']?>" required>
                                                 </div>
                                             </div>
 
@@ -350,7 +352,7 @@ include './../includes/side-header.php';
                             </div>
 
                             <div class="text-center mt-4 d-none formSubmit">
-                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
+                                <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Issue">
                             </div>
                         </form>
                     </div>
