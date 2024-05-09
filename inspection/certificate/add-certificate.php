@@ -170,7 +170,7 @@ include './../includes/side-header.php';
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" placeholder="Enter Date Compiled...">
+                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled...">
                                             </div>
                                         </div>
 
@@ -179,7 +179,7 @@ include './../includes/side-header.php';
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="issued_on" class="form-control p-4" id="issued-on" placeholder="Enter Issued On...">
+                                                <input type="date" name="issued_on" class="form-control p-4" id="issued-on" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Issued On...">
                                             </div>
                                         </div>
                                     </div>

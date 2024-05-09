@@ -999,6 +999,10 @@ function createInputField(type, id, name, readOnly = true, required = true) {
 
     }
   
+  } else if (type === "date") {
+    let currentDate = new Date().toISOString().split('T')[0];
+    input.max = currentDate;
+
   }
   return input;
 }
