@@ -204,22 +204,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                             </div>
 
                                             <div class="col col-12 p-0 form-group">
-                                                <label>Character Of Occupancy</label>
-
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control p-4" value="<?= $certificate['character_of_occupancy'] ?>" readonly>
-                                                </div>
-                                            </div>
-
-                                            <div class="col col-12 p-0 form-group">
-                                                <label>Group</label>
-
-                                                <div class="input-group">
-                                                    <input type="text" class="form-control p-4" value="<?= $certificate['bus_group'] ?>" readonly>
-                                                </div>
-                                            </div>
-
-                                            <div class="col col-12 p-0 form-group">
                                                 <label>Occupancy No.</label>
 
                                                 <div class="input-group">
