@@ -57,8 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
     $inspectionData = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
 }
 
-// var_dump($inspectionData);
-// exit;
 ?>
 
 <!-- Content Wrapper -->
@@ -106,11 +104,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                             $descriptions = explode(',', $data['descriptions']);
 
                         ?>
-                            <form class="user" id="inspection-form" enctype="multipart/form-data">
+                            <form action="./generate/regenerate-equipment-inspection.php" method="POST" class="user" id="inspection-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
                                     <div class="image-container mb-3">
                                         <img src="./../business/images/<?= $data['bus_img_url'] ?>" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
                                     </div>
+
+                                    <button type="submit" name="submit" class="btn btn-primary btn-md-block mr-3 px-3">Re-Issue
+                                    </button>
                                 </div>
 
                                 <div id="inspectionCarousel" class="carousel slide">
@@ -128,47 +129,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Application Type</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['application_type'] ?>" readonly>
+                                                <input type="text" name="application_type" class="form-control p-4" value="<?= $data['application_type'] ?>" readonly>
                                             </div>
 
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Business Name</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['bus_name'] ?>" readonly>
+                                                <input type="text" name="bus_name" class="form-control p-4" value="<?= $data['bus_name'] ?>" readonly>
                                             </div>
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Owner Name</label>
-                                                <input type="text" class="form-control p-4" value="<?= $owner_fullname ?>" readonly>
+                                                <input type="text" name="owner_name" class="form-control p-4" value="<?= $owner_fullname ?>" readonly>
                                             </div>
 
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Business Address</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['bus_address'] ?>" readonly>
+                                                <input type="text" name="bus_address" class="form-control p-4" value="<?= $data['bus_address'] ?>" readonly>
                                             </div>
 
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Business Type</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['bus_type'] ?>" readonly>
+                                                <input type="text" name="bus_type" class="form-control p-4" value="<?= $data['bus_type'] ?>" readonly>
                                             </div>
 
 
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Business Contact No.</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['bus_contact_number'] ?>" readonly>
+                                                <input type="text" name="bus_contact_number" class="form-control p-4" value="<?= $data['bus_contact_number'] ?>" readonly>
                                             </div>
 
                                             <div class="d-md-flex align-items-center justify-content-center">
                                                 <div class="col col-md-6 p-0 form-group flex-md-grow-1">
                                                     <label>Floor Area</label>
-                                                    <input type="text" class="form-control p-4" value="<?= $data['floor_area'] ?>" readonly>
+                                                    <input type="text" name="floor_area" class="form-control p-4" value="<?= $data['floor_area'] ?>" readonly>
                                                 </div>
 
                                                 <div class="col col-md-6 p-0 form-group flex-md-grow-1">
                                                     <label for="signage-area">Signage Area</label>
-                                                    <input type="text" class="form-control p-4" value="<?= $data['signage_area'] ?>" readonly>
+                                                    <input type="text" name="signage_area" class="form-control p-4" value="<?= $data['signage_area'] ?>" readonly>
                                                 </div>
                                             </div>
 
@@ -186,50 +187,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                                 <?php foreach ($item_names as $index => $item) : ?>
 
-
                                                     <div class="shadow bg-white rounded p-3 mb-2" id="item-content-1">
                                                         <a id="item-title-1" class="text text-decoration-none" style="cursor: pointer; font-weight: 700;">Item <?= $index + 1 ?>
                                                         </a>
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Item Name</label>
-                                                            <input type="text" class="form-control p-4" value="<?= $item_names[$index] ?>" readonly>
+                                                            <input type="text" name="item_name[]" class="form-control p-4" value="<?= $item_names[$index] ?>" readonly>
                                                         </div>
 
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Category</label>
-                                                            <input type="text" class="form-control p-4" value="<?= $category_names[$index] ?>" readonly>
+                                                            <input type="text" name="category_name[]" class="form-control p-4" value="<?= $category_names[$index] ?>" readonly>
                                                         </div>
 
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Section</label>
-                                                            <input type="text" class="form-control p-4" value="<?= $sections[$index] ?>" readonly>
+                                                            <input type="text" name="section[]" class="form-control p-4" value="<?= $sections[$index] ?>" readonly>
                                                         </div>
 
                                                         <?php if ($category_names[$index] !== 'Electronics') : ?>
 
                                                             <div class="col col-12 p-0 form-group mb-1">
                                                                 <label>Capacity</label>
-                                                                <input type="text" class="form-control p-4" value="<?= $capacities[$index] ?>" readonly>
+                                                                <input type="text" name="capacity[]" class="form-control p-4" value="<?= $capacities[$index] ?>" readonly>
                                                             </div>
                                                         <?php endif; ?>
 
                                                         <div class="d-md-flex align-items-center justify-content-center p-0">
                                                             <div class="col col-md-6 p-0 form-group mb-1 flex-md-grow-1">
                                                                 <label>Quantity</label>
-                                                                <input type="number" class="form-control p-4" value="<?= $quantities[$index] ?>" readonly>
+                                                                <input type="number" name="quantity[]" class="form-control p-4" value="<?= $quantities[$index] ?>" readonly>
                                                             </div>
 
                                                             <div class="col col-md-6 p-0 form-group mb-1 flex-md-grow-1">
                                                                 <label>Power Rating</label>
-                                                                <input type="number" class="form-control p-4" value="<?= $power_ratings[$index] ?>" readonly>
+                                                                <input type="number" name="power_rating[]" class="form-control p-4" value="<?= $power_ratings[$index] ?>" readonly>
                                                             </div>
                                                         </div>
 
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Fee</label>
-                                                            <input type="number" class="form-control p-4" value="<?= $fees[$index] ?>" readonly>
+                                                            <input type="number" name="fee[]" class="form-control p-4" value="<?= $fees[$index] ?>" readonly>
                                                         </div>
                                                     </div>
+
                                                 <?php endforeach ?>
                                             </div>
 
@@ -241,7 +242,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                             <div class="col col-12 p-0 form-group mb-1">
                                                 <label>Section</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['bldg_section'] ?>" readonly>
+                                                <input type="text" name="bldg_section" class="form-control p-4" value="<?= $data['bldg_section'] ?>" readonly>
                                             </div>
 
                                             <div class="col col-12 p-0 form-group mb-1">
@@ -259,7 +260,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                         <span class="input-group-text">₱</span>
                                                     </div>
 
-                                                    <input type="number" class="form-control p-4" value="<?= $data['bldg_fee'] ?>" readonly>
+                                                    <input type="number" name="bldg_fee" class="form-control p-4" value="<?= $data['bldg_fee'] ?>" readonly>
                                                 </div>
                                             </div>
 
@@ -275,14 +276,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                             <span class="input-group-text">₱</span>
                                                         </div>
 
-                                                        <input type="number" class="form-control p-4" value="<?= $data['sanitary_fee'] ?>" readonly>
+                                                        <input type="number" name="sanitary_fee" class="form-control p-4" value="<?= $data['sanitary_fee'] ?>" readonly>
                                                     </div>
                                                 </div>
 
                                                 <div class="col col-md-6 p-0 form-group flex-md-grow-1">
                                                     <label for="sanitary-quantity">Quantity
                                                     </label>
-                                                    <input type="number" class="form-control p-4" value="<?= $data['sanitary_quantity'] ?>" readonly>
+                                                    <input type="number" name="sanitary_quantity" class="form-control p-4" value="<?= $data['sanitary_quantity'] ?>" readonly>
                                                 </div>
                                             </div>
 
@@ -306,7 +307,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                         <span class="input-group-text">₱</span>
                                                     </div>
 
-                                                    <input type="number" class="form-control p-4" value="<?= $data['signage_fee'] ?>" readonly>
+                                                    <input type="number" name="signage_fee" class="form-control p-4" value="<?= $data['signage_fee'] ?>" readonly>
                                                 </div>
                                             </div>
 
@@ -325,7 +326,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                 foreach ($inspector_ids as $index => $inspector_id) :
 
                                                     $inspector_firstname = $inspector_firstnames[$index];
-                                                    $inspector_midname = $inspector_midnames[$index];
+                                                    $inspector_midname = $inspector_midnames[$index] ? mb_substr($inspector_midnames[$index], 0, 1, 'UTF-8') . "." : "";
                                                     $inspector_lastname = $inspector_lastnames[$index];
                                                     $inspector_suffix = $inspector_suffixes[$index];
 
@@ -340,7 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Inspector Name</label>
 
-                                                            <input type="text" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
+                                                            <input type="text" name="inspector_name[]" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
                                                         </div>
 
                                                     </div>
@@ -353,7 +354,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                             <div class=" col col-12 p-0 form-group mb-1">
                                                 <label>Remarks</label>
-                                                <input type="text" class="form-control p-4" value="<?= $data['remarks'] ?>" readonly>
+                                                <input type="text" name="remarks" class="form-control p-4" value="<?= $data['remarks'] ?>" readonly>
                                             </div>
 
                                             <div class="d-flex flex-column" id="violation-container">
@@ -377,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Description</label>
-                                                            <input type="text" class="form-control p-4" value="<?= $descriptions[$index] ?>" readonly>
+                                                            <input type="text" name="description" class="form-control p-4" value="<?= $descriptions[$index] ?>" readonly>
                                                         </div>
 
                                                     </div>
