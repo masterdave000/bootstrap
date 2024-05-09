@@ -115,7 +115,7 @@ include './../includes/side-header.php';
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="character-of-occupancy">Character of Occupancy<span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="character_of_occucpancy" class="form-control p-4" id="character-of-occupancy" required readonly>
+                                            <input type="text" name="character_of_occupancy" class="form-control p-4" id="character-of-occupancy" required readonly>
                                         </div>
 
                                         <input type="hidden" id="bus-type" disabled>
