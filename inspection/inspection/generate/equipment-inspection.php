@@ -325,7 +325,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </section>
                         <section class="position-absolute left bottom-0 start-50 translate-middle d-print-none">
                             <button class="btn btn-primary btn-md-block mr-3 px-3" id="print-button">Print
-                                Report</button>
+                            </button>
                         </section>
                     </section>
                 </section>
