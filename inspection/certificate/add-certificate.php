@@ -105,6 +105,19 @@ include './../includes/side-header.php';
                                             <input type="text" name="bus_address" class="form-control p-4" id="bus-address" required readonly>
                                         </div>
 
+
+                                        <div class="col col-12 p-0 form-group d-none">
+                                            <label for="bus-group">Business Group<span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="bus_group" class="form-control p-4" id="bus-group" required readonly>
+                                        </div>
+
+                                        <div class="col col-12 p-0 form-group d-none">
+                                            <label for="character-of-occupancy">Character of Occupancy<span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" name="character_of_occucpancy" class="form-control p-4" id="character-of-occupancy" required readonly>
+                                        </div>
+
                                         <input type="hidden" id="bus-type" disabled>
                                         <input type="hidden" id="bus-contact-number" disabled>
                                         <input type="hidden" id="floor-area" disabled>
