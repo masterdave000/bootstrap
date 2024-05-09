@@ -143,7 +143,30 @@ include './../../includes/side-header.php';
                                 </div>
                             </div>
 
-                            <div class="col col-12 p-0 form-group">
+                            <div class="form-group flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronics' ? 'd-flex' : "d-none" ?>" id="electronics-section">
+                                <label for="section">Section<span class="text-danger">*</span>
+                                </label>
+                                <div class="d-flex align-items-center justify-content-center select-container">
+                                    <select name="section" class="form-control form-select px-3" id="electronics" <?php echo $billing['category_name'] === 'Electronics' ? "" : "disabled" ?>>
+
+                                        <option selected hidden value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "" ?>">
+                                            <?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : "Select" ?>
+                                        </option>
+
+                                        <option value="Central Office switching equipment, remote switching units, etc.">Central Office switching equipment, remote switching units, etc.</option>
+                                        <option value="Broadcast Station for Radion and TV">Broadcast Station for Radion and TV</option>
+                                        <option value="Automated Teller Machines, Ticketing,Vending, etc.">Automated Teller Machines, Ticketing,Vending, etc.</option>
+                                        <option value="ELectronics and Communications Outlets, etc.">ELectronics and Communications Outlets, etc.</option>
+                                        <option value="Station/Terminal/Control, etc.">Station/Terminal/Control, etc.</option>
+                                        <option value="Studios, Auditoriums, Theaters, etc.">Studios, Auditoriums, Theaters, etc.</option>
+                                        <option value="Antenna Towers/Masts or Other Structures for Installation">Antenna Towers/Masts or Other Structures for Installation</option>
+                                        <option value="Electronic or Electronically-COntrolled Indoors and Outdoor Signages">Electronic or Electronically-COntrolled Indoors and Outdoor Signages</option>
+                                        <option value="Poles and Attachment">Poles and Attachment</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="d-none col col-12 p-0 form-group" id="capacity-container">
                                 <label for="capacity">Capacity <span class="text-danger">*</span>
                                 </label>
                                 <input type="text" name="capacity" class="form-control p-4" id="capacity" placeholder="Enter Capacity..." value="<?php echo $billing['capacity'] ?>" required>
