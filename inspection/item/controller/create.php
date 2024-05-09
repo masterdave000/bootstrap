@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category_id = filter_var($clean_category_id, FILTER_VALIDATE_INT);
 
     $item_name = htmlspecialchars(ucwords(trim($_POST['item_name'])));
-    $section = $_POST['section'];
+    $section = htmlspecialchars($_POST['section']);
 
     $img_name = basename($_FILES['item_img']['name']);
     $temp_name = $_FILES['item_img']['tmp_name'];
