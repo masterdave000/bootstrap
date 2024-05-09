@@ -151,9 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <td><?php echo $item_name ?></td>
                                             <td><?php echo $power_rating ?></td>
                                             <td><?php echo $quantity ?></td>
-                                            <td><?php echo $category_name === 'Electronics' ? $fee : '' ?></td>
-                                            <td><?php echo $category_name === 'Electrical' ? $fee : '' ?></td>
-                                            <td><?php echo $category_name === 'Mechanical' ? $fee : '' ?></td>
+                                            <td><?php echo $category_name === 'Electronics' ? number_format($fee, 2) : '' ?></td>
+                                            <td><?php echo $category_name === 'Electrical' ? number_format($fee, 2)  : '' ?></td>
+                                            <td><?php echo $category_name === 'Mechanical' ? number_format($fee, 2)  : '' ?></td>
                                         </tr>
 
                                         <input type="hidden" name="billings_id[]" value="<?php echo $billing_id ?>">
