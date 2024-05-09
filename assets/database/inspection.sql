@@ -17,6 +17,8 @@ CREATE TABLE business (
 	bus_address varchar(100) NOT NULL,
 	bus_type varchar(50) DEFAULT NULL,
 	bus_contact_number varchar(11) NOT NULL,
+    bus_group varchar(100) NOT NULL,
+    character_of_occupancy varchar(100) NOT NULL, 
 	email varchar(50) DEFAULT NULL,
 	floor_area double DEFAULT NULL,
 	signage_area double DEFAULT NULL,
@@ -191,7 +193,7 @@ FROM users u LEFT JOIN inspector i
 ON u.inspector_id = i.inspector_id;
     
 CREATE VIEW business_view AS
-SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.email, floor_area, signage_area, bus_img_url, 
+SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.bus_group, bus.character_of_occupancy, bus.email, floor_area, signage_area, bus_img_url, 
 owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_suffix 
 FROM business bus
 LEFT JOIN owner ON bus.owner_id = owner.owner_id;
