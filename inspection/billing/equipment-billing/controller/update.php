@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_category_id = filter_var($_POST['category_id'], FILTER_SANITIZE_NUMBER_INT);
     $category_id = filter_var($clean_category_id, FILTER_VALIDATE_INT);
     $section = $_POST['section'];
-    $capacity = $_POST['capacity'];
+    $capacity = $_POST['capacity'] ?: NULL;
     $fee = $_POST['fee'];
 }
 
