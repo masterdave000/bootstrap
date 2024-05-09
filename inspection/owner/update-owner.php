@@ -1,27 +1,27 @@
-<?php 
+<?php
 
 $title = "Edit Owner";
 include './../includes/side-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    
+
     $clean_owner_id = filter_var($_GET['owner_id'], FILTER_SANITIZE_NUMBER_INT);
     $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
 }
-    $getOwnerQuery = "SELECT * FROM owner WHERE owner_id = :owner_id";
-    $getOwnerStatement = $pdo->prepare($getOwnerQuery);
-    $getOwnerStatement->bindParam(':owner_id', $owner_id);
-    $getOwnerStatement->execute();
+$getOwnerQuery = "SELECT * FROM owner WHERE owner_id = :owner_id";
+$getOwnerStatement = $pdo->prepare($getOwnerQuery);
+$getOwnerStatement->bindParam(':owner_id', $owner_id);
+$getOwnerStatement->execute();
 
-    $owner = $getOwnerStatement->fetch(PDO::FETCH_ASSOC);
-    $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
-    $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-    $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
-    $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
-    $contact_number = htmlspecialchars($owner['contact_number']);
-    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+$owner = $getOwnerStatement->fetch(PDO::FETCH_ASSOC);
+$firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
+$midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+$lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
+$suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
+$contact_number = htmlspecialchars($owner['contact_number']);
+$fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
 
-    $img_url = $owner['owner_img_url'];
+$img_url = $owner['owner_img_url'];
 ?>
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -29,15 +29,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
         <?php
 
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['update'];
-                //Removing session message
-                unset($_SESSION['update']);
-            }
+        if (isset($_SESSION['update'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['update'];
+            //Removing session message
+            unset($_SESSION['update']);
+        }
+
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden">
@@ -46,25 +53,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/<?php echo $img_url?>" alt="default-owner-image"
-                                        class="img-fluid rounded-circle" />
+                                    <img src="./images/<?php echo $img_url ?>" alt="default-owner-image" class="img-fluid rounded-circle" />
                                 </div>
 
-                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname?></p>
+                                <p class="h3 text-gray-900 mb-4 "><?php echo $fullname ?></p>
 
                                 <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="owner_img_url" id="owner-img-url" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG" />
+                                    <input type="file" name="owner_img_url" id="owner-img-url" class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
 
-                                    <input type="hidden" name="current_img_url" value="<?php echo $img_url?>" />
+                                    <input type="hidden" name="current_img_url" value="<?php echo $img_url ?>" />
 
                                     <?php
-                                    
+
                                     if (isset($_SESSION['error'])) {
                                         echo "<small class='text-danger text-center'>" . $_SESSION['error'] . "</small>";
                                         unset($_SESSION['error']); // clear the error message from the session
@@ -86,17 +91,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-firstname">First Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_firstname" id="owner-firstname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter First Name..."
-                                        value="<?php echo $firstname?>" required>
+                                    <input type="text" name="owner_firstname" id="owner-firstname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="ownerNameHelp" placeholder="Enter First Name..." value="<?php echo $firstname ?>" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-midname">Middle Name </label>
-                                    <input type="text" name="owner_midname" id="owner-midname" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Middle Name..." value="<?php echo $owner['owner_midname']?>">
+                                    <input type="text" name="owner_midname" id="owner-midname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="ownerNameHelp" placeholder="Enter Middle Name..." value="<?php echo $owner['owner_midname'] ?>">
                                 </div>
                             </div>
 
@@ -104,17 +104,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-lasttname">Last Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="owner_lastname" id="owner-lasttname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="ownerNameHelp" placeholder="Enter Last Name..."
-                                        value="<?php echo $lastname?>" required>
+                                    <input type="text" name="owner_lastname" id="owner-lasttname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="ownerNameHelp" placeholder="Enter Last Name..." value="<?php echo $lastname ?>" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="owner-suffix">Suffix </label>
-                                    <input type="text" name="owner_suffix" id="owner-suffix" class="form-control p-4"
-                                        id="exampleInputOwnerName" aria-describedby="ownerNameHelp"
-                                        placeholder="Enter Suffix Name..." value="<?php echo $suffix?>">
+                                    <input type="text" name="owner_suffix" id="owner-suffix" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="ownerNameHelp" placeholder="Enter Suffix Name..." value="<?php echo $suffix ?>">
                                 </div>
                             </div>
 
@@ -122,24 +117,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="contact-number">Contact Number <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="contact_number" class="form-control p-4"
-                                        id="contact-number" aria-describedby="contactnoHelp"
-                                        placeholder="Enter Contact Number..." maxlength="11"
-                                        value="<?php echo $owner['contact_number']?>" required>
+                                    <input type="text" name="contact_number" class="form-control p-4" id="contact-number" aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." maxlength="11" value="<?php echo $owner['contact_number'] ?>" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="email">Email <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control p-4" id="email"
-                                        aria-describedby="contactnoHelp" placeholder="Enter Email Address..."
-                                        value="<?php echo $owner['email']?>" required>
+                                    <input type="email" name="email" class="form-control p-4" id="email" aria-describedby="contactnoHelp" placeholder="Enter Email Address..." value="<?php echo $owner['email'] ?>" required>
                                 </div>
                             </div>
-                            <input type="hidden" name="owner_id" value="<?php echo $owner['owner_id']?>">
+                            <input type="hidden" name="owner_id" value="<?php echo $owner['owner_id'] ?>">
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">
                         </form>
                     </div>
                 </div>

@@ -6,13 +6,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$user_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
 	$clean_inspector_id = filter_var($_POST['inspector_name'], FILTER_SANITIZE_NUMBER_INT);
-    $inspector_id = filter_var($clean_inspector_id, FILTER_VALIDATE_INT);
-	
+	$inspector_id = filter_var($clean_inspector_id, FILTER_VALIDATE_INT);
+
 	$username = htmlspecialchars($_POST['username']);
 	$role = htmlspecialchars(ucwords($_POST['role']));
 
+
+	$userDuplicate = "SELECT user_id FROM user_view WHERE username = :username AND user_id != :user_id";
+	$userStatement = $pdo->prepare($userDuplicate);
+	$userStatement->bindParam(':user_id', $user_id);
+	$userStatement->bindParam(':username', $username);
+	$userStatement->execute();
+
+	$userCount = $userStatement->rowCount();
+
+	if ($userCount > 0) {
+		$_SESSION['duplicate'] = "
+		<div class='msgalert alert--danger' id='alert'>
+			<div class='alert__message'>	
+				$username Already Exist
+			</div>
+		</div>
+		
+		";
+
+		header('location:' . SITEURL . "inspection/user/update-user.php?user_id=$user_id");
+		exit;
+	}
+
+
 	$updateuserQuery = "UPDATE users SET
-		inspector_id = :clean_inspector_id,
+		inspector_id = :inspector_id,
 		username = :username,
 		role = :role
 		WHERE user_id = :user_id

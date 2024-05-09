@@ -31,7 +31,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Handle the case when section is not set
     // You can return an error response or an empty array
     $response = array(
-        'fee' => 1.00,
+        'fee' => 0.00,
         'billing_id' => ''
     );
     

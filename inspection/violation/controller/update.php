@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include './../../../config/constants.php';
 
@@ -7,6 +7,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $violation_id = filter_var($clean_violation_id, FILTER_VALIDATE_INT);
 
     $description = trim(ucfirst($_POST['description']));
+}
+
+$violationDuplicate = "SELECT violation_id FROM violation WHERE description = :description AND violation_id != :violation_id";
+$violationStatement = $pdo->prepare($violationDuplicate);
+$violationStatement->bindParam(':violation_id', $violation_id);
+$violationStatement->bindParam(':description', $description);
+$violationStatement->execute();
+
+$violationCount = $violationStatement->rowCount();
+
+if ($violationCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            Violation Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . "inspection/violation/update-violation.php?violation_id=$violation_id");
+    exit;
 }
 
 

@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-include './../../../config/constants.php';
+include './../../../../config/constants.php';
 
 if (filter_has_var(INPUT_POST, 'password')) {
 
@@ -21,44 +21,43 @@ if (filter_has_var(INPUT_POST, 'password')) {
 
         ";
         //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/building-billing/');
         exit;
     }
-    
 }
 
 //Get the id to be deleted
-if (filter_has_var(INPUT_POST, 'billing_id')) { 
-    $clean_billing_id = filter_var($_POST['billing_id'], FILTER_SANITIZE_NUMBER_INT);
-    $billing_id = filter_var($clean_billing_id, FILTER_VALIDATE_INT);
+if (filter_has_var(INPUT_POST, 'bldg_billing_id')) {
+    $clean_bldg_billing_id = filter_var($_POST['bldg_billing_id'], FILTER_SANITIZE_NUMBER_INT);
+    $bldg_billing_id = filter_var($clean_bldg_billing_id, FILTER_VALIDATE_INT);
 
-    $billingQuery = "DELETE FROM equipment_billing WHERE billing_id = :billing_id";
+    $billingQuery = "DELETE FROM building_billing WHERE bldg_billing_id = :bldg_billing_id";
     $billingStatement = $pdo->prepare($billingQuery);
-    $billingStatement->bindParam(':billing_id', $billing_id);
+    $billingStatement->bindParam(':bldg_billing_id', $bldg_billing_id);
 
     if ($billingStatement->execute()) {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
-                Billing Details Deleted Successfully
+                Building Billing Record Deleted Successfully
             </div>
         </div>
         ";
         //Redirecting to the manage display page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/building-billing/');
     } else {
         //Creating SESSION variable to display message.
         $_SESSION['delete'] = "
         <div class='msgalert alert--danger' id='alert'>
             <div class='alert__message'>
-                Failed to Delete Billing Details, Please try again
+                Failed to Delete Building Billing Record, Please try again
             </div>
         </div>
 
         ";
         //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+        header('location:' . SITEURL . 'inspection/billing/building-billing/');
     }
 } else {
 
@@ -70,6 +69,6 @@ if (filter_has_var(INPUT_POST, 'billing_id')) {
         </div>
 
         ";
-        //Redirecting to the manage billing page.
-        header('location:' . SITEURL . 'inspection/billing/');
+    //Redirecting to the manage billing page.
+    header('location:' . SITEURL . 'inspection/billing/building-billing/');
 }

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include './../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -6,7 +6,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $category_id = filter_var($clean_category_id, FILTER_VALIDATE_INT);
 
     $item_name = htmlspecialchars(ucwords(trim($_POST['item_name'])));
-    
+    $section = htmlspecialchars($_POST['section']);
+
     $img_name = basename($_FILES['item_img']['name']);
     $temp_name = $_FILES['item_img']['tmp_name'];
     $img_size = $_FILES['item_img']['size'];
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filename = $item_name . '(' . date('m-d-Y') . ').png';
 
     $img_url = 'default-img.png';
-    
+
     if ($img_name) {
         if (!in_array($img_extension, $allowed_types)) {
             $_SESSION['error'] = "Only JPEG, JPG, and PNG files are allowed.";
@@ -35,23 +36,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../add-item.php");
             exit();
         }
-
     }
 }
+
+$itemDuplicate = "SELECT item_id FROM item_list WHERE item_name = :item_name";
+$itemStatement = $pdo->prepare($itemDuplicate);
+$itemStatement->bindParam(':item_name', $item_name);
+$itemStatement->execute();
+
+$itemCount = $itemStatement->rowCount();
+
+if ($itemCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $item_name Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . 'inspection/item/add-item.php');
+    exit;
+}
+
 
 $itemQuery = "INSERT INTO item_list (
     category_id,
     item_name,
+    section,
     img_url
 ) VALUES (
     :category_id,
     :item_name,
+    :section,
     :img_url
 )";
 
 $itemStatement = $pdo->prepare($itemQuery);
 $itemStatement->bindParam(':category_id', $category_id);
 $itemStatement->bindParam(':item_name', $item_name);
+$itemStatement->bindParam(':section', $section);
 $itemStatement->bindParam(':img_url', $img_url);
 
 

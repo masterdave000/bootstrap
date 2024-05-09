@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Add Inspector";
 include './../includes/side-header.php';
@@ -10,15 +10,22 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
+
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden">
@@ -27,18 +34,16 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
                         <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/default.png" alt="default-inspector-image"
-                                        class="img-fluid rounded-circle" />
+                                    <img src="./images/default.png" alt="default-inspector-image" class="img-fluid rounded-circle" />
                                 </div>
 
                                 <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="inspector_img_url" id="inspector-img-url"
-                                        class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
+                                    <input type="file" name="inspector_img_url" id="inspector-img-url" class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
 
                                     <?php
                                     if (isset($_SESSION['error'])) {
@@ -61,16 +66,12 @@ include './../includes/side-header.php';
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="inspector-firstname">First Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="inspector_firstname" id="inspector-firstname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="inspectorNameHelp" placeholder="Enter First Name..." required>
+                                    <input type="text" name="inspector_firstname" id="inspector-firstname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="inspectorNameHelp" placeholder="Enter First Name..." required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="inspector-midname">Middle Name </label>
-                                    <input type="text" name="inspector_midname" id="inspector-midname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="inspectorNameHelp" placeholder="Enter Middle Name...">
+                                    <input type="text" name="inspector_midname" id="inspector-midname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="inspectorNameHelp" placeholder="Enter Middle Name...">
                                 </div>
                             </div>
 
@@ -78,16 +79,12 @@ include './../includes/side-header.php';
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="inspector-lasttname">Last Name <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="inspector_lastname" id="inspector-lasttname"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="inspectorNameHelp" placeholder="Enter Last Name..." required>
+                                    <input type="text" name="inspector_lastname" id="inspector-lasttname" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="inspectorNameHelp" placeholder="Enter Last Name..." required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="inspector-suffix">Suffix </label>
-                                    <input type="text" name="inspector_suffix" id="inspector-suffix"
-                                        class="form-control p-4" id="exampleInputOwnerName"
-                                        aria-describedby="inspectorNameHelp" placeholder="Enter Suffix Name...">
+                                    <input type="text" name="inspector_suffix" id="inspector-suffix" class="form-control p-4" id="exampleInputOwnerName" aria-describedby="inspectorNameHelp" placeholder="Enter Suffix Name...">
                                 </div>
                             </div>
 
@@ -95,21 +92,17 @@ include './../includes/side-header.php';
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="contact-number">Contact Number <span class="text-danger">*</span>
                                     </label>
-                                    <input type="text" name="contact_number" class="form-control p-4"
-                                        id="contact-number" aria-describedby="contactnoHelp"
-                                        placeholder="Enter Contact Number..." maxlength="11" required>
+                                    <input type="text" name="contact_number" class="form-control p-4" id="contact-number" aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." maxlength="11" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
                                     <label for="email">Email <span class="text-danger">*</span>
                                     </label>
-                                    <input type="email" name="email" class="form-control p-4" id="email"
-                                        aria-describedby="contactnoHelp" placeholder="Enter Email Address..." required>
+                                    <input type="email" name="email" class="form-control p-4" id="email" aria-describedby="contactnoHelp" placeholder="Enter Email Address..." required>
                                 </div>
                             </div>
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Add">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
                         </form>
                     </div>
                 </div>

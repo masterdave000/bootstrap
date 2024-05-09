@@ -12,6 +12,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 	if ($password1 == $password2) {
 
+		$userDuplicate = "SELECT user_id FROM user_view WHERE username = :username";
+		$userStatement = $pdo->prepare($userDuplicate);
+		$userStatement->bindParam(':username', $username);
+		$userStatement->execute();
+
+		$userCount = $userStatement->rowCount();
+
+		if ($userCount > 0) {
+			$_SESSION['duplicate'] = "
+			<div class='msgalert alert--danger' id='alert'>
+				<div class='alert__message'>	
+					$username Already Exist
+				</div>
+			</div>
+			
+			";
+
+			header('location:' . SITEURL . 'inspection/user/add-user.php');
+			exit;
+		}
+
 		$insertUserQuery = "INSERT INTO users
 			(
 				inspector_id,

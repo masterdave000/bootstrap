@@ -200,7 +200,7 @@ include './../includes/side-header.php';
 
                                             <div class="input-group">
                                                 <input type="date" name="date_complied" class="form-control p-4"
-                                                    id="date-compiled" placeholder="Enter Date Compiled...">
+                                                    id="date-complied" placeholder="Enter Date Compiled...">
                                             </div>
                                         </div>
 

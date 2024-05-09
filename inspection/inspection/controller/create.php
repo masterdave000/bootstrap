@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include './../../../config/constants.php';
 
@@ -9,53 +9,44 @@ include './../../../config/constants.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
     $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
-    
+
     $clean_business_id = filter_var($_POST['business_id'], FILTER_SANITIZE_NUMBER_INT);
     $business_id = filter_var($clean_business_id, FILTER_VALIDATE_INT);
-    
+
+    $clean_bldg_billing_id = filter_var($_POST['bldg_billing_id'], FILTER_SANITIZE_NUMBER_INT);
+    $bldg_billing_id = filter_var($clean_bldg_billing_id, FILTER_VALIDATE_INT);
+
+    $clean_signage_id = filter_var($_POST['signage_id'], FILTER_SANITIZE_NUMBER_INT);
+    $signage_id = filter_var($clean_signage_id, FILTER_VALIDATE_INT);
+
+    $clean_sanitary_id = filter_var($_POST['sanitary_id'], FILTER_SANITIZE_NUMBER_INT);
+    $sanitary_id = filter_var($clean_sanitary_id, FILTER_VALIDATE_INT);
+
     $billings_id = $_POST['billings_id'];
     $items_id = $_POST['items_id'];
     $inspectors_id = $_POST['inspectors_id'];
-    
-    $application_type = $_POST['application_type'];
-    $remarks = $_POST['remarks'];
-    
+
+    $application_type = htmlspecialchars($_POST['application_type']);
+    $remarks = htmlspecialchars($_POST['remarks']);
+
     $power_ratings = $_POST['power_ratings'];
     $quantities = $_POST['quantities'];
     $fees = $_POST['fees'];
-    
+
     $building_fee = $_POST['building_fee'];
     $sanitary_fee = $_POST['sanitary_fee'];
+    $sanitary_quantity = $_POST['sanitary_quantity'];
     $signage_fee = $_POST['signage_fee'];
 
     $date_inspected = date('Y-m-d H:i:s');
 }
 
-// Insert Data to business billing
-
-$busBillingInsert = "INSERT INTO business_billing(
-    building_fee,
-    sanitary_fee,
-    signage_fee
-) VALUES (
-    :building_fee,
-    :sanitary_fee,
-    :signage_fee
-)";
-
-$busBillingStatement = $pdo->prepare($busBillingInsert);
-$busBillingStatement->bindParam(':building_fee', $building_fee);
-$busBillingStatement->bindParam(':sanitary_fee', $sanitary_fee);
-$busBillingStatement->bindParam(':signage_fee', $signage_fee);
-$busBillingStatement->execute();
-
-$business_billing_id = $pdo->lastInsertId();
-
 // Insert Data to inspection
 $inspectionInsert = "INSERT INTO inspection(
     owner_id,
     bus_id,
-    business_billing_id,
+    signage_id,
+    bldg_billing_id,
     application_type,
     remarks,
     date_inspected
@@ -63,7 +54,8 @@ $inspectionInsert = "INSERT INTO inspection(
 ) VALUES(
     :owner_id,
     :bus_id,
-    :business_billing_id,
+    :signage_id,
+    :bldg_billing_id,
     :application_type,
     :remarks,
     :date_inspected
@@ -72,7 +64,8 @@ $inspectionInsert = "INSERT INTO inspection(
 $inspectionStatement = $pdo->prepare($inspectionInsert);
 $inspectionStatement->bindParam(':owner_id', $owner_id);
 $inspectionStatement->bindParam(':bus_id', $business_id);
-$inspectionStatement->bindParam(':business_billing_id', $business_billing_id);
+$inspectionStatement->bindParam(':signage_id', $signage_id);
+$inspectionStatement->bindParam(':bldg_billing_id', $bldg_billing_id);
 $inspectionStatement->bindParam(':application_type', $application_type);
 $inspectionStatement->bindParam(':remarks', $remarks);
 $inspectionStatement->bindParam(':date_inspected', $date_inspected);
@@ -104,7 +97,7 @@ $inspectionItemStatement = $pdo->prepare($inspectionItemInsert);
 for ($i = 0; $i < count($items_id); $i++) {
     $inspectionItemStatement->bindParam(':inspection_id', $inspection_id);
     $inspectionItemStatement->bindParam(':item_id', $items_id[$i]);
-    $inspectionItemStatement->bindParam(':billing_id', $billings_id[$i]);
+    $inspectionItemStatement->bindValue(':billing_id', $billings_id[$i]);
     $inspectionItemStatement->bindParam(':power_rating', $power_ratings[$i]);
     $inspectionItemStatement->bindParam(':quantity', $quantities[$i]);
     $inspectionItemStatement->bindParam(':fee', $fees[$i]);
@@ -131,6 +124,23 @@ if (filter_has_var(INPUT_POST, 'violations_id')) {
         $violationStatement->execute();
     }
 }
+
+$inspectionSanitary = "INSERT INTO inspection_sanitary_billing (
+    inspection_id,
+    sanitary_id,
+    sanitary_quantity
+) 
+VALUES (
+    :inspection_id,
+    :sanitary_id,
+    :sanitary_quantity
+)";
+
+$inspectionSanitaryStatement = $pdo->prepare($inspectionSanitary);
+$inspectionSanitaryStatement->bindParam(':inspection_id', $inspection_id);
+$inspectionSanitaryStatement->bindParam(':sanitary_id', $sanitary_id);
+$inspectionSanitaryStatement->bindParam(':sanitary_quantity', $sanitary_quantity);
+$inspectionSanitaryStatement->execute();
 
 // Insert Data to inspection inspector
 $inspectorInsert = "INSERT INTO inspection_inspector(

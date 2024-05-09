@@ -54,7 +54,9 @@
 
     </ul>
 
-    <?php require __DIR__ . './../modals/logout.php'?>
+    <?php 
+    require($_SERVER['DOCUMENT_ROOT'] . '/obos/inspection/modals/logout.php')?>
+    
 
 </nav>
 <!-- End of Topbar -->

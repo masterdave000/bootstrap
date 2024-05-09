@@ -1,8 +1,7 @@
-<?php 
+<?php
 
-$title = "Update Billing";
-include './../includes/side-header.php';
-
+$title = "Add Billing";
+include './../../includes/side-header.php';
 
 ?>
 
@@ -14,37 +13,22 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['update'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['update'];
-                //Removing session message
-                unset($_SESSION['update']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
 
-            if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['duplicate'];
-                //Removing session message
-                unset($_SESSION['duplicate']);
-            }
-
-
-            if (filter_has_var(INPUT_GET, 'billing_id')) {
-
-                $clean_billing_id = filter_var($_GET['billing_id'], FILTER_SANITIZE_NUMBER_INT);
-                $billing_id = filter_var($clean_billing_id, FILTER_VALIDATE_INT);
-
-                $billingQuery = "SELECT * FROM equipment_billing_view WHERE billing_id = :billing_id";
-                $billingStatement = $pdo->prepare($billingQuery);
-                $billingStatement->bindParam(':billing_id', $billing_id);
-                $billingStatement->execute();
-
-                $billing = $billingStatement->fetch(PDO::FETCH_ASSOC);
-                
-            }
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -53,29 +37,27 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
-                        <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
+                        <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
 
                             <div class="form-group d-flex flex-column flex-md-grow-1">
                                 <label for="category-id">Category <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
                                     <select name="category_id" id="category-id" class="form-control px-3" required>
-                                        <?php 
-                                            $categoryQuery = "SELECT * from category_list";
-                                            $categoryStatement = $pdo->query($categoryQuery);
-                                            $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
-                                            
-                                            foreach ($categories as $category) {
-                                                ?>
+                                        <option selected disabled hidden value="">Select</option>
+                                        <?php
+                                        $categoryQuery = "SELECT * from category_list";
+                                        $categoryStatement = $pdo->query($categoryQuery);
+                                        $categories = $categoryStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                        <option
-                                            <?php echo $category['category_id'] === $billing['category_id']? 'selected' : ''?>
-                                            value="<?php echo $category['category_id']?>">
-                                            <?php echo $category['category_name']?>
-                                        </option>
+                                        foreach ($categories as $category) {
+                                        ?>
 
+                                            <option value="<?php echo $category['category_id'] ?>">
+                                                <?php echo $category['category_name'] ?>
+                                            </option>
                                         <?php
                                         }
 
@@ -84,19 +66,12 @@ include './../includes/side-header.php';
                                 </div>
                             </div>
 
-
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electrical' ? 'd-flex' : ""?>"
-                                id="electrical-section">
+                            <div class="form-group d-none flex-column flex-md-grow-1" id="electrical-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electrical"
-                                        <?php echo $billing['category_name'] === 'Electrical' ? "" : "disabled"?>>
-
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Electrical' ? $billing['section'] : ""?>
-                                        </option>
+                                    <select name="section" class="form-control px-3" id="electrical">
+                                        <option selected disabled hidden value="">Select</option>
                                         <option value="Total Connected Load">Total Connected Load</option>
                                         <option value="Total Transformer / Uninterrupted Power Supply">Total Transformer
                                             / Uninterrupted Power Supply</option>
@@ -107,19 +82,12 @@ include './../includes/side-header.php';
                                 </div>
                             </div>
 
-
-
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Mechanical' ? 'd-flex' : ""?>"
-                                id="mechanical-section">
+                            <div class="form-group d-none flex-column flex-md-grow-1" id="mechanical-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="mechanical"
-                                        <?php echo $billing['category_name'] === 'Mechanical' ? "" : "disabled"?>>
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Mechanical' ? $billing['section'] : ""?>
-                                        </option>
+                                    <select name="section" class="form-control px-3" id="mechanical">
+                                        <option selected disabled hidden value="">Select</option>
                                         <option value="Refrigeration and Ice Plant">Refrigeration and Ice Plant</option>
                                         <option value="Air Conditioning Systems">Air Conditioning Systems</option>
                                         <option value="Packaged or Centralized Air Conditioning Systems">Packaged or
@@ -152,29 +120,28 @@ include './../includes/side-header.php';
                                 </div>
                             </div>
 
-
-                            <div class="form-group d-none flex-column flex-md-grow-1 <?php echo $billing['category_name'] === 'Electronics' ? 'd-flex' : ""?>"
-                                id="electronic-section">
+                            <div class="form-group d-none flex-column flex-md-grow-1" id="electronics-section">
                                 <label for="section">Section<span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                    <select name="section" class="form-control px-3" id="electronic"
-                                        <?php echo $billing['category_name'] === 'Electronics' ? "" : "disabled"?>>
-
-                                        <option selected hidden
-                                            value="<?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : ""?>">
-                                            <?php echo $billing['category_name'] === 'Electronics' ? $billing['section'] : ""?>
-                                        </option>
+                                    <select name="section" class="form-control form-select px-3" id="electronics">
+                                        <option selected disabled hidden value="">Select</option>
+                                        <option value="Central Office switching equipment, remote switching units, etc.">Central Office switching equipment, remote switching units, etc.</option>
+                                        <option value="Broadcast Station for Radion and TV">Broadcast Station for Radion and TV</option>
+                                        <option value="Automated Teller Machines, Ticketing,Vending, etc.">Automated Teller Machines, Ticketing,Vending, etc.</option>
+                                        <option value="ELectronics and Communications Outlets, etc.">Electronics and Communications Outlets, etc.</option>
+                                        <option value="Station/Terminal/Control, etc.">Station/Terminal/Control, etc.</option>
+                                        <option value="Studios, Auditoriums, Theaters, etc.">Studios, Auditoriums, Theaters, etc.</option>
+                                        <option value="Antenna Towers/Masts or Other Structures for Installation">Antenna Towers/Masts or Other Structures for Installation</option>
+                                        <option value="Electronic or Electronically-COntrolled Indoors and Outdoor Signages">Electronic or Electronically-Controlled Indoors and Outdoor Signages</option>
+                                        <option value="Poles and Attachment">Poles and Attachment</option>
                                     </select>
                                 </div>
                             </div>
 
-
-                            <div class="col col-12 p-0 form-group">
-                                <label for="capacity">Capacity <span class="text-danger">*</span>
-                                </label>
-                                <input type="text" name="capacity" class="form-control p-4" id="capacity"
-                                    placeholder="Enter Capacity..." value="<?php echo $billing['capacity']?>" required>
+                            <div class="d-none col col-12 p-0 form-group" id="capacity-container">
+                                <label for="capacity">Capacity</label>
+                                <input type="text" name="capacity" class="form-control p-4" id="capacity" placeholder="Enter Capacity..." disabled>
                             </div>
 
                             <div class="col col-12 p-0 form-group">
@@ -186,26 +153,17 @@ include './../includes/side-header.php';
                                         <span class="input-group-text">₱</span>
                                     </div>
 
-                                    <input type="number" name="fee" class="form-control p-4" id="fee"
-                                        placeholder="Enter Fee..." step="0.01" min="0.00"
-                                        value="<?php echo $billing['fee']?>" required>
+                                    <input type="number" name="fee" class="form-control p-4" id="fee" placeholder="Enter Fee..." step="0.01" value="0.00" min="0.00" required>
                                 </div>
                             </div>
 
-                            <input type="hidden" name="billing_id" value="<?php echo $billing['billing_id']?>"
-                                value="Edit">
-
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Edit">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
                         </form>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
 <!-- End of Main Content -->
 
@@ -214,7 +172,7 @@ include './../includes/side-header.php';
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php require './../includes/footer.php'; ?>
+<?php require './../../includes/footer.php'; ?>
 </body>
 
 </html>

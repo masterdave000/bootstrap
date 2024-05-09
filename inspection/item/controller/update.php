@@ -1,14 +1,16 @@
-<?php 
+<?php
 include './../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_item_id = filter_var($_POST['item_id'], FILTER_SANITIZE_NUMBER_INT);
     $item_id = filter_var($clean_item_id, FILTER_VALIDATE_INT);
-    
+
 
     $clean_category_id = filter_var($_POST['category_id'], FILTER_SANITIZE_NUMBER_INT);
     $category_id = filter_var($clean_category_id, FILTER_VALIDATE_INT);
     $item_name = htmlspecialchars(ucwords(trim($_POST['item_name'])));
+
+    $section = htmlspecialchars($_POST['section']);
 
     $img_name = basename($_FILES['item_img']['name']);
     $temp_name = $_FILES['item_img']['tmp_name'];
@@ -21,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $filename = $item_name . '(' . date('m-d-Y') . ').png';
 
     $img_url = $_POST['current_item_img'];
-    
+
     if ($img_name) {
         if (!in_array($img_extension, $allowed_types)) {
             $_SESSION['error'] = "Only JPEG, JPG, and PNG files are allowed.";
@@ -38,13 +40,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ../update-item.php?item_id='$item_id'");
             exit();
         }
-
     }
+}
+$itemDuplicate = "SELECT item_id FROM item_list WHERE item_name = :item_name AND item_id != :item_id";
+$itemStatement = $pdo->prepare($itemDuplicate);
+$itemStatement->bindParam(':item_id', $item_id);
+$itemStatement->bindParam(':item_name', $item_name);
+$itemStatement->execute();
+
+$itemCount = $itemStatement->rowCount();
+
+if ($itemCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $item_name Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . "inspection/item/update-item.php?item_id=$item_id");
+    exit;
 }
 
 $itemQuery = "UPDATE item_list SET
     category_id = :category_id,
     item_name = :item_name,
+    section = :section,
     img_url = :img_url  
     WHERE item_id = :item_id  
 ";
@@ -53,6 +76,7 @@ $itemStatement = $pdo->prepare($itemQuery);
 $itemStatement->bindParam(':item_id', $item_id, PDO::PARAM_INT);
 $itemStatement->bindParam(':category_id', $category_id, PDO::PARAM_INT);
 $itemStatement->bindParam(':item_name', $item_name);
+$itemStatement->bindParam(':section', $section);
 $itemStatement->bindParam(':img_url', $img_url);
 
 

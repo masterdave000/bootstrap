@@ -114,59 +114,186 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let equipmentCategory = document.getElementById("category-id");
-  let electricalSection = document.getElementById("electrical-section");
-  let mechanicalSection = document.getElementById("mechanical-section");
-  let electronicSection = document.getElementById("electronic-section");
+// BUILDING BILLING
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('bldg-section')) {
+    let buildingSection = document.getElementById('bldg-section');
+    let propertyAttributeContainer = document.getElementById('prop-attr-container');
 
-  if (equipmentCategory) {
-    equipmentCategory.addEventListener("change", () => {
-      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-      let equipmentCategoryText = selectedOption.innerText.trim();
+    buildingSection.addEventListener('change', function() {
+      let buildingSectionValue = buildingSection.value;
+
+      if (buildingSectionValue) {
+        
+        let propertyAttribute = document.getElementById('bldg-property-attribute');
+
+        let bldgPropAttr = new XMLHttpRequest();
+        bldgPropAttr.open("GET", `./json_response/building-property-attribute.php?bldg_section=${buildingSectionValue}`);
+
+        bldgPropAttr.onreadystatechange = function () {
+          if (bldgPropAttr.readyState === 4 && bldgPropAttr.status === 200) {
+            let bldgPropAttrDetails = JSON.parse(bldgPropAttr.responseText);
+
+            propertyAttribute.innerHTML = "";
+
+            let propAttrDefaultOption = document.createElement("option");
+            propAttrDefaultOption.value = "";
+            propAttrDefaultOption.text = buildingSectionValue ? "Select" : "No Data";
+            propAttrDefaultOption.selected = true;
+            propAttrDefaultOption.disabled = true;
+            propAttrDefaultOption.hidden = true;
+            propertyAttribute.appendChild(propAttrDefaultOption);
+
+            bldgPropAttrDetails.bldg_property_attributes.forEach(bldg_property_attribute => {
+              let option = document.createElement("option");
+              option.value = bldg_property_attribute;
+              option.text = bldg_property_attribute;
+              propertyAttribute.appendChild(option);
+            });
+
+            propertyAttributeContainer.classList.remove('d-none');
+            document.getElementById("bldg-fee-container").classList.add('d-none');
+
+          }
+        }
+        bldgPropAttr.send();
   
-  
-      if (equipmentCategoryText === 'Electrical') {
-        electricalSection.classList.replace('d-none', 'd-flex');
-        electricalSection.querySelector('select').removeAttribute("disabled");
-        electricalSection.querySelector('select').setAttribute('required', 'required');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Mechanical') {
-        mechanicalSection.classList.replace('d-none', 'd-flex');
-        mechanicalSection.querySelector('select').removeAttribute("disabled");
-        mechanicalSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Electronic') {
-        electronicSection.classList.replace('d-none', 'd-flex');
-        electronicSection.querySelector('select').removeAttribute("disabled");
-        electronicSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
+        propertyAttribute.addEventListener('change', function () {
+          
+          let propertyAttributeValue = propertyAttribute.value;
+
+          let buildingBilling = new XMLHttpRequest();
+          buildingBilling.open("GET", `./json_response/building-fee.php?bldg_section=${encodeURIComponent(buildingSectionValue)}&bldg_property_attribute=${encodeURIComponent(propertyAttributeValue)}`, true);
+
+          buildingBilling.onreadystatechange = function () {
+            if (buildingBilling.readyState === 4 && buildingBilling.status === 200) {
+              let buildingBillingDetails = JSON.parse(buildingBilling.responseText);
+
+              document.getElementById("bldg-fee-container").classList.remove('d-none');
+
+              let buildingFee = document.getElementById('bldg-fee');
+              buildingFee.value = buildingBillingDetails.bldg_fee;
+
+              let bldgBillingId = document.getElementById('bldg-billing-id');
+              bldgBillingId.value = buildingBillingDetails.bldg_billing_id;
+
+
+
+            }
+          }
+
+          buildingBilling.send();
+        });
+        
       }
+
     });
   }
 
 });
+
+// SANITARY BILLING
+if (document.getElementById("sanitary-quantity")) {
+  let sanitaryFee = document.getElementById("sanitary-fee");
+  let sanitaryFeeValue = sanitaryFee.value
+  let sanitaryQuantity = document.getElementById("sanitary-quantity");
+
+  // Function to calculate total fee
+  function calculateTotalFee() {
+    let quantity = parseFloat(sanitaryQuantity.value);
+    let fee = parseFloat(sanitaryFeeValue).toFixed(2);
+    if (isNaN(quantity) || isNaN(fee) || quantity === 0) {
+        // If either quantity or fee is not a number, reset fee input field
+        sanitaryFee.value = parseFloat(sanitaryFeeValue).toFixed(2);
+    } else {
+        // Calculate total fee and update fee input field
+        let totalFee = quantity * fee;
+        sanitaryFee.value = totalFee.toFixed(2); // assuming you want to keep it as a float with 2 decimal places
+    }
+  }
+
+  sanitaryQuantity.addEventListener("input", function() {
+    calculateTotalFee();
+  });
+  
+}
+
+
+// SIGNAGE BILLING
+document.addEventListener('DOMContentLoaded', function() {
+  if (document.getElementById('display-type')) {
+    let displayType = document.getElementById('display-type');
+    let signTypeContainer = document.getElementById('sign-type-container');
+
+    displayType.addEventListener('change', function() {
+      let displayTypeValue = displayType.value;
+
+      if (displayTypeValue) {
+        
+        let signType = document.getElementById('sign-type');
+
+        let sign_type = new XMLHttpRequest();
+        sign_type.open("GET", `./json_response/sign-type.php?display_type=${displayTypeValue}`);
+
+        sign_type.onreadystatechange = function () {
+          if (sign_type.readyState === 4 && sign_type.status === 200) {
+            let sign_type_details = JSON.parse(sign_type.responseText);
+
+            signType.innerHTML = "";
+
+            let signTypeDefaultOption = document.createElement("option");
+            signTypeDefaultOption.value = "";
+            signTypeDefaultOption.text = displayTypeValue ? "Select" : "No Data";
+            signTypeDefaultOption.selected = true;
+            signTypeDefaultOption.disabled = true;
+            signTypeDefaultOption.hidden = true;
+            signType.appendChild(signTypeDefaultOption);
+
+            sign_type_details.sign_types.forEach(sign_type => {
+              let option = document.createElement("option");
+              option.value = sign_type;
+              option.text = sign_type;
+              signType.appendChild(option);
+            });
+
+            signTypeContainer.classList.remove('d-none');
+            document.getElementById("signage-fee-container").classList.add('d-none');
+
+          }
+        }
+        sign_type.send();
+  
+        signType.addEventListener('change', function () {
+          
+          let signTypeValue = signType.value;
+
+          let signageBilling = new XMLHttpRequest();
+          signageBilling.open("GET", `./json_response/signage-fee.php?display_type=${encodeURIComponent(displayTypeValue)}&sign_type=${encodeURIComponent(signTypeValue)}`, true);
+
+          signageBilling.onreadystatechange = function () {
+            if (signageBilling.readyState === 4 && signageBilling.status === 200) {
+              let signageBillingDetails = JSON.parse(signageBilling.responseText);
+
+              document.getElementById("signage-fee-container").classList.remove('d-none');
+
+              let signageId = document.getElementById('signage-id');
+              signageId.value = signageBillingDetails.signage_id;
+
+              let signageFee = document.getElementById('signage-fee');
+              signageFee.value = signageBillingDetails.signage_fee;
+            }
+          }
+
+          signageBilling.send();
+        });
+        
+      }
+
+    });
+  }
+
+});
+
 
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -189,7 +316,7 @@ document.addEventListener("DOMContentLoaded", function () {
         item.open("GET", `./json_response/item.php?item_id=${itemId}`, true);
         item.onreadystatechange = function () {
             if (item.readyState === 4 && item.status === 200) {
-                let itemDetails = JSON.parse(item.responseText);
+                var itemDetails = JSON.parse(item.responseText);
 
                 // Increment counter for each click
                 counter++;
@@ -224,91 +351,131 @@ document.addEventListener("DOMContentLoaded", function () {
                 categoryNameContainer.appendChild(categoryName);
 
                 let categoryNameInputField = createInputField('text', `category-name-${counter}`, `category_name[]`);
-                categoryNameInputField.readOnly = true; // Disabled
+                categoryNameInputField.readOnly = true; // Readonly
                 categoryNameContainer.appendChild(categoryNameInputField);
                 categoryNameInputField.value = itemDetails.category_name;
 
                 // Section Field
-                let sectionContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
+                let sectionContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
                 itemContent.appendChild(sectionContainer);
 
-                let sectionLabel = createLabel(`Section`);
-                sectionContainer.appendChild(sectionLabel);
+                let section = createLabel(`Section`);
+                sectionContainer.appendChild(section);
 
-                let sectionFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
-                sectionContainer.appendChild(sectionFieldContainer);
+                let sectionInputField = createInputField('text', `section-${counter}`, `section[]`);
+                sectionInputField.readOnly = true; // Readonly
+                sectionContainer.appendChild(sectionInputField);
+                sectionInputField.value = itemDetails.section ? itemDetails.section: 'No Data';
 
-                let sectionSelect = document.createElement('select');
-                sectionSelect.classList.add('form-control');
-                sectionSelect.classList.add('form-select');
-                sectionSelect.id = `section-${counter}`;
-                sectionSelect.name = 'section[]';
-                sectionFieldContainer.appendChild(sectionSelect);
+                if (itemDetails.category_name === 'Electronics') {
 
-                // Capacity Field
-                let capacityContainer = createContainerDiv('form-group d-none flex-column flex-md-grow-1');
-                itemContent.appendChild(capacityContainer);
+                    let sectionValue = itemDetails.section;
+                    let electronicsFee = new XMLHttpRequest();
+                    electronicsFee.open("POST", "./json_response/electronics-fee.php", true);
+                    electronicsFee.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    electronicsFee.onreadystatechange = function () {
+                      if (electronicsFee.readyState === 4 && electronicsFee.status === 200) {
+                        let response = JSON.parse(electronicsFee.responseText);
+  
+                          console.log(response);
+                          // Store the initial fee value
+                          originalFeeValue = parseFloat(response.fee);
+  
+                          // Set the fee input field value
+                          feeInputField.value = parseFloat(response.fee).toFixed(2);
+                          billingIdHiddenInput.value = response.billing_id;
+                        }
+                      };
+                      // Send selected section as parameter
+                    electronicsFee.send(`section=${encodeURIComponent(sectionValue)}`);
+              
+                } else {
+                  
+                  // Capacity Field
+                  let capacityContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
+                  itemContent.appendChild(capacityContainer);
 
-                let capacityLabel = createLabel(`Capacity`);
-                capacityContainer.appendChild(capacityLabel);
+                  let capacityLabel = createLabel(`Capacity`);
+                  capacityContainer.appendChild(capacityLabel);
 
-                let capacityFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
-                capacityContainer.appendChild(capacityFieldContainer);
+                  let capacityFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
+                  capacityContainer.appendChild(capacityFieldContainer);
 
-                let capacitySelect = document.createElement('select');
-                capacitySelect.classList.add('form-control');
-                capacitySelect.classList.add('form-select');
-                capacitySelect.id = `capacity-${counter}`;
-                capacitySelect.name = 'capacity[]';
-                capacityFieldContainer.appendChild(capacitySelect);
-                
+                  let capacitySelect = document.createElement('select');
+                  capacitySelect.classList.add('form-control');
+                  capacitySelect.classList.add('form-select');
+                  capacitySelect.id = `capacity-${counter}`;
+                  capacitySelect.name = 'capacity[]';
+                  capacityFieldContainer.appendChild(capacitySelect);
 
-                function updateSections() {
-                  var selectedCategory = categoryNameInputField.value;
-                  // Make an AJAX request to fetch sections
-                  let xhr = new XMLHttpRequest();
-                  xhr.open("POST", "./json_response/sections.php", true);
-                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                  xhr.onreadystatechange = function () {
-                      if (xhr.readyState === 4 && xhr.status === 200) {
+                  // Function to update the capacities based on the selected section
+                  function updateCapacities() {
+                    let selectedSection = itemDetails.section;
+                    // Make an AJAX request to fetch capacities
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "./json_response/capacities.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
                           let response = JSON.parse(xhr.responseText);
+                          
+                          capacitySelect.innerHTML = "";
+                          
+                          // Capacity Default Option
+                          let capacityDefaultOption = document.createElement("option");
+                          capacityDefaultOption.value = "";
+                          capacityDefaultOption.text = response.capacities.length > 0 ? "Select" : "No Registered Equipment Billing";
+                          capacityDefaultOption.selected = true;
+                          capacityDefaultOption.disabled = true;
+                          capacityDefaultOption.hidden = true;
+                          capacitySelect.appendChild(capacityDefaultOption);
+                          capacitySelect.disabled = response.capacities.length > 0 ? false : true;
 
-                          // Section Default option
-                          let sectionDefaultOption = document.createElement("option");
-                          sectionDefaultOption.value = "";
-                          sectionDefaultOption.text = "Select";
-                          sectionDefaultOption.selected = true;
-                          sectionDefaultOption.disabled = true;
-                          sectionDefaultOption.hidden = true;
-                          sectionSelect.appendChild(sectionDefaultOption);
-
-                   
-                          // Populate section select field with fetched sections
-                          response.sections.forEach(section => {
+                          if (response.capacities.length > 0) {
+                            response.capacities.forEach(capacity => {
                               let option = document.createElement("option");
-                              option.value = section;
-                              option.text = section;
-                              sectionSelect.appendChild(option);
-                          });
-                      }
-                  };
-                  // Send selected category as parameter
-                  xhr.send(`category=${selectedCategory}`);
+                              option.value = capacity;
+                              option.text = capacity;
+                              capacitySelect.appendChild(option);
+                            });
+
+                          }
+                          
+                        }
+                    };
+                    // Send selected section as parameter
+                    xhr.send(`section=${encodeURIComponent(selectedSection)}`);
+                  }
+
+                  updateCapacities();
+                
+
+            
+                  capacitySelect.addEventListener("change", function () {
+                    let selectedCapacity = capacitySelect.value;
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "./json_response/fee.php", true);
+                    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                    xhr.onreadystatechange = function () {
+                      if (xhr.readyState === 4 && xhr.status === 200) {
+                        let response = JSON.parse(xhr.responseText);
+  
+                          // Store the initial fee value
+                          originalFeeValue = parseFloat(response.fee);
+  
+                          // Set the fee input field value
+                          feeInputField.value = parseFloat(response.fee).toFixed(2);
+                          billingIdHiddenInput.value = response.billing_id;
+                        }
+                      };
+                      // Send selected section as parameter
+                    xhr.send(`capacity=${encodeURIComponent(selectedCapacity)}`);
+                  });
+                
                 }
+                
 
-                // Call updateSections to populate sections initially
-                updateSections();
-                
-                // Add event listener for section change event
-                sectionSelect.addEventListener("change", function () {
-                    updateCapacities();
-                });
-
-                capacitySelect.addEventListener("change", function () {
-                    updateFee();
-                });
-                
-                
                 // Quantity and Power Rating Container
                 let quantityPowerContainer = createContainerDiv('d-md-flex align-items-center justify-content-center p-0');
                 itemContent.appendChild(quantityPowerContainer);
@@ -349,70 +516,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 let billingIdHiddenInput = createHiddenInput("billing_id[]", `billing-id-${counter}`, true)
                 itemContent.appendChild(billingIdHiddenInput);
 
-                // Function to update the capacities based on the selected section
-                function updateCapacities() {
-                  let selectedSection = sectionSelect.value;
-                  // Make an AJAX request to fetch capacities
-                  let xhr = new XMLHttpRequest();
-                  xhr.open("POST", "./json_response/capacities.php", true);
-                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                  xhr.onreadystatechange = function () {
-                      if (xhr.readyState === 4 && xhr.status === 200) {
-                        let response = JSON.parse(xhr.responseText);
-                          
-                        capacitySelect.innerHTML = "";
-
-                        capacityContainer.classList.remove('d-none');
-                        capacityContainer.classList.add('d-flex');
-                        // Capacity Default Option
-                        let capacityDefaultOption = document.createElement("option");
-                        capacityDefaultOption.value = "";
-                        capacityDefaultOption.text = "Select";
-                        capacityDefaultOption.selected = true;
-                        capacityDefaultOption.disabled = true;
-                        capacityDefaultOption.hidden = true;
-                        capacitySelect.appendChild(capacityDefaultOption);
-
-                        response.capacities.forEach(capacity => {
-                          let option = document.createElement("option");
-                          option.value = capacity;
-                          option.text = capacity;
-                          capacitySelect.appendChild(option);
-                        });
-
-                      }
-                  };
-                  // Send selected section as parameter
-                  xhr.send(`section=${selectedSection}`);
-                }
-
                 let originalFeeValue;
-
-                function updateFee() {
-                  let selectedCapacity = capacitySelect.value;
-
-                  let xhr = new XMLHttpRequest();
-                  xhr.open("POST", "./json_response/fee.php", true);
-                  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                  xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                      let response = JSON.parse(xhr.responseText);
-
-                        // Store the initial fee value
-                        originalFeeValue = parseFloat(response.fee);
-
-                        // Set the fee input field value
-                        feeInputField.value = parseFloat(response.fee).toFixed(2);
-                        billingIdHiddenInput.value = response.billing_id;
-                      }
-                    };
-                    // Send selected section as parameter
-                  xhr.send(`capacity=${selectedCapacity}`);
-                }
 
                 quantityInputField.addEventListener("input", function() {
                   calculateTotalFee();
                 });
+
 
                 // Function to calculate total fee
                 function calculateTotalFee() {
@@ -487,59 +596,82 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let equipmentCategory = document.getElementById("category-id");
-  let electricalSection = document.getElementById("electrical-section");
-  let mechanicalSection = document.getElementById("mechanical-section");
-  let electronicSection = document.getElementById("electronic-section");
+function billing(category, section1, section2, section3, capacity) {
+  document.addEventListener("DOMContentLoaded", () => {
+    let Category = document.getElementById(category);
+    let Section1 = document.getElementById(section1);
+    let Section2 = document.getElementById(section2);
+    let Section3 = document.getElementById(section3);
 
-  if (equipmentCategory) {
-    equipmentCategory.addEventListener("change", () => {
-      let selectedOption = equipmentCategory.options[equipmentCategory.selectedIndex];
-      let equipmentCategoryText = selectedOption.innerText.trim();
+    if (capacity) {
+      var Capacity = document.getElementById(capacity);
+    }
+ 
   
+    if (Category) {
+      Category.addEventListener("change", () => {
+        let selectedOption = Category.options[Category.selectedIndex];
+        let CategoryText = selectedOption.innerText.trim();
+    
   
-      if (equipmentCategoryText === 'Electrical') {
-        electricalSection.classList.replace('d-none', 'd-flex');
-        electricalSection.querySelector('select').removeAttribute("disabled");
-        electricalSection.querySelector('select').setAttribute('required', 'required');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Mechanical') {
-        mechanicalSection.classList.replace('d-none', 'd-flex');
-        mechanicalSection.querySelector('select').removeAttribute("disabled");
-        mechanicalSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        electronicSection.classList.replace('d-flex', 'd-none');
-        electronicSection.querySelector('select').removeAttribute("required");
-        electronicSection.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (equipmentCategoryText === 'Electronic') {
-        electronicSection.classList.replace('d-none', 'd-flex');
-        electronicSection.querySelector('select').removeAttribute("disabled");
-        electronicSection.querySelector('select').setAttribute('required', 'required');
-  
-        electricalSection.classList.replace('d-flex', 'd-none');
-        electricalSection.querySelector('select').removeAttribute("required");
-        electricalSection.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        mechanicalSection.classList.replace('d-flex', 'd-none');
-        mechanicalSection.querySelector('select').removeAttribute("required");
-        mechanicalSection.querySelector('select').setAttribute('disabled', 'disabled');
-      }
-    });
-  }
-  
-});
+        if (CategoryText === 'Electrical') {
+          Section1.classList.replace('d-none', 'd-flex');
+          Section1.querySelector('select').removeAttribute("disabled");
+          Section1.querySelector('select').setAttribute('required', 'required');
+    
+          Section2.classList.replace('d-flex', 'd-none');
+          Section2.querySelector('select').removeAttribute("required");
+          Section2.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section3.classList.replace('d-flex', 'd-none');
+          Section3.querySelector('select').removeAttribute("required");
+          Section3.querySelector('select').setAttribute('disabled', 'disabled');
+
+          Capacity.classList.replace('d-none', 'd-block');
+          Capacity.querySelector('input').removeAttribute("disabled");
+          Capacity.querySelector('input').setAttribute('required', 'required');
+
+        } else if (CategoryText === 'Mechanical') {
+          Section2.classList.replace('d-none', 'd-flex');
+          Section2.querySelector('select').removeAttribute("disabled");
+          Section2.querySelector('select').setAttribute('required', 'required');
+    
+          Section1.classList.replace('d-flex', 'd-none');
+          Section1.querySelector('select').removeAttribute("required");
+          Section1.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section3.classList.replace('d-flex', 'd-none');
+          Section3.querySelector('select').removeAttribute("required");
+          Section3.querySelector('select').setAttribute('disabled', 'disabled');
+
+          Capacity.classList.replace('d-none', 'd-block');
+          Capacity.querySelector('input').removeAttribute("disabled");
+          Capacity.querySelector('input').setAttribute('required', 'required');
+
+        } else if (CategoryText === 'Electronics') {
+          Section3.classList.replace('d-none', 'd-flex');
+          Section3.querySelector('select').removeAttribute("disabled");
+          Section3.querySelector('select').setAttribute('required', 'required');
+    
+          Section1.classList.replace('d-flex', 'd-none');
+          Section1.querySelector('select').removeAttribute("required");
+          Section1.querySelector('select').setAttribute('disabled', 'disabled');
+    
+          Section2.classList.replace('d-flex', 'd-none');
+          Section2.querySelector('select').removeAttribute("required");
+          Section2.querySelector('select').setAttribute('disabled', 'disabled');
+
+          Capacity.classList.replace('d-block', 'd-none');
+          Capacity.querySelector('input').removeAttribute('required');
+          Capacity.querySelector('input').setAttribute('disabled', 'disabled');
+        }
+      });
+    }
+    
+  });
+}
+
+billing('category-id', 'electrical-section', 'mechanical-section', 'electronics-section', 'capacity-container');
 
 
 
@@ -853,7 +985,7 @@ function createInputField(type, id, name, readOnly = true, required = true) {
       input.value = 1;
       input.step = 1;
     } else if (name === "fee[]") {
-      input.value = parseFloat(1.00).toFixed(2);
+      input.value = parseFloat(0.00).toFixed(2);
       input.step = 0.01;
     } else if (name === "power_rating[]") {
       input.value = parseFloat(0.00).toFixed(2);

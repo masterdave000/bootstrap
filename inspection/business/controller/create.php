@@ -47,6 +47,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 }
 
+$businessDuplicate = "SELECT bus_id FROM business WHERE bus_name = :bus_name";
+$businessStatement = $pdo->prepare($businessDuplicate);
+$businessStatement->bindParam(':bus_name', $bus_name);
+$businessStatement->execute();
+
+$businessCount = $businessStatement->rowCount();
+
+if ($businessCount > 0) {
+    $_SESSION['duplicate'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>	
+            $bus_name Record Already Exist
+        </div>
+    </div>
+    
+    ";
+
+    header('location:' . SITEURL . 'inspection/business/add-business.php');
+    exit;
+}
+
+
 $businessQuery = "INSERT INTO business (
     owner_id, 
     bus_name, 
