@@ -114,7 +114,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-q
 // BUILDING BILLING
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('bldg-section')) {
