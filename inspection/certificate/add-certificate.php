@@ -152,12 +152,11 @@ include './../includes/side-header.php';
                                         <p class="text font-weight-bolder">Other Certificate Information</p>
 
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="bin">BIN <span class="text-danger">*</span>
-                                            </label>
+                                            <label for="bin">BIN</label>
 
                                             <div class="input-group">
                                                 <input type="text" name="bin" class="form-control p-4" id="bin"
-                                                    placeholder="Enter BIN..." required>
+                                                    placeholder="Enter BIN...">
                                             </div>
                                         </div>
 

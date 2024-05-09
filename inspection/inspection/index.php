@@ -93,15 +93,18 @@ if (isset($_SESSION['add'])) { //Checking whether the session is set or not
 
 ?>
 
-<div class='msgalert alert--success' id='alert'>
-    <div class='alert__message'>
-        <?php
-        $msg = htmlspecialchars($_GET['msg']);
-        unset($_GET['msg']);
-        echo $msg;
-        ?>
+
+<?php if (filter_has_var(INPUT_GET, 'msg')) : ?>
+    <div class='msgalert alert--success' id='alert'>
+        <div class='alert__message'>
+            <?php
+            $msg = htmlspecialchars($_GET['msg']);
+            unset($_GET['msg']);
+            echo $msg;
+            ?>
+        </div>
     </div>
-</div>
+<?php endif ?>
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">

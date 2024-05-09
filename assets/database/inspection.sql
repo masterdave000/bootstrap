@@ -152,7 +152,7 @@ CREATE TABLE annual_inspection_certificate (
 	bus_id int NOT NULL,
 	owner_id int NOT NULL,
     application_type varchar(50) NOT NULL,
-    bin varchar(100) NOT NULL,
+    bin varchar(100) NULL DEFAULT NULL,
 	bus_group varchar(10) NOT NULL,    
     character_of_occupancy varchar(100) NOT NULL,
     occupancy_no varchar(50) NOT NULL,
