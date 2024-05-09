@@ -22,11 +22,6 @@ require "./../includes/side-header.php";
                 </div>
 
                 <div class="billing-link-container d-flex justify-content-center align-items-center card shadow pointer-event">
-                    <a href="./electronics-billing/" class="text-decoration-none text-dark">Electronics Billing
-                    </a>
-                </div>
-
-                <div class="billing-link-container d-flex justify-content-center align-items-center card shadow pointer-event">
                     <a href="./building-billing/" class="text-decoration-none text-dark">Building Billing</a>
                 </div>
 
