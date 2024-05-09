@@ -114,47 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-  let category = document.getElementById("category-id");
-  let Section1 = document.getElementById("electrical-section");
-  let Section2 = document.getElementById("mechanical-section");
-
-  if (category) {
-    category.addEventListener("change", () => {
-      let selectedOption = category.options[category.selectedIndex];
-      let categoryText = selectedOption.innerText.trim();
-  
-  
-      if (categoryText === 'Electrical') {
-        Section1.classList.replace('d-none', 'd-flex');
-        Section1.querySelector('select').removeAttribute("disabled");
-        Section1.querySelector('select').setAttribute('required', 'required');
-  
-        Section2.classList.replace('d-flex', 'd-none');
-        Section2.querySelector('select').removeAttribute("required");
-        Section2.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        Section3.classList.replace('d-flex', 'd-none');
-        Section3.querySelector('select').removeAttribute("required");
-        Section3.querySelector('select').setAttribute('disabled', 'disabled');
-      } else if (categoryText === 'Mechanical') {
-        Section2.classList.replace('d-none', 'd-flex');
-        Section2.querySelector('select').removeAttribute("disabled");
-        Section2.querySelector('select').setAttribute('required', 'required');
-  
-        Section1.classList.replace('d-flex', 'd-none');
-        Section1.querySelector('select').removeAttribute("required");
-        Section1.querySelector('select').setAttribute('disabled', 'disabled');
-  
-        Section3.classList.replace('d-flex', 'd-none');
-        Section3.querySelector('select').removeAttribute("required");
-        Section3.querySelector('select').setAttribute('disabled', 'disabled');
-      }
-    });
-  }
-
-});
-
+q
 // BUILDING BILLING
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('bldg-section')) {
@@ -357,7 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
         item.open("GET", `./json_response/item.php?item_id=${itemId}`, true);
         item.onreadystatechange = function () {
             if (item.readyState === 4 && item.status === 200) {
-                let itemDetails = JSON.parse(item.responseText);
+                var itemDetails = JSON.parse(item.responseText);
 
                 // Increment counter for each click
                 counter++;
@@ -396,59 +356,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 categoryNameContainer.appendChild(categoryNameInputField);
                 categoryNameInputField.value = itemDetails.category_name;
 
+                // Section Field
+                let sectionContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                itemContent.appendChild(sectionContainer);
+
+                let section = createLabel(`Section`);
+                sectionContainer.appendChild(section);
+
+                let sectionInputField = createInputField('text', `section-${counter}`, `section[]`);
+                sectionInputField.readOnly = true; // Readonly
+                sectionContainer.appendChild(sectionInputField);
+                sectionInputField.value = itemDetails.section ? itemDetails.section: 'No Data';
+
                 if (itemDetails.category_name === 'Electronics') {
 
-                  let sectionContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
-                  itemContent.appendChild(sectionContainer);
-
-                  let sectionLabel = createLabel(`Section`);
-                  sectionContainer.appendChild(sectionLabel);
-                  let electronicsSectionContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
-                  sectionContainer.appendChild(electronicsSectionContainer);
-
-                  let sectionSelect = document.createElement('select');
-                  sectionSelect.classList.add('form-control');
-                  sectionSelect.classList.add('form-select');
-                  sectionSelect.id = `section-${counter}`;
-                  sectionSelect.name = 'section[]';
-                  electronicsSectionContainer.appendChild(sectionSelect);
-
-                  let electronicsSection = new XMLHttpRequest();
-                  electronicsSection.open("POST", `./json_response/electronics-section.php`, true);
-
-                  electronicsSection.onreadystatechange = function () {
-                    if (electronicsSection.readyState === 4 && electronicsSection.status === 200) {
-                      let electronicsSectionDetails = JSON.parse(electronicsSection.responseText);
-
-                      sectionSelect.innerHTML = "";
-                        
-                        // section Default Option
-                        let sectionDefaultOption = document.createElement("option");
-                        sectionDefaultOption.value = "";
-                        sectionDefaultOption.text = electronicsSectionDetails.sections.length > 0 ? "Select" : "No Registered Electronics Billing";
-                        sectionDefaultOption.selected = true;
-                        sectionDefaultOption.disabled = true;
-                        sectionDefaultOption.hidden = true;
-                        sectionSelect.appendChild(sectionDefaultOption);
-                        sectionSelect.disabled = electronicsSectionDetails.sections.length > 0 ? false : true;
-
-                        if (electronicsSectionDetails.sections.length > 0) {
-                          electronicsSectionDetails.sections.forEach(section => {
-                            let option = document.createElement("option");
-                            option.value = section;
-                            option.text = section;
-                            sectionSelect.appendChild(option);
-                          });
-
-                        }
-                      
-                    }
-                  }
-
-                  electronicsSection.send();
-
-                  sectionSelect.addEventListener("change", function () {
-                    let selectedSection = sectionSelect.value;
+                    let sectionValue = itemDetails.section;
                     let electronicsFee = new XMLHttpRequest();
                     electronicsFee.open("POST", "./json_response/electronics-fee.php", true);
                     electronicsFee.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -456,32 +378,20 @@ document.addEventListener("DOMContentLoaded", function () {
                       if (electronicsFee.readyState === 4 && electronicsFee.status === 200) {
                         let response = JSON.parse(electronicsFee.responseText);
   
+                          console.log(response);
                           // Store the initial fee value
-                          originalFeeValue = parseFloat(response.electronics_fee);
+                          originalFeeValue = parseFloat(response.fee);
   
                           // Set the fee input field value
-                          feeInputField.value = parseFloat(response.electronics_fee).toFixed(2);
-                          electronicsIdHiddenInput.value = response.electronics_id;
+                          feeInputField.value = parseFloat(response.fee).toFixed(2);
+                          billingIdHiddenInput.value = response.billing_id;
                         }
                       };
                       // Send selected section as parameter
-                    electronicsFee.send(`section=${encodeURIComponent(selectedSection)}`);
-                  });
-                  
-                  
+                    electronicsFee.send(`section=${encodeURIComponent(sectionValue)}`);
+              
                 } else {
-                  // Section Field
-                  let sectionContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
-                  itemContent.appendChild(sectionContainer);
-
-                  let section = createLabel(`Section`);
-                  sectionContainer.appendChild(section);
-
-                  let sectionInputField = createInputField('text', `section-${counter}`, `section[]`);
-                  sectionInputField.readOnly = true; // Readonly
-                  sectionContainer.appendChild(sectionInputField);
-                  sectionInputField.value = itemDetails.section ? itemDetails.section: 'No Data';
-
+                  
                   // Capacity Field
                   let capacityContainer = createContainerDiv('form-group d-flex flex-column flex-md-grow-1');
                   itemContent.appendChild(capacityContainer);
@@ -607,9 +517,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 let billingIdHiddenInput = createHiddenInput("billing_id[]", `billing-id-${counter}`, true)
                 itemContent.appendChild(billingIdHiddenInput);
 
-                let electronicsIdHiddenInput = createHiddenInput("electronics_id[]", `electronics-id-${counter}`, true)
-                itemContent.appendChild(electronicsIdHiddenInput);
-
                 let originalFeeValue;
 
                 quantityInputField.addEventListener("input", function() {
@@ -690,20 +597,24 @@ document.addEventListener("DOMContentLoaded", function () {
     
 });
 
-function billing(category, section1, section2, section3) {
+function billing(category, section1, section2, section3, capacity) {
   document.addEventListener("DOMContentLoaded", () => {
     let Category = document.getElementById(category);
     let Section1 = document.getElementById(section1);
     let Section2 = document.getElementById(section2);
     let Section3 = document.getElementById(section3);
+
+    if (capacity) {
+      var Capacity = document.getElementById(capacity);
+    }
+ 
   
     if (Category) {
       Category.addEventListener("change", () => {
         let selectedOption = Category.options[Category.selectedIndex];
         let CategoryText = selectedOption.innerText.trim();
     
-    
-
+  
         if (CategoryText === 'Electrical') {
           Section1.classList.replace('d-none', 'd-flex');
           Section1.querySelector('select').removeAttribute("disabled");
@@ -716,6 +627,11 @@ function billing(category, section1, section2, section3) {
           Section3.classList.replace('d-flex', 'd-none');
           Section3.querySelector('select').removeAttribute("required");
           Section3.querySelector('select').setAttribute('disabled', 'disabled');
+
+          Capacity.classList.replace('d-none', 'd-block');
+          Capacity.querySelector('input').removeAttribute("disabled");
+          Capacity.querySelector('input').setAttribute('required', 'required');
+
         } else if (CategoryText === 'Mechanical') {
           Section2.classList.replace('d-none', 'd-flex');
           Section2.querySelector('select').removeAttribute("disabled");
@@ -728,7 +644,12 @@ function billing(category, section1, section2, section3) {
           Section3.classList.replace('d-flex', 'd-none');
           Section3.querySelector('select').removeAttribute("required");
           Section3.querySelector('select').setAttribute('disabled', 'disabled');
-        } else if (CategoryText === 'Electronic') {
+
+          Capacity.classList.replace('d-none', 'd-block');
+          Capacity.querySelector('input').removeAttribute("disabled");
+          Capacity.querySelector('input').setAttribute('required', 'required');
+
+        } else if (CategoryText === 'Electronics') {
           Section3.classList.replace('d-none', 'd-flex');
           Section3.querySelector('select').removeAttribute("disabled");
           Section3.querySelector('select').setAttribute('required', 'required');
@@ -740,6 +661,10 @@ function billing(category, section1, section2, section3) {
           Section2.classList.replace('d-flex', 'd-none');
           Section2.querySelector('select').removeAttribute("required");
           Section2.querySelector('select').setAttribute('disabled', 'disabled');
+
+          Capacity.classList.replace('d-block', 'd-none');
+          Capacity.querySelector('input').removeAttribute('required');
+          Capacity.querySelector('input').setAttribute('disabled', 'disabled');
         }
       });
     }
@@ -747,7 +672,7 @@ function billing(category, section1, section2, section3) {
   });
 }
 
-billing('category-id', 'electrical-section', 'mechanical-section', 'electronic-section');
+billing('category-id', 'electrical-section', 'mechanical-section', 'electronics-section', 'capacity-container');
 
 
 
