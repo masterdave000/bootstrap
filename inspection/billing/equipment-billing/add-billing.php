@@ -134,7 +134,9 @@ include './../../includes/side-header.php';
                                         <option value="Studios, Auditoriums, Theaters, etc.">Studios, Auditoriums, Theaters, etc.</option>
                                         <option value="Antenna Towers/Masts or Other Structures for Installation">Antenna Towers/Masts or Other Structures for Installation</option>
                                         <option value="Electronic or Electronically-COntrolled Indoors and Outdoor Signages">Electronic or Electronically-Controlled Indoors and Outdoor Signages</option>
-                                        <option value="Poles and Attachment">Poles and Attachment</option>
+                                        <option value="Pole">Pole</option>
+                                        <option value="Attachment">Attachment</option>
+                                        <option value="Other Types or Electronics or Eletronically Controlled Device, etc.">Other Types or Electronics or Eletronically Controlled Device, etc.</option>
                                     </select>
                                 </div>
                             </div>
