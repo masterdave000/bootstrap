@@ -1,6 +1,6 @@
 <?php
 
-$title = "Business List";
+$title = "Billing List";
 require "./../includes/side-header.php";
 
 ?>
