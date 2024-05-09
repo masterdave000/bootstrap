@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $title = "Equipment Billing List";
 require "./../../includes/side-header.php";
@@ -8,37 +8,37 @@ require "./../../includes/side-header.php";
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <?php 
-        
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
-        
-            if (isset($_SESSION['delete'])) {
-                echo $_SESSION['delete'];
-                unset($_SESSION['delete']);
-            }
-        
-            if (isset($_SESSION['update'])) {
-                echo $_SESSION['update'];
-                unset($_SESSION['update']);
-            }
+        <?php
 
-            if (isset($_SESSION['invalid_password'])) {
-                echo $_SESSION['invalid_password'];
-                unset($_SESSION['invalid_password']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
 
-            if (isset($_SESSION['id_not_found'])) {
-                echo $_SESSION['id_not_found'];
-                unset($_SESSION['id_not_found']);
-            }
+        if (isset($_SESSION['delete'])) {
+            echo $_SESSION['delete'];
+            unset($_SESSION['delete']);
+        }
+
+        if (isset($_SESSION['update'])) {
+            echo $_SESSION['update'];
+            unset($_SESSION['update']);
+        }
+
+        if (isset($_SESSION['invalid_password'])) {
+            echo $_SESSION['invalid_password'];
+            unset($_SESSION['invalid_password']);
+        }
+
+        if (isset($_SESSION['id_not_found'])) {
+            echo $_SESSION['id_not_found'];
+            unset($_SESSION['id_not_found']);
+        }
         ?>
 
-        <?php require './../../includes/top-header.php'?>
+        <?php require './../../includes/top-header.php' ?>
 
         <div class="container-fluid mt-4">
             <!-- Page Heading -->
@@ -48,8 +48,7 @@ require "./../../includes/side-header.php";
 
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-billing.php"
-                        class="btn btn-primary d-flex justify-content-center align-items-center">
+                    <a href="./add-billing.php" class="btn btn-primary d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Add</span>
                     </a>
@@ -71,56 +70,53 @@ require "./../../includes/side-header.php";
 
                             <tbody>
 
-                                <?php 
-                                    $billingQuery = "SELECT billing_id, category_name, section, capacity FROM equipment_billing_view ORDER BY billing_id DESC";
-                                    $billingStatement = $pdo->query($billingQuery);
-                                    $billings = $billingStatement->fetchAll(PDO::FETCH_ASSOC);
-                                    
-                        
-                                    foreach ($billings as $billing) :
-                        
+                                <?php
+                                $billingQuery = "SELECT billing_id, category_name, section, capacity FROM equipment_billing_view ORDER BY billing_id DESC";
+                                $billingStatement = $pdo->query($billingQuery);
+                                $billings = $billingStatement->fetchAll(PDO::FETCH_ASSOC);
+
+
+                                foreach ($billings as $billing) :
+
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
-                                    <td class="p-0 m-0 w-md-50">
-                                        <a href="view-billing.php?billing_id=<?php echo $billing['billing_id']?>"
-                                            class="d-flex flex-row align-items-center text-decoration-none text-gray-700 flex-gap">
-                                            <div>
-                                                <div class="text">
-                                                    <?php echo $billing['category_name']?>
+                                    <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
+                                        <td class="p-0 m-0 w-md-50">
+                                            <a href="view-billing.php?billing_id=<?php echo $billing['billing_id'] ?>" class="d-flex flex-row align-items-center text-decoration-none text-gray-700 flex-gap">
+                                                <div>
+                                                    <div class="text">
+                                                        <?php echo $billing['category_name'] ?>
+                                                    </div>
+
+                                                    <div class="sub-title d-none d-md-flex">Section:
+                                                        <?php echo $billing['section'] ?>
+                                                    </div>
+                                                    <?php if ($billing['capacity']) : ?>
+                                                        <div class="sub-title d-none d-md-flex">Section:
+                                                            <?php echo $billing['capacity'] ?>
+                                                        </div>
+                                                    <?php endif ?>
                                                 </div>
+                                            </a>
+                                        </td>
 
-                                                <div class="sub-title d-none d-md-flex">Section:
-                                                    <?php echo $billing['section']?>
-                                                </div>
+                                        <td class="d-flex justify-content-end">
+                                            <a href="./update-billing.php?billing_id=<?php echo $billing['billing_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Edit</span>
+                                            </a>
 
-                                                <div class="sub-title d-none d-md-flex">Section:
-                                                    <?php echo $billing['capacity']?>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </td>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-<?php echo $billing['billing_id'] ?>" class="btn btn-danger d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Delete</span>
+                                            </a>
 
-                                    <td class="d-flex justify-content-end">
-                                        <a href="./update-billing.php?billing_id=<?php echo $billing['billing_id']?>"
-                                            class="btn btn-info mr-2 text-center d-flex align-items-center">
-                                            <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Edit</span>
-                                        </a>
-
-                                        <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal-<?php echo $billing['billing_id']?>"
-                                            class="btn btn-danger d-flex justify-content-center align-items-center">
-                                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Delete</span>
-                                        </a>
-
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
                                 <?php
-                                require './modals/delete.php';
-                                    endforeach
+                                    require './modals/delete.php';
+                                endforeach
                                 ?>
                             </tbody>
                         </table>
@@ -135,8 +131,8 @@ require "./../../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
-require './../../includes/footer.php'; 
+<?php
+require './../../includes/footer.php';
 ?>
 
 </body>
