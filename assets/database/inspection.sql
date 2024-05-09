@@ -202,7 +202,7 @@ FROM item_list i
 LEFT JOIN category_list c ON i.category_id = c.category_id;
 
 CREATE VIEW inspection_view AS
-SELECT i.inspection_id, b.bus_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
+SELECT i.inspection_id, b.bus_id, iins.inspector_id, o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix, b.bus_name, 
 b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area, 
 bb.bldg_section, bb.bldg_property_attribute, bb.bldg_fee,
 sb.display_type, sb.sign_type, sb.signage_fee,

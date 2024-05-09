@@ -1,27 +1,9 @@
 <?php
 
-// var_dump($_POST);
-// exit;
-
 $title = "Equipment List Certificate";
 include './../../includes/side-header.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
-    $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
-
-    $clean_business_id = filter_var($_POST['business_id'], FILTER_SANITIZE_NUMBER_INT);
-    $business_id = filter_var($clean_business_id, FILTER_VALIDATE_INT);
-
-    $clean_sanitary_id = filter_var($_POST['sanitary_id'], FILTER_SANITIZE_NUMBER_INT);
-    $sanitary_id = filter_var($clean_sanitary_id, FILTER_VALIDATE_INT);
-
-    $clean_bldg_billing_id = filter_var($_POST['bldg_billing_id'], FILTER_SANITIZE_NUMBER_INT);
-    $bldg_billing_id = filter_var($clean_bldg_billing_id, FILTER_VALIDATE_INT);
-
-    $clean_signage_id = filter_var($_POST['signage_id'], FILTER_SANITIZE_NUMBER_INT);
-    $signage_id = filter_var($clean_signage_id, FILTER_VALIDATE_INT);
-
 
     $owner_name = trim(ucwords($_POST['owner_name']));
 
@@ -46,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $totalMechanicalFee = 0.00;
 }
 ?>
-
-
 
 <div id="content-wrapper">
     <div class="content">
@@ -124,9 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                     <?php
 
-                                    for ($i = 0; $i < count($_POST['item_id']); $i++) {
-                                        $billing_id = $_POST['billing_id'][$i];
-                                        $item_id = $_POST['item_id'][$i];
+                                    for ($i = 0; $i < count($_POST['item_name']); $i++) {
                                         $item_name = $_POST['item_name'][$i];
                                         $category_name = $_POST['category_name'][$i];
                                         $quantity = $_POST['quantity'][$i];
@@ -152,15 +130,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <td><?php echo $power_rating ?></td>
                                             <td><?php echo $quantity ?></td>
                                             <td><?php echo $category_name === 'Electronics' ? number_format($fee, 2) : '' ?></td>
-                                            <td><?php echo $category_name === 'Electrical' ? number_format($fee, 2)  : '' ?></td>
-                                            <td><?php echo $category_name === 'Mechanical' ? number_format($fee, 2)  : '' ?></td>
+                                            <td><?php echo $category_name === 'Electrical' ? number_format($fee, 2) : '' ?></td>
+                                            <td><?php echo $category_name === 'Mechanical' ? number_format($fee, 2) : '' ?></td>
                                         </tr>
 
-                                        <input type="hidden" name="billings_id[]" value="<?php echo $billing_id ?>">
-                                        <input type="hidden" name="items_id[]" value="<?php echo $item_id ?>">
-                                        <input type="hidden" name="power_ratings[]" value="<?php echo $power_rating ?>">
-                                        <input type="hidden" name="quantities[]" value="<?php echo $quantity ?>">
-                                        <input type="hidden" name="fees[]" value="<?php echo $fee ?>">
                                     <?php
 
                                     }
@@ -186,28 +159,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                                             <?php
 
-
-
-                                            for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
-                                                $inspector_id = $_POST['inspector_id'][$i];
+                                            for ($i = 0; $i < count($_POST['inspector_name']); $i++) {
                                                 $inspector_name = $_POST['inspector_name'][$i];
                                             ?>
-
-                                                <div class="d-flex justify-content-center m-0">
+                                                <p class="text-center m-0 p-0">
                                                     <?php echo $inspector_name ?>
-                                                </div>
-
-                                                <input type="hidden" name="inspectors_id[]" value="<?php echo $inspector_id ?>">
-
-
+                                                </p>
                                             <?php
                                             }
                                             ?>
-                                            <div></div>
-                                            <div></div>
-
 
                                         </div>
+
                                         <div class="date-inspected w-50 d-flex flex-column align-items-center px-1">
                                             <div><b>Remarks/Date Inspected</b></div>
 
@@ -299,9 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         $description = $_POST['description'][$i];
 
                                                 ?>
-
                                                         <li><?php echo $description ?></li>
-                                                        <input type="hidden" name="violations_id[]" value="<?php echo $violation_id ?>">
 
                                                     <?php
                                                     }
@@ -324,23 +285,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </section>
                         </section>
                         <section class="position-absolute left bottom-0 start-50 translate-middle d-print-none">
-                            <button class="btn btn-primary btn-md-block mr-3 px-3" id="print-button">Print
-                            </button>
+                            <a href="./../index.php?msg=Re-issued Successfully" class="btn btn-primary btn-md-block mr-3 px-3" id="print-button">Print
+                            </a>
                         </section>
                     </section>
                 </section>
-
-                <input type="hidden" name="owner_id" value="<?php echo $owner_id ?>">
-                <input type="hidden" name="business_id" value="<?php echo $business_id ?>">
-                <input type="hidden" name="bldg_billing_id" value="<?php echo $bldg_billing_id ?>">
-                <input type="hidden" name="signage_id" value="<?php echo $signage_id ?>">
-                <input type="hidden" name="sanitary_id" value="<?php echo $sanitary_id ?>">
-                <input type="hidden" name="application_type" value="<?php echo $application_type ?>">
-                <input type="hidden" name="building_fee" value="<?php echo $building_fee ?>">
-                <input type="hidden" name="sanitary_fee" value="<?php echo $sanitary_fee ?>">
-                <input type="hidden" name="sanitary_quantity" value="<?php echo $sanitary_quantity ?>">
-                <input type="hidden" name="signage_fee" value="<?php echo $signage_fee ?>">
-                <input type="hidden" name="remarks" value="<?php echo $remarks ?>">
             </form>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-$title = "Business List";
+$title = "Billing List";
 require "./../includes/side-header.php";
 
 ?>
@@ -18,11 +18,6 @@ require "./../includes/side-header.php";
             <div class="billing-container d-flex justify-content-center align-items-center flex-gap">
                 <div class="billing-link-container d-flex justify-content-center align-items-center card shadow pointer-event">
                     <a href="./equipment-billing/" class="text-decoration-none text-dark">Equipment Billing
-                    </a>
-                </div>
-
-                <div class="billing-link-container d-flex justify-content-center align-items-center card shadow pointer-event">
-                    <a href="./electronics-billing/" class="text-decoration-none text-dark">Electronics Billing
                     </a>
                 </div>
 
