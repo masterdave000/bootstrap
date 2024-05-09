@@ -79,14 +79,6 @@ CREATE TABLE sanitary_billing (
 
 INSERT INTO sanitary_billing (sanitary_id, sanitary_section, sanitary_fee) VALUES (1, 'Plumbing', 60.00);
 
-CREATE TABLE electronics_billing (
-	electronics_id int NOT NULL AUTO_INCREMENT,
-    electronics_section varchar(100) NOT NULL,
-    electronics_fee decimal(11, 2) NOT NULL,
-    PRIMARY KEY(sanitary_id)
-);
-
-
 CREATE TABLE inspection ( 
 	inspection_id int NOT NULL AUTO_INCREMENT,
 	owner_id int NOT NULL,
@@ -137,7 +129,7 @@ CREATE TABLE equipment_billing (
 	billing_id int NOT NULL AUTO_INCREMENT,
     category_id int NOT NULL,
 	section varchar(100) NOT NULL,
-    capacity varchar(100) NOT NULL,
+    capacity varchar(100) NULL DEFAULT NULL,
 	fee decimal(11, 2) NOT NULL,
     PRIMARY KEY(billing_id),
     FOREIGN KEY(category_id) REFERENCES category_list(category_id)
@@ -147,14 +139,12 @@ CREATE TABLE inspection_item (
 	inspection_id int NOT NULL,
     item_id int NOT NULL,
     billing_id int NULL,
-    electronics_id int NULL,
 	power_rating varchar(100) DEFAULT NULL,
     quantity int NOT NULL,
 	fee decimal(11, 2) NOT NULL,
     FOREIGN KEY(inspection_id) REFERENCES inspection(inspection_id),
 	FOREIGN KEY(item_id) REFERENCES item_list(item_id),
-    FOREIGN KEY(billing_id) REFERENCES equipment_billing(billing_id),
-    FOREIGN KEY(electronics_id) REFERENCES electronics_billing(electronics_id)
+    FOREIGN KEY(billing_id) REFERENCES equipment_billing(billing_id)
 );
 
 CREATE TABLE annual_inspection_certificate (
@@ -217,7 +207,6 @@ b.bus_type, b.bus_address, b.bus_contact_number, b.floor_area, b.signage_area,
 bb.bldg_section, bb.bldg_property_attribute, bb.bldg_fee,
 sb.display_type, sb.sign_type, sb.signage_fee,
 sanb.sanitary_section, isb.sanitary_quantity, sanb.sanitary_fee,
-elecb.electronics_section,
 i.application_type, ii.power_rating, il.item_name, cl.category_name, eb.section, eb.capacity, ii.quantity, ii.fee, 
 ins.inspector_firstname, ins.inspector_midname, ins.inspector_lastname, ins.inspector_suffix, v.description, i.remarks, b.bus_img_url, i.date_inspected
 FROM inspection i 
@@ -231,7 +220,6 @@ LEFT JOIN signage_billing sb ON i.signage_id = sb.signage_id
 LEFT JOIN inspection_sanitary_billing isb ON i.inspection_id = isb.inspection_id
 LEFT JOIN sanitary_billing sanb ON isb.sanitary_id = sanb.sanitary_id
 LEFT JOIN equipment_billing eb ON ii.billing_id = eb.billing_id
-LEFT JOIN electronics_billing elecb ON ii.electronics_id = elecb.electronics_id
 LEFT JOIN inspection_inspector iins ON i.inspection_id = iins.inspection_id
 LEFT JOIN inspector ins ON iins.inspector_id = ins.inspector_id
 LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
