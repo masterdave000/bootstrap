@@ -156,11 +156,11 @@ include './../../includes/side-header.php';
                                         <option value="Central Office switching equipment, remote switching units, etc.">Central Office switching equipment, remote switching units, etc.</option>
                                         <option value="Broadcast Station for Radion and TV">Broadcast Station for Radion and TV</option>
                                         <option value="Automated Teller Machines, Ticketing,Vending, etc.">Automated Teller Machines, Ticketing,Vending, etc.</option>
-                                        <option value="ELectronics and Communications Outlets, etc.">ELectronics and Communications Outlets, etc.</option>
+                                        <option value="ELectronics and Communications Outlets, etc.">Electronics and Communications Outlets, etc.</option>
                                         <option value="Station/Terminal/Control, etc.">Station/Terminal/Control, etc.</option>
                                         <option value="Studios, Auditoriums, Theaters, etc.">Studios, Auditoriums, Theaters, etc.</option>
                                         <option value="Antenna Towers/Masts or Other Structures for Installation">Antenna Towers/Masts or Other Structures for Installation</option>
-                                        <option value="Electronic or Electronically-COntrolled Indoors and Outdoor Signages">Electronic or Electronically-COntrolled Indoors and Outdoor Signages</option>
+                                        <option value="Electronic or Electronically-COntrolled Indoors and Outdoor Signages">Electronic or Electronically-Controlled Indoors and Outdoor Signages</option>
                                         <option value="Poles and Attachment">Poles and Attachment</option>
                                     </select>
                                 </div>
@@ -169,7 +169,7 @@ include './../../includes/side-header.php';
                             <div class="d-none col col-12 p-0 form-group" id="capacity-container">
                                 <label for="capacity">Capacity <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="capacity" class="form-control p-4" id="capacity" placeholder="Enter Capacity..." value="<?php echo $billing['capacity'] ?>" required>
+                                <input type="text" name="capacity" class="form-control p-4" id="capacity" placeholder="Enter Capacity..." value="<?php echo $billing['capacity'] ?>" disabled>
                             </div>
 
                             <div class="col col-12 p-0 form-group">
