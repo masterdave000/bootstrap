@@ -197,15 +197,15 @@ include './../includes/side-header.php';
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
-                                    <label for="contact-number">Contact Number <span class="text-danger">*</span>
+                                    <label for="contact-number">Contact Number <span class="text-danger">*</span> <small class="font-italic">(i.e. 09433637223)</small>
                                     </label>
-                                    <input type="text" name="contact_number" class="form-control p-4" id="contact-number" aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." maxlength="11" required>
+                                    <input type="text" name="contact_number" class="form-control p-4" id="contact-number" aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." maxlength="11" pattern="^(09)\d{9}$" oninvalid="this.setCustomValidity('Characters are not allowed. 11 digit numnber starting with 09')" onchange="try{setCustomValidity('')}catch(e){}" oninput="setCustomValidity(' ')" required>
                                 </div>
 
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">
-                                    <label for="email">Email <span class="text-danger">*</span>
+                                    <label for="email">Email <span class="text-danger">*</span> <small class="font-italic">(i.e. sample@gmail.com)</small>
                                     </label>
-                                    <input type="email" name="email" class="form-control p-4" id="email" aria-describedby="contactnoHelp" placeholder="Enter Contact Number...">
+                                    <input type="email" name="email" class="form-control p-4" id="email" aria-describedby="contactnoHelp" placeholder="Enter Contact Number..." pattern="[A-Za-z0-9-._]+@[A-Za-z0-9.-_]+\.[a-zA-Z]{2,}">
                                 </div>
                             </div>
 
