@@ -2,32 +2,32 @@
 <script src="
 https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js
 "></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
 </script>
 <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
 
 <script src="<?php echo SITEURL ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="<?php echo SITEURL ?>assets/js/main.js"></script>
+<script src="<?php echo SITEURL ?>assets/js/input-validation.js"></script>
 <script src="<?php echo SITEURL ?>assets/js/sb-admin-2.js"></script>
 
 
 <?php
-if ($title === 'Dashboard') :?>
-<!-- Page level plugins -->
-<script src="<?php echo SITEURL ?>vendor/chart.js/Chart.min.js"></script>
-<!-- Page level custom scripts -->
-<script src="<?php echo SITEURL ?>assets/js/demo/chart-area-demo.js"></script>
-<script src="<?php echo SITEURL ?>assets/js/demo/chart-pie-demo.js"></script>
+if ($title === 'Dashboard') : ?>
+    <!-- Page level plugins -->
+    <script src="<?php echo SITEURL ?>vendor/chart.js/Chart.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="<?php echo SITEURL ?>assets/js/demo/chart-area-demo.js"></script>
+    <script src="<?php echo SITEURL ?>assets/js/demo/chart-pie-demo.js"></script>
 
-<?php elseif ($title === 'Manage User'): ?>
+<?php elseif ($title === 'Manage User') : ?>
 
-<!-- Page level plugins -->
-<script src="<?php echo SITEURL ?>vendor/datatables/jquery.dataTables.min.js"></script>
-<script src="<?php echo SITEURL ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
-<!--Page level custom scripts -->
-<script src="<?php echo SITEURL ?>asets/js/demo/datatables-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="<?php echo SITEURL ?>vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo SITEURL ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <!--Page level custom scripts -->
+    <script src="<?php echo SITEURL ?>asets/js/demo/datatables-demo.js"></script>
 
 
-<?php endif;?>
+<?php endif; ?>
