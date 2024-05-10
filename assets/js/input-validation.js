@@ -1,48 +1,28 @@
-function fnameValidation (fname) {
-    if (document.getElementById(fname)) {
-        let fnameInput = document.getElementById(fname);
+function specialCharactersAndNumbersValidation (element) {
+    if (document.getElementById(element)) {
+        let elementInput = document.getElementById(element);
 
-        fnameInput.addEventListener('input', () => {
-            const fnameValue = fnameInput.value.trim();
-            if (fnameValue === '') {
-              fnameInput.setCustomValidity('Please enter a value. Avoid inputting whitespaces');
-            } else if (/^[0-9]+$/.test(fnameValue)) {
-              fnameInput.setCustomValidity('Numbers are not allowed.');
-            } else if (/^[~`!@#$%^&*()_=+[\]{}|;:'",<>/?]+$/.test(fnameValue)) {
-              fnameInput.setCustomValidity('Special Characters are not allowed.');
-            } else if (!/^[a-zA-Z\s-.ñÑ]+$/.test(fnameValue)) {
-              fnameInput.setCustomValidity('Numbers and Special Characters are not allowed.');
+        elementInput.addEventListener('input', () => {
+            const elementValue = elementInput.value.trim();
+            if (elementValue === '') {
+              elementInput.setCustomValidity('Please enter a value. Avoid inputting whitespaces');
+            } else if (/^[0-9]+$/.test(elementValue)) {
+              elementInput.setCustomValidity('Numbers are not allowed.');
+            } else if (/^[~`!@#$%^&*()_=+[\]{}|;:'",<>/?]+$/.test(elementValue)) {
+              elementInput.setCustomValidity('Special Characters are not allowed.');
+            } else if (!/^[a-zA-Z\s-.ñÑ]+$/.test(elementValue)) {
+              elementInput.setCustomValidity('Numbers and Special Characters are not allowed.');
             } else {
-              fnameInput.setCustomValidity('');
+              elementInput.setCustomValidity('');
             }
           });
     }
 }
 
-fnameValidation('inspector-firstname');
-fnameValidation('owner-firstname');
+specialCharactersAndNumbersValidation('inspector-firstname');
+specialCharactersAndNumbersValidation('inspector-lastname');
+specialCharactersAndNumbersValidation('owner-firstname');
+specialCharactersAndNumbersValidation('owner-lastname');
 
-function lnameValidation (lname) {
-    if (document.getElementById(lname)) {
-        let lnameInput = document.getElementById(lname);
 
-        lnameInput.addEventListener('input', () => {
-            const lnameValue = lnameInput.value.trim(); 
-            if (lnameValue === '') {
-              lnameInput.setCustomValidity('Please enter a value. Avoid inputting whitespaces');
-            } else if (/^[0-9]+$/.test(lnameValue)) {
-              lnameInput.setCustomValidity('Numbers are not allowed.');
-            } else if (/^[~`!@#$%^&*()_=+[\]{}|;:'",<>/?]+$/.test(lnameValue)) {
-              lnameInput.setCustomValidity('Special Characters are not allowed.');
-            } else if (!/^[a-zA-Z\s-.ñÑ]+$/.test(lnameValue)) {
-              lnameInput.setCustomValidity('Numbers and Special Characters are not allowed.');
-            } else {
-              lnameInput.setCustomValidity('');
-            }
-          });
-    }
-}
-
-lnameValidation('inspector-lastname');
-lnameValidation('owner-lastname');
 
