@@ -163,7 +163,7 @@ include './../includes/side-header.php';
                                                 <select name="bldg_section" id="bldg-section" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php
-                                                    $buildingQuery = "SELECT bldg_section from building_billing";
+                                                    $buildingQuery = "SELECT DISTINCT bldg_section from building_billing";
                                                     $buildingStatement = $pdo->query($buildingQuery);
                                                     $buildings = $buildingStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -215,18 +215,18 @@ include './../includes/side-header.php';
                                                         <span class="input-group-text">₱</span>
                                                     </div>
 
-                                                    <?php 
-                                                        $sanitaryQuery = "SELECT * FROM sanitary_billing WHERE sanitary_section = :sanitary_section";
-                                                        $sanitaryStatement = $pdo->prepare($sanitaryQuery);
-                                                        $sanitaryStatement->bindValue(':sanitary_section','Plumbing');
-                                                        $sanitaryStatement->execute();
+                                                    <?php
+                                                    $sanitaryQuery = "SELECT * FROM sanitary_billing WHERE sanitary_section = :sanitary_section";
+                                                    $sanitaryStatement = $pdo->prepare($sanitaryQuery);
+                                                    $sanitaryStatement->bindValue(':sanitary_section', 'Plumbing');
+                                                    $sanitaryStatement->execute();
 
-                                                        $sanitaryBilling = $sanitaryStatement->fetch(PDO::FETCH_ASSOC);
+                                                    $sanitaryBilling = $sanitaryStatement->fetch(PDO::FETCH_ASSOC);
 
                                                     ?>
-                                                    <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="<?= $sanitaryBilling['sanitary_fee']?>" readonly>
+                                                    <input type="number" name="sanitary_fee" class="form-control p-4" id="sanitary-fee" placeholder="Enter Sanitary Fee..." step="0.01" value="<?= $sanitaryBilling['sanitary_fee'] ?>" readonly>
 
-                                                    <input type="hidden" name="sanitary_id" value="<?= $sanitaryBilling['sanitary_id']?>" required>
+                                                    <input type="hidden" name="sanitary_id" value="<?= $sanitaryBilling['sanitary_id'] ?>" required>
                                                 </div>
                                             </div>
 
@@ -246,7 +246,7 @@ include './../includes/side-header.php';
                                                 <select name="display_type" id="display-type" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php
-                                                    $signageQuery = "SELECT display_type from signage_billing";
+                                                    $signageQuery = "SELECT DISTINCT display_type from signage_billing";
                                                     $signageStatement = $pdo->query($signageQuery);
                                                     $signages = $signageStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -286,7 +286,7 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <input type="hidden" name="bldg_billing_id" id="bldg-billing-id">
-                                        <input type="hidden" name="sanitary_id" id="sanitary-id" value="<?= $sanitaryBilling['sanitary_id']?>">
+                                        <input type="hidden" name="sanitary_id" id="sanitary-id" value="<?= $sanitaryBilling['sanitary_id'] ?>">
                                         <input type="hidden" name="signage_id" id="signage-id">
                                     </div>
 
