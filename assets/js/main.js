@@ -6,7 +6,24 @@ if (alert) {
   }, 6000);
 }
 
-let table = new DataTable('#obosTable');
+
+$(function() {
+  let table1 = new DataTable('#obosTable', {
+      // DataTable options for the first table
+  });
+
+  let table2 = new DataTable('#itemModalTable', {
+      // DataTable options for the second table
+  });
+
+  let table3 = new DataTable('#inspectorModalTable', {
+    // DataTable options for the second table
+  });
+
+  let table4 = new DataTable('#violationModalTable', {
+    // DataTable options for the second table
+  });
+});
 
 let printButton = document.getElementById("print-button");
 

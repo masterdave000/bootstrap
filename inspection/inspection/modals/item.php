@@ -1,6 +1,5 @@
-<!-- Logout Modal-->
-<div class="modal fade" id="item-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+<div class="modal fade w-100" id="item-list" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
@@ -10,10 +9,15 @@
             </div>
 
             <div class="modal-body">
-                <table class="d-flex justify-content-center">
+                <table class="table table-borderless d-flex flex-column justify-content-center" id="itemModalTable" width="100%" cellspacing="0">
                     <thead>
+                        <tr class="d-flex justify-content-between border-bottom">
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
-                    <tbody class="w-100">
+
+                    <tbody>
                         <?php
                         $itemQuery = "SELECT * FROM item_view ORDER BY item_name";
                         $itemStatement = $pdo->query($itemQuery);
@@ -30,7 +34,6 @@
 
                                         <div>
                                             <div class="text">
-                                                <span class="d-none d-md-inline">Name:</span>
                                                 <?php echo $item['item_name'] ?>
                                             </div>
                                             <div class="sub-title d-none d-md-flex">
@@ -54,7 +57,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
 </div>
