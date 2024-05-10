@@ -58,8 +58,8 @@ CREATE TABLE inspector (
 
 CREATE TABLE building_billing (
 	bldg_billing_id int NOT NULL AUTO_INCREMENT,
-    bldg_section varchar(100) NOT NULL,
-    bldg_property_attribute varchar(100) NOT NULL,
+    bldg_section varchar(255) NOT NULL,
+    bldg_property_attribute varchar(255) NOT NULL,
 	bldg_fee decimal(10, 2) NOT NULL,
 	PRIMARY KEY(bldg_billing_id)
 );
