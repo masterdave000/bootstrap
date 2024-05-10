@@ -156,27 +156,24 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="occupancy-no">Occupancy No. <span class="text-danger">*</span>
-                                            </label>
+                                            <label for="occupancy-no">Occupancy No. </label>
 
                                             <div class="input-group">
                                                 <input type="text" name="occupancy_no" class="form-control p-4" id="occupancy-no" placeholder="Enter Occupancy No...">
                                             </div>
                                         </div>
 
-
                                         <div class="col col-12 p-0 form-group">
                                             <label for="date-compiled">Date Complied <span class="text-danger">*</span>
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled...">
+                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled..." required>
                                             </div>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="issued-on">Issued On <span class="text-danger">*</span>
-                                            </label>
+                                            <label for="issued-on">Issued On</label>
 
                                             <div class="input-group">
                                                 <input type="date" name="issued_on" class="form-control p-4" id="issued-on" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Issued On...">
