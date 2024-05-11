@@ -10,21 +10,38 @@ CREATE TABLE owner (
 	PRIMARY KEY(owner_id)
 );
 
+CREATE TABLE occupancy_classification (
+	occupancy_classification_id int NOT NULL AUTO_INCREMENT,
+    character_of_occupancy varchar(100) NOT NULL,
+    occupancy_group varchar(50) NOT NULL,
+    PRIMARY KEY(occupancy_classification_id)
+);
+
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Residential Dwellings', 'Group A');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Residentials, Hotels, and Apartments', 'Group B');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Education and Recreation', 'Group C');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Institutional', 'Group D');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Business and Mercantile', 'Group E');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Industrial', 'Group F');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Storage and Hazardous', 'Group G');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Assembly Other Than Group I', 'Group H');
+INSERT INTO occupancy_classification (character_of_occupancy, occupancy_group) VALUES ('Assembly Occupant Load 1000 or More', 'Group I');
+
 CREATE TABLE business (
 	bus_id int NOT NULL AUTO_INCREMENT,
 	owner_id int NOT NULL,
+    occupancy_classification_id int NOT NULL,
 	bus_name varchar(100) NOT NULL,
 	bus_address varchar(100) NOT NULL,
 	bus_type varchar(50) DEFAULT NULL,
 	bus_contact_number varchar(11) NOT NULL,
-    bus_group varchar(100) NOT NULL,
-    character_of_occupancy varchar(100) NOT NULL, 
 	email varchar(50) DEFAULT NULL,
 	floor_area double DEFAULT NULL,
 	signage_area double DEFAULT NULL,
 	bus_img_url varchar(50) DEFAULT 'no-image.png',
 	PRIMARY KEY(bus_id),
-	FOREIGN KEY(owner_id) REFERENCES owner(owner_id)
+	FOREIGN KEY(owner_id) REFERENCES owner(owner_id),
+	FOREIGN KEY(occupancy_classification_id) REFERENCES occupancy_classification(occupancy_classification_id)
 ); 
 
 CREATE TABLE category_list (
@@ -191,10 +208,11 @@ FROM users u LEFT JOIN inspector i
 ON u.inspector_id = i.inspector_id;
     
 CREATE VIEW business_view AS
-SELECT bus_id, owner.owner_id, bus_name, bus_address, bus_type, bus.bus_contact_number, bus.bus_group, bus.character_of_occupancy, bus.email, floor_area, signage_area, bus_img_url, 
-owner.owner_firstname, owner.owner_midname, owner.owner_lastname, owner.owner_suffix 
+SELECT bus_id, o.owner_id, oc.occupancy_classification_id, bus_name, bus_address, bus_type, bus.bus_contact_number, oc.character_of_occupancy, oc.occupancy_group, bus.email, floor_area, signage_area, bus_img_url, 
+o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix 
 FROM business bus
-LEFT JOIN owner ON bus.owner_id = owner.owner_id;
+LEFT JOIN owner o ON bus.owner_id = o.owner_id
+LEFT JOIN occupancy_classification oc ON bus.occupancy_classification_id = oc.occupancy_classification_id;
 
 CREATE VIEW item_view AS 
 SELECT i.item_id, i.item_name, c.category_name, i.section, i.img_url
