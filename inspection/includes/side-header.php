@@ -65,13 +65,13 @@ $role = $_SESSION['role'];
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL ?>inspection/category/">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fa-solid fa-layer-group"></i>
                     <span>Category</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL ?>inspection/item/">
-                    <i class="fas fa-fw fa-list"></i>
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
                     <span>Item</span></a>
             </li>
 
