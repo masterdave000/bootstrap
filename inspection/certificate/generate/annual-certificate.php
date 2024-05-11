@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $application_type = trim(strtoupper($_POST['application_type']));
     $character_occupancy = trim(strtoupper($_POST['character_of_occupancy']));
-    $group_substr = trim(strtoupper(substr($_POST['bus_group'], -1)));
-    $group = trim(strtoupper($_POST['bus_group']));
+    $group_substr = trim(strtoupper(substr($_POST['occupancy_group'], -1)));
+    $group = trim(strtoupper($_POST['occupancy_group']));
     $occupancy_no = $_POST['occupancy_no'];
     $date_inspected = date('m-d-Y');
     $date_complied = $_POST['date_complied'];
@@ -368,7 +368,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" name="bin" value="<?= $bin ?>">
             <input type="hidden" name="application_type" value="<?= $application_type ?>">
             <input type="hidden" name="character_occupancy" value="<?= $character_occupancy ?>">
-            <input type="hidden" name="bus_group" value="<?= $group ?>">
+            <input type="hidden" name="occupancy_group" value="<?= $group ?>">
             <input type="hidden" name="occupancy_no" value="<?= $occupancy_no ?>">
             <input type="hidden" name="issued_on" value="<?= $issued_on ?>">
             <input type="hidden" name="date_complied" value="<?= $date_complied ?>">

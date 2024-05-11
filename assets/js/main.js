@@ -120,7 +120,7 @@ function businessDataFetch(businessId) {
                   } else {
 
                     let busGroup = document.getElementById("bus-group");
-                    busGroup.value = businessDetails.bus_group;
+                    busGroup.value = businessDetails.occupancy_group;
     
                     let characterOfOccupancy = document.getElementById("character-of-occupancy");
                     characterOfOccupancy.value = businessDetails.character_of_occupancy;

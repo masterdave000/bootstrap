@@ -109,7 +109,7 @@ include './../includes/side-header.php';
                                         <div class="col col-12 p-0 form-group d-none">
                                             <label for="bus-group">Business Group <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_group" class="form-control p-4" id="bus-group" required readonly>
+                                            <input type="text" name="occupancy_group" class="form-control p-4" id="bus-group" required readonly>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
