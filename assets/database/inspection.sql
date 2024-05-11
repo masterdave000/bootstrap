@@ -244,11 +244,13 @@ LEFT JOIN inspection_violation iv ON i.inspection_id = iv.inspection_id
 LEFT JOIN violation v ON iv.violation_id = v.violation_id;
 
 CREATE VIEW annual_inspection_certificate_view AS
-SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, b.bus_group, b.character_of_occupancy, b.bus_img_url, aic.occupancy_no, aic.issued_on,
+SELECT aic.certificate_id, aic.application_type, aic.bin, b.bus_name, b.bus_address, oc.character_of_occupancy, oc.occupancy_group, b.bus_img_url, aic.occupancy_no, aic.issued_on,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
-i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_complied, aic.date_inspected
+i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, 
+aici.category, aici.date_signed, aici.time_in, aici.time_out, aic.date_complied, aic.date_inspected
 FROM annual_inspection_certificate aic 
 LEFT JOIN business b ON aic.bus_id = b.bus_id
+LEFT JOIN occupancy_classification oc ON b.occupancy_classification_id = oc.occupancy_classification_id
 LEFT JOIN owner o ON aic.owner_id = o.owner_id
 LEFT JOIN annual_inspection_certificate_inspector aici ON aic.certificate_id = aici.certificate_id
 LEFT JOIN inspector i ON aici.inspector_id = i.inspector_id;
