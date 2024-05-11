@@ -147,13 +147,41 @@ function businessDataFetch(businessId) {
 businessDataFetch('inspection-business-id');
 businessDataFetch('certificate-business-id');
 
+document.addEventListener('DOMContentLoaded', function () {
+  if (document.getElementById('character-of-occupancy')) {
+    let characterOfOccupancy = document.getElementById('character-of-occupancy');
+
+    characterOfOccupancy.addEventListener('change', function() {
+      let characterOfOccupancyValue = characterOfOccupancy.value;
+
+      let group = new XMLHttpRequest();
+      group.open('GET', `./json_response/group.php?character_of_occupancy=${encodeURIComponent(characterOfOccupancyValue)}`, true);
+
+      group.onreadystatechange = function() {
+        if (group.readyState === 4 && group.status === 200) {
+                  
+          let groupDetails = JSON.parse(group.responseText);
+
+          let occupancyGroup = document.getElementById('occupancy-group');
+          let occupancyGroupContainer = document.getElementById('occupancy-group-container');
+          occupancyGroupContainer.classList.remove('d-none');
+          occupancyGroup.value = groupDetails.occupancy_group;
+
+          let occupancyClassificationId = document.getElementById('occupancy-classification-id');
+          occupancyClassificationId.value = groupDetails.occupancy_classification_id
+        }
+      }
+      group.send();
+    });
+
+  }
+});
 
 // BUILDING BILLING
 document.addEventListener('DOMContentLoaded', function() {
   if (document.getElementById('bldg-section')) {
     let buildingSection = document.getElementById('bldg-section');
     let propertyAttributeContainer = document.getElementById('prop-attr-container');
-
     buildingSection.addEventListener('change', function() {
       let buildingSectionValue = buildingSection.value;
 
