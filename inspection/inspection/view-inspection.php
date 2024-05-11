@@ -38,12 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
         GROUP_CONCAT(power_rating) AS power_ratings, 
         GROUP_CONCAT(quantity) AS quantities, 
         GROUP_CONCAT(fee) AS fees, 
-        GROUP_CONCAT(inspector_id) AS inspector_ids, 
-        GROUP_CONCAT(inspector_firstname) AS inspector_firstnames, 
-        GROUP_CONCAT(inspector_midname) AS inspector_midnames, 
-        GROUP_CONCAT(inspector_lastname) AS inspector_lastnames, 
-        GROUP_CONCAT(inspector_suffix) AS inspector_suffixes, 
-        GROUP_CONCAT(description) AS descriptions, 
+        GROUP_CONCAT(DISTINCT inspector_id) AS inspector_ids, 
+        GROUP_CONCAT(
+        DISTINCT 
+            CONCAT(
+                inspector_firstname, 
+                IFNULL(CONCAT(' ', LEFT(inspector_midname, 1), '.'), ''), 
+                ' ', 
+                inspector_lastname, 
+                ' ', 
+                inspector_suffix
+            )
+        ) AS inspector_fullnames,
+        GROUP_CONCAT(DISTINCT description) AS descriptions, 
         bus_img_url, 
         date_inspected
         FROM inspection_view 
@@ -97,10 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                             $fees = explode(',', $data['fees']);
 
                             $inspector_ids = explode(',', $data['inspector_ids']);
-                            $inspector_firstnames = explode(',', $data['inspector_firstnames']);
-                            $inspector_midnames = explode(',', $data['inspector_midnames']);
-                            $inspector_lastnames = explode(',', $data['inspector_lastnames']);
-                            $inspector_suffixes = explode(',', $data['inspector_suffixes']);
+                            $inspector_fullnames = explode(' ,', $data['inspector_fullnames']);
+
                             $descriptions = explode(',', $data['descriptions']);
 
                         ?>
@@ -325,13 +330,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                 <?php
                                                 foreach ($inspector_ids as $index => $inspector_id) :
 
-                                                    $inspector_firstname = $inspector_firstnames[$index];
-                                                    $inspector_midname = $inspector_midnames[$index] ? mb_substr($inspector_midnames[$index], 0, 1, 'UTF-8') . "." : "";
-                                                    $inspector_lastname = $inspector_lastnames[$index];
-                                                    $inspector_suffix = $inspector_suffixes[$index];
-
-                                                    $inspector_fullname = trim($inspector_firstname . ' ' . $inspector_midname . ' ' . $inspector_lastname . ' ' . $inspector_suffix);
-
+                                                    $inspector_fullname = $inspector_fullnames[$index];
 
                                                 ?>
 

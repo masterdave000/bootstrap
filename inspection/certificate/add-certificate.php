@@ -70,7 +70,7 @@ include './../includes/side-header.php';
                                             <label for="business-id">Business Name <span class="text-danger">*</span>
                                             </label>
                                             <div class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="business_id" id="business-id" class="form-control form-select px-3" required>
+                                                <select name="business_id" id="certificate-business-id" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php
                                                     $businessQuery = "SELECT * from business";
@@ -100,29 +100,23 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
-                                            <label for="bus-address">Business Address<span class="text-danger">*</span>
+                                            <label for="bus-address">Business Address <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="bus_address" class="form-control p-4" id="bus-address" required readonly>
                                         </div>
 
 
                                         <div class="col col-12 p-0 form-group d-none">
-                                            <label for="bus-group">Business Group<span class="text-danger">*</span>
+                                            <label for="bus-group">Business Group <span class="text-danger">*</span>
                                             </label>
-                                            <input type="text" name="bus_group" class="form-control p-4" id="bus-group" required readonly>
+                                            <input type="text" name="occupancy_group" class="form-control p-4" id="bus-group" required readonly>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group d-none">
-                                            <label for="character-of-occupancy">Character of Occupancy<span class="text-danger">*</span>
+                                            <label for="character-of-occupancy">Character of Occupancy <span class="text-danger">*</span>
                                             </label>
                                             <input type="text" name="character_of_occupancy" class="form-control p-4" id="character-of-occupancy" required readonly>
                                         </div>
-
-                                        <input type="hidden" id="bus-type" disabled>
-                                        <input type="hidden" id="bus-contact-number" disabled>
-                                        <input type="hidden" id="floor-area" disabled>
-                                        <input type="hidden" id="signage-area" disabled>
-
                                     </div>
 
                                     <div class="carousel-item p-2" data-bs-interval="false">
@@ -133,8 +127,8 @@ include './../includes/side-header.php';
                                                     Inspector: <span id="total-inspector">0</span>
                                                 </p>
                                             </div>
-
                                         </div>
+
                                         <div class="d-flex justify-content-end my-4">
                                             <a class="btn btn-primary btn-md-block px-3" data-bs-target="#inspector-list" data-bs-toggle="modal">Add
                                                 Inspector</a>
@@ -156,27 +150,24 @@ include './../includes/side-header.php';
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="occupancy-no">Occupancy No. <span class="text-danger">*</span>
-                                            </label>
+                                            <label for="occupancy-no">Occupancy No. </label>
 
                                             <div class="input-group">
                                                 <input type="text" name="occupancy_no" class="form-control p-4" id="occupancy-no" placeholder="Enter Occupancy No...">
                                             </div>
                                         </div>
 
-
                                         <div class="col col-12 p-0 form-group">
                                             <label for="date-compiled">Date Complied <span class="text-danger">*</span>
                                             </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled...">
+                                                <input type="date" name="date_complied" class="form-control p-4" id="date-complied" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Date Compiled..." required>
                                             </div>
                                         </div>
 
                                         <div class="col col-12 p-0 form-group">
-                                            <label for="issued-on">Issued On <span class="text-danger">*</span>
-                                            </label>
+                                            <label for="issued-on">Issued On</label>
 
                                             <div class="input-group">
                                                 <input type="date" name="issued_on" class="form-control p-4" id="issued-on" max="<?php echo date('Y-m-d') ?>" placeholder="Enter Issued On...">

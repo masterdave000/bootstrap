@@ -5,13 +5,17 @@ include './../../../config/constants.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_bus_id = filter_var($_POST['bus_id'], FILTER_SANITIZE_NUMBER_INT);
     $bus_id = filter_var($clean_bus_id, FILTER_VALIDATE_INT);
-    $owner_id = htmlspecialchars(trim(ucwords($_POST['owner_name'])));
+
+    $clean_id = filter_var($_POST['occupancy_classification_id'], FILTER_SANITIZE_NUMBER_INT);
+    $occupancy_classification_id = filter_var($clean_id, FILTER_VALIDATE_INT);
+
+    $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
+    $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
+
     $bus_name = htmlspecialchars(trim(ucwords($_POST['bus_name'])));
     $bus_address = htmlspecialchars(trim(ucwords($_POST['bus_address'])));
     $bus_type = htmlspecialchars(trim(ucwords($_POST['bus_type'])));
     $bus_contact_number = htmlspecialchars($_POST['contact_number']);
-    $bus_group = htmlspecialchars(trim(ucwords($_POST['bus_group'])));
-    $character_of_occupancy = htmlspecialchars(trim(ucwords($_POST['character_of_occupancy'])));
     $floor_area = htmlspecialchars($_POST['floor_area']);
     $signage_area = htmlspecialchars($_POST['signage_area']);
     $clean_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
@@ -72,12 +76,11 @@ if ($businessCount > 0) {
 
 $businessQuery = "UPDATE business SET
     owner_id = :owner_id, 
+    occupancy_classification_id = :occupancy_classification_id,
     bus_name = :bus_name, 
     bus_address = :bus_address, 
     bus_type = :bus_type, 
     bus_contact_number = :bus_contact_number,
-    bus_group = :bus_group,
-    character_of_occupancy = :character_of_occupancy,
     email = :email,
     floor_area = :floor_area,
     signage_area = :signage_area,
@@ -89,12 +92,11 @@ $businessQuery = "UPDATE business SET
 $businessStatement = $pdo->prepare($businessQuery);
 $businessStatement->bindParam(':bus_id', $bus_id, PDO::PARAM_INT);
 $businessStatement->bindParam(':owner_id', $owner_id, PDO::PARAM_INT);
+$businessStatement->bindParam(':occupancy_classification_id', $occupancy_classification_id, PDO::PARAM_INT);
 $businessStatement->bindParam(':bus_name', $bus_name);
 $businessStatement->bindParam(':bus_address', $bus_address);
 $businessStatement->bindParam(':bus_type', $bus_type);
 $businessStatement->bindParam(':bus_contact_number', $bus_contact_number);
-$businessStatement->bindParam(':bus_group', $bus_group);
-$businessStatement->bindParam(':character_of_occupancy', $character_of_occupancy);
 $businessStatement->bindParam(':email', $email);
 $businessStatement->bindParam(':floor_area', $floor_area);
 $businessStatement->bindParam(':signage_area', $signage_area);

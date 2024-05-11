@@ -79,15 +79,14 @@ include './../includes/side-header.php';
                             </div>
 
                             <div class="col col-12 p-0 form-group">
-                                <label>Business Group</label>
-                                <input type="text" class="form-control p-4" value="<?php echo $business['bus_group'] ?>" disabled>
-                            </div>
-
-                            <div class="col col-12 p-0 form-group">
                                 <label for=" bus-type">Character of Occupancy</label>
                                 <input type="text" class="form-control p-4" value="<?php echo $business['character_of_occupancy'] ?>" disabled>
                             </div>
 
+                            <div class="col col-12 p-0 form-group">
+                                <label>Group</label>
+                                <input type="text" class="form-control p-4" value="<?php echo $business['occupancy_group'] ?>" disabled>
+                            </div>
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">

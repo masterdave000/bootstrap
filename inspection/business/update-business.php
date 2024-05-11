@@ -93,7 +93,7 @@ include './../includes/side-header.php';
                                     <label for="owner-name">Owner Name <span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex align-items-center justify-content-center select-container">
-                                        <select name="owner_name" id="owner-name" class="form-control form-select px-3" required>
+                                        <select name="owner_id" id="owner-name" class="form-control form-select px-3" required>
 
                                             <option selected value="<?php echo $business['owner_id'] ?>">
                                                 <?php echo $fullname ?>
@@ -171,27 +171,6 @@ include './../includes/side-header.php';
 
                             <div class="d-md-flex align-items-center justify-content-between">
                                 <div class="form-group d-flex flex-column flex-md-grow-1">
-                                    <label for="bus-group">Business Group <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="d-flex align-items-center justify-content-center select-container">
-                                        <select name="bus_group" id="bus-group" class="form-control form-select px-3" required>
-                                            <option selected hidden value="<?= $business['bus_group'] ?>"><?= $business['bus_group'] ?></option>
-                                            <option value="Group A">Group A</option>
-                                            <option value="Group B">Group B</option>
-                                            <option value="Group C">Group C</option>
-                                            <option value="Group D">Group D</option>
-                                            <option value="Group E">Group E</option>
-                                            <option value="Group F">Group F</option>
-                                            <option value="Group G">Group G</option>
-                                            <option value="Group H">Group H</option>
-                                            <option value="Group I">Group I</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="d-md-flex align-items-center justify-content-between">
-                                <div class="form-group d-flex flex-column flex-md-grow-1">
                                     <label for="character-of-occupancy">Character of Occupancy <span class="text-danger">*</span>
                                     </label>
                                     <div class="d-flex align-items-center justify-content-center select-container">
@@ -216,6 +195,14 @@ include './../includes/side-header.php';
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col col-12 p-0 form-group" id="occupancy-group-container">
+                                <label for="occupancy-group">Group <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" name="occupancy_group" class="form-control p-4" id="occupancy-group" value="<?= $business['occupancy_group'] ?>" required readonly>
+                            </div>
+
+                            <input type="hidden" name="occupancy_classification_id" id="occupancy-classification-id" value="<?= $business['occupancy_classification_id'] ?>">
 
                             <div class="d-md-flex align-items-center justify-content-center flex-gap">
                                 <div class="col col-md-6 p-1 form-group flex-md-grow-1">

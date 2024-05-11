@@ -53,38 +53,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         <form action="./controller/update.php" method="POST" class="user" enctype="multipart/form-data">
 
                             <div class="form-group d-flex flex-column flex-md-grow-1">
-                                <label for="section">Section<span class="text-danger">*</span>
+                                <label for="section">Section <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center justify-content-center select-container">
                                     <select name="section" class="form-control form-select px-3">
-                                        <option selected hidden value="<?= $building['bldg_section']?>"><?= $building['bldg_section']?></option>
-                                        <option value="Division A-1">Division A-1</option>
-                                        <option value="Division A-2">Division A-2</option>
-                                        <option value="Division B-1">Division B-1</option>
-                                        <option value="Division D-1">Division D-1</option>
-                                        <option value="Division D-2">Division D-2</option>
-                                        <option value="Division D-3">Division D-3</option>
-                                        <option value="Division E-1">Division E-1</option>
-                                        <option value="Division E-2">Division E-2</option>
-                                        <option value="Division E-3">Division E-3</option>
-                                        <option value="Division F-1">Division F-1</option>
-                                        <option value="Division G-1">Division G-1</option>
-                                        <option value="Division G-2">Division G-2</option>
-                                        <option value="Division G-3">Division G-3</option>
-                                        <option value="Division G-4">Division G-4</option>
-                                        <option value="Division G-5">Division G-5</option>
-                                        <option value="Division H-1">Division H-1</option>
-                                        <option value="Division H-2">Division H-2</option>
-                                        <option value="Division H-3">Division H-3</option>
-                                        <option value="Division H-4">Division H-4</option>
-                                        <option value="I-1">I-1</option>
-                                        <option value="Commercial">Commercial</option>
-                                        <option value="Industrial Institutional Building">Industrial Institutional Building</option>
-                                        <option value="Appendages">Appendages</option>
-                                        <option value="First Class Cinematographs or Theaters">First Class Cinematographs or Theaters</option>
-                                        <option value="Second Class Cinematographs or Theaters">Second Class Cinematographs or Theaters</option>
-                                        <option value="Third Class Cinematographs or Theaters">Third Class Cinematographs or Theaters</option>
-                                        <option value="Grandstands/Bleachers">Grandstands/Bleachers</option>
+                                        <option selected hidden value="<?= $building['bldg_section'] ?>"><?= $building['bldg_section'] ?></option>
+                                        <option value="Division A-1 and A-2">Division A-1 and A-2</option>
+                                        <option value="Division B-1/D-1, 2, 3/E-1, 2, 3/F-1/G-1, 2, 3, 4, 5/H-1, 2, 3, 4/ and I-1, Commercial, Industrial Institutional Buildings, and Appendages">Division B-1/D-1, 2, 3/E-1, 2, 3/F-1/G-1, 2, 3, 4, 5/H-1, 2, 3, 4/ and I-1, Commercial, Industrial Institutional Buildings, and Appendages</option>
+                                        <option value="Divisions C-1, 2, Amusement Houses, and Gymnasia">Divisions C-1, 2, Amusement Houses, and Gymnasia</option>
                                     </select>
                                 </div>
                             </div>
@@ -92,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             <div class="col col-12 p-0 form-group">
                                 <label for="property-attribute">Property Attribute <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="property_attribute" class="form-control p-4" id="property-attribute" placeholder="Enter Property Attribute..." value="<?= $building['bldg_property_attribute']?>" required>
+                                <input type="text" name="property_attribute" class="form-control p-4" id="property-attribute" placeholder="Enter Property Attribute..." value="<?= $building['bldg_property_attribute'] ?>" required>
                             </div>
 
                             <div class="col col-12 p-0 form-group">
@@ -104,11 +80,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         <span class="input-group-text">₱</span>
                                     </div>
 
-                                    <input type="number" name="fee" class="form-control p-4" id="fee" placeholder="Enter Fee..." step="0.01" min="0.00" value="<?= $building['bldg_fee']?>" required>
+                                    <input type="number" name="fee" class="form-control p-4" id="fee" placeholder="Enter Fee..." step="0.01" min="0.00" value="<?= $building['bldg_fee'] ?>" required>
                                 </div>
                             </div>
 
-                            <input type="hidden" name="bldg_billing_id" value="<?= $bldg_billing_id?>">
+                            <input type="hidden" name="bldg_billing_id" value="<?= $bldg_billing_id ?>">
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">
                         </form>

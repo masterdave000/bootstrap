@@ -3,12 +3,15 @@
 include './../../../config/constants.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $owner_id = htmlspecialchars(trim(ucwords($_POST['owner_name'])));
+    $clean_id = filter_var($_POST['occupancy_classification_id'], FILTER_SANITIZE_NUMBER_INT);
+    $occupancy_classification_id = filter_var($clean_id, FILTER_VALIDATE_INT);
+
+    $clean_owner_id = filter_var($_POST['owner_id'], FILTER_SANITIZE_NUMBER_INT);
+    $owner_id = filter_var($clean_owner_id, FILTER_VALIDATE_INT);
+
     $bus_name = htmlspecialchars(trim(ucwords($_POST['bus_name'])));
     $bus_address = htmlspecialchars(trim(ucwords($_POST['bus_address'])));
     $bus_type = htmlspecialchars(trim(ucwords($_POST['bus_type'])));
-    $bus_group = htmlspecialchars(trim(ucwords($_POST['bus_group'])));
-    $character_of_occupancy = htmlspecialchars(trim(ucwords($_POST['character_of_occupancy'])));
     $contact_number = htmlspecialchars($_POST['contact_number']);
     $floor_area = htmlspecialchars($_POST['floor_area']);
     $signage_area = htmlspecialchars($_POST['signage_area']);
@@ -70,24 +73,22 @@ if ($businessCount > 0) {
 
 $businessQuery = "INSERT INTO business (
     owner_id, 
+    occupancy_classification_id,
     bus_name, 
     bus_address,
     bus_type,
     bus_contact_number,
-    bus_group,
-    character_of_occupancy,
     email,
     floor_area,
     signage_area,
     bus_img_url
 ) VALUES (
     :owner_id, 
+    :occupancy_classification_id,
     :bus_name, 
     :bus_address,
     :bus_type,
     :bus_contact_number,
-    :bus_group,
-    :character_of_occupancy,
     :email,
     :floor_area,
     :signage_area,
@@ -96,12 +97,11 @@ $businessQuery = "INSERT INTO business (
 
 $businessStatement = $pdo->prepare($businessQuery);
 $businessStatement->bindParam(':owner_id', $owner_id);
+$businessStatement->bindParam(':occupancy_classification_id', $occupancy_classification_id);
 $businessStatement->bindParam(':bus_name', $bus_name);
 $businessStatement->bindParam(':bus_address', $bus_address);
 $businessStatement->bindParam(':bus_type', $bus_type);
 $businessStatement->bindParam(':bus_contact_number', $contact_number);
-$businessStatement->bindParam(':bus_group', $bus_group);
-$businessStatement->bindParam(':character_of_occupancy', $character_of_occupancy);
 $businessStatement->bindParam(':email', $email);
 $businessStatement->bindParam(':floor_area', $floor_area);
 $businessStatement->bindParam(':signage_area', $signage_area);

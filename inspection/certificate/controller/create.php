@@ -12,8 +12,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
     $bin = trim(strtoupper($_POST['bin']));
     $application_type = trim(strtoupper($_POST['application_type']));
-    $character_of_occupancy = trim(strtoupper($_POST['character_occupancy']));
-    $bus_group = trim(strtoupper($_POST['bus_group']));
     $occupancy_no = $_POST['occupancy_no'];
     $date_inspected = date('Y-m-d H:i:s');
     $date_complied = $_POST['date_complied'];
