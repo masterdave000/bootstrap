@@ -367,8 +367,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="hidden" name="owner_id" value="<?= $owner_id ?>">
             <input type="hidden" name="bin" value="<?= $bin ?>">
             <input type="hidden" name="application_type" value="<?= $application_type ?>">
-            <input type="hidden" name="character_occupancy" value="<?= $character_occupancy ?>">
-            <input type="hidden" name="occupancy_group" value="<?= $group ?>">
             <input type="hidden" name="occupancy_no" value="<?= $occupancy_no ?>">
             <input type="hidden" name="issued_on" value="<?= $issued_on ?>">
             <input type="hidden" name="date_complied" value="<?= $date_complied ?>">
