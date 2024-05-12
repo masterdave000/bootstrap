@@ -382,27 +382,6 @@ require './modals/inspector.php';
 require './modals/violation.php';
 ?>
 
-<script>
-    function saveFormData() {
-        const formData = new FormData(document.getElementById('inspection-form'));
-        for (const [key, value] of formData.entries()) {
-            localStorage.setItem(key, value);
-        }
-    }
-    function loadFormData() {
-        const formData = new FormData(document.getElementById('inspection-form'));
-        for (const [key, value] of formData.entries()) {
-            const savedValue = localStorage.getItem(key);
-            if (savedValue !== null) {
-                document.getElementById(key).value = savedValue;
-            }
-        }
-    }
-
-    document.getElementById('inspection-form').addEventListener('change', saveFormData);
-
-    window.addEventListener('load', loadFormData);
-</script>
 </body>
 
 </html>
