@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set('Asia/Manila');
 
-define('SITEURL', 'http://localhost/obos/');
+define('SITEURL', 'https://ecd1-2001-4456-c88-d300-61c1-2408-b78-eb16.ngrok-free.app/obos/');
 $localhost = 'localhost';
 $db_name = 'inspection';
 $username = 'root';
