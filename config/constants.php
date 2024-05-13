@@ -1,8 +1,8 @@
 <?php
 session_start();
 date_default_timezone_set('Asia/Manila');
-
 define('SITEURL', 'https://localhost/obos/');
+
 $localhost = 'localhost';
 $db_name = 'inspection';
 $username = 'root';
