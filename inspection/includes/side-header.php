@@ -63,11 +63,13 @@ $role = $_SESSION['role'];
                     <span>Dashboard</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL ?>inspection/category/">
-                    <i class="fa-solid fa-layer-group"></i>
-                    <span>Category</span></a>
-            </li>
+            <?php if ($role === 'Administrator') : ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/category/">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Category</span></a>
+                </li>
+            <?php endif; ?>
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL ?>inspection/item/">
@@ -87,19 +89,20 @@ $role = $_SESSION['role'];
                     <span>Certificate</span></a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL ?>inspection/business/">
-                    <i class="fas fa-fw fa-business-time"></i>
-                    <span>Business</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL ?>inspection/owner/">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Owner</span></a>
-            </li>
 
             <?php if ($role === 'Administrator') : ?>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/business/">
+                        <i class="fas fa-fw fa-business-time"></i>
+                        <span>Business</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/owner/">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Owner</span></a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo SITEURL ?>inspection/inspector/">
