@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $clean_id = filter_var($_GET['certificate_id'], FILTER_SANITIZE_NUMBER_INT);
     $certificate_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-    $annualCertificateQuery = "SELECT DISTINCT certificate_id, application_type, bin, bus_name, bus_address, bus_img_url, bus_group, character_of_occupancy, occupancy_no, issued_on, owner_firstname, owner_midname, owner_lastname, owner_suffix, category, date_complied, date_inspected,
+    $annualCertificateQuery = "SELECT DISTINCT certificate_id, application_type, bin, bus_name, bus_address, bus_img_url, occupancy_group, character_of_occupancy, occupancy_no, issued_on, owner_firstname, owner_midname, owner_lastname, owner_suffix, category, date_complied, date_inspected,
                             GROUP_CONCAT(inspector_firstname) AS inspector_firstname,
                             GROUP_CONCAT(inspector_midname) AS inspector_midname,
                             GROUP_CONCAT(inspector_lastname) AS inspector_lastname,
@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                             <div class="col col-12 p-0 form-group">
                                                 <label>Business Group
                                                 </label>
-                                                <input type="text" class="form-control p-4" value="<?= $certificate['bus_group'] ?>" readonly>
+                                                <input type="text" class="form-control p-4" value="<?= $certificate['occupancy_group'] ?>" readonly>
                                             </div>
 
                                             <div class="col col-12 p-0 form-group">
