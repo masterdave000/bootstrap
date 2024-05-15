@@ -57,9 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <!-- Scroll to Top Button-->
             <form action="./../controller/create.php" method="POST">
                 <section class="sheet-container">
-                    <section class="sheet">
+                    <section class="sheet d-flex position-relative">
                         <img src="./../../../assets/img/list-of-equipments.jpg" alt="list-of-equipment" class="sheet-image">
-                        <section class="section">
+                        <section class="section d-flex flex-column">
                             <div class="section-header">
                                 <div class="d-flex justify-content-between w-100">
                                     <div class="d-flex flex-column align-items-center justify-content-center owner-container p-0">
@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 </tbody>
                             </table>
 
-                            <section class="section-footer d-flex justify-content-between">
+                            <section class="section-footer d-flex justify-content-between position-absolute bottom-0 pr-4">
                                 <div class="left w-50">
                                     <div class="inspector-container mb-2 d-flex justify-content-between flex-gap">
                                         <div class="inspector-names w-50 d-flex flex-column align-items-center px-1">

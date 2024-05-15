@@ -11,10 +11,20 @@
     border: 1px solid;
 }
 
+.section-footer {
+    width: 94.5%;
+    position: absolute !important;
+    bottom: 30px !important;
+}
+
 .inspected-payment-container,
 .inspector-container,
 .violation-container {
     width: 100% !important;
+}
+
+.section-footer {
+    border: 2px solid black;
 }
 
 .section {
