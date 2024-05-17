@@ -32,6 +32,25 @@ include './../includes/side-header.php';
                 $suffix = htmlspecialchars(ucwords($business['owner_suffix']));
                 $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
             }
+
+            //inspection base sa bus_id
+            $inspectionQuery = "SELECT * FROM inspection WHERE bus_id = :bus_id";
+            $inspectionStatement = $pdo->prepare($inspectionQuery);
+            $inspectionStatement->bindParam(':bus_id', $bus_id);
+            $inspectionStatement->execute();
+
+            $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        }
+        ?>
+        <?php
+        function formatDate($dateString) {
+            if ($dateString === '0000-00-00 00:00:00') {
+                return 'Not assigned';
+            }
+            
+            $date = new DateTime($dateString);
+            return $date->format('M-d-Y');
         }
         ?>
 
@@ -53,34 +72,60 @@ include './../includes/side-header.php';
                                     <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">History</button>
                                 </div>
                                 <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inspection History</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <li data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">diwata</li>
-                                    </div>
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inspection History</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <?php if (!empty($inspections)): ?>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Application Type</th>
+                                                            <th>Remarks</th>
+                                                            <th>Date Inspected</th>
+                                                            <th>Date Signed</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php foreach ($inspections as $inspection): ?>
+                                                            <tr>
+                                                                <td class="application-type" data-bs-target="#exampleModalToggle2">
+                                                                    <a href="../inspection/view-inspection.php?inspection_id=<?php echo htmlspecialchars($inspection['inspection_id']); ?>" target="_blank">
+                                                                        <?php echo htmlspecialchars($inspection['application_type']); ?>
+                                                                    </a>
+                                                                </td>
+                                                                <td><?php echo htmlspecialchars($inspection['remarks']); ?></td>
+                                                                <td><?php echo formatDate($inspection['date_inspected']); ?></td>
+                                                                <td><?php echo formatDate($inspection['date_signed']); ?></td>
+                                                            </tr>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            <?php else: ?>
+                                                <p>No inspection data available.</p>
+                                            <?php endif; ?>
+                                        </div>
+                                        </div>
                                     </div>
                                 </div>
-                                </div>
-
                                 <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Diwata Pares</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Diwata Pares</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, obcaecati!
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to Inspection</button>
+                                        </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, obcaecati!
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to Inspection</button>
-                                    </div>
-                                    </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
