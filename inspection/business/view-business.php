@@ -83,7 +83,7 @@ include './../includes/side-header.php';
                                                 <table class="table table-bordered">
                                                     <thead>
                                                         <tr>
-                                                            <th>Application Type</th>
+                                                            <th>Application ID</th>
                                                             <th>Remarks</th>
                                                             <th>Date Inspected</th>
                                                             <th>Date Signed</th>
@@ -94,7 +94,7 @@ include './../includes/side-header.php';
                                                             <tr>
                                                                 <td class="application-type" data-bs-target="#exampleModalToggle2">
                                                                     <a href="../inspection/view-inspection.php?inspection_id=<?php echo htmlspecialchars($inspection['inspection_id']); ?>" target="_blank">
-                                                                        <?php echo htmlspecialchars($inspection['application_type']); ?>
+                                                                        <?php echo htmlspecialchars($inspection['inspection_id']); ?>
                                                                     </a>
                                                                 </td>
                                                                 <td><?php echo htmlspecialchars($inspection['remarks']); ?></td>
@@ -107,22 +107,6 @@ include './../includes/side-header.php';
                                             <?php else: ?>
                                                 <p>No inspection data available.</p>
                                             <?php endif; ?>
-                                        </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Diwata Pares</h1>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, obcaecati!
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to Inspection</button>
                                         </div>
                                         </div>
                                     </div>
