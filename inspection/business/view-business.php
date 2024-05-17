@@ -86,7 +86,7 @@ include './../includes/side-header.php';
                                                             <th>Application ID</th>
                                                             <th>Remarks</th>
                                                             <th>Date Inspected</th>
-                                                            <th>Date Signed</th>
+                                                            <!-- <th>Date Signed</th> -->
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -99,7 +99,7 @@ include './../includes/side-header.php';
                                                                 </td>
                                                                 <td><?php echo htmlspecialchars($inspection['remarks']); ?></td>
                                                                 <td><?php echo formatDate($inspection['date_inspected']); ?></td>
-                                                                <td><?php echo formatDate($inspection['date_signed']); ?></td>
+                                                                <!-- <td><?php echo formatDate($inspection['date_signed']); ?></td> -->
                                                             </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
