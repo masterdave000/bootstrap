@@ -44,7 +44,45 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
+                            <div class="row">
+                                <div class="col"></div>
+                                <div class="col col-md-5">
+                                    <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
+                                </div>
+                                <div class="col">
+                                    <button class="btn btn-success" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">History</button>
+                                </div>
+                                <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Inspection History</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <li data-bs-target="#exampleModalToggle2" data-bs-toggle="modal">diwata</li>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+
+                                <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Diwata Pares</h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, obcaecati!
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal">Back to Inspection</button>
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         <form class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
