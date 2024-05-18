@@ -79,7 +79,7 @@ include './../includes/side-header.php';
                                             <label for="schedule-date">Inspection Date </label>
 
                                             <div class="input-group">
-                                                <input type="date" name="schedule_date" class="form-control p-4" id="schedule-date" placeholder="Enter Inspection Date..." max="<?= date('Y-m-d') ?>">
+                                                <input type="date" name="schedule_date" class="form-control p-4" id="schedule-date" placeholder="Enter Inspection Date..." max="<?= date('Y-m-d') ?>" required>
                                             </div>
                                         </div>
                                     </div>
