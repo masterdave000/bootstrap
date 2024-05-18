@@ -8,35 +8,6 @@ require "./../includes/side-header.php";
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <?php
-
-        if (isset($_SESSION['add'])) //Checking whether the session is set or not
-        {    //DIsplaying session message
-            echo $_SESSION['add'];
-            //Removing session message
-            unset($_SESSION['add']);
-        }
-
-        if (isset($_SESSION['delete'])) {
-            echo $_SESSION['delete'];
-            unset($_SESSION['delete']);
-        }
-
-        if (isset($_SESSION['update'])) {
-            echo $_SESSION['update'];
-            unset($_SESSION['update']);
-        }
-
-        if (isset($_SESSION['invalid_password'])) {
-            echo $_SESSION['invalid_password'];
-            unset($_SESSION['invalid_password']);
-        }
-
-        if (isset($_SESSION['id_not_found'])) {
-            echo $_SESSION['id_not_found'];
-            unset($_SESSION['id_not_found']);
-        }
-        ?>
 
         <?php require './../includes/top-header.php' ?>
 
@@ -71,25 +42,29 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php
-                                $scheduleQuery = "SELECT * FROM business_inspection_schedule_view WHERE inspector_id = :inspector_id ORDER BY schedule_date DESC";
-                                $scheduleStatement = $pdo->prepare($scheduleQuery);
-                                $scheduleStatement->bindParam(':inspector_id', $_SESSION['inspector_id']);
-                                $scheduleStatement->execute();
+                                $scheduleQuery = "SELECT DISTINCT schedule_id, bus_name, schedule_date, bus_img_url FROM business_inspection_schedule_view";
 
-                                while ($schedules = $scheduleStatement->fetch(PDO::FETCH_ASSOC)) {
+                                $bindings = [];
+
+                                if ($_SESSION['role'] !== 'Administrator') {
+                                    $scheduleQuery .= " WHERE inspector_id = :inspector_id";
+                                    $bindings[':inspector_id'] = $_SESSION['inspector_id'];
+                                }
+                                $scheduleQuery .= " ORDER BY schedule_date DESC";
+
+                                $scheduleStatement = $pdo->prepare($scheduleQuery);
+                                $scheduleStatement->execute($bindings);
+
+                                $schedule = $scheduleStatement->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($schedule as $schedules) {
                                     $schedule_id = htmlspecialchars(ucwords($schedules['schedule_id']));
                                     $bus_name = htmlspecialchars(ucwords($schedules['bus_name']));
-                                    $firstname = htmlspecialchars(ucwords($schedules['inspector_firstname']));
-                                    $midname = htmlspecialchars(ucwords($schedules['inspector_midname'] ? mb_substr($schedules['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                    $lastname = htmlspecialchars(ucwords($schedules['inspector_lastname']));
-                                    $suffix = htmlspecialchars(ucwords($schedules['inspector_suffix']));
-                                    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
-                                   
+
                                 ?>
 
                                     <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                         <td class="p-0 m-0">
-                                            <a href="view-schedule.php?schedule_id=<?php echo $schedules['schedule_id'] ?>" class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap" href="./view-schedule.php?schedule_id=<?php $schedules['schedule_id'] ?>">
+                                            <a href="view-schedule.php?schedule_id=<?php echo $schedules['schedule_id'] ?>" class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap" href="./view-schedule.php?schedule_id=<?php echo $schedules['schedule_id'] ?>">
                                                 <div class="image-container img-fluid">
                                                     <img src="<?= SITEURL ?>inspection/business/images/<?php echo $schedules['bus_img_url'] ?? 'no-image.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
                                                 </div>
@@ -141,6 +116,37 @@ require "./../includes/side-header.php";
 <?php
 require './../includes/footer.php';
 ?>
+
+<?php
+
+if (isset($_SESSION['add'])) //Checking whether the session is set or not
+{    //DIsplaying session message
+    echo $_SESSION['add'];
+    //Removing session message
+    unset($_SESSION['add']);
+}
+
+if (isset($_SESSION['delete'])) {
+    echo $_SESSION['delete'];
+    unset($_SESSION['delete']);
+}
+
+if (isset($_SESSION['update'])) {
+    echo $_SESSION['update'];
+    unset($_SESSION['update']);
+}
+
+if (isset($_SESSION['invalid_password'])) {
+    echo $_SESSION['invalid_password'];
+    unset($_SESSION['invalid_password']);
+}
+
+if (isset($_SESSION['id_not_found'])) {
+    echo $_SESSION['id_not_found'];
+    unset($_SESSION['id_not_found']);
+}
+?>
+
 
 </body>
 
