@@ -55,7 +55,7 @@ include './../includes/side-header.php';
                                             <label for="business-id">Business Name <span class="text-danger">*</span>
                                             </label>
                                             <div class="d-flex align-items-center justify-content-center select-container">
-                                                <select name="business_id" id="" class="form-control form-select px-3" required>
+                                                <select name="business_id" id="schedule-business-id" class="form-control form-select px-3" required>
                                                     <option selected disabled hidden value="">Select</option>
                                                     <?php
                                                     $businessQuery = "SELECT * from business";
