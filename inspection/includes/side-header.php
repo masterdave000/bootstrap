@@ -116,6 +116,12 @@ $role = $_SESSION['role'];
                         <span>Billing</span></a>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/schedule/">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>Schedule</span></a>
+                </li>
+
             <?php endif; ?>
 
             <li class="nav-item">
