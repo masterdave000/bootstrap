@@ -52,6 +52,7 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
           prevBtn.classList.add('invisible');
           
         } else if (totalItems - 1 == currentIndex) {
+          prevBtn.classList.remove('invisible');
           nextBtn.classList.add('invisible');
           submitBtn.classList.remove('d-none');
         } else {
@@ -69,6 +70,7 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
 
 carousel('inspectionCarousel');
 carousel('certificateCarousel');
+carousel('scheduleCarousel');
 
 
 function businessDataFetch(businessId) {
@@ -752,9 +754,14 @@ function inspector(inspectorContainers, selectInspector) {
   
           let inspectorId = this.getAttribute("data-inspector-id");
   
+          let url = `./../json_response/inspector.php?inspector_id=${inspectorId}`;
+
+          if (inspectorContainers === 'inspector-certificate-container') {
+            let url = `./json_response/inspector.php?inspector_id=${inspectorId}`;
+          }
           // Make an AJAX request to fetch the inspector details
           let inspector = new XMLHttpRequest();
-          inspector.open("GET", `./json_response/inspector.php?inspector_id=${inspectorId}`, true);
+          inspector.open("GET", url, true);
           inspector.onreadystatechange = function () {
               if (inspector.readyState === 4 && inspector.status === 200) {
                   let inspectorDetails = JSON.parse(inspector.responseText);
