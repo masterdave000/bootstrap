@@ -2,11 +2,10 @@
 session_start();
 date_default_timezone_set('Asia/Manila');
 define('SITEURL', 'http://localhost/obos/');
-
-$localhost = 'localhost';
+$localhost = 'localhost:3308';
 $db_name = 'inspection';
 $username = 'root';
-$password = '';
+$password = 'Bilaosrrmmmjg02311_';
 
 
 $dsn = "mysql:host=$localhost;dbname=$db_name;charset=UTF8;";
