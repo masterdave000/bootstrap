@@ -276,8 +276,11 @@ FROM equipment_billing b
 LEFT JOIN category_list c ON b.category_id = c.category_id;
 
 CREATE VIEW business_inspection_schedule_view AS
-SELECT s.schedule_id, b.bus_id, i.inspector_id, b.bus_name, i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, s.schedule_date, b.bus_img_url
+SELECT s.schedule_id, b.bus_id, i.inspector_id, o.owner_id, b.bus_name, b.bus_address, b.bus_type, b.bus_contact_number, b.floor_area, b.signage_area,
+o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
+i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, s.schedule_date, b.bus_img_url
 FROM schedule s
 LEFT JOIN business b ON s.bus_id = b.bus_id
+LEFT JOIN owner o ON b.owner_id = o.owner_id
 LEFT JOIN inspector_schedule ins ON s.schedule_id = ins.schedule_id
 LEFT JOIN inspector i ON ins.inspector_id = i.inspector_id;
