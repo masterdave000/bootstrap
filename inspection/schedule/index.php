@@ -4,6 +4,7 @@ $title = "Schedule List";
 require "./../includes/side-header.php";
 
 ?>
+
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
@@ -19,10 +20,12 @@ require "./../includes/side-header.php";
 
                 <div class="d-flex align-items-center justify-content-between card-header">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-schedule.php" class="btn btn-primary d-flex justify-content-center align-items-center">
-                        <i class="fa fa-plus mr-1" aria-hidden="true"></i>
-                        <span class="d-none d-lg-inline">Add</span>
-                    </a>
+                    <?php if ($role !== 'Inspector') : ?>
+                        <a href="./add-schedule.php" class="btn btn-primary d-flex justify-content-center align-items-center">
+                            <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+                            <span class="d-none d-lg-inline">Add</span>
+                        </a>
+                    <?php endif ?>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -48,7 +51,7 @@ require "./../includes/side-header.php";
 
                                 if ($_SESSION['role'] !== 'Administrator') {
                                     $scheduleQuery .= " WHERE inspector_id = :inspector_id";
-                                    $bindings[':inspector_id'] = $_SESSION['inspector_id'];
+                                    $bindings[':inspector_id'] = $user_inspector_id;
                                 }
                                 $scheduleQuery .= " ORDER BY schedule_date DESC";
 
@@ -82,16 +85,18 @@ require "./../includes/side-header.php";
                                         </td>
 
                                         <td class="d-flex justify-content-end">
-                                            <a href="./update-schedule.php?schedule_id=<?php echo $schedules['schedule_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
-                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
-                                                <span class="d-none d-lg-inline">Edit</span>
-                                            </a>
 
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-<?php echo $schedules['schedule_id'] ?>" class="btn btn-danger d-flex justify-content-center align-items-center">
-                                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-                                                <span class="d-none d-lg-inline">Delete</span>
-                                            </a>
+                                            <?php if ($role !== 'Inspector') : ?>
+                                                <a href="./update-schedule.php?schedule_id=<?php echo $schedules['schedule_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                    <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                    <span class="d-none d-lg-inline">Edit</span>
+                                                </a>
 
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-<?php echo $schedules['schedule_id'] ?>" class="btn btn-danger d-flex justify-content-center align-items-center">
+                                                    <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                                    <span class="d-none d-lg-inline">Delete</span>
+                                                </a>
+                                            <?php endif ?>
                                         </td>
                                     </tr>
 
@@ -108,14 +113,6 @@ require "./../includes/side-header.php";
         </div>
     </div>
 </div>
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
-
-<?php
-require './../includes/footer.php';
-?>
 
 <?php
 
@@ -145,7 +142,21 @@ if (isset($_SESSION['id_not_found'])) {
     echo $_SESSION['id_not_found'];
     unset($_SESSION['id_not_found']);
 }
+
+if (isset($_SESSION['redirect'])) {
+    echo $_SESSION['redirect'];
+    unset($_SESSION['redirect']);
+}
 ?>
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<?php
+require './../includes/footer.php';
+?>
+
 
 
 </body>
