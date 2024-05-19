@@ -9,7 +9,7 @@ if ($role === 'Inspection') {
     $_SESSION['redirect'] = "
     <div class='msgalert alert--danger' id='alert'>
         <div class='alert__message'>
-            Cannot Access
+            Restricted Access
     </div>
 ";
 
