@@ -30,6 +30,7 @@ require "./../includes/side-header.php";
                                         Category
                                     </th>
 
+                                    <th></th>
                                 </tr>
                             </thead>
 
@@ -69,6 +70,14 @@ require "./../includes/side-header.php";
                                                         <?php echo $inspection['date_inspected'] ?></div>
 
                                                 </div>
+                                            </a>
+                                        </td>
+
+                                        <td class="d-flex justify-content-end">
+
+                                            <a href="./update-inspection.php?inspection_id=<?php echo $inspection['inspection_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Edit</span>
                                             </a>
                                         </td>
                                     </tr>
