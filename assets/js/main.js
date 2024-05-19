@@ -452,6 +452,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           // Set the fee input field value
                           feeInputField.value = parseFloat(response.fee).toFixed(2);
                           billingIdHiddenInput.value = response.billing_id;
+
+                          $quantity = document.getElementById(`quantity-${counter}`);
+                          $quantity.removeAttribute('readonly');
                         }
                       };
                       // Send selected section as parameter
@@ -535,6 +538,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           // Set the fee input field value
                           feeInputField.value = parseFloat(response.fee).toFixed(2);
                           billingIdHiddenInput.value = response.billing_id;
+
+                          $quantity = document.getElementById(`quantity-${counter}`);
+                          $quantity.removeAttribute('readonly');
                         }
                       };
                       // Send selected section as parameter
@@ -555,7 +561,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let quantityLabel = createLabel('Quantity');
                 quantityContainer.appendChild(quantityLabel);
 
-                let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, false);
+                let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, true);
                 quantityContainer.append(quantityInputField);
 
                 // Power Rating
