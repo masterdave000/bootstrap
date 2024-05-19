@@ -19,14 +19,17 @@
 
                     <tbody>
                         <?php
-                        $businessQuery = "SELECT DISTINCT schedule_id, bus_id, bus_name, bus_img_url, schedule_date FROM business_inspection_schedule_view WHERE schedule_date = CURDATE() ORDER BY schedule_date";
-                        $businessStatement = $pdo->query($businessQuery);
-                        $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-                        foreach ($businesses as $business) {
+                        $businessQuery = "SELECT DISTINCT schedule_id, bus_id, bus_name, bus_img_url, schedule_date FROM business_inspection_schedule_view WHERE schedule_date = CURDATE() AND inspector_id = :inspector_id ORDER BY schedule_date";
+
+                        $businessStatement = $pdo->prepare($businessQuery);
+                        $businessStatement->bindParam(':inspector_id', $_SESSION['inspector_id']);
+                        $businessStatement->execute();
+
+                        while ($business = $businessStatement->fetch(PDO::FETCH_ASSOC)) {
                         ?>
-                            <tr class="d-flex justify-content-between align-businesss-center border-bottom py-1 select-business" data-business-id="<?php echo $business['bus_id'] ?>">
+                            <tr class="d-flex justify-content-between align-businesss-center border-bottom py-1 select-business">
                                 <td class="p-0 m-0 w-100">
-                                    <a href="#" class="d-flex align-businesss-center text-decoration-none
+                                    <a href="./add-inspection.php?schedule_id='<?= $business['schedule_id'] ?>'" class="d-flex align-businesss-center text-decoration-none
                                 text-gray-700 flex-gap w-100">
                                         <div class=" image-container img-fluid">
                                             <img src="./../business/images/<?php echo $business['bus_img_url'] ?? 'default-img.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
@@ -44,7 +47,7 @@
 
                                 </td>
                                 <td>
-                                    <a class="btn btn-primary py-1" data-business-id="<?php echo $business['bus_id'] ?>">
+                                    <a href="./add-inspection.php?schedule_id='<?= $business['schedule_id'] ?>'" class="btn btn-primary py-1">
                                         Select
                                     </a>
                                 </td>
