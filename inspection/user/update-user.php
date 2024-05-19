@@ -3,6 +3,18 @@
 $title = "Edit User";
 include './../includes/side-header.php';
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $clean_user_id = filter_var($_GET['user_id'], FILTER_SANITIZE_NUMBER_INT);
     $user_id = filter_var($clean_user_id, FILTER_VALIDATE_INT);

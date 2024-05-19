@@ -3,6 +3,18 @@
 $title = "Edit Owner";
 include './../includes/side-header.php';
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $clean_owner_id = filter_var($_GET['owner_id'], FILTER_SANITIZE_NUMBER_INT);
@@ -126,7 +138,7 @@ $img_url = $owner['owner_img_url'];
                                     <input type="email" name="email" class="form-control p-4" id="email" aria-describedby="contactnoHelp" placeholder="Enter Email Address..." pattern="[A-Za-z0-9-._]+@[A-Za-z0-9.-_]+\.[a-zA-Z]{2,}" value="<?php echo $owner['email'] ?>" required>
                                 </div>
                             </div>
-                            
+
                             <input type="hidden" name="owner_id" value="<?php echo $owner['owner_id'] ?>">
 
                             <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">

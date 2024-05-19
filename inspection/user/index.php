@@ -1,54 +1,66 @@
-<?php 
+<?php
 
 $title = "Manage User";
 require "./../includes/side-header.php";
+
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
 
 ?>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <?php 
-        
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
-        
-            if (isset($_SESSION['delete'])) {
-                echo $_SESSION['delete'];
-                unset($_SESSION['delete']);
-            }
-        
-            if (isset($_SESSION['update'])) {
-                echo $_SESSION['update'];
-                unset($_SESSION['update']);
-            }
-        
-            if (isset($_SESSION['change_pass_success'])) {
-                 echo $_SESSION['change_pass_success'];
-                unset($_SESSION['change_pass_success']);
-            }
-        
-            if (isset($_SESSION['no_user_data_found'])) {
-                echo $_SESSION['no_user_data_found'];
-                unset($_SESSION['no_user_data_found']);
-            }
+        <?php
 
-            if (isset($_SESSION['invalid_password'])) {
-                echo $_SESSION['invalid_password'];
-                unset($_SESSION['invalid_password']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
 
-            if (isset($_SESSION['id_not_found'])) {
-                echo $_SESSION['id_not_found'];
-                unset($_SESSION['id_not_found']);
-            }
+        if (isset($_SESSION['delete'])) {
+            echo $_SESSION['delete'];
+            unset($_SESSION['delete']);
+        }
+
+        if (isset($_SESSION['update'])) {
+            echo $_SESSION['update'];
+            unset($_SESSION['update']);
+        }
+
+        if (isset($_SESSION['change_pass_success'])) {
+            echo $_SESSION['change_pass_success'];
+            unset($_SESSION['change_pass_success']);
+        }
+
+        if (isset($_SESSION['no_user_data_found'])) {
+            echo $_SESSION['no_user_data_found'];
+            unset($_SESSION['no_user_data_found']);
+        }
+
+        if (isset($_SESSION['invalid_password'])) {
+            echo $_SESSION['invalid_password'];
+            unset($_SESSION['invalid_password']);
+        }
+
+        if (isset($_SESSION['id_not_found'])) {
+            echo $_SESSION['id_not_found'];
+            unset($_SESSION['id_not_found']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <div class="container-fluid mt-4">
             <div class="card shadow mb-4">
@@ -75,67 +87,61 @@ require "./../includes/side-header.php";
 
                             <tbody>
 
-                                <?php 
-                                    $userQuery = "SELECT * FROM user_view ORDER BY user_id";
-                                    $userStatement = $pdo->query($userQuery);
-                                    $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
+                                <?php
+                                $userQuery = "SELECT * FROM user_view ORDER BY user_id";
+                                $userStatement = $pdo->query($userQuery);
+                                $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                    foreach ($users as $user) :
-                                        $firstname = htmlspecialchars(ucwords($user['inspector_firstname']));
-                                        $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                        $lastname = htmlspecialchars(ucwords($user['inspector_lastname']));
-                                        $suffix = htmlspecialchars(ucwords($user['inspector_suffix']));
+                                foreach ($users as $user) :
+                                    $firstname = htmlspecialchars(ucwords($user['inspector_firstname']));
+                                    $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                    $lastname = htmlspecialchars(ucwords($user['inspector_lastname']));
+                                    $suffix = htmlspecialchars(ucwords($user['inspector_suffix']));
 
-                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+                                    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
-                                    <td class="p-0 m-0">
-                                        <a href="./view-user.php?user_id=<?php echo $user['user_id']?>"
-                                            class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
-                                            <div class="image-container img-fluid">
-                                                <img src="./../inspector/images/<?php echo $user['inspector_img_url'] ?? 'default.png'?>"
-                                                    alt="inspector-image" class="img-fluid rounded-circle" />
-                                            </div>
-
-                                            <div>
-                                                <div class="text">
-                                                    <?php echo $fullname?>
+                                    <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
+                                        <td class="p-0 m-0">
+                                            <a href="./view-user.php?user_id=<?php echo $user['user_id'] ?>" class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
+                                                <div class="image-container img-fluid">
+                                                    <img src="./../inspector/images/<?php echo $user['inspector_img_url'] ?? 'default.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
                                                 </div>
-                                                <div class="sub-title">
-                                                    <span class="d-none d-md-inline">Username:</span>
-                                                    <?php echo $user['username']?>
+
+                                                <div>
+                                                    <div class="text">
+                                                        <?php echo $fullname ?>
+                                                    </div>
+                                                    <div class="sub-title">
+                                                        <span class="d-none d-md-inline">Username:</span>
+                                                        <?php echo $user['username'] ?>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </a>
-                                    </td>
+                                            </a>
+                                        </td>
 
-                                    <td class="d-flex justify-content-end">
-                                        <a href="./update-user.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-info mr-2 text-center d-flex align-items-center">
-                                            <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Edit</span>
-                                        </a>
+                                        <td class="d-flex justify-content-end">
+                                            <a href="./update-user.php?user_id=<?php echo $user['user_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Edit</span>
+                                            </a>
 
-                                        <a href="./change-password.php?user_id=<?php echo $user['user_id']?>"
-                                            class="btn btn-warning mr-2 text-center d-flex justify-content-center align-items-center">
-                                            <i class="fa fa-key mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Change Password</span>
-                                        </a>
+                                            <a href="./change-password.php?user_id=<?php echo $user['user_id'] ?>" class="btn btn-warning mr-2 text-center d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-key mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Change Password</span>
+                                            </a>
 
-                                        <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal-<?php echo $user['user_id']?>"
-                                            class="btn btn-danger d-flex justify-content-center align-items-center">
-                                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Delete</span>
-                                        </a>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-<?php echo $user['user_id'] ?>" class="btn btn-danger d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Delete</span>
+                                            </a>
 
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
                                 <?php
-                                require './modals/delete.php';
-                                    endforeach  
+                                    require './modals/delete.php';
+                                endforeach
                                 ?>
 
                             </tbody>
@@ -152,7 +158,7 @@ require "./../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
+<?php
 require './../includes/footer.php';
 ?>
 

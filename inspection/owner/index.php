@@ -1,45 +1,57 @@
-<?php 
+<?php
 
 $title = "Owner List";
 require "./../includes/side-header.php";
+
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
 
 ?>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->
     <div id="content">
-        <?php 
-        
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
-        
-            if (isset($_SESSION['delete'])) {
-                echo $_SESSION['delete'];
-                unset($_SESSION['delete']);
-            }
-        
-            if (isset($_SESSION['update'])) {
-                echo $_SESSION['update'];
-                unset($_SESSION['update']);
-            }
+        <?php
 
-            if (isset($_SESSION['invalid_password'])) {
-                echo $_SESSION['invalid_password'];
-                unset($_SESSION['invalid_password']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
 
-            if (isset($_SESSION['id_not_found'])) {
-                echo $_SESSION['id_not_found'];
-                unset($_SESSION['id_not_found']);
-            }
+        if (isset($_SESSION['delete'])) {
+            echo $_SESSION['delete'];
+            unset($_SESSION['delete']);
+        }
+
+        if (isset($_SESSION['update'])) {
+            echo $_SESSION['update'];
+            unset($_SESSION['update']);
+        }
+
+        if (isset($_SESSION['invalid_password'])) {
+            echo $_SESSION['invalid_password'];
+            unset($_SESSION['invalid_password']);
+        }
+
+        if (isset($_SESSION['id_not_found'])) {
+            echo $_SESSION['id_not_found'];
+            unset($_SESSION['id_not_found']);
+        }
 
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Begin Page Content -->
         <div class="container-fluid mt-4">
@@ -67,61 +79,56 @@ require "./../includes/side-header.php";
 
                             <tbody>
 
-                                <?php 
-                                    $ownerQuery = "SELECT * FROM owner ORDER BY owner_id DESC";
-                                    $ownerStatement = $pdo->query($ownerQuery);
-                                    $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
+                                <?php
+                                $ownerQuery = "SELECT * FROM owner ORDER BY owner_id DESC";
+                                $ownerStatement = $pdo->query($ownerQuery);
+                                $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                  
-                                    foreach ($owners as $owner) :
-                                        $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
-                                        $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                        $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
-                                        $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
-                                        $contact_number = htmlspecialchars($owner['contact_number']);
-                                        $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+
+                                foreach ($owners as $owner) :
+                                    $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
+                                    $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                    $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
+                                    $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
+                                    $contact_number = htmlspecialchars($owner['contact_number']);
+                                    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
 
-                                <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
-                                    <td class="p-0 m-0">
-                                        <a href="./view-owner.php?owner_id=<?php echo $owner['owner_id']?>"
-                                            class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
-                                            <div class="image-container img-fluid">
-                                                <img src="./images/<?php echo $owner['owner_img_url'] ?? 'default.png'?>"
-                                                    alt="inspector-image" class="img-fluid rounded-circle" />
-                                            </div>
-
-                                            <div>
-                                                <div class="text">
-                                                    <?php echo $fullname?>
+                                    <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
+                                        <td class="p-0 m-0">
+                                            <a href="./view-owner.php?owner_id=<?php echo $owner['owner_id'] ?>" class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap">
+                                                <div class="image-container img-fluid">
+                                                    <img src="./images/<?php echo $owner['owner_img_url'] ?? 'default.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
                                                 </div>
-                                                <div class="sub-title d-none d-md-flex">ID:
-                                                    <?php echo $owner['owner_id']?></div>
 
-                                            </div>
-                                        </a>
-                                    </td>
+                                                <div>
+                                                    <div class="text">
+                                                        <?php echo $fullname ?>
+                                                    </div>
+                                                    <div class="sub-title d-none d-md-flex">ID:
+                                                        <?php echo $owner['owner_id'] ?></div>
 
-                                    <td class="d-flex justify-content-end">
-                                        <a href="./update-owner.php?owner_id=<?php echo $owner['owner_id']?>"
-                                            class="btn btn-info mr-2 text-center d-flex align-items-center">
-                                            <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Edit</span>
-                                        </a>
+                                                </div>
+                                            </a>
+                                        </td>
 
-                                        <a href="#" data-bs-toggle="modal"
-                                            data-bs-target="#deleteModal-<?php echo $owner['owner_id']?>"
-                                            class="btn btn-danger d-flex justify-content-center align-items-center">
-                                            <i class="fa fa-trash mr-1" aria-hidden="true"></i>
-                                            <span class="d-none d-lg-inline">Delete</span>
-                                        </a>
+                                        <td class="d-flex justify-content-end">
+                                            <a href="./update-owner.php?owner_id=<?php echo $owner['owner_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Edit</span>
+                                            </a>
 
-                                    </td>
-                                </tr>
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal-<?php echo $owner['owner_id'] ?>" class="btn btn-danger d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-trash mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Delete</span>
+                                            </a>
+
+                                        </td>
+                                    </tr>
 
                                 <?php
-                                require './modals/delete.php';
-                                    endforeach
+                                    require './modals/delete.php';
+                                endforeach
                                 ?>
                             </tbody>
                         </table>
@@ -137,7 +144,7 @@ require "./../includes/side-header.php";
     <i class="fas fa-angle-up"></i>
 </a>
 
-<?php 
+<?php
 require './../includes/footer.php';
 ?>
 
