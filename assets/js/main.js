@@ -50,6 +50,7 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
         var totalItems = $('.carousel-item').length;
         if (currentIndex == 0) {
           prevBtn.classList.add('invisible');
+          nextBtn.classList.remove('invisible');
           
         } else if (totalItems - 1 == currentIndex) {
           prevBtn.classList.remove('invisible');
