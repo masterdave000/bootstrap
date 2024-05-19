@@ -101,7 +101,7 @@ require "./../includes/side-header.php";
                                     </tr>
 
                                 <?php
-                                    // require './modals/delete.php';
+                                    require './modals/delete.php';
                                 }
                                 ?>
 
