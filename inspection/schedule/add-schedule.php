@@ -1,7 +1,22 @@
 <?php
 
+ob_start();
+
 $title = "Add Inspection Schedule";
 include './../includes/side-header.php';
+
+if ($role === 'Inspection') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Cannot Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/schedule/');
+    exit;
+}
+
 
 ?>
 
@@ -149,3 +164,7 @@ require './modals/inspector.php';
 </body>
 
 </html>
+
+<?php
+ob_end_flush(); // Flush output buffer and send output to the browser
+?>
