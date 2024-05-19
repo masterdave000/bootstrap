@@ -5,6 +5,7 @@ require __DIR__ . "/../../login-check.php";
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
+$user_inspector_id = $_SESSION['inspector_id'];
 ?>
 
 <!DOCTYPE html>
