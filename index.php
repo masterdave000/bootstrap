@@ -124,6 +124,7 @@ if (filter_has_var(INPUT_POST, 'submit')) {
 
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
+        $_SESSION['inspector_id'] = $user['inspector_id'];
         $_SESSION['inspector_img_url'] = $user['inspector_img_url'];
         $_SESSION['role'] = $user['role'];
 

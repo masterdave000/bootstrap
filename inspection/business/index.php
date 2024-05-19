@@ -60,7 +60,7 @@ require "./../includes/side-header.php";
                             <thead>
                                 <tr class="d-flex justify-content-between border-bottom">
                                     <th>
-                                        Category
+                                        Business Name
                                     </th>
 
                                     <th>

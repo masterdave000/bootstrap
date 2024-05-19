@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                             <?php echo $user['role'] ?>
                                         </option>
                                         <option value="Administrator">Administrator</option>
-                                        <option value="Inspector Admin">Inspector Admin</option>
+                                        <option value="Inspector - Team Leader">Inspector - Team Leader</option>
                                         <option value="Inspector">Inspector</option>
                                     </select>
                                 </div>

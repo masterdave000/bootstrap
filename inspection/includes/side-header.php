@@ -5,6 +5,7 @@ require __DIR__ . "/../../login-check.php";
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $role = $_SESSION['role'];
+$user_inspector_id = $_SESSION['inspector_id'];
 ?>
 
 <!DOCTYPE html>
@@ -114,6 +115,12 @@ $role = $_SESSION['role'];
                     <a class="nav-link" href="<?php echo SITEURL ?>inspection/billing/">
                         <i class="fa fa-credit-card-alt"></i>
                         <span>Billing</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/schedule/">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <span>Schedule</span></a>
                 </li>
 
             <?php endif; ?>

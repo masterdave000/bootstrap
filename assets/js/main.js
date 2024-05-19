@@ -50,8 +50,10 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
         var totalItems = $('.carousel-item').length;
         if (currentIndex == 0) {
           prevBtn.classList.add('invisible');
+          nextBtn.classList.remove('invisible');
           
         } else if (totalItems - 1 == currentIndex) {
+          prevBtn.classList.remove('invisible');
           nextBtn.classList.add('invisible');
           submitBtn.classList.remove('d-none');
         } else {
@@ -69,6 +71,7 @@ function carousel(carouselForm, previous = '.previous-container', next = '.next-
 
 carousel('inspectionCarousel');
 carousel('certificateCarousel');
+carousel('scheduleCarousel');
 
 
 function businessDataFetch(businessId) {
@@ -87,43 +90,45 @@ function businessDataFetch(businessId) {
               if (business.readyState === 4 && business.status === 200) {
                   
                   let businessDetails = JSON.parse(business.responseText);
-              
-                  let ownerId = document.getElementById("owner-id");
-                  ownerId.value = businessDetails.owner_id;
-  
-                  let ownerName= document.getElementById("owner-name");
-                  ownerName.value = businessDetails.owner_name;
-  
-                  let busName = document.getElementById("bus-name");
-                  busName.value = businessDetails.bus_name;
-  
-                  let busAddress = document.getElementById("bus-address");
-                  busAddress.value = businessDetails.bus_address;
-
-                  
+                
                   let busImg = document.getElementById("bus-img");
                   busImg.src = `./../business/images/${businessDetails.bus_img_url??'no-image.png'}`;
               
-                  if (businessId === 'inspection-business-id') {
-                    let busType = document.getElementById("bus-type");
-                    busType.value = businessDetails.bus_type;
-  
-                    let busContactNumber = document.getElementById("bus-contact-number");
-                    busContactNumber.value = businessDetails.bus_contact_number;
-    
-                    let floorArea = document.getElementById("floor-area");
-                    floorArea.value = businessDetails.floor_area;
-    
-                    let signageArea = document.getElementById("signage-area");
-                    signageArea.value = businessDetails.signage_area;
-                    
-                  } else {
+                  if (businessId !== 'schedule-business-id') {
 
-                    let busGroup = document.getElementById("bus-group");
-                    busGroup.value = businessDetails.occupancy_group;
+                    let busName = document.getElementById("bus-name");
+                    busName.value = businessDetails.bus_name;
+                
+                    let ownerId = document.getElementById("owner-id");
+                    ownerId.value = businessDetails.owner_id;
     
-                    let characterOfOccupancy = document.getElementById("character-of-occupancy");
-                    characterOfOccupancy.value = businessDetails.character_of_occupancy;
+                    let ownerName= document.getElementById("owner-name");
+                    ownerName.value = businessDetails.owner_name;
+
+                    let busAddress = document.getElementById("bus-address");
+                    busAddress.value = businessDetails.bus_address;
+
+                    if (businessId === 'inspection-business-id') {
+                      let busType = document.getElementById("bus-type");
+                      busType.value = businessDetails.bus_type;
+    
+                      let busContactNumber = document.getElementById("bus-contact-number");
+                      busContactNumber.value = businessDetails.bus_contact_number;
+      
+                      let floorArea = document.getElementById("floor-area");
+                      floorArea.value = businessDetails.floor_area;
+      
+                      let signageArea = document.getElementById("signage-area");
+                      signageArea.value = businessDetails.signage_area;
+                    } else {
+
+                      let busGroup = document.getElementById("bus-group");
+                      busGroup.value = businessDetails.occupancy_group;
+      
+                      let characterOfOccupancy = document.getElementById("character-of-occupancy");
+                      characterOfOccupancy.value = businessDetails.character_of_occupancy;
+                    }
+                    
                   }
                  
                   let carouselItemContainer = document.querySelector(".carousel-item");
@@ -146,6 +151,7 @@ function businessDataFetch(businessId) {
 
 businessDataFetch('inspection-business-id');
 businessDataFetch('certificate-business-id');
+businessDataFetch('schedule-business-id');
 
 document.addEventListener('DOMContentLoaded', function () {
   if (document.getElementById('character-of-occupancy')) {
@@ -752,9 +758,14 @@ function inspector(inspectorContainers, selectInspector) {
   
           let inspectorId = this.getAttribute("data-inspector-id");
   
+          let url = `./../json_response/inspector.php?inspector_id=${inspectorId}`;
+
+          if (inspectorContainers === 'inspector-certificate-container') {
+            let url = `./json_response/inspector.php?inspector_id=${inspectorId}`;
+          }
           // Make an AJAX request to fetch the inspector details
           let inspector = new XMLHttpRequest();
-          inspector.open("GET", `./json_response/inspector.php?inspector_id=${inspectorId}`, true);
+          inspector.open("GET", url, true);
           inspector.onreadystatechange = function () {
               if (inspector.readyState === 4 && inspector.status === 200) {
                   let inspectorDetails = JSON.parse(inspector.responseText);
