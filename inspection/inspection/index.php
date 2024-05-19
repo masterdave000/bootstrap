@@ -36,11 +36,18 @@ require "./../includes/side-header.php";
                             <tbody>
 
                                 <?php
-                                $inspectionQuery = "SELECT DISTINCT inspection_id, bus_name, bus_img_url, date_inspected FROM inspection_view ORDER BY inspection_id DESC";
-                                $inspectionStatement = $pdo->query($inspectionQuery);
+                                $inspectionQuery = "SELECT DISTINCT inspection_id, bus_name, bus_img_url, date_inspected FROM inspection_view";
+
+                                $bindings = [];
+                                if ($role !== 'Administrator') {
+                                    $inspectionQuery .= " WHERE inspection_id = :inspection_id";
+                                    $bindings[':inspection_id'] = $user_inspector_id;
+                                }
+
+                                $inspectionQuery .= " ORDER BY inspection_id DESC";
+                                $inspectionStatement = $pdo->prepare($inspectionQuery);
+                                $inspectionStatement->execute($bindings);
                                 $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
-                                ?>
-                                <?php
 
                                 foreach ($inspections as $inspection) :
                                 ?>
