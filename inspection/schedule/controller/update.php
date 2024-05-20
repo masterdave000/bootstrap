@@ -77,8 +77,17 @@ if (filter_has_var(INPUT_POST, 'inspector_id')) {
         }
     }
 
+    $scheduleUpdateQuery = "UPDATE schedule SET bus_id = :bus_id, schedule_date = :schedule_date WHERE schedule_id =:schedule_id";
+    $scheduleUpdateStatement = $pdo->prepare($scheduleUpdateQuery);
+    $scheduleUpdateStatement->bindParam(':schedule_id', $schedule_id);
+    $scheduleUpdateStatement->bindParam(':bus_id', $bus_id);
+    $scheduleUpdateStatement->bindParam(':schedule_date', $schedule_date);
+    $scheduleUpdateStatement->execute();
 
-    $_SESSION['update'] = "
+
+    if ($scheduleUpdateStatement->execute()) {
+
+        $_SESSION['update'] = "
         <div class='msgalert alert--success' id='alert'>
             <div class='alert__message'>
                 Business Inspection Schedule Updated Successfully
@@ -86,5 +95,16 @@ if (filter_has_var(INPUT_POST, 'inspector_id')) {
         </div>
     ";
 
-    header('location:' . SITEURL . 'inspection/schedule/');
+        header('location:' . SITEURL . 'inspection/schedule/');
+    } else {
+        $_SESSION['update'] = "
+			<div class='msgalert alert--danger' id='alert'>
+                <div class='alert__message'>	
+                    Failed to Update Business Inspection Schedule
+                </div>
+			</div>
+		";
+
+        header('location:' . SITEURL . "inspection/schedule/update-schedule.php?schedule_id='$schedule_id'");
+    }
 }

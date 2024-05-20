@@ -163,7 +163,15 @@ require './data/data.php';
     </div>
 </div>
 
-</div>
+<?php
+
+if (isset($_SESSION['redirect'])) //Checking whether the session is set or not
+{    //DIsplaying session message
+    echo $_SESSION['redirect'];
+    //Removing session message
+    unset($_SESSION['redirect']);
+}
+?>
 
 
 <!-- Scroll to Top Button-->

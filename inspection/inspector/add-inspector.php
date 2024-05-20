@@ -3,6 +3,18 @@
 $title = "Add Inspector";
 include './../includes/side-header.php';
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
+
 ?>
 
 <div id="content-wrapper" class="d-flex flex-column">

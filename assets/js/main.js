@@ -108,20 +108,8 @@ function businessDataFetch(businessId) {
                     let busAddress = document.getElementById("bus-address");
                     busAddress.value = businessDetails.bus_address;
 
-                    if (businessId === 'inspection-business-id') {
-                      let busType = document.getElementById("bus-type");
-                      busType.value = businessDetails.bus_type;
-    
-                      let busContactNumber = document.getElementById("bus-contact-number");
-                      busContactNumber.value = businessDetails.bus_contact_number;
-      
-                      let floorArea = document.getElementById("floor-area");
-                      floorArea.value = businessDetails.floor_area;
-      
-                      let signageArea = document.getElementById("signage-area");
-                      signageArea.value = businessDetails.signage_area;
-                    } else {
-
+                    if (businessId === 'certificate-business-id') {
+                      
                       let busGroup = document.getElementById("bus-group");
                       busGroup.value = businessDetails.occupancy_group;
       
@@ -149,7 +137,6 @@ function businessDataFetch(businessId) {
   });
 }
 
-businessDataFetch('inspection-business-id');
 businessDataFetch('certificate-business-id');
 businessDataFetch('schedule-business-id');
 
@@ -452,6 +439,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           // Set the fee input field value
                           feeInputField.value = parseFloat(response.fee).toFixed(2);
                           billingIdHiddenInput.value = response.billing_id;
+
+                          $quantity = document.getElementById(`quantity-${counter}`);
+                          $quantity.removeAttribute('readonly');
                         }
                       };
                       // Send selected section as parameter
@@ -535,6 +525,9 @@ document.addEventListener("DOMContentLoaded", function () {
                           // Set the fee input field value
                           feeInputField.value = parseFloat(response.fee).toFixed(2);
                           billingIdHiddenInput.value = response.billing_id;
+
+                          $quantity = document.getElementById(`quantity-${counter}`);
+                          $quantity.removeAttribute('readonly');
                         }
                       };
                       // Send selected section as parameter
@@ -555,7 +548,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let quantityLabel = createLabel('Quantity');
                 quantityContainer.appendChild(quantityLabel);
 
-                let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, false);
+                let quantityInputField = createInputField('number', `quantity-${counter}`, `quantity[]`, true);
                 quantityContainer.append(quantityInputField);
 
                 // Power Rating

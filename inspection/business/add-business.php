@@ -3,6 +3,17 @@
 $title = "Add Business";
 include './../includes/side-header.php';
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
 ?>
 
 <!-- Content Wrapper -->
@@ -78,21 +89,28 @@ include './../includes/side-header.php';
                                             $ownerStatement = $pdo->query($ownerQuery);
                                             $owners = $ownerStatement->fetchAll(PDO::FETCH_ASSOC);
 
-                                            foreach ($owners as $owner) {
-                                                $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
-                                                $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                                $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
-                                                $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
-                                                $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+                                            if (empty($owners)) : ?>
 
-                                            ?>
+                                                <option selected disabled value="">No Owner Profile Available</option>
+                                            <?php else : ?>
+
+                                                <?php foreach ($owners as $owner) {
+                                                    $firstname = htmlspecialchars(ucwords($owner['owner_firstname']));
+                                                    $midname = htmlspecialchars(ucwords($owner['owner_midname'] ? mb_substr($owner['owner_midname'], 0, 1, 'UTF-8') . "." : ""));
+                                                    $lastname = htmlspecialchars(ucwords($owner['owner_lastname']));
+                                                    $suffix = htmlspecialchars(ucwords($owner['owner_suffix']));
+                                                    $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
+                                                }
+
+                                                ?>
+
 
                                                 <option selected disabled hidden value="">Select</option>
-                                                <option value="<?php echo $owner['owner_id'] ?>">
-                                                    <?php echo $fullname ?>
+                                                <option value="<?php echo $owner['owner_id'] ?: '' ?>">
+                                                    <?php echo $fullname ?? 'No Owner Profile Available' ?>
                                                 </option>
 
-                                            <?php } ?>
+                                            <?php endif ?>
                                         </select>
                                     </div>
                                 </div>

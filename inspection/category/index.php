@@ -3,6 +3,18 @@
 $title = "Manage Category";
 require "./../includes/side-header.php";
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
+
 ?>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -86,7 +98,7 @@ require "./../includes/side-header.php";
 
                                 <tr class="d-flex justify-content-between align-items-center border-bottom py-1">
                                     <td class="p-0 m-0">
-                                        <a href="./view-category.php?category_id=<?php echo $category['category_id']?>"
+                                        <a href="#"
                                             class="d-flex align-items-center justify-content-between text-decoration-none text-gray-700 flex-gap">
                                             <div class="image-container img-fluid">
                                                 <img src="./images/<?php echo $category['category_img_url'] ?? 'default-img.png'?>"

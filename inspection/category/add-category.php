@@ -1,8 +1,19 @@
-<?php 
+<?php
 
 $title = "Add Category";
 include './../includes/side-header.php';
 
+if ($role !== 'Administrator') {
+    $_SESSION['redirect'] = "
+    <div class='msgalert alert--danger' id='alert'>
+        <div class='alert__message'>
+            Restricted Access
+    </div>
+";
+
+    header('location:' . SITEURL . 'inspection/dashboard/');
+    exit;
+}
 ?>
 
 <!-- Content Wrapper -->
@@ -13,22 +24,22 @@ include './../includes/side-header.php';
 
         <?php
 
-            if (isset($_SESSION['add'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['add'];
-                //Removing session message
-                unset($_SESSION['add']);
-            }
+        if (isset($_SESSION['add'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['add'];
+            //Removing session message
+            unset($_SESSION['add']);
+        }
 
-            if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
-            {	//DIsplaying session message
-                echo $_SESSION['duplicate'];
-                //Removing session message
-                unset($_SESSION['duplicate']);
-            }
+        if (isset($_SESSION['duplicate'])) //Checking whether the session is set or not
+        {    //DIsplaying session message
+            echo $_SESSION['duplicate'];
+            //Removing session message
+            unset($_SESSION['duplicate']);
+        }
         ?>
 
-        <?php require './../includes/top-header.php'?>
+        <?php require './../includes/top-header.php' ?>
 
         <!-- Outer Row -->
         <div class="row d-flex align-items-center justify-content-center overflow-hidden" style="height: 90%;">
@@ -37,18 +48,16 @@ include './../includes/side-header.php';
                     <!-- Nested Row within Card Body -->
                     <div class="d-flex flex-column justify-content-center col-lg-12">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title?></h1>
+                            <h1 class="h4 text-gray-900 mb-4"><?php echo $title ?></h1>
                         </div>
                         <form action="./controller/create.php" method="POST" class="user" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./images/default-img.png" alt="default-category-image"
-                                        class="img-fluid rounded-circle" />
+                                    <img src="./images/default-img.png" alt="default-category-image" class="img-fluid rounded-circle" />
                                 </div>
 
                                 <div class="form-group d-flex flex-column align-items-center w-100">
-                                    <input type="file" name="category_img" id="category-img" class="border w-75"
-                                        accept="image/JPEG, image/JPG, image/PNG" />
+                                    <input type="file" name="category_img" id="category-img" class="border w-75" accept="image/JPEG, image/JPG, image/PNG" />
 
                                     <?php
                                     if (isset($_SESSION['error'])) {
@@ -70,13 +79,10 @@ include './../includes/side-header.php';
                             <div class="col col-12 p-0 form-group">
                                 <label for="category-name">Category Name <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" name="category_name" class="form-control p-4" id="category-name"
-                                    aria-describedby="businessaddressHelp" placeholder="Enter Category Name..."
-                                    required>
+                                <input type="text" name="category_name" class="form-control p-4" id="category-name" aria-describedby="businessaddressHelp" placeholder="Enter Category Name..." required>
                             </div>
 
-                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3"
-                                value="Add">
+                            <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Add">
                         </form>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ if ($role === 'Inspector') {
     $_SESSION['redirect'] = "
     <div class='msgalert alert--danger' id='alert'>
         <div class='alert__message'>
-            Cannot Access
+            Restricted Access
     </div>
 ";
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         foreach ($scheduleData as $schedule) {
 
                             $inspector_ids = explode(',', $schedule['inspector_ids']);
-        
+
                             $inspector_fullnames = explode(' ,', $schedule['inspector_fullnames']);
                         ?>
                             <form action="./controller/update.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                 <label for="business-id">Business Name <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="d-flex align-items-center justify-content-center select-container">
-                                                    <select name="business_id" id="" class="form-control form-select px-3" required>
+                                                    <select name="business_id" id="schedule-business-id" class="form-control form-select px-3" required>
                                                         <option selected hidden value="">Select</option>
                                                         <?php
                                                         $businessQuery = "SELECT * from business";

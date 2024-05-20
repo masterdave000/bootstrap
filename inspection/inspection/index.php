@@ -16,7 +16,7 @@ require "./../includes/side-header.php";
             <div class="card shadow mb-4">
                 <div class="d-flex align-items-center justify-content-between card-header h-75">
                     <h1 class="h3 text-gray-800 mt-2"><?php echo $title ?></h1>
-                    <a href="./add-inspection.php" class="btn btn-primary d-flex justify-content-center align-items-center">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#business-list" class="btn btn-primary d-flex justify-content-center align-items-center">
                         <i class="fa fa-plus mr-1" aria-hidden="true"></i>
                         <span class="d-none d-lg-inline">Issue</span>
                     </a>
@@ -30,17 +30,25 @@ require "./../includes/side-header.php";
                                         Category
                                     </th>
 
+                                    <th></th>
                                 </tr>
                             </thead>
 
                             <tbody>
 
                                 <?php
-                                $inspectionQuery = "SELECT DISTINCT inspection_id, bus_name, bus_img_url, date_inspected FROM inspection_view ORDER BY inspection_id DESC";
-                                $inspectionStatement = $pdo->query($inspectionQuery);
+                                $inspectionQuery = "SELECT DISTINCT inspection_id, bus_name, bus_img_url, date_inspected FROM inspection_view";
+
+                                $bindings = [];
+                                if ($role !== 'Administrator') {
+                                    $inspectionQuery .= " WHERE inspection_id = :inspection_id";
+                                    $bindings[':inspection_id'] = $user_inspector_id;
+                                }
+
+                                $inspectionQuery .= " ORDER BY inspection_id DESC";
+                                $inspectionStatement = $pdo->prepare($inspectionQuery);
+                                $inspectionStatement->execute($bindings);
                                 $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
-                                ?>
-                                <?php
 
                                 foreach ($inspections as $inspection) :
                                 ?>
@@ -64,6 +72,14 @@ require "./../includes/side-header.php";
                                                 </div>
                                             </a>
                                         </td>
+
+                                        <td class="d-flex justify-content-end">
+
+                                            <a href="./update-inspection.php?inspection_id=<?php echo $inspection['inspection_id'] ?>" class="btn btn-info mr-2 text-center d-flex align-items-center">
+                                                <i class="fa fa-pencil-square mr-1" aria-hidden="true"></i>
+                                                <span class="d-none d-lg-inline">Edit</span>
+                                            </a>
+                                        </td>
                                     </tr>
 
                                 <?php
@@ -79,6 +95,11 @@ require "./../includes/side-header.php";
         </div>
     </div>
 </div>
+
+<?php
+
+include "./modals/business.php";
+?>
 
 <?php
 
