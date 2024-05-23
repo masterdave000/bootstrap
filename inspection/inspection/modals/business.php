@@ -17,11 +17,19 @@
 
                     <tbody>
                         <?php
-                        $businessQuery = "SELECT DISTINCT schedule_id, bus_id, bus_name, bus_img_url, schedule_date FROM business_inspection_schedule_view WHERE schedule_date = CURDATE() AND inspector_id = :inspector_id ORDER BY schedule_date";
+                        $businessQuery = "SELECT DISTINCT schedule_id, bus_id, bus_name, bus_img_url, schedule_date FROM business_inspection_schedule_view WHERE schedule_date = CURDATE()";
+
+                        $bindings = [];
+
+                        if ($role !== 'Administrator') {
+                            $businessQuery .= " AND inspector_id = :inspector_id";
+                            $bindings[':inspector_id'] = $user_inspector_id;
+                        }
+
+                        $businessQuery .= " ORDER BY schedule_date";
 
                         $businessStatement = $pdo->prepare($businessQuery);
-                        $businessStatement->bindParam(':inspector_id', $user_inspector_id);
-                        $businessStatement->execute();
+                        $businessStatement->execute($bindings);
 
                         while ($business = $businessStatement->fetch(PDO::FETCH_ASSOC)) {
                         ?>
