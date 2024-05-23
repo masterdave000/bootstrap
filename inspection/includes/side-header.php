@@ -64,19 +64,87 @@ $user_inspector_id = $_SESSION['inspector_id'];
                     <span>Dashboard</span></a>
             </li>
 
-            <?php if ($role === 'Administrator') : ?>
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/category/">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span>Category</span></a>
-                </li>
-            <?php endif; ?>
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#userSubMenu1" aria-expanded="false" aria-controls="userSubMenu1">
+                    <span class="d-flex justify-content-between align-items-center">
+                        <span>
+                            <i class="fas fa-fw fa-circle-user"></i>
+                            Establishments 
+                        </span>
+                        <i class="fas fa-chevron-down"></i> 
+                    </span>
+                </a>
+                <div id="userSubMenu1" class="collapse">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITEURL ?>inspection/owner/">
+                                <i class="fas fa-fw fa-user"></i>
+                                <span>Owner</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="inspection/business/">
+                                <i class="fas fa-fw fa-business-time"></i>
+                                <span>Business</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITEURL?>inspection/inspector/">
+                                <i class="fas fa-fw fa-user"></i>
+                                <span>Barangay location</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo SITEURL ?>inspection/item/">
+                <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#userSubMenu2" aria-expanded="false" aria-controls="userSubMenu2">
+                    <span class="d-flex justify-content-between align-items-center">
+                        <span>
+                            <i class="fas fa-fw fa-circle-user"></i>
+                            Equipments
+                        </span>
+                        <i class="fas fa-chevron-down"></i> 
+                    </span>
+                </a>
+                <div id="userSubMenu2" class="collapse">
+                    <ul class="nav flex-column sub-menu">
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITEURL ?>inspection/category/">
+                                <i class="fa-solid fa-layer-group"></i>
+                                <span>Category</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITEURL ?>inspection/item/">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                                <span>Items</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="<?php echo SITEURL ?>inspection/billing/">
+                                <i class="fa fa-credit-card-alt"></i>
+                                <span>Billing</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <?php if ($role === 'Administrator') : ?>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="inspection/category/">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>Category</span></a>
+                </li> -->
+            <?php endif; ?>
+
+            <!-- <li class="nav-item">
+                <a class="nav-link" href="inspection/item/">
                     <i class="fa-solid fa-screwdriver-wrench"></i>
                     <span>Item</span></a>
-            </li>
+            </li> -->
 
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo SITEURL ?>inspection/inspection/">
@@ -93,17 +161,17 @@ $user_inspector_id = $_SESSION['inspector_id'];
 
             <?php if ($role === 'Administrator') : ?>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/business/">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="inspection/business/">
                         <i class="fas fa-fw fa-business-time"></i>
                         <span>Business</span></a>
-                </li>
+                </li> -->
 
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/owner/">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="inspection/owner/">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Owner</span></a>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo SITEURL ?>inspection/inspector/">
@@ -111,11 +179,11 @@ $user_inspector_id = $_SESSION['inspector_id'];
                         <span>Inspector</span></a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/billing/">
+                <!-- <li class="nav-item">
+                    <a class="nav-link" href="inspection/billing/">
                         <i class="fa fa-credit-card-alt"></i>
                         <span>Billing</span></a>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo SITEURL ?>inspection/schedule/">
@@ -134,9 +202,37 @@ $user_inspector_id = $_SESSION['inspector_id'];
             <?php if ($role === 'Administrator') : ?>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/user/">
-                        <i class="fas fa-fw fa-circle-user"></i>
-                        <span>User</span></a>
+                    <a class="nav-link" href="#" data-bs-toggle="collapse" data-bs-target="#userSubMenu" aria-expanded="false" aria-controls="userSubMenu">
+                    <span class="d-flex justify-content-between align-items-center">
+                        <span>
+                            <i class="fas fa-fw fa-circle-user"></i>
+                            User
+                        </span>
+                        <i class="fas fa-chevron-down"></i> 
+                    </span>
+                    </a>
+                    <div id="userSubMenu" class="collapse">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo SITEURL ?>inspection/user/administrator/">
+                                    <i class="fas fa-fw fa-user-tie"></i>
+                                    <span>Administrator</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo SITEURL ?>inspection/user/team-inspector/">
+                                    <i class="fas fa-fw fa-users"></i>
+                                    <span>Team Inspector</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="<?php echo SITEURL ?>inspection/user/inspector/">
+                                    <i class="fas fa-fw fa-user"></i>
+                                    <span>Inspector</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
 
             <?php endif; ?>
