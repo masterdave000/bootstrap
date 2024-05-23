@@ -203,9 +203,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <?php
                                             }
                                             ?>
-                                            <div></div>
-                                            <div></div>
-
 
                                         </div>
                                         <div class="date-inspected w-50 d-flex flex-column align-items-center px-1">

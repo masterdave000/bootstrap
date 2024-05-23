@@ -45,7 +45,8 @@ require "./../includes/side-header.php";
                                     $bindings[':inspection_id'] = $user_inspector_id;
                                 }
 
-                                $inspectionQuery .= " ORDER BY inspection_id DESC";
+                                $inspectionQuery .= " ORDER BY date_inspected DESC";
+
                                 $inspectionStatement = $pdo->prepare($inspectionQuery);
                                 $inspectionStatement->execute($bindings);
                                 $inspections = $inspectionStatement->fetchAll(PDO::FETCH_ASSOC);
