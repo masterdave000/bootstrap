@@ -34,8 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 ?>
 
-
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -76,6 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             $owner_suffix = htmlspecialchars(ucwords($schedule['owner_suffix']));
 
                             $owner_fullname = trim($owner_firstname . ' ' . $owner_midname . ' ' . $owner_lastname . ' ' . $owner_suffix);
+
                         ?>
                             <form action="./generate/equipment-inspection.php" method="POST" class="user" id="inspection-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
@@ -122,12 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                             <div class="col col-12 p-0 form-group d-none">
                                                 <label for="owner-name">Owner Name
                                                 </label>
-                                                <input type="text" name="owner_name" class="form-control p-4" id="owner-name" value="<?= $owner_lastname ?>" required readonly>
+                                                <input type="text" name="owner_name" class="form-control p-4" id="owner-name" value="<?= $owner_fullname ?>" required readonly>
                                                 <input type="hidden" id="owner-id" name="owner_id" value="<?= $schedule['owner_id'] ?>">
                                             </div>
 
                                             <div class="col col-12 p-0 form-group d-none">
-                                                <label for="bus-address">Business Addres
+                                                <label for="bus-address">Business Address
                                                 </label>
                                                 <input type="text" name="bus_address" class="form-control p-4" id="bus-address" value="<?= $schedule['bus_address'] ?>" required readonly>
                                             </div>
@@ -201,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                             <option value="<?php echo $building['bldg_section'] ?>">
                                                                 <?php echo $building['bldg_section'] ?>
                                                             </option>
-                                                            
+
                                                         <?php
                                                         endforeach;
                                                         ?>
@@ -345,6 +344,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                         </div>
 
                                                     </div>
+
+                                                    <input type="hidden" name="inspector_id[]" value="<?= $inspector_ids[$index] ?>">
                                                 <?php endforeach ?>
                                             </div>
                                         </div>
