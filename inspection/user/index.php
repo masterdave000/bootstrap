@@ -93,10 +93,10 @@ if ($role !== 'Administrator') {
                                 $users = $userStatement->fetchAll(PDO::FETCH_ASSOC);
 
                                 foreach ($users as $user) :
-                                    $firstname = htmlspecialchars(ucwords($user['inspector_firstname']));
-                                    $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : ""));
-                                    $lastname = htmlspecialchars(ucwords($user['inspector_lastname']));
-                                    $suffix = htmlspecialchars(ucwords($user['inspector_suffix']));
+                                    $firstname = htmlspecialchars(ucwords($user['inspector_firstname'] ?? '') ?? '');
+                                    $midname = htmlspecialchars(ucwords($user['inspector_midname'] ? mb_substr($user['inspector_midname'], 0, 1, 'UTF-8') . "." : "") ?? '');
+                                    $lastname = htmlspecialchars(ucwords($user['inspector_lastname'] ?? '') ?? '');
+                                    $suffix = htmlspecialchars(ucwords($user['inspector_suffix'] ?? '') ?? '');
 
                                     $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                                 ?>
