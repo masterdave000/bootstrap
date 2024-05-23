@@ -55,7 +55,7 @@
     </ul>
 
     <?php 
-    require($_SERVER['DOCUMENT_ROOT'] . '/obos/inspection/modals/logout.php')?>
+    require('../modals/logout.php')?>
     
 
 </nav>
