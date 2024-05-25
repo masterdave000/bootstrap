@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         </div>
 
                                         <div class="carousel-item p-2" data-bs-interval="false">
-                                            <div class="d-flex flex-column" id="inspector-container">
+                                            <div class="d-flex flex-column" id="inspector-schedule-container">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="text font-weight-bolder">Inspector Information</p>
                                                     <p class="text font-weight-bolder">Total
