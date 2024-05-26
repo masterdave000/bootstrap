@@ -911,7 +911,10 @@ function inspector(inspectorContainers, selectInspector) {
                     createOption('Leader', 'Leader');
                     createOption('Member', 'Member');
 
-                    document.getElementById('formSubmit').classList.remove('d-none');
+                    if (document.getElementById('formSubmit')) {
+                      document.getElementById('formSubmit').classList.remove('d-none');
+                    }
+                    
                   }
                   // Update the displayed count of added inspectors
                   updateInspectorCount(counter);
