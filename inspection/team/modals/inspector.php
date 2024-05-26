@@ -30,7 +30,7 @@
                             $suffix = htmlspecialchars(ucwords($inspector['inspector_suffix']));
                             $fullname = trim($firstname . ' ' . $midname . ' ' . $lastname . ' ' . $suffix);
                         ?>
-                            <tr class="d-flex justify-content-between align-inspectors-center border-bottom py-1 select-inspector" data-inspector-id="<?php echo $inspector['inspector_id'] ?>">
+                            <tr class="d-flex justify-content-between align-inspectors-center border-bottom py-1 select-team-inspector" data-inspector-id="<?php echo $inspector['inspector_id'] ?>">
                                 <td class="p-0 m-0 w-100">
                                     <a href="#" class="d-flex align-inspectors-center text-decoration-none
                                     text-gray-700 flex-gap w-100">

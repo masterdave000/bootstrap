@@ -54,7 +54,7 @@ if (filter_has_var(INPUT_POST, 'inspector_id')) {
     }
 
 
-    $currentInspectorsQuery = "SELECT inspector_id FROM inspector_schedule WHERE schedule_id = :schedule_id and inspector_id";
+    $currentInspectorsQuery = "SELECT inspector_id FROM inspector_schedule WHERE schedule_id = :schedule_id";
     $currentInspectorsStatement = $pdo->prepare($currentInspectorsQuery);
     $currentInspectorsStatement->bindParam(':schedule_id', $schedule_id);
     $currentInspectorsStatement->execute();

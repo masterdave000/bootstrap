@@ -769,6 +769,7 @@ function inspector(inspectorContainers, selectInspector) {
                   //Inspector Container
                   let inspectorContainer = document.getElementById(inspectorContainers);
 
+                  
                   //Inspector Content Container
                   let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
                   inspectorContainer.appendChild(inspectorContent);
@@ -831,20 +832,20 @@ function inspector(inspectorContainers, selectInspector) {
                       categorySelect.appendChild(Option);
                     }
 
-                    let defaultOption = createOption("", "Select", selected = true, disabled = true, hidden = true);
-                    let Option1 = createOption('Locational/Zoning of land Use', 'Locational/Zoning of land Use');
-                    let option2 = createOption('Line and Grade (Geodetic)', 'Line and Grade (Geodetic)');
-                    let option3 = createOption('Architectural', 'Architectural');
-                    let option4 = createOption('Civil/ Structural', 'Civil/ Structural');
-                    let option5 = createOption('Electrical', 'Electrical');
-                    let option6 = createOption('Mechanical', 'Mechanical');
-                    let option7 = createOption('Sanitary', 'Sanitary');
-                    let option8 = createOption('Plumbing', 'Plumbing');
-                    let option9 = createOption('Electronics', 'Electronics');
-                    let option10 = createOption('Interior', 'Interior');
-                    let option11 = createOption('Accessibility', 'Accessibility');
-                    let option12 = createOption('Fire', 'Fire');
-                    let option13 = createOption('Others (Specify)', 'Others (Specify)');
+                    createOption("", "Select", selected = true, disabled = true, hidden = true);
+                    createOption('Locational/Zoning of land Use', 'Locational/Zoning of land Use');
+                    createOption('Line and Grade (Geodetic)', 'Line and Grade (Geodetic)');
+                    createOption('Architectural', 'Architectural');
+                    createOption('Civil/ Structural', 'Civil/ Structural');
+                    createOption('Electrical', 'Electrical');
+                    createOption('Mechanical', 'Mechanical');
+                    createOption('Sanitary', 'Sanitary');
+                    createOption('Plumbing', 'Plumbing');
+                    createOption('Electronics', 'Electronics');
+                    createOption('Interior', 'Interior');
+                    createOption('Accessibility', 'Accessibility');
+                    createOption('Fire', 'Fire');
+                    createOption('Others (Specify)', 'Others (Specify)');
 
                     // Date Signed
                     let dateSignedContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
@@ -878,6 +879,42 @@ function inspector(inspectorContainers, selectInspector) {
  
                      let timeOutInputField = createInputField('time', `time-out-${counter}`, `time_out[]`, false);
                      timeOutContainer.appendChild(timeOutInputField);
+                  } else if (inspectorContainers === 'inspector-team-container') {
+                    // Role Field
+                    let roleContainer = createContainerDiv('form-group flex-column flex-md-grow-1');
+                    inspectorContent.appendChild(roleContainer);
+
+                    let roleLabel = createLabel(`Role`);
+                    roleContainer.appendChild(roleLabel);
+
+                    let roleFieldContainer = createContainerDiv('d-flex align-items-center justify-content-center select-container');
+                    roleContainer.appendChild(roleFieldContainer);
+
+                    let roleSelect = document.createElement('select');
+                    roleSelect.classList.add('form-control');
+                    roleSelect.classList.add('form-select');
+                    roleSelect.id = `role-${counter}`;
+                    roleSelect.name = 'role[]';
+                    roleFieldContainer.appendChild(roleSelect);
+
+                    function createOption(value = "", text = "Select", selected = false, disabled = false, hidden = false) {
+                      let Option = document.createElement("option");
+                      Option.value = value;
+                      Option.text = text;
+                      Option.selected = selected;
+                      Option.disabled = disabled;
+                      Option.hidden = hidden;
+                      roleSelect.appendChild(Option);
+                    }
+
+                    createOption("", "Select", selected = true, disabled = true, hidden = true);
+                    createOption('Leader', 'Leader');
+                    createOption('Member', 'Member');
+
+                    if (document.getElementById('formSubmit')) {
+                      document.getElementById('formSubmit').classList.remove('d-none');
+                    }
+                    
                   }
                   // Update the displayed count of added inspectors
                   updateInspectorCount(counter);
@@ -925,7 +962,8 @@ function inspector(inspectorContainers, selectInspector) {
   
 }
 inspector('inspector-certificate-container', '.select-certificate-inspector');
-inspector('inspector-container', '.select-inspector');
+inspector('inspector-schedule-container', '.select-schedule-inspector');
+inspector('inspector-team-container', '.select-team-inspector');
 
 document.addEventListener("DOMContentLoaded", function () {
   let wrapper = document.getElementById("violation-list");

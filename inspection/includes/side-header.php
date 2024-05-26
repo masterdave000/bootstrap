@@ -112,6 +112,12 @@ $user_inspector_id = $_SESSION['inspector_id'];
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link" href="<?php echo SITEURL ?>inspection/team/">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Team</span></a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="<?php echo SITEURL ?>inspection/billing/">
                         <i class="fa fa-credit-card-alt"></i>
                         <span>Billing</span></a>

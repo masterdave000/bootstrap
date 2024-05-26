@@ -73,6 +73,23 @@ CREATE TABLE inspector (
 	PRIMARY KEY(inspector_id)
 );
 
+CREATE TABLE inspector_team (
+    team_id INT NOT NULL AUTO_INCREMENT,
+    team_name VARCHAR(100) NOT NULL,
+    PRIMARY KEY (team_id)
+);
+
+CREATE TABLE inspector_team_members (
+    team_member_id INT NOT NULL AUTO_INCREMENT,
+    team_id INT NOT NULL,
+    inspector_id INT NOT NULL,
+    team_role VARCHAR(50) NOT NULL,
+    PRIMARY KEY (team_member_id),
+    FOREIGN KEY (team_id) REFERENCES inspector_team (team_id) ON DELETE CASCADE,
+    FOREIGN KEY (inspector_id) REFERENCES inspector (inspector_id) ON DELETE CASCADE,
+    UNIQUE (team_id, inspector_id)
+);
+
 CREATE TABLE schedule (
 	schedule_id int NOT NULL AUTO_INCREMENT,
     bus_id int NOT NULL,
@@ -284,3 +301,10 @@ LEFT JOIN business b ON s.bus_id = b.bus_id
 LEFT JOIN owner o ON b.owner_id = o.owner_id
 LEFT JOIN inspector_schedule ins ON s.schedule_id = ins.schedule_id
 LEFT JOIN inspector i ON ins.inspector_id = i.inspector_id;
+
+CREATE VIEW inspector_team_view AS
+SELECT tm.team_member_id, tn.team_id, i.inspector_id, i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, i.inspector_img_url, 
+tn.team_name, tm.team_role
+FROM inspector_team_members tm
+LEFT JOIN inspector i ON tm.inspector_id = i.inspector_id
+LEFT JOIN inspector_team_name tn ON tm.team_id = tn.team_id;

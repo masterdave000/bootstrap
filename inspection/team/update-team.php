@@ -1,10 +1,10 @@
 <?php
 ob_start();
 
-$title = "Edit Inspection Schedule";
+$title = "Edit Team";
 include './../includes/side-header.php';
 
-if ($role === 'Inspector') {
+if ($role !== 'Administrator') {
     $_SESSION['redirect'] = "
     <div class='msgalert alert--danger' id='alert'>
         <div class='alert__message'>
@@ -12,17 +12,17 @@ if ($role === 'Inspector') {
     </div>
 ";
 
-    header('location:' . SITEURL . 'inspection/schedule/');
+    header('location:' . SITEURL . 'inspection/team/');
     exit;
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $clean_id = filter_var($_GET['schedule_id'], FILTER_SANITIZE_NUMBER_INT);
-    $schedule_id = filter_var($clean_id, FILTER_VALIDATE_INT);
+    $clean_id = filter_var($_GET['team_id'], FILTER_SANITIZE_NUMBER_INT);
+    $team_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-    $scheduleQuery = "SELECT schedule_id, bus_id, 
-                            GROUP_CONCAT( inspector_id) AS inspector_ids,
+    $teamQuery = "SELECT GROUP_CONCAT(team_member_id) AS team_member_ids,
+                            team_id, team_name,
+                            GROUP_CONCAT(inspector_id) AS inspector_ids,
                             GROUP_CONCAT(
                                 CONCAT(
                                     inspector_firstname, 
@@ -33,14 +33,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     inspector_suffix
                                 )
                             ) AS inspector_fullnames,
-                            schedule_date,
-                            bus_img_url FROM business_inspection_schedule_view WHERE schedule_id = :schedule_id ORDER BY inspector_id DESC";
-    $scheduleStatement = $pdo->prepare($scheduleQuery);
-    $scheduleStatement->bindParam(':schedule_id', $schedule_id);
-    $scheduleStatement->execute();
+                            GROUP_CONCAT(team_role) AS team_roles,
+                            inspector_img_url FROM inspector_team_view WHERE team_id = :team_id ORDER BY team_member_id DESC";
+    $teamStatement = $pdo->prepare($teamQuery);
+    $teamStatement->bindParam(':team_id', $team_id);
+    $teamStatement->execute();
 
-    $scheduleData = $scheduleStatement->fetchAll(PDO::FETCH_ASSOC);
+    $teamData = $teamStatement->fetchAll(PDO::FETCH_ASSOC);
 }
+
 ?>
 
 <!-- Content Wrapper -->
@@ -73,65 +74,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         </div>
 
                         <?php
-                        foreach ($scheduleData as $schedule) {
+                        foreach ($teamData as $team) {
 
-                            $inspector_ids = explode(',', $schedule['inspector_ids']);
+                            $team_member_ids = explode(',', $team['team_member_ids']);
+                            $inspector_ids = explode(',', $team['inspector_ids']);
+                            $team_roles = explode(',', $team['team_roles']);
+                            $inspector_fullnames = explode(' ,', $team['inspector_fullnames']);
 
-                            $inspector_fullnames = explode(' ,', $schedule['inspector_fullnames']);
+
                         ?>
                             <form action="./controller/update.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
                                     <div class="image-container mb-3">
-                                        <img src="./../business/images/<?= $schedule['bus_img_url'] ?>" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
+                                        <img src="./../inspector/images/<?= $schedule['inspector_img_url'] ?>" alt="default-item-image" class="img-fluid rounded-circle" id="inspector-img" />
                                     </div>
                                 </div>
 
                                 <div id="scheduleCarousel" class="carousel slide">
-                                    <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#scheduleCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#scheduleCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#scheduleCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                                    </div>
+
                                     <div class="carousel-inner">
                                         <div class="carousel-item active p-2" data-bs-interval="false">
-
-                                            <p class="text font-weight-bolder">Business Information</p>
-
-                                            <div class="form-group d-flex flex-column flex-md-grow-1">
-                                                <label for="business-id">Business Name <span class="text-danger">*</span>
-                                                </label>
-                                                <div class="d-flex align-items-center justify-content-center select-container">
-                                                    <select name="business_id" id="schedule-business-id" class="form-control form-select px-3" required>
-                                                        <option selected hidden value="">Select</option>
-                                                        <?php
-                                                        $businessQuery = "SELECT * from business";
-                                                        $businessStatement = $pdo->query($businessQuery);
-                                                        $businesses = $businessStatement->fetchAll(PDO::FETCH_ASSOC);
-
-                                                        foreach ($businesses as $business) {
-                                                        ?>
-
-                                                            <option <?= $schedule['bus_id'] === $business['bus_id'] ? 'selected' : '' ?> value="<?php echo $business['bus_id'] ?>">
-                                                                <?php echo $business['bus_name'] ?>
-                                                            </option>
-                                                        <?php
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-
                                             <div class="col col-12 p-0 form-group">
-                                                <label for="schedule-date">Inspection Date <span class="text-danger">*</span></label>
-
-                                                <div class="input-group">
-                                                    <input type="date" name="schedule_date" class="form-control p-4" id="schedule-date" placeholder="Enter Inspection Date..." max="<?= date('Y-m-d') ?>" value="<?= $schedule['schedule_date'] ?>" required>
-                                                </div>
+                                                <label for="team-name">Team Name <span class="text-danger">*</span>
+                                                </label>
+                                                <input type="text" name="team_name" class="form-control p-4" id="team-name" placeholder="Enter Team Name..." value="<?= $team['team_name'] ?>" required>
                                             </div>
-                                        </div>
 
-                                        <div class="carousel-item p-2" data-bs-interval="false">
-                                            <div class="d-flex flex-column" id="inspector-schedule-container">
+                                            <div class="d-flex flex-column" id="inspector-team-container">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="text font-weight-bolder">Inspector Information</p>
                                                     <p class="text font-weight-bolder">Total
@@ -143,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                 foreach ($inspector_ids as $index => $inspector_id) :
 
                                                     $inspector_fullname = $inspector_fullnames[$index];
+                                                    $team_role = $team_roles[$index];
 
                                                 ?>
 
@@ -154,6 +124,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                                                             <input type="text" name="inspector_name[]" id="inspector-name-<?= $index + 1 ?>" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
                                                         </div>
+
+                                                        <div class="form-group flex-column flex-md-grow-1" id="">
+                                                            <label>Role <strong style="color:red;">*</strong></label>
+                                                            <div class="d-flex align-items-center justify-content-center select-container" id="">
+                                                                <select class="form-control form-select" id="role-2" name="role[]">
+                                                                    <option selected value="<?= $team_role ?>" hidden><?= $team_role ?> </option>
+                                                                    <option value="Leader">Leader</option>
+                                                                    <option value="Member">Member</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <input type="hidden" name="team_member_id[]" value="<?= $team_member_ids[$index] ?>" id="team-member-id-<?= $index + 1 ?>">
 
                                                         <input type="hidden" name="inspector_id[]" value="<?= $inspector_id ?>" id="inspector-id-<?= $index + 1 ?>">
                                                     </div>
@@ -170,22 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                                     </div>
 
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <div class="previous-container invisible">
-                                            <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 previous carousel-button" data-bs-target="#scheduleCarousel" role="button" data-bs-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                        <div class="next-container">
-                                            <button class="d-flex justify-content-center align-items-center border-0 bg-dark p-2 next carousel-button" data-bs-target="#scheduleCarousel" role="button" data-bs-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            </button>
-                                        </div>
-                                    </div>
+
                                 </div>
 
-                                <input type="hidden" name="schedule_id" value="<?= $schedule['schedule_id'] ?>">
-                                <div class="text-center mt-4 d-none formSubmit">
+                                <input type="hidden" name="team_id" value="<?= $team['team_id'] ?>">
+                                <div class="text-center mt-4 formSubmit">
                                     <input type="submit" name="submit" class="btn btn-primary btn-user btn-block mt-3" value="Edit">
                                 </div>
                             </form>

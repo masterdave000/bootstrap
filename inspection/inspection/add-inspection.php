@@ -423,7 +423,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 require './../includes/footer.php';
 require './modals/item.php';
-require './modals/inspector.php';
 require './modals/violation.php';
 ?>
 
