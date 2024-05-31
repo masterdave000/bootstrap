@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $clean_id = filter_var($_GET['schedule_id'], FILTER_SANITIZE_NUMBER_INT);
     $schedule_id = filter_var($clean_id, FILTER_VALIDATE_INT);
 
-    $scheduleQuery = "SELECT schedule_id, bus_id, 
-                            GROUP_CONCAT( inspector_id) AS inspector_ids,
+    $scheduleQuery = "SELECT schedule_id, bus_id, team_id, 
+                            GROUP_CONCAT(inspector_id) AS inspector_ids,
                             GROUP_CONCAT(
                                 CONCAT(
                                     inspector_firstname, 
@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                     inspector_suffix
                                 )
                             ) AS inspector_fullnames,
+                            GROUP_CONCAT(team_role) AS team_roles,
                             schedule_date,
                             bus_img_url FROM business_inspection_schedule_view WHERE schedule_id = :schedule_id ORDER BY inspector_id DESC";
     $scheduleStatement = $pdo->prepare($scheduleQuery);
@@ -77,7 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
                             $inspector_ids = explode(',', $schedule['inspector_ids']);
 
-                            $inspector_fullnames = explode(' ,', $schedule['inspector_fullnames']);
+                            $inspector_fullnames = explode(',', $schedule['inspector_fullnames']);
+                            $team_roles = explode(',', $schedule['team_roles']);
                         ?>
                             <form action="./controller/update.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
@@ -155,16 +157,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                             <input type="text" name="inspector_name[]" id="inspector-name-<?= $index + 1 ?>" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
                                                         </div>
 
-                                                        <input type="hidden" name="inspector_id[]" value="<?= $inspector_id ?>" id="inspector-id-<?= $index + 1 ?>">
+                                                        <div class="col col-12 p-0 form-group mb-1">
+                                                            <label>Team Role</label>
+
+                                                            <input type="text" name="team_role[]" id="team-role-<?= $index + 1 ?>" class="form-control p-4" value="<?= $team_roles[$index] ?>" readonly>
+                                                        </div>
+
+                                                        <input type="hidden" name="team_id" value="<?= $schedule['team_id'] ?>" id="team-id-<?= $index + 1 ?>">
                                                     </div>
                                                 <?php endforeach ?>
                                             </div>
 
                                             <div class="d-flex justify-content-end my-4">
-                                                <a class="btn btn-primary btn-md-block px-3" data-bs-target="#inspector-list" data-bs-toggle="modal">Add
-                                                    Inspector</a>
-                                                <a class="btn btn-danger btn-md-block px-3 <?= count($inspector_ids) > 0 ? 'ml-3' : 'd-none' ?>" id="delete-inspector">Delete
-                                                    Inspector</a>
+                                                <a class="btn btn-primary btn-md-block px-3 <?= $index > 0 ? 'd-none' : '' ?>" id="add-team-button" data-bs-target="#team-list" data-bs-toggle="modal">Add
+                                                    Team</a>
+                                                <a class="btn btn-danger btn-md-block px-3 <?= count($inspector_ids) > 0 ? 'ml-3' : 'd-none' ?>" id="delete-team">Delete
+                                                    Team</a>
                                             </div>
                                         </div>
 
@@ -214,7 +222,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <?php
 
 require './../includes/footer.php';
-require './modals/inspector.php';
+require './modals/team.php';
 ?>
 
 </body>
