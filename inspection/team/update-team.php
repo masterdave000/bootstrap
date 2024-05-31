@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                             <form action="./controller/update.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
                                     <div class="image-container mb-3">
-                                        <img src="./../inspector/images/<?= $schedule['inspector_img_url'] ?>" alt="default-item-image" class="img-fluid rounded-circle" id="inspector-img" />
+                                        <img src="<?= SITEURL ?>inspection/inspector/images/<?php echo $team['inspector_img_url'] ?? 'default.png' ?>" alt="default-item-image" class="img-fluid rounded-circle" id="team-img" />
                                     </div>
                                 </div>
 
