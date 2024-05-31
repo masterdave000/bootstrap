@@ -2,7 +2,7 @@
 
 ob_start();
 
-$title = "Add Inspection Schedule";
+$title = "Add Team";
 include './../includes/side-header.php';
 
 if ($role === 'Inspection') {
@@ -51,7 +51,7 @@ if ($role === 'Inspection') {
                         <form action="./controller/create.php" method="POST" class="user" id="certificate-form" enctype="multipart/form-data">
                             <div class="d-flex flex-column align-items-center">
                                 <div class="image-container mb-3">
-                                    <img src="./../business/images/no-image.png" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
+                                    <img src="<?= SITEURL ?>inspection/inspector/images/default.png" alt="default-item-image" class="img-fluid rounded-circle" id="bus-img" />
                                 </div>
                             </div>
 
