@@ -6,6 +6,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clean_bus_id = filter_var($_POST['business_id'], FILTER_SANITIZE_NUMBER_INT);
     $bus_id = filter_var($clean_bus_id, FILTER_VALIDATE_INT);
 
+    $clean_team_id = filter_var($_POST['team_id'], FILTER_SANITIZE_NUMBER_INT);
+    $team_id = filter_var($clean_team_id, FILTER_VALIDATE_INT);
+
     $schedule_date = $_POST['schedule_date'];
 }
 
@@ -18,14 +21,14 @@ $insertScheduleStatement->execute();
 
 $schedule_id = $pdo->lastInsertId();
 
-$insertInspectorScheduleQuery = "INSERT INTO inspector_schedule (inspector_id, schedule_id) VALUES (:inspector_id, :schedule_id)";
+$insertInspectorScheduleQuery = "INSERT INTO inspector_schedule (schedule_id, team_id) VALUES (:schedule_id, :team_id)";
 $insertInspectorScheduleStatement = $pdo->prepare($insertInspectorScheduleQuery);
 
-for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
-    $insertInspectorScheduleStatement->bindParam(':inspector_id', $_POST['inspector_id'][$i]);
-    $insertInspectorScheduleStatement->bindParam(':schedule_id', $schedule_id);
-    $insertInspectorScheduleStatement->execute();
-}
+
+$insertInspectorScheduleStatement->bindParam(':schedule_id', $schedule_id);
+$insertInspectorScheduleStatement->bindParam(':team_id', $team_id);
+$insertInspectorScheduleStatement->execute();
+
 
 // Redirect with $_SESSION Message
 

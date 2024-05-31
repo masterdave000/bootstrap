@@ -73,7 +73,7 @@ CREATE TABLE inspector (
 	PRIMARY KEY(inspector_id)
 );
 
-CREATE TABLE inspector_team (
+CREATE TABLE inspector_team_name (
     team_id INT NOT NULL AUTO_INCREMENT,
     team_name VARCHAR(100) NOT NULL,
     PRIMARY KEY (team_id)
@@ -99,9 +99,9 @@ CREATE TABLE schedule (
 );
 
 CREATE TABLE inspector_schedule (
-	inspector_id int NOT NULL,
     schedule_id int NOT NULL,
-	FOREIGN KEY (inspector_id) REFERENCES inspector(inspector_id),
+	team_id int NOT NULL,
+	FOREIGN KEY (team_id) REFERENCES inspector_team_name(team_id),
 	FOREIGN KEY (schedule_id) REFERENCES schedule(schedule_id)
 );
 
@@ -293,14 +293,18 @@ FROM equipment_billing b
 LEFT JOIN category_list c ON b.category_id = c.category_id;
 
 CREATE VIEW business_inspection_schedule_view AS
-SELECT s.schedule_id, b.bus_id, i.inspector_id, o.owner_id, b.bus_name, b.bus_address, b.bus_type, b.bus_contact_number, b.floor_area, b.signage_area,
+SELECT s.schedule_id, b.bus_id, i.inspector_id, o.owner_id, itn.team_id, b.bus_name, b.bus_address, b.bus_type, b.bus_contact_number, b.floor_area, b.signage_area,
 o.owner_firstname, o.owner_midname, o.owner_lastname, o.owner_suffix,
-i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, s.schedule_date, b.bus_img_url
+itn.team_name,
+i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, itm.team_role,
+s.schedule_date, b.bus_img_url, i.inspector_img_url
 FROM schedule s
 LEFT JOIN business b ON s.bus_id = b.bus_id
 LEFT JOIN owner o ON b.owner_id = o.owner_id
 LEFT JOIN inspector_schedule ins ON s.schedule_id = ins.schedule_id
-LEFT JOIN inspector i ON ins.inspector_id = i.inspector_id;
+LEFT JOIN inspector_team_name itn ON ins.team_id = itn.team_id
+LEFT JOIN inspector_team_members itm ON itn.team_id = itm.team_id
+LEFT JOIN inspector i ON itm.inspector_id = i.inspector_id;
 
 CREATE VIEW inspector_team_view AS
 SELECT tm.team_member_id, tn.team_id, i.inspector_id, i.inspector_firstname, i.inspector_midname, i.inspector_lastname, i.inspector_suffix, i.inspector_img_url, 

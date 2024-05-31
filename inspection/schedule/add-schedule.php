@@ -109,10 +109,10 @@ if ($role === 'Inspection') {
                                         </div>
 
                                         <div class="d-flex justify-content-end my-4">
-                                            <a class="btn btn-primary btn-md-block px-3" data-bs-target="#inspector-list" data-bs-toggle="modal">Add
-                                                Inspector</a>
-                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-inspector">Delete
-                                                Inspector</a>
+                                            <a class="btn btn-primary btn-md-block px-3" id="add-team-button" data-bs-target="#team-list" data-bs-toggle="modal">Add
+                                                Team</a>
+                                            <a class="btn btn-danger btn-md-block px-3 d-none" id="delete-team">Delete
+                                                Team</a>
                                         </div>
                                     </div>
 
@@ -157,7 +157,7 @@ if ($role === 'Inspection') {
 <?php
 
 require './../includes/footer.php';
-require './modals/inspector.php';
+require './modals/team.php';
 ?>
 
 </body>

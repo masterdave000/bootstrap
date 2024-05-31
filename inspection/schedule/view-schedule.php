@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         inspector_suffix
                                     )
                             ) AS inspector_fullnames,
+                            GROUP_CONCAT(team_role) AS team_roles,
                             schedule_date,
                             bus_img_url 
                             FROM business_inspection_schedule_view WHERE schedule_id = :schedule_id";
@@ -55,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                         foreach ($scheduleData as $schedule) {
 
                             $inspector_ids = explode(',', $schedule['inspector_ids']);
-                            $inspector_fullnames = explode(' ,', $schedule['inspector_fullnames']);
+                            $inspector_fullnames = explode(',', $schedule['inspector_fullnames']);
+                            $team_roles = explode(',', $schedule['team_roles']);
                         ?>
                             <form action="" method="" class="user" id="certificate-form" enctype="multipart/form-data">
                                 <div class="d-flex flex-column align-items-center">
@@ -93,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                         </div>
 
                                         <div class="carousel-item p-2" data-bs-interval="false">
-                                            <div class="d-flex flex-column" id="inspector-container">
+                                            <div class="d-flex flex-column" id="inspector-schedule-container">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="text font-weight-bolder">Inspector Information</p>
                                                     <p class="text font-weight-bolder">Total
@@ -114,8 +116,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                                                         <div class="col col-12 p-0 form-group mb-1">
                                                             <label>Inspector Name</label>
 
-                                                            <input type="text" name="inspector_name[]" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
+                                                            <input type="text" class="form-control p-4" value="<?= $inspector_fullname ?>" readonly>
                                                         </div>
+
+                                                        <div class="col col-12 p-0 form-group mb-1">
+                                                            <label>Team Role</label>
+
+                                                            <input type="text" class="form-control p-4" value="<?= $team_roles[$index] ?>" readonly>
+                                                        </div>
+
 
                                                     </div>
                                                 <?php endforeach ?>
@@ -162,7 +171,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <?php
 
 require './../includes/footer.php';
-require './modals/inspector.php';
 ?>
 
 </body>
