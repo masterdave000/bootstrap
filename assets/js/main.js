@@ -753,9 +753,11 @@ function inspector(inspectorContainers, selectInspector) {
   
           let url = `./../json_response/inspector.php?inspector_id=${inspectorId}`;
 
-          if (inspectorContainers === 'inspector-certificate-container') {
-            let url = `./json_response/inspector.php?inspector_id=${inspectorId}`;
+          if (inspectorContainers == 'inspector-certificate-container') {
+            url = `./json_response/inspector.php?inspector_id=${inspectorId}`;
+            console.log(url);
           }
+          
           // Make an AJAX request to fetch the inspector details
           let inspector = new XMLHttpRequest();
           inspector.open("GET", url, true);
@@ -796,10 +798,10 @@ function inspector(inspectorContainers, selectInspector) {
   
                   if (inspectorContainers === 'inspector-certificate-container') {
                     // Inspector Name ABBR
-                    inspector_abbr = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
-                    inspectorContent.appendChild(inspector_abbr);
-                    inspector_abbr.value = inspectorDetails.inspector_abbr
-
+                    inspector_abbre = createHiddenInput("inspector_abbr[]", `inspector-abbr-${counter}`, true)
+                    inspectorContent.appendChild(inspector_abbre);
+                    inspector_abbre.value = inspectorDetails.inspector_abbr
+                    console.log(inspectorDetails.inspector_abbr);
                     // Inspector Lastname
                     inspectorLastname = createHiddenInput("inspector_lastname[]", `inspector-lastname-${counter}`, true)
                     inspectorContent.appendChild(inspectorLastname);
@@ -962,8 +964,136 @@ function inspector(inspectorContainers, selectInspector) {
   
 }
 inspector('inspector-certificate-container', '.select-certificate-inspector');
-inspector('inspector-schedule-container', '.select-schedule-inspector');
 inspector('inspector-team-container', '.select-team-inspector');
+
+function team(teamContainers, selectTeam) {
+  document.addEventListener("DOMContentLoaded", function () {
+    let wrapper = document.getElementById("team-list");
+    let selectTeamButtons = document.querySelectorAll(selectTeam);
+    let deleteTeamButton = document.getElementById("delete-team");
+    let totalInspector = document.getElementById("total-inspector");
+    let counter = parseInt(totalInspector.innerText) || 0; // Initialize counter
+  
+    // Inside the loop where you're adding event listeners for select inspector buttons
+    for (let i = 0; i < selectTeamButtons.length; i++) {
+      selectTeamButtons[i].addEventListener("click", function (event) {
+          event.preventDefault();
+  
+          let teamId = this.getAttribute("data-team-id");
+          let url = `./json_response/team.php?team_id=${teamId}`;
+          
+          console.log(teamId);
+          // Make an AJAX request to fetch the inspector details
+          let team = new XMLHttpRequest();
+          team.open("GET", url, true);
+          team.onreadystatechange = function () {
+              if (team.readyState === 4 && team.status === 200) {
+                  let teamDetailsArray = JSON.parse(team.responseText);
+  
+                  //Inspector Container
+                  let inspectorContainer = document.getElementById(teamContainers);
+  
+                  // Iterate through each inspector in the response array
+                  teamDetailsArray.forEach((teamDetails, index) => {
+                      // Increment counter for each inspector
+                      counter++;
+  
+                      //Inspector Content Container
+                      let inspectorContent = createContainerDiv('shadow bg-white rounded p-3 mb-2', `inspector-content-${counter}`);
+                      inspectorContainer.appendChild(inspectorContent);
+  
+                      let inspectorTitle = createTitle(`Inspector ${counter}`, `inspector-title-${counter}`);
+                      inspectorContent.appendChild(inspectorTitle);
+  
+                      // Create and append inspector name container div
+                      let inspectorNameContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                      inspectorContent.appendChild(inspectorNameContainer);
+  
+                      // Create and append inspector name label
+                      let inspectorNameLabel = createLabel(`Inspector Name`);
+                      inspectorNameContainer.appendChild(inspectorNameLabel);
+  
+                      let inspectorNameInputField = createInputField('text', `inspector-name-${counter}`, `inspector_name[]`);
+                      inspectorNameContainer.appendChild(inspectorNameInputField);
+                      inspectorNameInputField.value = teamDetails.inspector_name;
+  
+                      // Update input field values with unique identifiers
+                      inspectorContent.appendChild(createHiddenInput("team_id", `team-id-${counter}`, true));
+                      document.getElementById(`team-id-${counter}`).value = teamDetails.team_id;
+  
+                      // Role Field
+                      let inspectorRoleContainer = createContainerDiv('col col-12 p-0 form-group mb-1');
+                      inspectorContent.appendChild(inspectorRoleContainer);
+  
+                      let roleLabel = createLabel(`Role`);
+                      inspectorRoleContainer.appendChild(roleLabel);
+  
+                      let inspectorRoleInputField = createInputField('text', `inspector-role-${counter}`, `inspector_role[]`);
+                      inspectorRoleContainer.appendChild(inspectorRoleInputField);
+                      inspectorRoleInputField.value = teamDetails.team_role;
+                      
+                      if (document.getElementById('formSubmit')) {
+                          document.getElementById('formSubmit').classList.remove('d-none');
+                      }
+  
+                      // Update the displayed count of added inspectors
+                      updateInspectorCount(counter);
+                  });
+  
+                  deleteTeamButton.classList.remove('d-none');
+                  document.getElementById('add-team-button').classList.add('d-none');
+                  // Close the modal
+                  let modal = bootstrap.Modal.getInstance(wrapper);
+                  modal.hide();
+              }
+          };
+          team.send();
+      });
+    }
+
+    // If delete button is available, add event listener to it
+    if (deleteTeamButton) {
+      deleteTeamButton.addEventListener("click", function () {
+        // Get the container element
+        let inspectorContainer = document.getElementById(teamContainers);
+        
+        if (inspectorContainer) {
+          // Get all child elements of the container
+          let children = inspectorContainer.children;
+          
+          // Convert the HTMLCollection to an array to safely iterate and remove elements
+          let childrenArray = Array.from(children);
+          
+          // Iterate over the children starting from the second one (index 1)
+          for (let i = 1; i < childrenArray.length; i++) {
+            inspectorContainer.removeChild(childrenArray[i]);
+          }
+    
+          // Reset the counter to 0
+          counter = 0;
+    
+          // Hide the delete button if the counter is 0
+          if (counter === 0) {
+            deleteTeamButton.classList.add('d-none');
+            document.getElementById('add-team-button').classList.remove('d-none');;
+          }
+    
+          // Update the displayed count of added inspectors
+          updateInspectorCount(counter);
+        }
+      });
+    }
+
+    function updateInspectorCount(count) {
+      if (totalInspector) {
+          totalInspector.innerHTML = count;
+      }
+    }
+  });
+}
+
+team('inspector-schedule-container', '.select-schedule-inspector');
+
 
 document.addEventListener("DOMContentLoaded", function () {
   let wrapper = document.getElementById("violation-list");
