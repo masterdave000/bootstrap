@@ -75,7 +75,7 @@ require "./../includes/side-header.php";
                                         <td class="p-0 m-0">
                                             <a href="view-team.php?team_id=<?php echo $team['team_id'] ?>" class="d-flex flex-row align-items-center justify-content-center text-decoration-none text-gray-700 flex-gap" href="./view-team.php?team_id=<?php echo $team['team_id'] ?>">
                                                 <div class="image-container img-fluid">
-                                                    <img src="<?= SITEURL ?>inspection/inspector/images/<?php echo $team['inspector_img_url'] ?? 'no-image.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
+                                                    <img src="<?= SITEURL ?>inspection/inspector/images/<?php echo $team['inspector_img_url'] ?? 'default.png' ?>" alt="inspector-image" class="img-fluid rounded-circle" />
                                                 </div>
 
                                                 <div>
