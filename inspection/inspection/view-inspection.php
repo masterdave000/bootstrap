@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
         date_inspected
         FROM inspection_view 
         WHERE inspection_id = :inspection_id 
-        GROUP BY inspection_id;";
+        GROUP BY inspection_id";
 
     $inspectionStatement = $pdo->prepare($inspectionQuery);
     $inspectionStatement->bindParam(':inspection_id', $inspection_id);
@@ -256,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                             </div>
 
 
-                                            <div class="col col-12 p-0 form-group d-none" id="bldg-fee-container">
+                                            <div class="col col-12 p-0 form-group" id="bldg-fee-container">
                                                 <label for="bldg-fee">Fee
                                                 </label>
 
@@ -304,7 +304,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                 <input type="text" class="form-control p-4" value="<?= $data['sign_type'] ?>" readonly>
                                             </div>
 
-                                            <div class="col col-12 p-0 form-group d-none">
+                                            <div class="col col-12 p-0 form-group">
                                                 <label>Fee</label>
 
                                                 <div class="input-group">
@@ -356,6 +356,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
                                                 <input type="text" name="remarks" class="form-control p-4" value="<?= $data['remarks'] ?>" readonly>
                                             </div>
 
+                                            <?php if ($data['remarks'] !== 'No Violation'):?>
                                             <div class="d-flex flex-column" id="violation-container">
                                                 <div class="d-flex justify-content-between">
                                                     <p class="text font-weight-bolder">Violation Information</p>
@@ -384,6 +385,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
                                                 <?php endforeach ?>
                                             </div>
+                                            
+                                            <?php endif?>
                                         </div>
                                     </div>
 
@@ -425,7 +428,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['inspection_id'])) {
 
 require './../includes/footer.php';
 require './modals/item.php';
-require './modals/inspector.php';
 require './modals/violation.php';
 ?>
 
