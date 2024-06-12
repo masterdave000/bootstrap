@@ -218,7 +218,6 @@ input[readonly] {
 .section-footer .parent-container {
   position: relative;
   height: 240px;
-  border: 1px solid black;
 }
 .section-footer .inspector-container {
   position: absolute;
