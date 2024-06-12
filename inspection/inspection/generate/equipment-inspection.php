@@ -180,47 +180,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <section class="section-footer d-flex justify-content-between position-absolute bottom-0 pr-4">
                                 <div class="left w-50">
-                                    <div class="inspector-container mb-2 d-flex justify-content-between flex-gap">
-                                        <div class="inspector-names w-50 d-flex flex-column align-items-center px-1">
-                                            <div><b>Inspector Name & Signature</b></div>
+                                    <div class="parent-container">
+                                        <div class="inspector-container mb-2 d-flex justify-content-between flex-gap">
+                                            <div class="inspector-names w-50 d-flex flex-column align-items-center px-1">
+                                                <div><b>Inspector Name & Signature</b></div>
 
-                                            <?php
+                                                <?php
+
+                                                for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
+                                                    $inspector_id = $_POST['inspector_id'][$i];
+                                                    $inspector_name = $_POST['inspector_name'][$i];
+                                                ?>
+
+                                                    <div class="d-flex justify-content-center m-0">
+                                                        <?php echo $inspector_name ?>
+                                                    </div>
+
+                                                    <input type="hidden" name="inspectors_id[]" value="<?php echo $inspector_id ?>">
 
 
+                                                <?php
+                                                }
+                                                ?>
 
-                                            for ($i = 0; $i < count($_POST['inspector_id']); $i++) {
-                                                $inspector_id = $_POST['inspector_id'][$i];
-                                                $inspector_name = $_POST['inspector_name'][$i];
-                                            ?>
+                                            </div>
+                                            <div class="date-inspected w-50 d-flex flex-column align-items-center px-1">
+                                                <div><b>Remarks/Date Inspected</b></div>
 
                                                 <div class="d-flex justify-content-center m-0">
-                                                    <?php echo $inspector_name ?>
+                                                    <span><?php echo date('m-d-Y'); ?></span>
                                                 </div>
 
-                                                <input type="hidden" name="inspectors_id[]" value="<?php echo $inspector_id ?>">
+                                                <div class="d-flex justify-content-center m-0">
+                                                    <span><?php echo $remarks ?></span>
+                                                </div>
+                                                <div></div>
+                                                <div></div>
 
 
-                                            <?php
-                                            }
-                                            ?>
-
-                                        </div>
-                                        <div class="date-inspected w-50 d-flex flex-column align-items-center px-1">
-                                            <div><b>Remarks/Date Inspected</b></div>
-
-                                            <div class="d-flex justify-content-center m-0">
-                                                <span><?php echo date('m-d-Y'); ?></span>
                                             </div>
-
-                                            <div class="d-flex justify-content-center m-0">
-                                                <span><?php echo $remarks ?></span>
-                                            </div>
-                                            <div></div>
-                                            <div></div>
-
-
                                         </div>
                                     </div>
+
                                     <div class="inspected-payment-container px-2">
                                         <div class="mb-3">
                                             <p class="font-weight-bolder m-0 text-center inspected-title pl-3 py-0">
@@ -250,72 +251,74 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                 </div>
                                 <div class="right w-50">
-                                    <div class="d-flex justify-content-between m-0">
-                                        <p class="m-0">Floor Area: </p>
-                                        <span class="underline"><span class="ml-2"><?php echo $floor_area ?></span>
-                                        </span> <span>m<sup>2</sup> </span>
-                                    </div>
-
-                                    <div class="d-flex flex-column align-items-center m-0 mb-2">
-                                        <div class="d-flex justify-content-between w-100">
-                                            <p class="m-0">Sinage Area: </p>
-                                            <span class="underline">
-                                                <span class="ml-2"><?php echo $signage_area ?></span>
-                                            </span>
-                                            <span>m<sup>2</sup> </span>
+                                    <div class="right-container">
+                                        <div class="d-flex justify-content-between m-0">
+                                            <p class="m-0">Floor Area: </p>
+                                            <span class="underline"><span class="ml-2"><?php echo $floor_area ?></span>
+                                            </span> <span>m<sup>2</sup> </span>
                                         </div>
-                                        <div>(Painted/Lighted)</div>
 
-                                    </div>
-
-                                    <div class="d-flex flex-column align-items-start other-fee">
-                                        <div>Building Fee = ₱ <?php echo $building_fee ?></div>
-                                        <div>Plumbing/Sanitary Fee = ₱ <?php echo $sanitary_fee ?></div>
-                                        <div>Signage Fee = ₱ <?php echo $signage_fee ?></div>
-                                    </div>
-
-                                    <div>
-                                        <div class="d-flex justify-content-start assessment-fee-title">
-                                            <div>TOTAL ASSESSMENT FEE = ₱
-                                                <?php
-                                                $totalAssessmentFee = $totalElectronicsFee + $totalElectricalFee +
-                                                    $totalMechanicalFee + $building_fee + $sanitary_fee + $signage_fee;
-
-                                                echo number_format($totalAssessmentFee, 2);
-                                                ?>
+                                        <div class="d-flex flex-column align-items-center m-0 mb-2">
+                                            <div class="d-flex justify-content-between w-100">
+                                                <p class="m-0">Sinage Area: </p>
+                                                <span class="underline">
+                                                    <span class="ml-2"><?php echo $signage_area ?></span>
+                                                </span>
+                                                <span>m<sup>2</sup> </span>
                                             </div>
+                                            <div>(Painted/Lighted)</div>
+
                                         </div>
-                                        <div class="d-flex flex-column align-items-center violation-container">
-                                            <div><b>VIOLATION/S:</b> (PLEASE CHECK)</div>
-                                            <ul class="align-self-start">
-                                                <?php
 
-                                                if (filter_has_var(INPUT_POST, 'violation_id')) {
-                                                    for ($i = 0; $i < count($_POST['violation_id']); $i++) {
-                                                        $violation_id = $_POST['violation_id'][$i];
-                                                        $description = $_POST['description'][$i];
+                                        <div class="d-flex flex-column align-items-start other-fee">
+                                            <div>Building Fee = ₱ <?php echo $building_fee ?></div>
+                                            <div>Plumbing/Sanitary Fee = ₱ <?php echo $sanitary_fee ?></div>
+                                            <div>Signage Fee = ₱ <?php echo $signage_fee ?></div>
+                                        </div>
 
-                                                ?>
-
-                                                        <li><?php echo $description ?></li>
-                                                        <input type="hidden" name="violations_id[]" value="<?php echo $violation_id ?>">
-
+                                        <div>
+                                            <div class="d-flex justify-content-start assessment-fee-title">
+                                                <div>TOTAL ASSESSMENT FEE = ₱
                                                     <?php
-                                                    }
-                                                } else {
+                                                    $totalAssessmentFee = $totalElectronicsFee + $totalElectricalFee +
+                                                        $totalMechanicalFee + $building_fee + $sanitary_fee + $signage_fee;
+
+                                                    echo number_format($totalAssessmentFee, 2);
+                                                    ?>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-column align-items-center violation-container">
+                                                <div><b>VIOLATION/S:</b> (PLEASE CHECK)</div>
+                                                <ul class="align-self-start">
+                                                    <?php
+
+                                                    if (filter_has_var(INPUT_POST, 'violation_id')) {
+                                                        for ($i = 0; $i < count($_POST['violation_id']); $i++) {
+                                                            $violation_id = $_POST['violation_id'][$i];
+                                                            $description = $_POST['description'][$i];
 
                                                     ?>
-                                                    <li><?php echo 'No Violation' ?></li>
-                                                <?php
-                                                }
-                                                ?>
+
+                                                            <li><?php echo $description ?></li>
+                                                            <input type="hidden" name="violations_id[]" value="<?php echo $violation_id ?>">
+
+                                                        <?php
+                                                        }
+                                                    } else {
+
+                                                        ?>
+                                                        <li><?php echo 'No Violation' ?></li>
+                                                    <?php
+                                                    }
+                                                    ?>
 
 
-                                            </ul>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="number">
-                                        (083) 554-1570 | 09335436999
+                                        <div class="number">
+                                            (083) 554-1570 | 09335436999
+                                        </div>
                                     </div>
                                 </div>
                             </section>
